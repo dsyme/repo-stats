@@ -2,12 +2,18 @@
 """
 Analyze repo-assist workflow invocation rates over time, broken down by trigger type.
 
-Trigger types and their meaning in the software factory model:
-  - schedule:    Automated scheduled runs (the factory's own clock)
-  - issue_comment:  Human "/repo-assist" comments (synchronous human intervention)
-  - workflow_dispatch: Manual UI trigger (human-initiated batch runs)
-  - issues:      Triggered by issue events (automated reaction)
-  - pull_request / pull_request_review_comment: Triggered by PR events (automated reaction)
+Three invocation categories:
+  - Scheduled:      Automated scheduled runs (the factory's own clock)
+  - /repo-assist:   Event-triggered runs that actually executed — issue comments,
+                    PR review comments, issue events, PR events. These represent
+                    actual /repo-assist invocations that passed pre-activation.
+  - Extra:          Manual dispatch from the GitHub Actions UI. Human-boosted
+                    automation — the maintainer dialing up the rate of runs.
+
+Filtering: Runs with conclusion 'skipped', 'cancelled', or 'action_required'
+are excluded. Skipped runs are trigger firings (e.g. issue_comment events)
+where the pre-activation check found no /repo-assist command. Action_required
+runs are trigger firings waiting for approval that never executed.
 
 Usage: python3 invocation-analysis.py DATA_DIR [OUTPUT_DIR]
 """
@@ -38,29 +44,20 @@ def load_json(path):
         return json.load(f)
 
 
-# Group triggers into meaningful categories
-TRIGGER_CATEGORIES = {
-    "schedule": "Scheduled (automated)",
-    "issue_comment": "Issue comment (/repo-assist)",
-    "workflow_dispatch": "Manual dispatch (UI)",
-    "issues": "Issue event (automated)",
-    "pull_request": "PR event (automated)",
-    "pull_request_review_comment": "PR review comment",
-    "discussion_comment": "Discussion comment",
-    "discussion": "Discussion",
-}
+# Conclusions that indicate the run never actually executed
+EXCLUDED_CONCLUSIONS = ("skipped", "cancelled", "action_required")
 
-# Simplified grouping for the factory model
-FACTORY_GROUPS = {
-    "schedule": "automated",
-    "issues": "automated",
-    "pull_request": "automated",
-    "issue_comment": "human-initiated",
-    "workflow_dispatch": "human-initiated",
-    "pull_request_review_comment": "human-initiated",
-    "discussion_comment": "human-initiated",
-    "discussion": "automated",
-}
+
+def categorize_event(event):
+    """Categorize a workflow event into one of three buckets."""
+    if event == "schedule":
+        return "scheduled"
+    elif event == "workflow_dispatch":
+        return "extra"
+    else:
+        # issue_comment, pull_request_review_comment, issues, pull_request,
+        # discussion_comment, discussion — all event-driven /repo-assist runs
+        return "repo-assist"
 
 
 def analyze_repo_invocations(data_dir):
@@ -93,77 +90,73 @@ def analyze_repo_invocations(data_dir):
     if not parsed_runs:
         return None
 
-    # Filter out SKIPPED runs — these are trigger firings (e.g. issue_comment
-    # events) where the pre-activation check determined no /repo-assist command
-    # was present, so the workflow did nothing. Counting them inflates the
-    # human-initiated invocation rate.
-    active_runs = [r for r in parsed_runs if r["conclusion"] != "skipped"]
-    skipped_runs = [r for r in parsed_runs if r["conclusion"] == "skipped"]
+    # Filter out runs that never actually executed:
+    # - skipped: pre-activation check found no /repo-assist command
+    # - cancelled: run was cancelled before completion
+    # - action_required: run was waiting for approval and never executed
+    active_runs = [r for r in parsed_runs if r["conclusion"] not in EXCLUDED_CONCLUSIONS]
+    excluded_count = len(parsed_runs) - len(active_runs)
 
     first_run = parsed_runs[0]["date"]
     last_run = parsed_runs[-1]["date"]
     total_days = max((last_run - first_run).days, 1)
     total_weeks = max(total_days / 7, 1)
 
-    # Count by trigger type (active runs only)
+    # Count by the three categories (active runs only)
+    scheduled = sum(1 for r in active_runs if categorize_event(r["event"]) == "scheduled")
+    repo_assist = sum(1 for r in active_runs if categorize_event(r["event"]) == "repo-assist")
+    extra = sum(1 for r in active_runs if categorize_event(r["event"]) == "extra")
+
+    # Keep detailed trigger counts for reference
     trigger_counts = defaultdict(int)
     for run in active_runs:
         trigger_counts[run["event"]] += 1
 
-    # Count by factory group (active runs only)
-    automated = sum(1 for r in active_runs if FACTORY_GROUPS.get(r["event"], "automated") == "automated")
-    human_initiated = sum(1 for r in active_runs if FACTORY_GROUPS.get(r["event"], "automated") == "human-initiated")
+    # Success/failure counts (of active runs)
+    successes = sum(1 for r in active_runs if r["conclusion"] == "success")
+    failures = sum(1 for r in active_runs if r["conclusion"] == "failure")
 
-    # Success/failure counts
-    successes = sum(1 for r in parsed_runs if r["conclusion"] == "success")
-    failures = sum(1 for r in parsed_runs if r["conclusion"] in ("failure", "cancelled"))
-    skipped = len(skipped_runs)
-
-    # Weekly time series by trigger group (active runs only)
-    weekly_automated = defaultdict(int)
-    weekly_human = defaultdict(int)
-    weekly_total = defaultdict(int)
+    # Weekly time series by category (active runs only)
+    weekly_scheduled = defaultdict(int)
+    weekly_repo_assist = defaultdict(int)
+    weekly_extra = defaultdict(int)
 
     for run in active_runs:
-        # Week number relative to first run
         week_start = first_run + timedelta(weeks=((run["date"] - first_run).days // 7))
         week_key = week_start.strftime("%Y-%m-%d")
 
-        group = FACTORY_GROUPS.get(run["event"], "automated")
-        weekly_total[week_key] += 1
-        if group == "automated":
-            weekly_automated[week_key] += 1
+        cat = categorize_event(run["event"])
+        if cat == "scheduled":
+            weekly_scheduled[week_key] += 1
+        elif cat == "repo-assist":
+            weekly_repo_assist[week_key] += 1
         else:
-            weekly_human[week_key] += 1
-
-    # Daily time series for the graph (smoother) — use active runs only
-    daily_by_trigger = defaultdict(lambda: defaultdict(int))
-    for run in active_runs:
-        day_key = run["date"].strftime("%Y-%m-%d")
-        daily_by_trigger[run["event"]][day_key] += 1
+            weekly_extra[week_key] += 1
 
     return {
         "repo": repo_name,
         "total_runs": len(parsed_runs),
         "active_runs": len(active_runs),
+        "excluded_runs": excluded_count,
         "first_run": first_run.strftime("%Y-%m-%d"),
         "last_run": last_run.strftime("%Y-%m-%d"),
         "total_days": total_days,
         "runs_per_day": round(len(active_runs) / total_days, 2),
         "runs_per_week": round(len(active_runs) / total_weeks, 2),
         "trigger_counts": dict(trigger_counts),
-        "automated_runs": automated,
-        "human_initiated_runs": human_initiated,
-        "human_ratio": round(human_initiated / len(active_runs), 3) if active_runs else 0,
+        "scheduled_runs": scheduled,
+        "repo_assist_runs": repo_assist,
+        "extra_runs": extra,
+        "repo_assist_ratio": round(repo_assist / len(active_runs), 3) if active_runs else 0,
         "successes": successes,
         "failures": failures,
-        "skipped": skipped,
         "success_rate": round(successes / len(active_runs), 3) if active_runs else 0,
         # For graphing
         "_parsed_runs": parsed_runs,
         "_active_runs": active_runs,
-        "_weekly_automated": dict(weekly_automated),
-        "_weekly_human": dict(weekly_human),
+        "_weekly_scheduled": dict(weekly_scheduled),
+        "_weekly_repo_assist": dict(weekly_repo_assist),
+        "_weekly_extra": dict(weekly_extra),
     }
 
 
@@ -172,30 +165,33 @@ def generate_invocation_graphs(all_results, output_dir):
     os.makedirs(output_dir, exist_ok=True)
     results = [r for r in all_results if r is not None]
 
-    # === Graph 1: Runs/week by repo, stacked by automated vs human ===
+    # === Graph 1: Runs/week by repo, stacked by 3 categories ===
     fig, ax = plt.subplots(figsize=(14, 7))
     results_sorted = sorted(results, key=lambda r: r["runs_per_week"], reverse=True)
     repos = [r["repo"].split("/")[1] if "/" in r["repo"] else r["repo"] for r in results_sorted]
     x = np.arange(len(repos))
 
-    auto_rates = [r["automated_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
-    human_rates = [r["human_initiated_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
+    sched_rates = [r["scheduled_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
+    ra_rates = [r["repo_assist_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
+    extra_rates = [r["extra_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
 
-    bars1 = ax.bar(x, auto_rates, label="Automated (schedule, issue/PR events)", color="#2196F3")
-    bars2 = ax.bar(x, human_rates, bottom=auto_rates,
-                   label="Human-initiated (comments, dispatch)", color="#FF9800")
+    ax.bar(x, sched_rates, label="Scheduled", color="#2196F3")
+    ax.bar(x, ra_rates, bottom=sched_rates,
+           label="/repo-assist", color="#FF9800")
+    ax.bar(x, extra_rates, bottom=[s + r for s, r in zip(sched_rates, ra_rates)],
+           label="Extra (dispatch)", color="#9C27B0")
 
-    # Add human ratio labels
+    # Add /repo-assist ratio labels
     for i, r in enumerate(results_sorted):
-        total = auto_rates[i] + human_rates[i]
+        total = sched_rates[i] + ra_rates[i] + extra_rates[i]
         if total > 0:
-            ax.text(i, total + 0.3, f"{r['human_ratio']:.0%}h",
+            ax.text(i, total + 0.3, f"{r['repo_assist_ratio']:.0%}",
                     ha="center", va="bottom", fontsize=8, color="#E65100")
 
     ax.set_xlabel("Repository")
     ax.set_ylabel("Workflow Runs per Week")
-    ax.set_title("Repo-Assist Invocation Rate by Trigger Type\n"
-                 "(% = proportion of human-initiated runs)")
+    ax.set_title("Repo Assist Invocation Rate by Category\n"
+                 "(% = proportion of /repo-assist invocations)")
     ax.set_xticks(x)
     ax.set_xticklabels(repos, rotation=45, ha="right")
     ax.legend()
@@ -204,38 +200,21 @@ def generate_invocation_graphs(all_results, output_dir):
     fig.savefig(os.path.join(output_dir, "invocation-rate-by-type.png"), dpi=150)
     plt.close(fig)
 
-    # === Graph 2: Detailed trigger breakdown per repo ===
+    # === Graph 2: Total runs by 3 categories per repo ===
     fig, ax = plt.subplots(figsize=(14, 7))
-    trigger_types = ["schedule", "issue_comment", "workflow_dispatch", "issues",
-                     "pull_request", "pull_request_review_comment"]
-    trigger_colors = {
-        "schedule": "#2196F3",
-        "issue_comment": "#FF9800",
-        "workflow_dispatch": "#F44336",
-        "issues": "#4CAF50",
-        "pull_request": "#9C27B0",
-        "pull_request_review_comment": "#FF5722",
-    }
-    trigger_labels = {
-        "schedule": "Scheduled",
-        "issue_comment": "/repo-assist comment",
-        "workflow_dispatch": "Manual dispatch",
-        "issues": "Issue event",
-        "pull_request": "PR event",
-        "pull_request_review_comment": "PR review comment",
-    }
 
-    bottoms = np.zeros(len(repos))
-    for trigger in trigger_types:
-        values = [r["trigger_counts"].get(trigger, 0) for r in results_sorted]
-        ax.bar(x, values, bottom=bottoms,
-               label=trigger_labels.get(trigger, trigger),
-               color=trigger_colors.get(trigger, "#9E9E9E"))
-        bottoms += np.array(values)
+    sched_vals = [r["scheduled_runs"] for r in results_sorted]
+    ra_vals = [r["repo_assist_runs"] for r in results_sorted]
+    extra_vals = [r["extra_runs"] for r in results_sorted]
+
+    ax.bar(x, sched_vals, label="Scheduled", color="#2196F3")
+    ax.bar(x, ra_vals, bottom=sched_vals, label="/repo-assist", color="#FF9800")
+    ax.bar(x, extra_vals, bottom=[s + r for s, r in zip(sched_vals, ra_vals)],
+           label="Extra (dispatch)", color="#9C27B0")
 
     ax.set_xlabel("Repository")
-    ax.set_ylabel("Total Workflow Runs")
-    ax.set_title("Repo-Assist Workflow Runs by Trigger Type (Total)")
+    ax.set_ylabel("Total Active Workflow Runs")
+    ax.set_title("Repo Assist Workflow Runs by Category (Total)")
     ax.set_xticks(x)
     ax.set_xticklabels(repos, rotation=45, ha="right")
     ax.legend(loc="upper right", fontsize=9)
@@ -287,7 +266,7 @@ def generate_invocation_graphs(all_results, output_dir):
     fig.savefig(os.path.join(output_dir, "invocation-over-time.png"), dpi=150)
     plt.close(fig)
 
-    # === Graph 4: Human intervention rate vs throughput (scatter) ===
+    # === Graph 4: /repo-assist rate vs throughput (scatter) ===
     # Load bottleneck data if available
     bottleneck_path = os.path.join(os.path.dirname(output_dir), "bottleneck-analysis.json")
     if os.path.exists(bottleneck_path):
@@ -297,8 +276,6 @@ def generate_invocation_graphs(all_results, output_dir):
         fig, ax = plt.subplots(figsize=(10, 8))
         status_colors = {
             "BLOCKED": "#D32F2F",
-            "CONSTRAINED": "#FF9800",
-            "MINOR": "#FFC107",
             "FLOWING": "#4CAF50",
             "IDLE": "#90CAF9",
         }
@@ -308,16 +285,16 @@ def generate_invocation_graphs(all_results, output_dir):
             if not bn:
                 continue
             color = status_colors.get(bn["bottleneck_status"], "#9E9E9E")
-            ax.scatter(r["human_ratio"] * 100, bn["throughput_ratio"] * 100,
+            ax.scatter(r["repo_assist_ratio"] * 100, bn["throughput_ratio"] * 100,
                        c=color, s=200, edgecolors="black", linewidth=0.5, zorder=5)
             label = r["repo"].split("/")[1] if "/" in r["repo"] else r["repo"]
-            ax.annotate(label, (r["human_ratio"] * 100, bn["throughput_ratio"] * 100),
+            ax.annotate(label, (r["repo_assist_ratio"] * 100, bn["throughput_ratio"] * 100),
                         textcoords="offset points", xytext=(8, 5), fontsize=9)
 
-        ax.set_xlabel("Human-Initiated Invocations (% of all runs)")
+        ax.set_xlabel("/repo-assist Invocation Rate (% of active runs)")
         ax.set_ylabel("Pipeline Throughput (% of RA PRs merged)")
-        ax.set_title("Human Intervention Rate vs Pipeline Throughput\n"
-                     "(Red=BLOCKED, Orange=CONSTRAINED, Yellow=MINOR, Green=FLOWING)")
+        ax.set_title("/repo-assist Invocation Rate vs Pipeline Throughput\n"
+                     "(Red=BLOCKED, Green=FLOWING, Blue=IDLE)")
         ax.grid(True, alpha=0.3)
         ax.set_xlim(-5, 105)
         ax.set_ylim(-5, 105)
@@ -331,33 +308,32 @@ def print_summary(all_results):
     results.sort(key=lambda r: r["runs_per_week"], reverse=True)
 
     print(f"\n{'='*120}")
-    print("REPO-ASSIST INVOCATION ANALYSIS (excluding skipped runs)")
+    print("REPO-ASSIST INVOCATION ANALYSIS (excluding skipped/cancelled/action_required runs)")
     print(f"{'='*120}")
-    print(f"\n{'Repository':<35} {'Total':>6} {'Active':>7} {'Runs/wk':>8} {'Auto':>6} {'Human':>6} "
-          f"{'Hum%':>5} {'Sched':>6} {'Comment':>8} {'Dispatch':>9} {'Issue':>6} "
-          f"{'PR':>4} {'Succ%':>6}")
-    print("-" * 120)
+    print(f"\n{'Repository':<35} {'Total':>6} {'Active':>7} {'Runs/wk':>8} {'Sched':>6} {'/RA':>5} "
+          f"{'Extra':>6} {'RA%':>5} {'Succ%':>6}")
+    print("-" * 100)
 
     for r in results:
-        tc = r["trigger_counts"]
         print(f"{r['repo']:<35} {r['total_runs']:>6} {r['active_runs']:>7} {r['runs_per_week']:>8.1f} "
-              f"{r['automated_runs']:>6} {r['human_initiated_runs']:>6} "
-              f"{r['human_ratio']*100:>4.0f}% "
-              f"{tc.get('schedule', 0):>6} {tc.get('issue_comment', 0):>8} "
-              f"{tc.get('workflow_dispatch', 0):>9} {tc.get('issues', 0):>6} "
-              f"{tc.get('pull_request', 0):>4} "
+              f"{r['scheduled_runs']:>6} {r['repo_assist_runs']:>5} "
+              f"{r['extra_runs']:>6} "
+              f"{r['repo_assist_ratio']*100:>4.0f}% "
               f"{r['success_rate']*100:>5.0f}%")
 
     print()
     total_runs = sum(r["total_runs"] for r in results)
     total_active = sum(r["active_runs"] for r in results)
-    total_human = sum(r["human_initiated_runs"] for r in results)
-    total_auto = sum(r["automated_runs"] for r in results)
-    total_skipped = sum(r["skipped"] for r in results)
-    print(f"Total: {total_runs} runs, {total_skipped} skipped ({total_skipped/total_runs*100:.0f}%), "
+    total_sched = sum(r["scheduled_runs"] for r in results)
+    total_ra = sum(r["repo_assist_runs"] for r in results)
+    total_extra = sum(r["extra_runs"] for r in results)
+    total_excluded = sum(r["excluded_runs"] for r in results)
+    print(f"Total: {total_runs} runs, {total_excluded} excluded ({total_excluded/total_runs*100:.0f}%), "
           f"{total_active} active "
-          f"({total_auto} automated, {total_human} human-initiated, "
-          f"{total_human/total_active*100:.0f}% human)")
+          f"({total_sched} scheduled, {total_ra} /repo-assist, {total_extra} extra)")
+    print(f"  Scheduled: {total_sched/total_active*100:.0f}%, "
+          f"/repo-assist: {total_ra/total_active*100:.0f}%, "
+          f"Extra: {total_extra/total_active*100:.0f}%")
 
 
 def main():
@@ -379,7 +355,7 @@ def main():
             all_results.append(result)
             print(f"  {result['repo']}: {result['total_runs']} runs, "
                   f"{result['runs_per_week']:.1f}/wk, "
-                  f"{result['human_ratio']:.0%} human-initiated")
+                  f"{result['repo_assist_ratio']:.0%} /repo-assist")
 
     print_summary(all_results)
 
