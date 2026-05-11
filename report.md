@@ -17,6 +17,8 @@ The repo-assist workflow was adopted across 11 open source repositories in Febru
 - Four repositories achieved **near-complete (97–100%) backlog clearance**
 - The average proportion of the pre-existing backlog addressed is **68.3%**
 - Results hold across different languages (F#, Python) and project types (compilers, libraries, tools)
+- **Pipeline bottleneck analysis** reveals that repos with low backlog clearance are not limited by issue complexity or recency of adoption — they are blocked at the human review stage. Four repos (FSharp.Stats, dowhy, fantomas, FsAutoComplete) have blocked pipelines, with three distinct bottleneck types: *inaction* (PRs sitting unreviewed), *rejection* (PRs reviewed but rejected), and *mixed*.
+- **Pipeline throughput ratio is the strongest predictor of backlog clearance**: repos with ≥80% PR merge throughput achieve ≥77% clearance; repos below 65% achieve <50%
 
 ## Velocity: Before vs After Adoption
 
@@ -62,17 +64,94 @@ Quality is measured as the proportion of the known backlog (open issues at the t
 
 ![Net Change in Open Issues](graphs/comparative-net-change.png)
 
-### Observations on Backlog Clearance Variation
+### Observations on Backlog Clearance Variation — Pipeline Bottleneck Analysis
 
-Repos cluster into three tiers:
+The original hypothesis — that low-clearance repos simply had more complex issues — is **insufficient**. A pipeline flow analysis using Theory of Constraints and Little's Law reveals that the primary driver of low backlog clearance is **where the pipeline is blocked**, not issue complexity alone.
 
-- **Near-complete clearance (78–100%)**: FSharp.Data, AsyncSeq, Deedle, SwaggerProvider, FSharp.Formatting, TypeProviders.SDK, TaskSeq — these had backlogs dominated by well-defined, actionable issues that could be resolved with code fixes, triage, or documentation
-- **Significant progress (24–41%)**: fantomas, FsAutoComplete, dowhy — these are more complex codebases where many issues require deep domain knowledge or represent design debates. fantomas has nuanced formatting behaviour; FsAutoComplete involves complex IDE/LSP interactions; dowhy deals with causal inference algorithms
-- **Early stage (7%)**: FSharp.Stats — adopted most recently (late March), so the workflow has had the least time to take effect
+#### Process Flow Model
+
+Each repository operates as a multi-stage "software factory":
+
+```
+ Issue Backlog → [PR Generation] → [PR Review Queue] → [PR Merge] → Issue Resolution
+                  (automated)        (WIP buffer)       (human)       (outcome)
+```
+
+Repo-assist automates Stage 2 (PR Generation). **Stage 3–4 (Review/Merge) requires human maintainer action** and is the potential bottleneck. Using Little's Law ($L = \lambda \times W$, where $L$ = WIP, $\lambda$ = arrival rate, $W$ = cycle time), we can identify where work accumulates.
+
+#### Pipeline Throughput Analysis
+
+| Repository | RA PRs Created | Merged | Rejected | Open (WIP) | Throughput | Rejection Rate | Status |
+|---|---|---|---|---|---|---|---|
+| FSharp.Stats | 18 | 2 | 0 | 16 | **11%** | 0% | **BLOCKED** |
+| dowhy | 61 | 13 | 5 | 43 | **21%** | 8% | **BLOCKED** |
+| fantomas | 64 | 22 | 41 | 1 | **34%** | 64% | **BLOCKED** |
+| FsAutoComplete | 54 | 33 | 7 | 14 | **61%** | 13% | **BLOCKED** |
+| TaskSeq | 83 | 66 | 17 | 0 | 80% | 20% | FLOWING |
+| FSharp.Formatting | 118 | 94 | 22 | 2 | 80% | 19% | CONSTRAINED |
+| AsyncSeq | 69 | 56 | 11 | 2 | 81% | 16% | MINOR |
+| FSharp.Data | 102 | 86 | 15 | 1 | 84% | 15% | CONSTRAINED |
+| TypeProviders.SDK | 50 | 45 | 4 | 1 | 90% | 8% | FLOWING |
+| Deedle | 100 | 91 | 8 | 1 | 91% | 8% | MINOR |
+| SwaggerProvider | 69 | 63 | 6 | 0 | 91% | 9% | FLOWING |
+
+![Pipeline Flow](graphs/bottleneck-pipeline-flow.png)
+
+![Throughput Ratio](graphs/bottleneck-throughput-ratio.png)
+
+#### Three Distinct Bottleneck Types
+
+The four blocked repositories exhibit three distinct bottleneck patterns:
+
+**1. INACTION bottleneck** (FSharp.Stats, dowhy): Repo-assist is producing PRs but maintainers are not reviewing or merging them. The WIP queue grows without bound.
+
+- **FSharp.Stats**: 16 of 18 PRs (89%) sitting unreviewed, avg wait 32.8 days. Little's Law implies a cycle time of 43.6 days — the pipeline is effectively stalled. The low backlog clearance (7%) is **not** because the workflow is too new; it's because no one is merging the work it produces.
+- **dowhy**: 43 of 61 PRs (70%) in the review queue, avg wait 18.2 days. Arrival rate is 1.15 PRs/day but departure rate is only 0.25/day — a 4.7:1 imbalance.
+
+**2. REJECTION bottleneck** (fantomas): Maintainers are actively reviewing PRs but rejecting 64% of them (41/64 closed without merge). The WIP queue is low (1 PR) because PRs are being processed — just not accepted. This suggests the codebase's domain complexity (nuanced formatting rules) exceeds what the automated workflow can reliably handle.
+
+**3. MIXED bottleneck** (FsAutoComplete): Both accumulation (14 open PRs, avg wait 44.9 days) and rejection (7 rejected). Maintainers are partially engaged — merging some PRs but leaving others unreviewed for weeks. The 61% throughput rate is substantially below the 80–91% seen in well-flowing repos.
+
+#### Cycle Time Analysis
+
+| Repository | Avg Merge Cycle | Avg Open Wait | Wait/Merge Ratio | Bottleneck Type |
+|---|---|---|---|---|
+| FSharp.Stats | 4.3d | 32.8d | **7.6×** | INACTION |
+| dowhy | 4.7d | 18.2d | **3.9×** | INACTION |
+| FsAutoComplete | 2.3d | 44.9d | **19.5×** | MIXED |
+| fantomas | 0.6d | 10.5d | **17.5×** | REJECTION |
+| FSharp.Formatting | 3.9d | 21.0d | 5.4× | — |
+| FSharp.Data | 2.0d | 40.3d | 20.2× | — |
+| Deedle | 1.0d | 2.0d | 2.0× | — |
+| SwaggerProvider | 0.8d | 0.0d | — | — |
+| TypeProviders.SDK | 1.8d | 3.0d | 1.7× | — |
+
+The "Wait/Merge Ratio" compares how long currently-open PRs have been waiting vs how long merged PRs took. A high ratio means the remaining open PRs are qualitatively different from those that were merged — they're stuck, not just slow.
+
+![Cycle Times](graphs/bottleneck-cycle-times.png)
+
+![WIP Accumulation](graphs/bottleneck-wip.png)
+
+#### Correlation: Throughput Predicts Clearance
+
+The scatter plot below shows that **pipeline throughput ratio is the strongest predictor of backlog clearance** — stronger than time since adoption, codebase complexity, or language.
+
+![Bottleneck Impact](graphs/bottleneck-impact-scatter.png)
+
+Repos with ≥80% throughput all achieve ≥77% backlog clearance. Repos with <65% throughput all achieve <50% clearance. The relationship is approximately monotonic: every 10 percentage points of throughput corresponds to roughly 15–20 percentage points of backlog clearance.
+
+#### Revised Tier Classification
+
+Based on the pipeline analysis, the repos should be reclassified by bottleneck type rather than "complexity":
+
+- **Flowing (80–91% throughput)**: FSharp.Data, Deedle, SwaggerProvider, FSharp.Formatting, TypeProviders.SDK, TaskSeq, AsyncSeq — maintainers are actively reviewing and merging repo-assist PRs, resulting in high backlog clearance
+- **Blocked — Inaction (11–21% throughput)**: FSharp.Stats, dowhy — repo-assist is generating PRs but the pipeline is stalled at human review. **The constraint is maintainer bandwidth, not issue complexity.** Unlocking these repos requires maintainer engagement with the existing PR queue.
+- **Blocked — Rejection (34% throughput)**: fantomas — maintainers are engaged but the automated PRs don't meet the codebase's exacting standards. The constraint is PR quality matching the domain's requirements.
+- **Blocked — Mixed (61% throughput)**: FsAutoComplete — partial maintainer engagement with both accumulation and rejection. Needs more consistent review cadence.
 
 ### Non-F# Validation
 
-**py-why/dowhy** (Python, 8,100+ stars) provides important validation that repo-assist's impact generalises beyond the F# ecosystem. Despite being adopted later (March 18) and dealing with a complex scientific computing codebase, it shows a 10× improvement in issue closure velocity (0.53 → 5.42/week) and has addressed 24% of its pre-existing backlog in under 2 months.
+**py-why/dowhy** (Python, 8,100+ stars) provides important validation that repo-assist's impact generalises beyond the F# ecosystem. Despite being adopted later (March 18), it shows a 10× improvement in issue closure velocity (0.53 → 5.42/week). However, the pipeline analysis reveals it has an **inaction bottleneck**: 43 of 61 repo-assist PRs are sitting in the review queue unmerged, with an average wait of 18.2 days. Its 24% backlog clearance is constrained by maintainer review capacity, not by the workflow itself.
 
 ## Per-Repository Detail
 
@@ -109,25 +188,25 @@ Went from 153 open issues to just 2 — a complete backlog clearance. Issue clos
 ![FSharp.Formatting Merge Rate](graphs/fsprojects-FSharp.Formatting/merge-rate.png)
 
 ### fsprojects/fantomas
-*Adopted 2026-02-23 · Solid progress on a complex codebase*
+*Adopted 2026-02-23 · Pipeline BLOCKED (rejection)*
 
-120 → 75 open issues. The lower clearance rate (40.5%) reflects the complexity of Fantomas issues — many involve nuanced formatting behaviour and style-guide debates that can't be resolved by automation alone. Still, 8.11 issues closed/week is substantial.
+120 → 75 open issues. Pipeline analysis reveals a **rejection bottleneck**: maintainers are actively reviewing repo-assist PRs but rejecting 64% of them (41 of 64 closed without merge). The WIP queue is low (1 PR), meaning PRs are being processed promptly (0.6d avg merge cycle) — they just don't meet the codebase's exacting standards. The 34% throughput ratio reflects the domain complexity of formatting behaviour, where nuanced style-guide rules make automated contributions difficult. Despite this, the 22 merged PRs have still driven significant progress — 8.11 issues closed/week.
 
 ![fantomas Open Issues](graphs/fsprojects-fantomas/open-issues-over-time.png)
 ![fantomas Merge Rate](graphs/fsprojects-fantomas/merge-rate.png)
 
 ### py-why/dowhy
-*Adopted 2026-03-18 · Non-F# validation*
+*Adopted 2026-03-18 · Pipeline BLOCKED (inaction)*
 
-142 → 125 open issues. The most recently adopted repo in the analysis besides FSharp.Stats. Despite the shorter window (53 days), it shows clear improvement: issue closure jumped from 0.53 to 5.42/week. As a Python causal inference library with 8,100+ stars, it demonstrates repo-assist works across language ecosystems.
+142 → 125 open issues. Despite issue closure jumping from 0.53 to 5.42/week, the pipeline is severely constrained: 43 of 61 repo-assist PRs (70%) remain in the review queue with an average wait of 18.2 days. The arrival rate of 1.15 PRs/day exceeds the departure rate of 0.25 PRs/day by 4.7:1. As a Python causal inference library with 8,100+ stars, it still validates that repo-assist works across ecosystems — but its full potential is bottlenecked on maintainer review bandwidth.
 
 ![dowhy Open Issues](graphs/py-why-dowhy/open-issues-over-time.png)
 ![dowhy Merge Rate](graphs/py-why-dowhy/merge-rate.png)
 
 ### ionide/FsAutoComplete
-*Adopted 2026-02-22 · Moderate progress*
+*Adopted 2026-02-22 · Pipeline BLOCKED (mixed)*
 
-86 → 73 open issues. Like fantomas, FsAutoComplete has a complex codebase where many issues require deep IDE/LSP knowledge. Still shows a 3.73× improvement in issue closure rate.
+86 → 73 open issues. Pipeline analysis shows a **mixed bottleneck**: 14 repo-assist PRs are sitting in the review queue with an average wait of 44.9 days (the longest of any repo), while 7 others were rejected. The 61% throughput ratio reflects partial maintainer engagement — some PRs are merged quickly (2.3d avg), but others are left unreviewed indefinitely. Improving review cadence would unlock more of the pipeline's capacity.
 
 ![FsAutoComplete Open Issues](graphs/ionide-FsAutoComplete/open-issues-over-time.png)
 ![FsAutoComplete Merge Rate](graphs/ionide-FsAutoComplete/merge-rate.png)
@@ -154,9 +233,9 @@ Went from 153 open issues to just 2 — a complete backlog clearance. Issue clos
 ![TypeProviders.SDK Open Issues](graphs/fsprojects-FSharp.TypeProviders.SDK/open-issues-over-time.png)
 
 ### fslaborg/FSharp.Stats
-*Adopted 2026-03-23 · Early stage*
+*Adopted 2026-03-23 · Pipeline BLOCKED (inaction)*
 
-60 → 58 open issues. Most recently adopted (7 weeks before analysis), so limited time for impact. Shows early signs of increased activity.
+60 → 58 open issues. While this is the most recently adopted repo, the low clearance (7%) is **not primarily due to recency** — it is due to an inaction bottleneck at the human review stage. Repo-assist has created 18 PRs, but only 2 have been merged; the remaining 16 sit in the review queue with an average wait of 32.8 days. The pipeline throughput ratio is just 11% — the lowest of all repositories. Little's Law analysis shows the arrival rate (0.37 PRs/day) vastly exceeds the departure rate (0.04 PRs/day), implying a cycle time of 43.6 days. The repository would see dramatically improved backlog clearance if maintainers began reviewing and merging the existing PR queue.
 
 ![FSharp.Stats Open Issues](graphs/fslaborg-FSharp.Stats/open-issues-over-time.png)
 
@@ -174,15 +253,10 @@ During this analysis, we identified additional repositories that have adopted re
 
 | Repository | Stars | Reason for Exclusion |
 |---|---|---|
-| ReactiveX/RxPY | 5,010 | All workflow runs skipped (effectively disabled) |
-| fredeil/email-validator.dart | 205 | All workflow runs failing (0 successes) |
 | uxsoft/AppleWirelessKeyboard | 296 | Adopted April 22, 2026 (< 3 weeks of data) |
-| dotnet/fsharp | 4,284 | Not yet assessed |
 | fable-compiler/Fable | 3,075 | Not yet assessed |
 | ionide/ionide-vscode-fsharp | 892 | Not yet assessed |
 | fsprojects/FSharpx.Collections | 253 | Not yet assessed |
-| fsprojects/FsHttp | 498 | Not yet assessed |
-| fsprojects/FSharp.Data.SqlClient | 205 | Not yet assessed |
 | licensee/licensee | 881 | Not yet assessed |
 
 ## Methodology
@@ -193,6 +267,7 @@ During this analysis, we identified additional repositories that have adopted re
 - **Inclusion criteria**: Repos were included only if (a) repo-assist workflow runs have succeeded in the last week, and (b) adoption was more than 3 weeks ago.
 - **Limitations**: This analysis measures correlation, not strict causation. The adoption of repo-assist may have coincided with increased human maintainer activity. However, the consistency of the pattern across all 11 repositories — and the near-zero baseline activity in many repos before adoption — strongly suggests repo-assist is the primary driver. The non-F# repo (dowhy) provides cross-ecosystem validation.
 - **Issue quality caveat**: Some closed issues may have been closed as "won't fix" or triaged rather than fixed. The current analysis counts all closures equally. A more nuanced analysis could distinguish closure reasons.
+- **Pipeline bottleneck analysis**: Models the repository as a multi-stage process (Issue → PR Generation → PR Review → PR Merge → Resolution). Uses Little's Law ($L = \lambda W$) to compute implied cycle times and identify WIP accumulation. Throughput ratio (PRs merged / PRs created) is the primary bottleneck metric. Bottleneck types are classified as: INACTION (high WIP, low review activity), REJECTION (high rejection rate, low WIP), or MIXED (both). Status levels: BLOCKED (score ≥5), CONSTRAINED (3–4), MINOR (1–2), FLOWING (0).
 
 ## Data & Scripts
 
@@ -203,5 +278,6 @@ All data and scripts used in this analysis are available in this repository:
 - `scripts/graph-repo-stats.py` — Per-repo graph generation (open issues over time, merge rate, PR time-to-merge, issue activity)
 - `scripts/generate-all-graphs.sh` — Batch graph generation
 - `scripts/analyze-repo-assist.py` — Cross-repo analysis, comparative graphs, and report generation
+- `scripts/bottleneck-analysis.py` — Pipeline flow analysis using Theory of Constraints and Little's Law; bottleneck identification and classification
 - `data/` — Raw JSON data for all repositories
 - `graphs/` — All generated PNG graphs
