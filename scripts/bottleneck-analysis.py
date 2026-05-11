@@ -327,14 +327,33 @@ def analyze_pipeline(data_dir):
         bottleneck_status = "BLOCKED"
         bottleneck_stage = "PR Review/Merge (human action required)"
     elif bottleneck_score >= 3:
-        bottleneck_status = "CONSTRAINED"
-        bottleneck_stage = "PR Review/Merge"
+        bottleneck_status = "FLOWING"
+        bottleneck_stage = "Minor friction but pipeline operating"
     elif bottleneck_score >= 1:
-        bottleneck_status = "MINOR"
-        bottleneck_stage = "PR Review/Merge"
+        bottleneck_status = "FLOWING"
+        bottleneck_stage = "Minor friction but pipeline operating"
     else:
         bottleneck_status = "FLOWING"
         bottleneck_stage = "None — pipeline balanced"
+
+    # Check for IDLE status: if WIP is very low AND open issues are very low,
+    # the factory has effectively cleared its backlog and is waiting for new
+    # work rather than being constrained. Override CONSTRAINED/MINOR → IDLE.
+    idle_threshold_issues = 5  # fewer than this = effectively idle
+    idle_threshold_wip = 2     # fewer open PRs than this
+    is_idle = (issues_open_now <= idle_threshold_issues
+               and wip_count <= idle_threshold_wip
+               and bottleneck_status in ("CONSTRAINED", "MINOR", "FLOWING"))
+
+    if is_idle:
+        bottleneck_status = "IDLE"
+        bottleneck_stage = "Input-starved — backlog cleared"
+        bottleneck_type = "NONE"
+        bottleneck_detail = (
+            f"Factory effectively idle: only {issues_open_now} open issues and "
+            f"{wip_count} open PRs remain. The backlog has been cleared and the "
+            f"pipeline is waiting for new work rather than being constrained."
+        )
 
     return {
         "repo": repo_name,
@@ -419,6 +438,7 @@ def generate_bottleneck_graphs(all_results, output_dir):
         "CONSTRAINED": "#FF9800",
         "MINOR": "#FFC107",
         "FLOWING": "#4CAF50",
+        "IDLE": "#90CAF9",
     }
     colors = [status_colors.get(r["bottleneck_status"], "#9E9E9E") for r in results]
 
@@ -470,7 +490,7 @@ def generate_bottleneck_graphs(all_results, output_dir):
     ax.set_xlabel("Repository")
     ax.set_ylabel("Throughput Ratio (%)")
     ax.set_title("Pipeline Throughput Ratio: PR Merge Rate / PR Creation Rate\n"
-                 "(Red = BLOCKED, Orange = CONSTRAINED, Yellow = MINOR, Green = FLOWING)")
+                 "(Red = BLOCKED, Green = FLOWING, Blue = IDLE)")
     ax.set_xticks(x)
     ax.set_xticklabels(repos, rotation=45, ha="right")
     ax.yaxis.set_major_formatter(mticker.PercentFormatter())

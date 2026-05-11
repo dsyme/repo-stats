@@ -93,31 +93,38 @@ def analyze_repo_invocations(data_dir):
     if not parsed_runs:
         return None
 
+    # Filter out SKIPPED runs — these are trigger firings (e.g. issue_comment
+    # events) where the pre-activation check determined no /repo-assist command
+    # was present, so the workflow did nothing. Counting them inflates the
+    # human-initiated invocation rate.
+    active_runs = [r for r in parsed_runs if r["conclusion"] != "skipped"]
+    skipped_runs = [r for r in parsed_runs if r["conclusion"] == "skipped"]
+
     first_run = parsed_runs[0]["date"]
     last_run = parsed_runs[-1]["date"]
     total_days = max((last_run - first_run).days, 1)
     total_weeks = max(total_days / 7, 1)
 
-    # Count by trigger type
+    # Count by trigger type (active runs only)
     trigger_counts = defaultdict(int)
-    for run in parsed_runs:
+    for run in active_runs:
         trigger_counts[run["event"]] += 1
 
-    # Count by factory group
-    automated = sum(1 for r in parsed_runs if FACTORY_GROUPS.get(r["event"], "automated") == "automated")
-    human_initiated = sum(1 for r in parsed_runs if FACTORY_GROUPS.get(r["event"], "automated") == "human-initiated")
+    # Count by factory group (active runs only)
+    automated = sum(1 for r in active_runs if FACTORY_GROUPS.get(r["event"], "automated") == "automated")
+    human_initiated = sum(1 for r in active_runs if FACTORY_GROUPS.get(r["event"], "automated") == "human-initiated")
 
     # Success/failure counts
     successes = sum(1 for r in parsed_runs if r["conclusion"] == "success")
     failures = sum(1 for r in parsed_runs if r["conclusion"] in ("failure", "cancelled"))
-    skipped = sum(1 for r in parsed_runs if r["conclusion"] == "skipped")
+    skipped = len(skipped_runs)
 
-    # Weekly time series by trigger group
+    # Weekly time series by trigger group (active runs only)
     weekly_automated = defaultdict(int)
     weekly_human = defaultdict(int)
     weekly_total = defaultdict(int)
 
-    for run in parsed_runs:
+    for run in active_runs:
         # Week number relative to first run
         week_start = first_run + timedelta(weeks=((run["date"] - first_run).days // 7))
         week_key = week_start.strftime("%Y-%m-%d")
@@ -129,30 +136,32 @@ def analyze_repo_invocations(data_dir):
         else:
             weekly_human[week_key] += 1
 
-    # Daily time series for the graph (smoother)
+    # Daily time series for the graph (smoother) — use active runs only
     daily_by_trigger = defaultdict(lambda: defaultdict(int))
-    for run in parsed_runs:
+    for run in active_runs:
         day_key = run["date"].strftime("%Y-%m-%d")
         daily_by_trigger[run["event"]][day_key] += 1
 
     return {
         "repo": repo_name,
         "total_runs": len(parsed_runs),
+        "active_runs": len(active_runs),
         "first_run": first_run.strftime("%Y-%m-%d"),
         "last_run": last_run.strftime("%Y-%m-%d"),
         "total_days": total_days,
-        "runs_per_day": round(len(parsed_runs) / total_days, 2),
-        "runs_per_week": round(len(parsed_runs) / total_weeks, 2),
+        "runs_per_day": round(len(active_runs) / total_days, 2),
+        "runs_per_week": round(len(active_runs) / total_weeks, 2),
         "trigger_counts": dict(trigger_counts),
         "automated_runs": automated,
         "human_initiated_runs": human_initiated,
-        "human_ratio": round(human_initiated / len(parsed_runs), 3) if parsed_runs else 0,
+        "human_ratio": round(human_initiated / len(active_runs), 3) if active_runs else 0,
         "successes": successes,
         "failures": failures,
         "skipped": skipped,
-        "success_rate": round(successes / len(parsed_runs), 3) if parsed_runs else 0,
+        "success_rate": round(successes / len(active_runs), 3) if active_runs else 0,
         # For graphing
         "_parsed_runs": parsed_runs,
+        "_active_runs": active_runs,
         "_weekly_automated": dict(weekly_automated),
         "_weekly_human": dict(weekly_human),
     }
@@ -240,7 +249,7 @@ def generate_invocation_graphs(all_results, output_dir):
     cmap = plt.cm.tab10
 
     for i, r in enumerate(results_sorted):
-        runs = r["_parsed_runs"]
+        runs = r["_active_runs"]
         if not runs:
             continue
 
@@ -291,6 +300,7 @@ def generate_invocation_graphs(all_results, output_dir):
             "CONSTRAINED": "#FF9800",
             "MINOR": "#FFC107",
             "FLOWING": "#4CAF50",
+            "IDLE": "#90CAF9",
         }
 
         for r in results:
@@ -320,17 +330,17 @@ def print_summary(all_results):
     results = [r for r in all_results if r is not None]
     results.sort(key=lambda r: r["runs_per_week"], reverse=True)
 
-    print(f"\n{'='*110}")
-    print("REPO-ASSIST INVOCATION ANALYSIS")
-    print(f"{'='*110}")
-    print(f"\n{'Repository':<35} {'Runs':>6} {'Runs/wk':>8} {'Auto':>6} {'Human':>6} "
+    print(f"\n{'='*120}")
+    print("REPO-ASSIST INVOCATION ANALYSIS (excluding skipped runs)")
+    print(f"{'='*120}")
+    print(f"\n{'Repository':<35} {'Total':>6} {'Active':>7} {'Runs/wk':>8} {'Auto':>6} {'Human':>6} "
           f"{'Hum%':>5} {'Sched':>6} {'Comment':>8} {'Dispatch':>9} {'Issue':>6} "
           f"{'PR':>4} {'Succ%':>6}")
-    print("-" * 110)
+    print("-" * 120)
 
     for r in results:
         tc = r["trigger_counts"]
-        print(f"{r['repo']:<35} {r['total_runs']:>6} {r['runs_per_week']:>8.1f} "
+        print(f"{r['repo']:<35} {r['total_runs']:>6} {r['active_runs']:>7} {r['runs_per_week']:>8.1f} "
               f"{r['automated_runs']:>6} {r['human_initiated_runs']:>6} "
               f"{r['human_ratio']*100:>4.0f}% "
               f"{tc.get('schedule', 0):>6} {tc.get('issue_comment', 0):>8} "
@@ -340,11 +350,14 @@ def print_summary(all_results):
 
     print()
     total_runs = sum(r["total_runs"] for r in results)
+    total_active = sum(r["active_runs"] for r in results)
     total_human = sum(r["human_initiated_runs"] for r in results)
     total_auto = sum(r["automated_runs"] for r in results)
-    print(f"Total across all repos: {total_runs} runs "
+    total_skipped = sum(r["skipped"] for r in results)
+    print(f"Total: {total_runs} runs, {total_skipped} skipped ({total_skipped/total_runs*100:.0f}%), "
+          f"{total_active} active "
           f"({total_auto} automated, {total_human} human-initiated, "
-          f"{total_human/total_runs*100:.0f}% human)")
+          f"{total_human/total_active*100:.0f}% human)")
 
 
 def main():

@@ -126,13 +126,13 @@
     "rejection_rate": 0.08,
     "action_rate": 0.99,
     "bottleneck_score": 2,
-    "bottleneck_status": "MINOR",
+    "bottleneck_status": "IDLE",
     "bottleneck_type": "NONE",
-    "bottleneck_stage": "PR Review/Merge",
+    "bottleneck_stage": "Input-starved \u2014 backlog cleared",
     "bottleneck_reasons": [
       "Queue stall: open PRs waiting 2.0d avg vs 1.0d avg merge cycle"
     ],
-    "bottleneck_detail": "Pipeline is flowing well.",
+    "bottleneck_detail": "Factory effectively idle: only 4 open issues and 1 open PRs remain. The backlog has been cleared and the pipeline is waiting for new work rather than being constrained.",
     "littles_law": {
       "arrival_rate_per_day": 1.587,
       "departure_rate_per_day": 1.444,
@@ -171,16 +171,16 @@
     "open_wait_time_median": 34.5,
     "open_wait_times": [
       17.0,
-      22.0,
-      23.0,
+      22.1,
+      23.1,
       26.0,
       28.0,
-      29.0,
+      29.1,
       32.0,
       34.0,
       35.0,
       35.0,
-      36.0,
+      36.1,
       37.1,
       39.0,
       40.0,
@@ -291,11 +291,11 @@
       2.5,
       3.0
     ],
-    "open_wait_time_avg": 13.5,
-    "open_wait_time_median": 13.5,
+    "open_wait_time_avg": 13.6,
+    "open_wait_time_median": 13.6,
     "open_wait_times": [
-      12.5,
-      14.5
+      12.6,
+      14.6
     ],
     "issues_open_at_adoption": 14,
     "issues_open_now": 2,
@@ -303,13 +303,13 @@
     "rejection_rate": 0.159,
     "action_rate": 0.971,
     "bottleneck_score": 2,
-    "bottleneck_status": "MINOR",
+    "bottleneck_status": "IDLE",
     "bottleneck_type": "NONE",
-    "bottleneck_stage": "PR Review/Merge",
+    "bottleneck_stage": "Input-starved \u2014 backlog cleared",
     "bottleneck_reasons": [
-      "Queue stall: open PRs waiting 13.5d avg vs 1.7d avg merge cycle"
+      "Queue stall: open PRs waiting 13.6d avg vs 1.7d avg merge cycle"
     ],
-    "bottleneck_detail": "Pipeline is flowing well.",
+    "bottleneck_detail": "Factory effectively idle: only 2 open issues and 2 open PRs remain. The backlog has been cleared and the pipeline is waiting for new work rather than being constrained.",
     "littles_law": {
       "arrival_rate_per_day": 0.873,
       "departure_rate_per_day": 0.709,
@@ -551,14 +551,14 @@
     "rejection_rate": 0.147,
     "action_rate": 0.99,
     "bottleneck_score": 4,
-    "bottleneck_status": "CONSTRAINED",
+    "bottleneck_status": "IDLE",
     "bottleneck_type": "NONE",
-    "bottleneck_stage": "PR Review/Merge",
+    "bottleneck_stage": "Input-starved \u2014 backlog cleared",
     "bottleneck_reasons": [
       "Queue stall: open PRs waiting 40.4d avg vs 2.0d avg merge cycle",
       "Long queue time: open PRs waiting 40.4d average"
     ],
-    "bottleneck_detail": "Pipeline is flowing well.",
+    "bottleneck_detail": "Factory effectively idle: only 2 open issues and 1 open PRs remain. The backlog has been cleared and the pipeline is waiting for new work rather than being constrained.",
     "littles_law": {
       "arrival_rate_per_day": 1.291,
       "departure_rate_per_day": 1.089,
@@ -697,9 +697,9 @@
     "rejection_rate": 0.186,
     "action_rate": 0.983,
     "bottleneck_score": 4,
-    "bottleneck_status": "CONSTRAINED",
+    "bottleneck_status": "FLOWING",
     "bottleneck_type": "NONE",
-    "bottleneck_stage": "PR Review/Merge",
+    "bottleneck_stage": "Minor friction but pipeline operating",
     "bottleneck_reasons": [
       "Queue stall: open PRs waiting 21.1d avg vs 3.9d avg merge cycle",
       "Long queue time: open PRs waiting 21.1d average"
@@ -902,11 +902,11 @@
     "rejection_rate": 0.087,
     "action_rate": 1.0,
     "bottleneck_score": 0,
-    "bottleneck_status": "FLOWING",
+    "bottleneck_status": "IDLE",
     "bottleneck_type": "NONE",
-    "bottleneck_stage": "None \u2014 pipeline balanced",
+    "bottleneck_stage": "Input-starved \u2014 backlog cleared",
     "bottleneck_reasons": [],
-    "bottleneck_detail": "Pipeline is flowing well.",
+    "bottleneck_detail": "Factory effectively idle: only 4 open issues and 0 open PRs remain. The backlog has been cleared and the pipeline is waiting for new work rather than being constrained.",
     "littles_law": {
       "arrival_rate_per_day": 1.095,
       "departure_rate_per_day": 1.0,
@@ -1046,7 +1046,7 @@
       6.4,
       5.4
     ],
-    "open_wait_time_avg": 44.9,
+    "open_wait_time_avg": 45.0,
     "open_wait_time_median": 38.9,
     "open_wait_times": [
       26.4,
@@ -1058,9 +1058,9 @@
       37.4,
       40.4,
       40.4,
-      53.9,
-      59.9,
-      62.9,
+      54.0,
+      60.0,
+      63.0,
       64.0,
       73.1
     ],
@@ -1076,8 +1076,8 @@
     "bottleneck_reasons": [
       "Moderate merge rate: 61% of RA PRs merged",
       "Moderate WIP: 26% of RA PRs in queue",
-      "Queue stall: open PRs waiting 44.9d avg vs 2.3d avg merge cycle",
-      "Long queue time: open PRs waiting 44.9d average"
+      "Queue stall: open PRs waiting 45.0d avg vs 2.3d avg merge cycle",
+      "Long queue time: open PRs waiting 45.0d average"
     ],
     "bottleneck_detail": "Both accumulation (14 open PRs) and rejection (7 rejected). Partial maintainer engagement.",
     "littles_law": {
@@ -1125,7 +1125,7 @@
       1.8,
       1.3
     ],
-    "open_wait_time_avg": 18.2,
+    "open_wait_time_avg": 18.3,
     "open_wait_time_median": 16.5,
     "open_wait_times": [
       0.5,
@@ -1169,7 +1169,7 @@
       39.1,
       40.1,
       40.8,
-      49.8,
+      49.9,
       51.8
     ],
     "issues_open_at_adoption": 142,
@@ -1184,8 +1184,8 @@
     "bottleneck_reasons": [
       "Low merge rate: only 21% of RA PRs merged",
       "High WIP: 70% of RA PRs still in review queue",
-      "Queue stall: open PRs waiting 18.2d avg vs 4.7d avg merge cycle",
-      "Long queue time: open PRs waiting 18.2d average"
+      "Queue stall: open PRs waiting 18.3d avg vs 4.7d avg merge cycle",
+      "Long queue time: open PRs waiting 18.3d average"
     ],
     "bottleneck_detail": "Pipeline blocked on human review: 43 PRs awaiting action. Repo-assist is producing work but maintainers are not reviewing/merging.",
     "littles_law": {
