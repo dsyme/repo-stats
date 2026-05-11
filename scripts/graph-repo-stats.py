@@ -46,9 +46,9 @@ def add_adoption_line(ax, adoption_date):
     """Add a vertical line marking repo-assist adoption."""
     if adoption_date is None:
         return
-    ax.axvline(x=adoption_date, color="#E91E63", linewidth=1.5, linestyle="--", alpha=0.8, zorder=5)
+    ax.axvline(x=adoption_date, color="#4CAF50", linewidth=1.5, linestyle="--", alpha=0.8, zorder=5)
     ax.text(adoption_date, ax.get_ylim()[1] * 0.95, " repo-assist",
-            color="#E91E63", fontsize=9, fontweight="bold", va="top", ha="left")
+            color="#4CAF50", fontsize=9, fontweight="bold", va="top", ha="left")
 
 
 def detect_adoption_date(data_dir):
