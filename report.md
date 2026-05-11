@@ -1,7 +1,8 @@
 # The Impact of Automated Repository Maintenance Assistance
 
-Date: May 11, 2026
-Authors: Don Syme, Peli de Halleux, Krzysztof Cieślak, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita
+**Date:** May 11, 2026
+
+**Authors:** Don Syme, Peli de Halleux, Krzysztof Cieślak, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita
 
 ## Overview
 
@@ -51,9 +52,13 @@ The mean velocity increase is even larger (31× for issues, 14× for PRs), but t
 
 ## Social Factors
 
-The adoption and effectiveness of repository automation will be influenced by human-social factors. For example, the creator of Repo Assist (@dsyme) was a maintainer and community leader in the software community which adopted Repo Assist here, and was the maintainer of some (but not all) of the repositories analyzed here. This clearly influenced adoption and usage rates. It is highly likely that, like all automation technologies, successful use will be driven by social factors and incentives. Repositories with more active maintainers, or more knowledgable maintainers (e.g. original code authors), or where maintainers feel empowered to install and act, or where maintainers see each other succceeding, or where maintainers are actively seeking forward velocity for their project - these are surely more likely to see better outcomes. Those with less active maintainers, or with high levels of risk aversion, or where quality constraints make action impossible - these may struggle to unlock the forward velocity that automated repository assistance can evidently provide.
+It is highly likely that, like all automation technologies, successful use will be driven by human-social factors and incentives.
 
-The adoption of AI automation can also have an impact on the repository as a place of human-to-human collaboration. The repositories in this analysis were generally "dormant" with low human-to-human interaction at point of adoption, so this impact is not explored nore measurable in this report. However the potential impact on human-to-human collaboration and the corrosive effect AI can have on social platforms should be taken into account before adopting any AI automation workflow. Future research should explore the social impact of AI automation in open source communities.
+For example, the creator of Repo Assist (@dsyme) was a maintainer and community leader in the software community which adopted Repo Assist here, and was the maintainer of some (but not all) of the repositories analyzed here. This clearly will influence adoption and usage rates.
+
+Repositories with more active maintainers, or more knowledgable maintainers (e.g. original code authors), or where maintainers feel empowered to install and act, or where maintainers see each other succceeding, or where maintainers are actively seeking forward velocity for their project - these are surely more likely to see better outcomes. Those with less active maintainers, or with high levels of risk aversion, or where quality constraints make action impossible - these may struggle to unlock the forward velocity that automated repository assistance can evidently provide.
+
+The adoption of AI automation can also have an impact on the repository as a place of human-to-human collaboration. The repositories in this analysis were generally "dormant" with low human-to-human interaction at point of adoption, so this impact is not explored (nor measurable) in this report. However the potential impact on human-to-human collaboration and the corrosive effect AI can have on social platforms should be taken into account before adopting any AI automation workflow. Future research should explore the social impact of AI automation in open source communities.
 
 ## The Repository as Factory
 
