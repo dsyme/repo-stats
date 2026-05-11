@@ -7,18 +7,20 @@
 
 ## Executive Summary
 
-The repo-assist workflow was adopted across 11 open source repositories in February–March 2026. The impact on repository maintenance velocity and backlog quality has been dramatic and consistent across all projects.
+The repo-assist workflow was adopted across 11 open source repositories in February–March 2026. Every repository shows increased activity, but outcomes vary significantly depending on whether maintainers are actively reviewing and merging the work repo-assist produces.
+
+![Open Issue Trajectories](graphs/normalized-open-issues.png)
 
 **Key findings:**
 
 - **Every repository reduced its open issue count**, with a combined reduction of **484 open issues** across all repos
 - **Average issue closure velocity increased from 0.25/week to 7.77/week** — a **31× increase**
 - **Average PR merge velocity increased from 0.49/week to 6.85/week** — a **14× increase**
-- Four repositories achieved **near-complete (97–100%) backlog clearance**
-- The average proportion of the pre-existing backlog addressed is **68.3%**
-- Results hold across different languages (F#, Python) and project types (compilers, libraries, tools)
-- **Pipeline bottleneck analysis** reveals that repos with low backlog clearance are not limited by issue complexity or recency of adoption — they are blocked at the human review stage. Four repos (FSharp.Stats, dowhy, fantomas, FsAutoComplete) have blocked pipelines, with three distinct bottleneck types: *inaction* (PRs sitting unreviewed), *rejection* (PRs reviewed but rejected), and *mixed*.
+- Seven repositories achieved **77–100% backlog clearance** where maintainers actively reviewed PRs
+- Four repositories remain **pipeline-blocked** — repo-assist is generating PRs, but they are not being merged due to maintainer inaction (FSharp.Stats, dowhy), high rejection rates (fantomas), or mixed engagement (FsAutoComplete)
 - **Pipeline throughput ratio is the strongest predictor of backlog clearance**: repos with ≥80% PR merge throughput achieve ≥77% clearance; repos below 65% achieve <50%
+- **59% of all workflow invocations are human-initiated** (via `/repo-assist` comments or manual dispatch), indicating significant maintainer co-piloting in well-functioning repos
+- Results hold across different languages (F#, Python) and project types (compilers, libraries, tools)
 
 ## Velocity: Before vs After Adoption
 
@@ -239,6 +241,38 @@ Went from 153 open issues to just 2 — a complete backlog clearance. Issue clos
 
 ![FSharp.Stats Open Issues](graphs/fslaborg-FSharp.Stats/open-issues-over-time.png)
 
+## Workflow Invocation Analysis
+
+Repo-assist can be triggered in several ways: on a **schedule** (automated daily/weekly), by **issue or PR events** (automated reaction), by **`/repo-assist` comments** on issues (human-initiated), or by **manual dispatch** from the GitHub Actions UI (human-initiated). The trigger mix reveals how actively maintainers are co-piloting the workflow.
+
+| Repository | Runs | Runs/wk | Scheduled | /repo-assist | Dispatch | Issue/PR | Human% |
+|---|---|---|---|---|---|---|---|
+| FSharp.Formatting | 703 | 63.1 | 73 | 300 | 90 | 177 | **64%** |
+| SwaggerProvider | 531 | 60.0 | 63 | 182 | 10 | 90 | **71%** |
+| FsAutoComplete | 325 | 44.6 | 52 | 108 | 50 | 110 | 50% |
+| dowhy | 358 | 44.0 | 80 | 98 | 5 | 48 | **63%** |
+| FSharp.Data | 372 | 33.4 | 71 | 101 | 96 | 100 | **54%** |
+| TaskSeq | 293 | 33.1 | 69 | 128 | 16 | 78 | 50% |
+| fantomas | 310 | 28.6 | 83 | 107 | 2 | 114 | 36% |
+| TypeProviders.SDK | 274 | 26.6 | 39 | 43 | 151 | 41 | **71%** |
+| Deedle | 234 | 26.4 | 36 | 102 | 44 | 52 | **62%** |
+| AsyncSeq | 117 | 10.8 | 43 | 27 | 25 | 22 | 44% |
+| FSharp.Stats | 70 | 10.0 | 31 | 26 | 4 | 9 | 43% |
+
+![Invocation Rate by Type](graphs/invocation-rate-by-type.png)
+
+![Invocation Trigger Breakdown](graphs/invocation-trigger-breakdown.png)
+
+### Human Intervention as a Measure of Engagement
+
+The `/repo-assist` comment trigger is particularly informative: it represents a human maintainer explicitly asking the workflow to work on a specific issue or PR — a synchronous intervention in the software factory. Repos with high `/repo-assist` comment rates (FSharp.Formatting: 300, SwaggerProvider: 182, TaskSeq: 128) also tend to have the highest pipeline throughput.
+
+![Human Intervention vs Throughput](graphs/invocation-vs-throughput.png)
+
+The scatter plot shows that **blocked repos (red) tend to have lower human intervention rates**, confirming that the bottleneck is maintainer engagement, not workflow capability. The well-flowing repos have maintainers who actively direct repo-assist's efforts via comments and dispatch.
+
+![Activity Over Time](graphs/invocation-over-time.png)
+
 ## Comparative Graphs
 
 ![Open Issues: 6 Months Ago vs Now](graphs/comparative-open-issues.png)
@@ -268,6 +302,7 @@ During this analysis, we identified additional repositories that have adopted re
 - **Limitations**: This analysis measures correlation, not strict causation. The adoption of repo-assist may have coincided with increased human maintainer activity. However, the consistency of the pattern across all 11 repositories — and the near-zero baseline activity in many repos before adoption — strongly suggests repo-assist is the primary driver. The non-F# repo (dowhy) provides cross-ecosystem validation.
 - **Issue quality caveat**: Some closed issues may have been closed as "won't fix" or triaged rather than fixed. The current analysis counts all closures equally. A more nuanced analysis could distinguish closure reasons.
 - **Pipeline bottleneck analysis**: Models the repository as a multi-stage process (Issue → PR Generation → PR Review → PR Merge → Resolution). Uses Little's Law ($L = \lambda W$) to compute implied cycle times and identify WIP accumulation. Throughput ratio (PRs merged / PRs created) is the primary bottleneck metric. Bottleneck types are classified as: INACTION (high WIP, low review activity), REJECTION (high rejection rate, low WIP), or MIXED (both). Status levels: BLOCKED (score ≥5), CONSTRAINED (3–4), MINOR (1–2), FLOWING (0).
+- **Workflow invocation analysis**: Uses the GitHub Actions API to retrieve all runs of the "Repo Assist" workflow. Triggers are classified as *automated* (schedule, issue events, PR events) or *human-initiated* (issue comments, workflow dispatch, PR review comments). The human-initiated ratio measures maintainer engagement with the workflow.
 
 ## Data & Scripts
 
@@ -279,5 +314,8 @@ All data and scripts used in this analysis are available in this repository:
 - `scripts/generate-all-graphs.sh` — Batch graph generation
 - `scripts/analyze-repo-assist.py` — Cross-repo analysis, comparative graphs, and report generation
 - `scripts/bottleneck-analysis.py` — Pipeline flow analysis using Theory of Constraints and Little's Law; bottleneck identification and classification
-- `data/` — Raw JSON data for all repositories
+- `scripts/normalized-graph.py` — Normalized open-issue trajectory graph aligned to adoption date
+- `scripts/invocation-analysis.py` — Workflow invocation rate analysis by trigger type
+- `scripts/download-workflow-runs.sh` — Download GitHub Actions workflow run data
+- `data/` — Raw JSON data for all repositories (including `workflow-runs.json` per repo)
 - `graphs/` — All generated PNG graphs
