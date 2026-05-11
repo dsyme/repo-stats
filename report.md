@@ -17,8 +17,9 @@ The repo-assist workflow was adopted across 11 open source repositories in Febru
 - **Average issue closure velocity increased from 0.25/week to 7.77/week** — a **31× increase**
 - **Average PR merge velocity increased from 0.49/week to 6.85/week** — a **14× increase**
 - Seven repositories achieved **77–100% backlog clearance** where maintainers actively reviewed PRs
-- Four repositories remain **pipeline-blocked** — repo-assist is generating PRs, but they are not being merged due to maintainer inaction (FSharp.Stats, dowhy), high rejection rates (fantomas), or mixed engagement (FsAutoComplete)
-- **Pipeline throughput ratio is the strongest predictor of backlog clearance**: repos with ≥80% PR merge throughput achieve ≥77% clearance; repos below 65% achieve <50%
+- Four repositories remain **pipeline-blocked** — repo-assist is generating PRs and investigation comments, but they are not being acted on due to maintainer inaction (FSharp.Stats, dowhy), high rejection rates (fantomas), or mixed engagement (FsAutoComplete)
+- **Repo-assist has two output paths per issue**: a **comment path** (investigation/triage → human closes issue without PR) and a **PR path** (code change → review → merge). In well-flowing repos, both paths contribute substantially to issue resolution; in blocked repos, maintainers are inactive on both paths
+- **Combined resolution rate is the strongest predictor of backlog clearance**: repos where maintainers act on both RA's comments and PRs achieve ≥77% clearance; repos ignoring both paths achieve <10%
 - **59% of all workflow invocations are human-initiated** (via `/repo-assist` comments or manual dispatch), indicating significant maintainer co-piloting in well-functioning repos
 - Results hold across different languages (F#, Python) and project types (compilers, libraries, tools)
 
@@ -72,30 +73,44 @@ The original hypothesis — that low-clearance repos simply had more complex iss
 
 #### Process Flow Model
 
-Each repository operates as a multi-stage "software factory":
+Each repository operates as a multi-stage "software factory" with **two distinct output paths**:
 
 ```
- Issue Backlog → [PR Generation] → [PR Review Queue] → [PR Merge] → Issue Resolution
-                  (automated)        (WIP buffer)       (human)       (outcome)
+                          ┌─── COMMENT PATH ──→ [Human Review/Close] ──→ Issue Resolution
+ Issue Backlog            │     (investigation,                          (no PR needed)
+       │                  │      triage, Q&A)
+       ▼                  │
+  [Investigation]  ───────┤
+   (automated)            │
+                          └─── PR PATH ──→ [PR Review Queue] ──→ [PR Merge] ──→ Issue Resolution
+                                (draft PR      (WIP buffer)       (human)        (code change)
+                                 created)
 ```
 
-Repo-assist automates Stage 2 (PR Generation). **Stage 3–4 (Review/Merge) requires human maintainer action** and is the potential bottleneck. Using Little's Law ($L = \lambda \times W$, where $L$ = WIP, $\lambda$ = arrival rate, $W$ = cycle time), we can identify where work accumulates.
+Repo-assist automates the Investigation stage. For each issue it processes, it produces one of two outputs:
+
+1. **Comment path**: Repo-assist investigates and determines that no code change is needed — the issue is already resolved, is a question that can be answered, or requires only triage. It leaves an investigation comment. A human may then close the issue.
+2. **PR path**: Repo-assist determines a code change is needed and creates a draft PR. This enters the review queue where human maintainer action is required.
+
+Both paths contribute to issue resolution. The comment path is a "fast lane" that resolves issues without requiring PR review overhead. Using Little's Law ($L = \lambda \times W$), we analyze where work accumulates in the PR path specifically — the comment path has no WIP buffer since it produces immediate output.
 
 #### Pipeline Throughput Analysis
 
-| Repository | RA PRs Created | Merged | Rejected | Open (WIP) | Throughput | Rejection Rate | Status |
+| Repository | Comment Path (closed/total) | RA PRs | Merged | Rejected | Open (WIP) | PR Throughput | Status |
 |---|---|---|---|---|---|---|---|
-| FSharp.Stats | 18 | 2 | 0 | 16 | **11%** | 0% | **BLOCKED** |
-| dowhy | 61 | 13 | 5 | 43 | **21%** | 8% | **BLOCKED** |
-| fantomas | 64 | 22 | 41 | 1 | **34%** | 64% | **BLOCKED** |
-| FsAutoComplete | 54 | 33 | 7 | 14 | **61%** | 13% | **BLOCKED** |
-| TaskSeq | 83 | 66 | 17 | 0 | 80% | 20% | FLOWING |
-| FSharp.Formatting | 118 | 94 | 22 | 2 | 80% | 19% | CONSTRAINED |
-| AsyncSeq | 69 | 56 | 11 | 2 | 81% | 16% | MINOR |
-| FSharp.Data | 102 | 86 | 15 | 1 | 84% | 15% | CONSTRAINED |
-| TypeProviders.SDK | 50 | 45 | 4 | 1 | 90% | 8% | FLOWING |
-| Deedle | 100 | 91 | 8 | 1 | 91% | 8% | MINOR |
-| SwaggerProvider | 69 | 63 | 6 | 0 | 91% | 9% | FLOWING |
+| FSharp.Stats | 2/28 | 18 | 2 | 0 | 16 | **11%** | **BLOCKED** |
+| dowhy | 16/82 | 61 | 13 | 5 | 43 | **21%** | **BLOCKED** |
+| fantomas | 28/75 | 64 | 22 | 41 | 1 | **34%** | **BLOCKED** |
+| FsAutoComplete | 27/89 | 54 | 33 | 7 | 14 | **61%** | **BLOCKED** |
+| TaskSeq | 12/17 | 83 | 66 | 17 | 0 | 80% | FLOWING |
+| FSharp.Formatting | 53/65 | 118 | 94 | 22 | 2 | 80% | CONSTRAINED |
+| AsyncSeq | 7/7 | 69 | 56 | 11 | 2 | 81% | MINOR |
+| FSharp.Data | 108/110 | 102 | 86 | 15 | 1 | 84% | CONSTRAINED |
+| TypeProviders.SDK | 11/16 | 50 | 45 | 4 | 1 | 90% | FLOWING |
+| Deedle | 67/70 | 100 | 91 | 8 | 1 | 91% | MINOR |
+| SwaggerProvider | 26/28 | 69 | 63 | 6 | 0 | 91% | FLOWING |
+
+The "Comment Path" column shows how many issues were resolved via investigation comments alone (closed/total investigated). In well-flowing repos like FSharp.Data (108/110) and Deedle (67/70), humans are closing issues after reading RA's investigation comments at very high rates. In blocked repos like FSharp.Stats (2/28) and dowhy (16/82), even the comment-path is stalled — maintainers are not acting on investigation results either.
 
 ![Pipeline Flow](graphs/bottleneck-pipeline-flow.png)
 
@@ -105,14 +120,14 @@ Repo-assist automates Stage 2 (PR Generation). **Stage 3–4 (Review/Merge) requ
 
 The four blocked repositories exhibit three distinct bottleneck patterns:
 
-**1. INACTION bottleneck** (FSharp.Stats, dowhy): Repo-assist is producing PRs but maintainers are not reviewing or merging them. The WIP queue grows without bound.
+**1. INACTION bottleneck** (FSharp.Stats, dowhy): Repo-assist is producing both investigation comments and PRs, but maintainers are not acting on either. The WIP queue grows without bound and comment-path closures are minimal.
 
-- **FSharp.Stats**: 16 of 18 PRs (89%) sitting unreviewed, avg wait 32.8 days. Little's Law implies a cycle time of 43.6 days — the pipeline is effectively stalled. The low backlog clearance (7%) is **not** because the workflow is too new; it's because no one is merging the work it produces.
-- **dowhy**: 43 of 61 PRs (70%) in the review queue, avg wait 18.2 days. Arrival rate is 1.15 PRs/day but departure rate is only 0.25/day — a 4.7:1 imbalance.
+- **FSharp.Stats**: 16 of 18 PRs (89%) sitting unreviewed, avg wait 32.8 days. On the comment path, only 2 of 28 investigated issues were closed — maintainers are ignoring RA's triage output too. Little's Law implies a cycle time of 43.6 days — the pipeline is effectively stalled. The low backlog clearance (7%) is **not** because the workflow is too new; it's because no one is acting on the work it produces.
+- **dowhy**: 43 of 61 PRs (70%) in the review queue, avg wait 18.2 days. On the comment path, only 16 of 82 investigated issues were closed. Arrival rate is 1.15 PRs/day but departure rate is only 0.25/day — a 4.7:1 imbalance.
 
-**2. REJECTION bottleneck** (fantomas): Maintainers are actively reviewing PRs but rejecting 64% of them (41/64 closed without merge). The WIP queue is low (1 PR) because PRs are being processed — just not accepted. This suggests the codebase's domain complexity (nuanced formatting rules) exceeds what the automated workflow can reliably handle.
+**2. REJECTION bottleneck** (fantomas): Maintainers are actively reviewing PRs but rejecting 64% of them (41/64 closed without merge). The WIP queue is low (1 PR) because PRs are being processed — just not accepted. On the comment path, 28 of 75 investigated issues were closed, indicating moderate engagement with RA's triage comments even as PRs are rejected. This suggests the codebase's domain complexity (nuanced formatting rules) exceeds what the automated workflow can reliably handle for code changes, though the investigation/triage function is still useful.
 
-**3. MIXED bottleneck** (FsAutoComplete): Both accumulation (14 open PRs, avg wait 44.9 days) and rejection (7 rejected). Maintainers are partially engaged — merging some PRs but leaving others unreviewed for weeks. The 61% throughput rate is substantially below the 80–91% seen in well-flowing repos.
+**3. MIXED bottleneck** (FsAutoComplete): Both accumulation (14 open PRs, avg wait 44.9 days) and rejection (7 rejected). On the comment path, only 27 of 89 investigated issues were closed — most RA investigation output is being ignored alongside the PR backlog. The 61% throughput rate is substantially below the 80–91% seen in well-flowing repos.
 
 #### Cycle Time Analysis
 
@@ -134,22 +149,22 @@ The "Wait/Merge Ratio" compares how long currently-open PRs have been waiting vs
 
 ![WIP Accumulation](graphs/bottleneck-wip.png)
 
-#### Correlation: Throughput Predicts Clearance
+#### Correlation: Resolution Rate Predicts Clearance
 
-The scatter plot below shows that **pipeline throughput ratio is the strongest predictor of backlog clearance** — stronger than time since adoption, codebase complexity, or language.
+The scatter plot below shows that **combined resolution rate (PR merges + comment-path closures) is the strongest predictor of backlog clearance** — stronger than time since adoption, codebase complexity, or language.
 
 ![Bottleneck Impact](graphs/bottleneck-impact-scatter.png)
 
-Repos with ≥80% throughput all achieve ≥77% backlog clearance. Repos with <65% throughput all achieve <50% clearance. The relationship is approximately monotonic: every 10 percentage points of throughput corresponds to roughly 15–20 percentage points of backlog clearance.
+Repos with ≥75% combined resolution rate all achieve ≥77% backlog clearance. Repos with <50% resolution rate all achieve <75% clearance. The dual-path model reveals that repos where maintainers act on *both* RA's investigation comments *and* its PRs achieve the best outcomes — the comment path alone can drive significant issue resolution without any PR review overhead.
 
 #### Revised Tier Classification
 
 Based on the pipeline analysis, the repos should be reclassified by bottleneck type rather than "complexity":
 
-- **Flowing (80–91% throughput)**: FSharp.Data, Deedle, SwaggerProvider, FSharp.Formatting, TypeProviders.SDK, TaskSeq, AsyncSeq — maintainers are actively reviewing and merging repo-assist PRs, resulting in high backlog clearance
-- **Blocked — Inaction (11–21% throughput)**: FSharp.Stats, dowhy — repo-assist is generating PRs but the pipeline is stalled at human review. **The constraint is maintainer bandwidth, not issue complexity.** Unlocking these repos requires maintainer engagement with the existing PR queue.
-- **Blocked — Rejection (34% throughput)**: fantomas — maintainers are engaged but the automated PRs don't meet the codebase's exacting standards. The constraint is PR quality matching the domain's requirements.
-- **Blocked — Mixed (61% throughput)**: FsAutoComplete — partial maintainer engagement with both accumulation and rejection. Needs more consistent review cadence.
+- **Flowing (80–91% PR throughput, high comment-path closure)**: FSharp.Data, Deedle, SwaggerProvider, FSharp.Formatting, TypeProviders.SDK, TaskSeq, AsyncSeq — maintainers are actively reviewing and merging repo-assist PRs **and** acting on investigation comments, resulting in high backlog clearance through both paths
+- **Blocked — Inaction (11–21% PR throughput, low comment-path closure)**: FSharp.Stats, dowhy — repo-assist is generating both PRs and investigation comments but the pipeline is stalled at human action on **both** paths. **The constraint is maintainer engagement, not issue complexity.** Unlocking these repos requires maintainers to review the existing PR queue and act on RA's triage comments.
+- **Blocked — Rejection (34% PR throughput, moderate comment-path closure)**: fantomas — maintainers are engaged but the automated PRs don't meet the codebase's exacting standards. The comment path is partially flowing (28/75 closed), suggesting RA's investigation/triage function adds value even when its code changes are rejected.
+- **Blocked — Mixed (61% PR throughput, low comment-path closure)**: FsAutoComplete — partial maintainer engagement with both accumulation and rejection on the PR path, and low action on the comment path (27/89). Needs more consistent review cadence across both paths.
 
 ### Non-F# Validation
 
@@ -192,7 +207,7 @@ Went from 153 open issues to just 2 — a complete backlog clearance. Issue clos
 ### fsprojects/fantomas
 *Adopted 2026-02-23 · Pipeline BLOCKED (rejection)*
 
-120 → 75 open issues. Pipeline analysis reveals a **rejection bottleneck**: maintainers are actively reviewing repo-assist PRs but rejecting 64% of them (41 of 64 closed without merge). The WIP queue is low (1 PR), meaning PRs are being processed promptly (0.6d avg merge cycle) — they just don't meet the codebase's exacting standards. The 34% throughput ratio reflects the domain complexity of formatting behaviour, where nuanced style-guide rules make automated contributions difficult. Despite this, the 22 merged PRs have still driven significant progress — 8.11 issues closed/week.
+120 → 75 open issues. Pipeline analysis reveals a **rejection bottleneck** on the PR path: maintainers are actively reviewing repo-assist PRs but rejecting 64% of them (41 of 64 closed without merge). The WIP queue is low (1 PR), meaning PRs are being processed promptly (0.6d avg merge cycle) — they just don't meet the codebase's exacting standards. On the comment path, 28 of 75 investigated issues were closed, showing moderate engagement with RA's triage function. The 34% PR throughput ratio reflects the domain complexity of formatting behaviour, but the comment path provides additional value — the dual-path model shows repo-assist contributing to issue resolution even when its code changes are rejected.
 
 ![fantomas Open Issues](graphs/fsprojects-fantomas/open-issues-over-time.png)
 ![fantomas Merge Rate](graphs/fsprojects-fantomas/merge-rate.png)
@@ -200,7 +215,7 @@ Went from 153 open issues to just 2 — a complete backlog clearance. Issue clos
 ### py-why/dowhy
 *Adopted 2026-03-18 · Pipeline BLOCKED (inaction)*
 
-142 → 125 open issues. Despite issue closure jumping from 0.53 to 5.42/week, the pipeline is severely constrained: 43 of 61 repo-assist PRs (70%) remain in the review queue with an average wait of 18.2 days. The arrival rate of 1.15 PRs/day exceeds the departure rate of 0.25 PRs/day by 4.7:1. As a Python causal inference library with 8,100+ stars, it still validates that repo-assist works across ecosystems — but its full potential is bottlenecked on maintainer review bandwidth.
+142 → 125 open issues. Despite issue closure jumping from 0.53 to 5.42/week, the pipeline is severely constrained on both paths: on the PR path, 43 of 61 PRs (70%) remain in the review queue with an average wait of 18.2 days; on the comment path, only 16 of 82 investigated issues were closed. The arrival rate of 1.15 PRs/day exceeds the departure rate of 0.25 PRs/day by 4.7:1. As a Python causal inference library with 8,100+ stars, it validates that repo-assist works across ecosystems — but its full potential is bottlenecked on maintainer engagement with both RA's PRs and investigation comments.
 
 ![dowhy Open Issues](graphs/py-why-dowhy/open-issues-over-time.png)
 ![dowhy Merge Rate](graphs/py-why-dowhy/merge-rate.png)
@@ -208,7 +223,7 @@ Went from 153 open issues to just 2 — a complete backlog clearance. Issue clos
 ### ionide/FsAutoComplete
 *Adopted 2026-02-22 · Pipeline BLOCKED (mixed)*
 
-86 → 73 open issues. Pipeline analysis shows a **mixed bottleneck**: 14 repo-assist PRs are sitting in the review queue with an average wait of 44.9 days (the longest of any repo), while 7 others were rejected. The 61% throughput ratio reflects partial maintainer engagement — some PRs are merged quickly (2.3d avg), but others are left unreviewed indefinitely. Improving review cadence would unlock more of the pipeline's capacity.
+86 → 73 open issues. Pipeline analysis shows a **mixed bottleneck** across both paths: on the PR path, 14 PRs sit in the review queue with an average wait of 44.9 days (the longest of any repo) while 7 others were rejected. On the comment path, only 27 of 89 investigated issues were closed — most RA investigation output is being ignored. The 61% throughput ratio reflects partial maintainer engagement — some PRs are merged quickly (2.3d avg), but others are left unreviewed indefinitely. Improving review cadence on both paths would unlock more of the pipeline's capacity.
 
 ![FsAutoComplete Open Issues](graphs/ionide-FsAutoComplete/open-issues-over-time.png)
 ![FsAutoComplete Merge Rate](graphs/ionide-FsAutoComplete/merge-rate.png)
@@ -237,7 +252,7 @@ Went from 153 open issues to just 2 — a complete backlog clearance. Issue clos
 ### fslaborg/FSharp.Stats
 *Adopted 2026-03-23 · Pipeline BLOCKED (inaction)*
 
-60 → 58 open issues. While this is the most recently adopted repo, the low clearance (7%) is **not primarily due to recency** — it is due to an inaction bottleneck at the human review stage. Repo-assist has created 18 PRs, but only 2 have been merged; the remaining 16 sit in the review queue with an average wait of 32.8 days. The pipeline throughput ratio is just 11% — the lowest of all repositories. Little's Law analysis shows the arrival rate (0.37 PRs/day) vastly exceeds the departure rate (0.04 PRs/day), implying a cycle time of 43.6 days. The repository would see dramatically improved backlog clearance if maintainers began reviewing and merging the existing PR queue.
+60 → 58 open issues. While this is the most recently adopted repo, the low clearance (7%) is **not primarily due to recency** — it is due to an inaction bottleneck on **both** output paths. On the PR path, repo-assist has created 18 PRs, but only 2 have been merged; the remaining 16 sit in the review queue with an average wait of 32.8 days. On the comment path, repo-assist investigated 28 issues, but only 2 were closed — maintainers are not acting on RA's triage output either. The pipeline throughput ratio is just 11% — the lowest of all repositories. The repository would see dramatically improved backlog clearance if maintainers began reviewing the existing PR queue and acting on RA's investigation comments.
 
 ![FSharp.Stats Open Issues](graphs/fslaborg-FSharp.Stats/open-issues-over-time.png)
 

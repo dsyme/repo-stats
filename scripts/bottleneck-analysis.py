@@ -25,6 +25,7 @@ Usage: python3 bottleneck-analysis.py DATA_DIR [--output OUTPUT_DIR]
 import argparse
 import json
 import os
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 from collections import defaultdict
@@ -112,6 +113,61 @@ def analyze_pipeline(data_dir):
             ra_open.append(pr)
         else:
             ra_closed_unmerged.append(pr)
+
+    # ===== Stage 1b: Identify comment-path (investigation) activity =====
+    # Repo-assist has two output paths per issue:
+    #   A. PR path: creates a PR to fix the issue
+    #   B. Comment path: investigates and leaves a comment (e.g. "already fixed",
+    #      "this is a question", triage note) — may lead to closure without a PR
+    #
+    # We detect the comment path by finding issues where github-actions[bot]
+    # left a "Repo Assist" comment but did NOT create a PR.
+
+    ra_pr_numbers = set(pr["number"] for pr in ra_prs)
+    issue_map = {i["number"]: i for i in issues}
+
+    comment_path_issues = set()
+    comment_path_closed = set()
+    comment_path_open = set()
+    pr_path_issues = set()  # issues that received a PR-creation comment
+
+    bot_comments_path = os.path.join(data_dir, "bot-comments.json")
+    if os.path.exists(bot_comments_path):
+        bot_comments = load_json(bot_comments_path)
+
+        # Group bot comments by issue number
+        comments_by_issue = defaultdict(list)
+        for c in bot_comments:
+            m = re.search(r"/issues/(\d+)$", c.get("issue_url", ""))
+            if m:
+                inum = int(m.group(1))
+                comments_by_issue[inum].append(c)
+
+        for inum, clist in comments_by_issue.items():
+            if inum in ra_pr_numbers:
+                continue  # This IS a PR, skip
+
+            has_pr_mention = any(
+                "Pull request created" in c["body"]
+                or "created a draft PR" in c["body"]
+                or "draft PR has been opened" in c["body"]
+                for c in clist
+            )
+            has_ra_response = any(
+                "automated response from Repo Assist" in c["body"]
+                or "Repo Assist completed" in c["body"]
+                for c in clist
+            )
+
+            if has_pr_mention:
+                pr_path_issues.add(inum)
+            elif has_ra_response:
+                comment_path_issues.add(inum)
+                if inum in issue_map:
+                    if issue_map[inum]["state"] == "closed":
+                        comment_path_closed.add(inum)
+                    else:
+                        comment_path_open.add(inum)
 
     # ===== Stage 2: Compute pipeline metrics =====
     days_since_adoption = (now - adoption).days
@@ -286,11 +342,21 @@ def analyze_pipeline(data_dir):
         "days_since_adoption": days_since_adoption,
         "weeks_since_adoption": round(weeks_since_adoption, 1),
 
-        # Pipeline inventory
+        # Pipeline inventory — PR path
         "ra_prs_total": len(ra_prs),
         "ra_prs_merged": len(ra_merged),
         "ra_prs_open": len(ra_open),
         "ra_prs_closed_unmerged": len(ra_closed_unmerged),
+
+        # Pipeline inventory — Comment path
+        "comment_path_total": len(comment_path_issues),
+        "comment_path_closed": len(comment_path_closed),
+        "comment_path_open": len(comment_path_open),
+        "pr_path_issues": len(pr_path_issues),
+
+        # Combined throughput (both paths)
+        "total_issues_acted_on": len(comment_path_issues) + len(pr_path_issues),
+        "total_issues_resolved": len(comment_path_closed) + sum(1 for n in pr_path_issues if n in issue_map and issue_map[n]["state"] == "closed"),
 
         # Flow rates
         "pr_creation_rate_per_week": round(pr_creation_rate, 2),
@@ -356,30 +422,41 @@ def generate_bottleneck_graphs(all_results, output_dir):
     }
     colors = [status_colors.get(r["bottleneck_status"], "#9E9E9E") for r in results]
 
-    # === Graph 1: Pipeline Flow Diagram (stacked bar) ===
+    # === Graph 1: Pipeline Flow Diagram (stacked bar — dual path) ===
     fig, ax = plt.subplots(figsize=(14, 7))
     merged = [r["ra_prs_merged"] for r in results]
     still_open = [r["ra_prs_open"] for r in results]
     closed_unmerged = [r["ra_prs_closed_unmerged"] for r in results]
+    cmt_closed = [r["comment_path_closed"] for r in results]
+    cmt_open = [r["comment_path_open"] for r in results]
 
-    bars1 = ax.bar(x, merged, label="Merged (throughput)", color="#4CAF50")
-    bars2 = ax.bar(x, still_open, bottom=merged, label="Open — awaiting review (WIP)", color="#FF9800")
-    bottoms = [m + o for m, o in zip(merged, still_open)]
-    bars3 = ax.bar(x, closed_unmerged, bottom=bottoms, label="Closed unmerged (rejected)", color="#9E9E9E")
+    # Comment path (bottom)
+    bars_cc = ax.bar(x, cmt_closed, label="Comment path → closed (no PR needed)", color="#81C784")
+    bars_co = ax.bar(x, cmt_open, bottom=cmt_closed, label="Comment path → still open", color="#C8E6C9")
+    cmt_top = [cc + co for cc, co in zip(cmt_closed, cmt_open)]
 
-    # Add throughput ratio labels
+    # PR path (stacked on top)
+    bars1 = ax.bar(x, merged, bottom=cmt_top, label="PR path → merged", color="#2E7D32")
+    pr_bottom2 = [ct + m for ct, m in zip(cmt_top, merged)]
+    bars2 = ax.bar(x, still_open, bottom=pr_bottom2, label="PR path → awaiting review (WIP)", color="#FF9800")
+    pr_bottom3 = [b + o for b, o in zip(pr_bottom2, still_open)]
+    bars3 = ax.bar(x, closed_unmerged, bottom=pr_bottom3, label="PR path → rejected", color="#9E9E9E")
+
+    # Add total count labels
     for i, r in enumerate(results):
-        total = r["ra_prs_total"]
-        ratio = r["throughput_ratio"]
-        ax.text(i, total + 1, f"{ratio:.0%}", ha="center", va="bottom",
-                fontsize=9, fontweight="bold", color=colors[i])
+        total = cmt_top[i] + r["ra_prs_total"]
+        comment_pct = cmt_closed[i] / max(total, 1) * 100
+        pr_merge_pct = merged[i] / max(total, 1) * 100
+        ax.text(i, total + 1, f"{merged[i]+cmt_closed[i]}/{total}",
+                ha="center", va="bottom", fontsize=9, fontweight="bold", color=colors[i])
 
     ax.set_xlabel("Repository")
-    ax.set_ylabel("Repo-Assist PRs")
-    ax.set_title("Pipeline Flow: Repo-Assist PR Disposition\n(% = throughput ratio: merged / created)")
+    ax.set_ylabel("Issues Acted On by Repo-Assist")
+    ax.set_title("Dual-Path Pipeline Flow: Comment Path + PR Path\n"
+                 "(labels show resolved/total issues acted on)")
     ax.set_xticks(x)
     ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.legend(loc="upper left")
+    ax.legend(loc="upper left", fontsize=8)
     ax.grid(True, alpha=0.3, axis="y")
     fig.tight_layout()
     fig.savefig(os.path.join(output_dir, "bottleneck-pipeline-flow.png"), dpi=150)
@@ -440,9 +517,15 @@ def generate_bottleneck_graphs(all_results, output_dir):
     fig.savefig(os.path.join(output_dir, "bottleneck-wip.png"), dpi=150)
     plt.close(fig)
 
-    # === Graph 5: Bottleneck Impact — throughput ratio vs backlog clearance ===
+    # === Graph 5: Bottleneck Impact — combined resolution rate vs backlog clearance ===
     fig, ax = plt.subplots(figsize=(10, 8))
-    throughputs = [r["throughput_ratio"] * 100 for r in results]
+    # Combined resolution rate: (merged PRs + comment-path closures) / total issues acted on
+    resolution_rates = []
+    for r in results:
+        total_acted = r["comment_path_total"] + r["ra_prs_total"]
+        total_resolved = r["comment_path_closed"] + r["ra_prs_merged"]
+        resolution_rates.append(total_resolved / total_acted * 100 if total_acted > 0 else 0)
+
     # Backlog clearance
     clearances = []
     for r in results:
@@ -450,16 +533,16 @@ def generate_bottleneck_graphs(all_results, output_dir):
         closed = r["issues_closed_after_adoption"]
         clearances.append(min(closed / oaa * 100, 100) if oaa > 0 else 0)
 
-    scatter = ax.scatter(throughputs, clearances, c=colors, s=200, edgecolors="black", linewidth=0.5, zorder=5)
+    scatter = ax.scatter(resolution_rates, clearances, c=colors, s=200, edgecolors="black", linewidth=0.5, zorder=5)
     for i, r in enumerate(results):
         label = r["repo"].split("/")[1] if "/" in r["repo"] else r["repo"]
-        ax.annotate(label, (throughputs[i], clearances[i]),
+        ax.annotate(label, (resolution_rates[i], clearances[i]),
                     textcoords="offset points", xytext=(8, 5), fontsize=9)
 
-    ax.set_xlabel("Pipeline Throughput Ratio (% of RA PRs merged)")
+    ax.set_xlabel("Combined Resolution Rate (% of issues acted on → resolved)")
     ax.set_ylabel("Backlog Clearance (%)")
-    ax.set_title("Bottleneck Impact: Pipeline Throughput vs Backlog Clearance\n"
-                 "(repos in bottom-left have blocked pipelines → low clearance)")
+    ax.set_title("Pipeline Impact: Combined Resolution Rate vs Backlog Clearance\n"
+                 "(includes both comment-path closures and PR merges)")
     ax.axvline(x=50, color="#FF9800", linestyle="--", alpha=0.4)
     ax.axvline(x=75, color="#4CAF50", linestyle="--", alpha=0.4)
     ax.grid(True, alpha=0.3)
@@ -480,8 +563,9 @@ def print_summary(all_results):
     print("=" * 100)
     print()
     print(f"\n{'Repository':<35} {'Status':<12} {'Type':<10} {'RA PRs':>7} {'Merged':>7} {'Reject':>7} {'Open':>5} "
-          f"{'Thru%':>6} {'Rej%':>5} {'WIP%':>5} {'MergeCT':>8} {'WaitCT':>8}")
-    print("-" * 120)
+          f"{'Thru%':>6} {'Rej%':>5} {'WIP%':>5} {'CmtPath':>8} {'CmtCls':>7} "
+          f"{'MergeCT':>8} {'WaitCT':>8}")
+    print("-" * 140)
 
     for r in results:
         repo = r["repo"]
@@ -490,16 +574,21 @@ def print_summary(all_results):
               f"{r['ra_prs_merged']:>7} {r['ra_prs_closed_unmerged']:>7} {r['ra_prs_open']:>5} "
               f"{r['throughput_ratio']*100:>5.0f}% {r['rejection_rate']*100:>4.0f}% "
               f"{r['wip_fraction']*100:>4.0f}% "
+              f"{r['comment_path_total']:>8} {r['comment_path_closed']:>7} "
               f"{r['merge_cycle_time_avg'] or 0:>7.1f}d "
               f"{r['open_wait_time_avg'] or 0:>7.1f}d")
 
     print()
     print("BOTTLENECK DETAILS:")
-    print("-" * 120)
+    print("-" * 140)
     for r in results:
         if r["bottleneck_status"] != "FLOWING":
             print(f"\n  {r['repo']} [{r['bottleneck_status']}] — type: {r['bottleneck_type']}:")
             print(f"    Summary: {r['bottleneck_detail']}")
+            if r["comment_path_total"] > 0:
+                print(f"    Comment path: {r['comment_path_total']} issues investigated, "
+                      f"{r['comment_path_closed']} closed (no PR needed), "
+                      f"{r['comment_path_open']} still open")
             for reason in r["bottleneck_reasons"]:
                 print(f"    • {reason}")
             ll = r["littles_law"]
