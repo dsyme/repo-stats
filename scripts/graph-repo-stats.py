@@ -42,10 +42,36 @@ def load_json(path):
         return json.load(f)
 
 
+def add_adoption_line(ax, adoption_date):
+    """Add a vertical line marking repo-assist adoption."""
+    if adoption_date is None:
+        return
+    ax.axvline(x=adoption_date, color="#E91E63", linewidth=1.5, linestyle="--", alpha=0.8, zorder=5)
+    ax.text(adoption_date, ax.get_ylim()[1] * 0.95, " repo-assist",
+            color="#E91E63", fontsize=9, fontweight="bold", va="top", ha="left")
+
+
+def detect_adoption_date(data_dir):
+    """Detect repo-assist adoption date from issues-raw.json and pulls.json."""
+    ra_dates = []
+    for fname in ("issues-raw.json", "pulls.json"):
+        path = os.path.join(data_dir, fname)
+        if not os.path.exists(path):
+            continue
+        for item in load_json(path):
+            labels = [l.get("name", "") for l in item.get("labels", [])]
+            title = item.get("title", "")
+            if "repo-assist" in labels or "[repo-assist]" in title.lower():
+                dt = parse_dt(item.get("created_at"))
+                if dt:
+                    ra_dates.append(dt)
+    return min(ra_dates) if ra_dates else None
+
+
 # ---------------------------------------------------------------------------
 # Graph 1: Open issues over time
 # ---------------------------------------------------------------------------
-def graph_open_issues(issues, cutoff, output_path):
+def graph_open_issues(issues, cutoff, output_path, repo_name="", adoption_date=None):
     """Reconstruct open issue count over time from created_at / closed_at."""
     events = []  # (datetime, delta)  delta = +1 for open, -1 for close
     for issue in issues:
@@ -92,13 +118,14 @@ def graph_open_issues(issues, cutoff, output_path):
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.fill_between(dates, counts, alpha=0.3)
     ax.plot(dates, counts, linewidth=1.5)
-    ax.set_title("Open Issues Over Time")
+    ax.set_title(f"{repo_name} — Open Issues Over Time" if repo_name else "Open Issues Over Time")
     ax.set_xlabel("Date")
     ax.set_ylabel("Open Issues")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
     ax.xaxis.set_major_locator(mdates.MonthLocator())
     fig.autofmt_xdate()
     ax.grid(True, alpha=0.3)
+    add_adoption_line(ax, adoption_date)
     fig.tight_layout()
     fig.savefig(output_path, dpi=150)
     plt.close(fig)
@@ -108,7 +135,7 @@ def graph_open_issues(issues, cutoff, output_path):
 # ---------------------------------------------------------------------------
 # Graph 2: Merge rate (PRs merged per week)
 # ---------------------------------------------------------------------------
-def graph_merge_rate(pulls, cutoff, output_path):
+def graph_merge_rate(pulls, cutoff, output_path, repo_name="", adoption_date=None):
     merged_dates = []
     for pr in pulls:
         merged = parse_dt(pr.get("merged_at"))
@@ -134,13 +161,14 @@ def graph_merge_rate(pulls, cutoff, output_path):
 
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.bar(dates, counts, width=5, alpha=0.7)
-    ax.set_title("PRs Merged Per Week")
+    ax.set_title(f"{repo_name} — PRs Merged Per Week" if repo_name else "PRs Merged Per Week")
     ax.set_xlabel("Week starting")
     ax.set_ylabel("PRs Merged")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
     ax.xaxis.set_major_locator(mdates.MonthLocator())
     fig.autofmt_xdate()
     ax.grid(True, alpha=0.3, axis="y")
+    add_adoption_line(ax, adoption_date)
     fig.tight_layout()
     fig.savefig(output_path, dpi=150)
     plt.close(fig)
@@ -150,7 +178,7 @@ def graph_merge_rate(pulls, cutoff, output_path):
 # ---------------------------------------------------------------------------
 # Graph 3: PR time-to-merge (rolling 10-PR average, in days)
 # ---------------------------------------------------------------------------
-def graph_pr_time_to_merge(pulls, cutoff, output_path):
+def graph_pr_time_to_merge(pulls, cutoff, output_path, repo_name="", adoption_date=None):
     durations = []
     for pr in pulls:
         created = parse_dt(pr.get("created_at"))
@@ -177,7 +205,7 @@ def graph_pr_time_to_merge(pulls, cutoff, output_path):
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.scatter(dates, days_open, alpha=0.3, s=15, label="Individual PRs")
     ax.plot(dates, rolling, color="red", linewidth=2, label=f"Rolling avg ({window})")
-    ax.set_title("PR Time to Merge (days)")
+    ax.set_title(f"{repo_name} — PR Time to Merge (days)" if repo_name else "PR Time to Merge (days)")
     ax.set_xlabel("Merge Date")
     ax.set_ylabel("Days Open")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
@@ -185,6 +213,7 @@ def graph_pr_time_to_merge(pulls, cutoff, output_path):
     ax.legend()
     fig.autofmt_xdate()
     ax.grid(True, alpha=0.3)
+    add_adoption_line(ax, adoption_date)
     fig.tight_layout()
     fig.savefig(output_path, dpi=150)
     plt.close(fig)
@@ -194,7 +223,7 @@ def graph_pr_time_to_merge(pulls, cutoff, output_path):
 # ---------------------------------------------------------------------------
 # Graph 4: Issue open/close activity per week
 # ---------------------------------------------------------------------------
-def graph_issue_activity(issues, cutoff, output_path):
+def graph_issue_activity(issues, cutoff, output_path, repo_name="", adoption_date=None):
     opened_weeks = defaultdict(int)
     closed_weeks = defaultdict(int)
 
@@ -223,7 +252,7 @@ def graph_issue_activity(issues, cutoff, output_path):
     width = timedelta(days=2.5)
     ax.bar([w - width/2 for w in all_weeks], opened, width=width, alpha=0.7, label="Opened", color="tab:red")
     ax.bar([w + width/2 for w in all_weeks], closed, width=width, alpha=0.7, label="Closed", color="tab:green")
-    ax.set_title("Issue Activity Per Week (Opened vs Closed)")
+    ax.set_title(f"{repo_name} — Issue Activity Per Week (Opened vs Closed)" if repo_name else "Issue Activity Per Week (Opened vs Closed)")
     ax.set_xlabel("Week starting")
     ax.set_ylabel("Count")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
@@ -231,6 +260,7 @@ def graph_issue_activity(issues, cutoff, output_path):
     ax.legend()
     fig.autofmt_xdate()
     ax.grid(True, alpha=0.3, axis="y")
+    add_adoption_line(ax, adoption_date)
     fig.tight_layout()
     fig.savefig(output_path, dpi=150)
     plt.close(fig)
@@ -271,18 +301,23 @@ def main():
 
     print(f"Loaded {len(issues)} issues, {len(pulls)} PRs")
 
+    # Detect repo-assist adoption date
+    adoption_date = detect_adoption_date(data_dir)
+    if adoption_date:
+        print(f"Repo-assist adoption detected: {adoption_date.strftime('%Y-%m-%d')}")
+
     # Generate graphs
     print("Generating open issues over time...")
-    graph_open_issues(issues, cutoff, os.path.join(output_dir, "open-issues-over-time.png"))
+    graph_open_issues(issues, cutoff, os.path.join(output_dir, "open-issues-over-time.png"), repo_name, adoption_date)
 
     print("Generating merge rate...")
-    graph_merge_rate(pulls, cutoff, os.path.join(output_dir, "merge-rate.png"))
+    graph_merge_rate(pulls, cutoff, os.path.join(output_dir, "merge-rate.png"), repo_name, adoption_date)
 
     print("Generating PR time to merge...")
-    graph_pr_time_to_merge(pulls, cutoff, os.path.join(output_dir, "pr-time-to-merge.png"))
+    graph_pr_time_to_merge(pulls, cutoff, os.path.join(output_dir, "pr-time-to-merge.png"), repo_name, adoption_date)
 
     print("Generating issue activity...")
-    graph_issue_activity(issues, cutoff, os.path.join(output_dir, "issue-activity.png"))
+    graph_issue_activity(issues, cutoff, os.path.join(output_dir, "issue-activity.png"), repo_name, adoption_date)
 
     print("All graphs generated.")
 
