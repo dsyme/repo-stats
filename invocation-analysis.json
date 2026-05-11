@@ -246,6 +246,32 @@
     "success_rate": 0.838
   },
   {
+    "repo": "licensee/licensee",
+    "total_runs": 251,
+    "active_runs": 106,
+    "excluded_runs": 145,
+    "first_run": "2026-03-02",
+    "last_run": "2026-05-11",
+    "total_days": 69,
+    "runs_per_day": 1.54,
+    "runs_per_week": 10.75,
+    "trigger_counts": {
+      "workflow_dispatch": 1,
+      "schedule": 70,
+      "pull_request": 7,
+      "issues": 12,
+      "pull_request_review_comment": 11,
+      "issue_comment": 5
+    },
+    "scheduled_runs": 70,
+    "repo_assist_runs": 35,
+    "extra_runs": 1,
+    "repo_assist_ratio": 0.33,
+    "successes": 85,
+    "failures": 21,
+    "success_rate": 0.802
+  },
+  {
     "repo": "py-why/dowhy",
     "total_runs": 358,
     "active_runs": 91,

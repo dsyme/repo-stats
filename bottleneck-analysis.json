@@ -115,10 +115,10 @@
       5.3,
       5.3
     ],
-    "open_wait_time_avg": 2.0,
-    "open_wait_time_median": 2.0,
+    "open_wait_time_avg": 2.1,
+    "open_wait_time_median": 2.1,
     "open_wait_times": [
-      2.0
+      2.1
     ],
     "issues_open_at_adoption": 108,
     "issues_open_now": 4,
@@ -130,7 +130,7 @@
     "bottleneck_type": "NONE",
     "bottleneck_stage": "Input-starved \u2014 backlog cleared",
     "bottleneck_reasons": [
-      "Queue stall: open PRs waiting 2.0d avg vs 1.0d avg merge cycle"
+      "Queue stall: open PRs waiting 2.1d avg vs 1.0d avg merge cycle"
     ],
     "bottleneck_detail": "Factory effectively idle: only 4 open issues and 1 open PRs remain. The backlog has been cleared and the pipeline is waiting for new work rather than being constrained.",
     "littles_law": {
@@ -167,25 +167,25 @@
       4.3,
       4.3
     ],
-    "open_wait_time_avg": 32.8,
-    "open_wait_time_median": 34.5,
+    "open_wait_time_avg": 32.9,
+    "open_wait_time_median": 34.6,
     "open_wait_times": [
-      17.0,
-      22.1,
-      23.1,
-      26.0,
-      28.0,
-      29.1,
-      32.0,
-      34.0,
-      35.0,
-      35.0,
-      36.1,
-      37.1,
-      39.0,
-      40.0,
-      42.0,
-      49.5
+      17.1,
+      22.2,
+      23.2,
+      26.1,
+      28.1,
+      29.2,
+      32.1,
+      34.1,
+      35.1,
+      35.1,
+      36.2,
+      37.2,
+      39.1,
+      40.1,
+      42.1,
+      49.6
     ],
     "issues_open_at_adoption": 61,
     "issues_open_now": 58,
@@ -199,8 +199,8 @@
     "bottleneck_reasons": [
       "Low merge rate: only 11% of RA PRs merged",
       "High WIP: 89% of RA PRs still in review queue",
-      "Queue stall: open PRs waiting 32.8d avg vs 4.3d avg merge cycle",
-      "Long queue time: open PRs waiting 32.8d average"
+      "Queue stall: open PRs waiting 32.9d avg vs 4.3d avg merge cycle",
+      "Long queue time: open PRs waiting 32.9d average"
     ],
     "bottleneck_detail": "Pipeline blocked on human review: 16 PRs awaiting action. Repo-assist is producing work but maintainers are not reviewing/merging.",
     "littles_law": {
@@ -291,11 +291,11 @@
       2.5,
       3.0
     ],
-    "open_wait_time_avg": 13.6,
-    "open_wait_time_median": 13.6,
+    "open_wait_time_avg": 13.7,
+    "open_wait_time_median": 13.7,
     "open_wait_times": [
       12.6,
-      14.6
+      14.7
     ],
     "issues_open_at_adoption": 14,
     "issues_open_now": 2,
@@ -307,7 +307,7 @@
     "bottleneck_type": "NONE",
     "bottleneck_stage": "Input-starved \u2014 backlog cleared",
     "bottleneck_reasons": [
-      "Queue stall: open PRs waiting 13.6d avg vs 1.7d avg merge cycle"
+      "Queue stall: open PRs waiting 13.7d avg vs 1.7d avg merge cycle"
     ],
     "bottleneck_detail": "Factory effectively idle: only 2 open issues and 2 open PRs remain. The backlog has been cleared and the pipeline is waiting for new work rather than being constrained.",
     "littles_law": {
@@ -540,10 +540,10 @@
       0.0,
       1.0
     ],
-    "open_wait_time_avg": 40.4,
-    "open_wait_time_median": 40.4,
+    "open_wait_time_avg": 40.5,
+    "open_wait_time_median": 40.5,
     "open_wait_times": [
-      40.4
+      40.5
     ],
     "issues_open_at_adoption": 155,
     "issues_open_now": 2,
@@ -555,8 +555,8 @@
     "bottleneck_type": "NONE",
     "bottleneck_stage": "Input-starved \u2014 backlog cleared",
     "bottleneck_reasons": [
-      "Queue stall: open PRs waiting 40.4d avg vs 2.0d avg merge cycle",
-      "Long queue time: open PRs waiting 40.4d average"
+      "Queue stall: open PRs waiting 40.5d avg vs 2.0d avg merge cycle",
+      "Long queue time: open PRs waiting 40.5d average"
     ],
     "bottleneck_detail": "Factory effectively idle: only 2 open issues and 1 open PRs remain. The backlog has been cleared and the pipeline is waiting for new work rather than being constrained.",
     "littles_law": {
@@ -685,11 +685,11 @@
       2.5,
       0.5
     ],
-    "open_wait_time_avg": 21.1,
-    "open_wait_time_median": 21.1,
+    "open_wait_time_avg": 21.2,
+    "open_wait_time_median": 21.2,
     "open_wait_times": [
-      2.0,
-      40.1
+      2.1,
+      40.2
     ],
     "issues_open_at_adoption": 86,
     "issues_open_now": 12,
@@ -701,8 +701,8 @@
     "bottleneck_type": "NONE",
     "bottleneck_stage": "Minor friction but pipeline operating",
     "bottleneck_reasons": [
-      "Queue stall: open PRs waiting 21.1d avg vs 3.9d avg merge cycle",
-      "Long queue time: open PRs waiting 21.1d average"
+      "Queue stall: open PRs waiting 21.2d avg vs 3.9d avg merge cycle",
+      "Long queue time: open PRs waiting 21.2d average"
     ],
     "bottleneck_detail": "Pipeline is flowing well.",
     "littles_law": {
@@ -782,10 +782,10 @@
       4.6,
       0.6
     ],
-    "open_wait_time_avg": 3.0,
-    "open_wait_time_median": 3.0,
+    "open_wait_time_avg": 3.1,
+    "open_wait_time_median": 3.1,
     "open_wait_times": [
-      3.0
+      3.1
     ],
     "issues_open_at_adoption": 32,
     "issues_open_now": 6,
@@ -917,8 +917,8 @@
   {
     "repo": "fsprojects/fantomas",
     "adoption_date": "2026-02-23",
-    "days_since_adoption": 76,
-    "weeks_since_adoption": 10.9,
+    "days_since_adoption": 77,
+    "weeks_since_adoption": 11.0,
     "ra_prs_total": 64,
     "ra_prs_merged": 22,
     "ra_prs_open": 1,
@@ -929,8 +929,8 @@
     "pr_path_issues": 10,
     "total_issues_acted_on": 85,
     "total_issues_resolved": 34,
-    "pr_creation_rate_per_week": 5.89,
-    "pr_merge_rate_per_week": 2.03,
+    "pr_creation_rate_per_week": 5.82,
+    "pr_merge_rate_per_week": 2.0,
     "throughput_ratio": 0.344,
     "utilization": 0.344,
     "wip_count": 1,
@@ -961,10 +961,10 @@
       4.3,
       0.3
     ],
-    "open_wait_time_avg": 10.5,
-    "open_wait_time_median": 10.5,
+    "open_wait_time_avg": 10.6,
+    "open_wait_time_median": 10.6,
     "open_wait_times": [
-      10.5
+      10.6
     ],
     "issues_open_at_adoption": 121,
     "issues_open_now": 75,
@@ -977,13 +977,13 @@
     "bottleneck_stage": "PR Review/Merge (human action required)",
     "bottleneck_reasons": [
       "Low merge rate: only 34% of RA PRs merged",
-      "Queue stall: open PRs waiting 10.5d avg vs 0.6d avg merge cycle",
+      "Queue stall: open PRs waiting 10.6d avg vs 0.6d avg merge cycle",
       "High rejection rate: 64% of RA PRs closed without merge (41 rejected)"
     ],
     "bottleneck_detail": "Maintainers are actively reviewing but rejecting 64% of PRs (41/64). This suggests either PR quality issues or that the codebase requires domain expertise the automated workflow lacks.",
     "littles_law": {
-      "arrival_rate_per_day": 0.842,
-      "departure_rate_per_day": 0.289,
+      "arrival_rate_per_day": 0.831,
+      "departure_rate_per_day": 0.286,
       "wip": 1,
       "implied_cycle_time_days": 1.2
     }
@@ -1047,22 +1047,22 @@
       5.4
     ],
     "open_wait_time_avg": 45.0,
-    "open_wait_time_median": 38.9,
+    "open_wait_time_median": 39.0,
     "open_wait_times": [
-      26.4,
-      30.4,
-      33.4,
-      34.4,
-      36.4,
-      36.4,
-      37.4,
-      40.4,
-      40.4,
-      54.0,
-      60.0,
-      63.0,
-      64.0,
-      73.1
+      26.5,
+      30.5,
+      33.5,
+      34.5,
+      36.5,
+      36.5,
+      37.5,
+      40.5,
+      40.5,
+      54.1,
+      60.1,
+      63.1,
+      64.1,
+      73.2
     ],
     "issues_open_at_adoption": 87,
     "issues_open_now": 73,
@@ -1085,6 +1085,77 @@
       "departure_rate_per_day": 0.429,
       "wip": 14,
       "implied_cycle_time_days": 20.0
+    }
+  },
+  {
+    "repo": "licensee/licensee",
+    "adoption_date": "2026-03-02",
+    "days_since_adoption": 70,
+    "weeks_since_adoption": 10.0,
+    "ra_prs_total": 29,
+    "ra_prs_merged": 23,
+    "ra_prs_open": 1,
+    "ra_prs_closed_unmerged": 5,
+    "comment_path_total": 16,
+    "comment_path_closed": 10,
+    "comment_path_open": 5,
+    "pr_path_issues": 2,
+    "total_issues_acted_on": 18,
+    "total_issues_resolved": 12,
+    "pr_creation_rate_per_week": 2.9,
+    "pr_merge_rate_per_week": 2.3,
+    "throughput_ratio": 0.793,
+    "utilization": 0.793,
+    "wip_count": 1,
+    "wip_fraction": 0.034,
+    "merge_cycle_time_avg": 1.0,
+    "merge_cycle_time_median": 0.1,
+    "merge_cycle_times": [
+      0.2,
+      0.4,
+      7.1,
+      1.4,
+      1.2,
+      0.2,
+      0.0,
+      0.0,
+      0.0,
+      0.1,
+      0.0,
+      0.0,
+      0.2,
+      0.1,
+      0.1,
+      0.0,
+      0.1,
+      0.7,
+      9.0,
+      2.0,
+      0.0,
+      0.1,
+      0.2
+    ],
+    "open_wait_time_avg": 0.7,
+    "open_wait_time_median": 0.7,
+    "open_wait_times": [
+      0.7
+    ],
+    "issues_open_at_adoption": 17,
+    "issues_open_now": 6,
+    "issues_closed_after_adoption": 23,
+    "rejection_rate": 0.172,
+    "action_rate": 0.966,
+    "bottleneck_score": 0,
+    "bottleneck_status": "FLOWING",
+    "bottleneck_type": "NONE",
+    "bottleneck_stage": "None \u2014 pipeline balanced",
+    "bottleneck_reasons": [],
+    "bottleneck_detail": "Pipeline is flowing well.",
+    "littles_law": {
+      "arrival_rate_per_day": 0.414,
+      "departure_rate_per_day": 0.329,
+      "wip": 1,
+      "implied_cycle_time_days": 2.4
     }
   },
   {
@@ -1125,52 +1196,52 @@
       1.8,
       1.3
     ],
-    "open_wait_time_avg": 18.3,
-    "open_wait_time_median": 16.5,
+    "open_wait_time_avg": 18.4,
+    "open_wait_time_median": 16.6,
     "open_wait_times": [
-      0.5,
-      1.0,
-      1.5,
-      2.0,
-      2.5,
-      3.0,
-      3.5,
-      6.5,
-      7.5,
-      8.0,
-      8.5,
-      10.0,
-      11.0,
-      11.5,
-      12.5,
-      13.5,
-      14.0,
-      14.5,
-      15.0,
-      15.5,
-      16.0,
-      16.5,
-      17.0,
-      17.5,
-      18.5,
-      19.0,
-      20.0,
-      21.5,
-      22.0,
-      22.5,
-      23.0,
-      23.5,
-      24.0,
-      24.5,
-      25.0,
-      25.5,
-      27.0,
-      38.1,
-      39.1,
-      40.1,
-      40.8,
-      49.9,
-      51.8
+      0.6,
+      1.1,
+      1.6,
+      2.1,
+      2.6,
+      3.1,
+      3.6,
+      6.6,
+      7.6,
+      8.1,
+      8.6,
+      10.1,
+      11.1,
+      11.6,
+      12.6,
+      13.6,
+      14.1,
+      14.6,
+      15.1,
+      15.6,
+      16.1,
+      16.6,
+      17.1,
+      17.6,
+      18.6,
+      19.1,
+      20.1,
+      21.6,
+      22.1,
+      22.6,
+      23.1,
+      23.6,
+      24.1,
+      24.6,
+      25.1,
+      25.6,
+      27.1,
+      38.2,
+      39.2,
+      40.2,
+      40.9,
+      50.0,
+      51.9
     ],
     "issues_open_at_adoption": 142,
     "issues_open_now": 125,
@@ -1184,8 +1255,8 @@
     "bottleneck_reasons": [
       "Low merge rate: only 21% of RA PRs merged",
       "High WIP: 70% of RA PRs still in review queue",
-      "Queue stall: open PRs waiting 18.3d avg vs 4.7d avg merge cycle",
-      "Long queue time: open PRs waiting 18.3d average"
+      "Queue stall: open PRs waiting 18.4d avg vs 4.7d avg merge cycle",
+      "Long queue time: open PRs waiting 18.4d average"
     ],
     "bottleneck_detail": "Pipeline blocked on human review: 43 PRs awaiting action. Repo-assist is producing work but maintainers are not reviewing/merging.",
     "littles_law": {

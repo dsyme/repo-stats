@@ -59,14 +59,14 @@ def detect_repo_assist(data_dir):
     for pr in pulls:
         title = pr.get("title", "")
         labels = [l.get("name", "") for l in pr.get("labels", [])]
-        if "[repo-assist]" in title or "repo-assist" in labels:
+        if "[repo-assist]" in title.lower() or "repo-assist" in labels:
             ra_prs.append(pr)
 
     ra_issues = []
     for issue in all_issues:
         labels = [l.get("name", "") for l in issue.get("labels", [])]
         title = issue.get("title", "")
-        if "repo-assist" in labels or "[repo-assist]" in title:
+        if "repo-assist" in labels or "[repo-assist]" in title.lower():
             ra_issues.append(issue)
 
     # Earliest repo-assist PR or issue creation date = adoption date
