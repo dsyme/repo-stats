@@ -1,4 +1,4 @@
-# The Impact of Automated Repositor y Maintenance Assistance
+# The Impact of Automated Repository Maintenance Assistance
 
 Date: May 11, 2026
 Author: Don Syme, Peli de Halleux, and the GitHub Next Team  
