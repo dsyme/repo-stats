@@ -58,6 +58,8 @@ For example, the creator of Repo Assist (@dsyme) was a maintainer and community 
 
 Repositories with more active maintainers, or more knowledgable maintainers (e.g. original code authors), or where maintainers feel empowered to install and act, or where maintainers see each other succceeding, or where maintainers are actively seeking forward velocity for their project - these are surely more likely to see better outcomes. Those with less active maintainers, or with high levels of risk aversion, or where quality constraints make action impossible - these may struggle to unlock the forward velocity that automated repository assistance can evidently provide.
 
+**Notification anxiety and burnout.** One maintainer (FsAutoComplete, see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)) explicitly cited **notification anxiety** as a reason for pausing the workflow: "you wake up, open GitHub and see a whole bunch of notifications, and you're like 'oh no my life sucks'." This is a well-known dynamic in open source maintenance, and continuous AI automation can amplify it — even when the output is high quality. The ability to **disable and re-enable** the workflow is an important safety valve: it lets maintainers control the production rate to match their available bandwidth, rather than being pressured by a stream of AI-generated work.
+
 The adoption of AI automation can also have an impact on the repository as a place of human-to-human collaboration. The repositories in this analysis were generally "dormant" with low human-to-human interaction at point of adoption, so this impact is not explored (nor measurable) in this report. However the potential impact on human-to-human collaboration and the corrosive effect AI can have on social platforms should be taken into account before adopting any AI automation workflow. Future research should explore the social impact of AI automation in open source communities.
 
 ## The Repository as Factory
@@ -131,7 +133,7 @@ The repositories fall into four distinct operational states:
 
 **4. BLOCKED — REJECTION bottleneck** (fantomas): Maintainers are actively reviewing PRs but rejecting 64% of them (41/64 closed without merge). The WIP queue is low (1 PR) because PRs are being processed — just not accepted. On the comment path, 28 of 75 investigated issues were closed, indicating moderate engagement with RA's triage comments even as PRs are rejected. This suggests the codebase's domain complexity (nuanced formatting rules) exceeds what the automated workflow can reliably handle for code changes, though the investigation/triage function is still useful.
 
-**5. BLOCKED — MIXED bottleneck** (FsAutoComplete): Both accumulation (14 open PRs, avg wait 44.9 days) and rejection (7 rejected). On the comment path, only 27 of 89 investigated issues were closed — most RA investigation output is being ignored alongside the PR backlog. The 61% throughput rate is substantially below the 80–91% seen in well-flowing repos.
+**5. BLOCKED — MIXED bottleneck** (FsAutoComplete): Both accumulation (14 open PRs, avg wait 44.9 days) and rejection (7 rejected). On the comment path, only 27 of 89 investigated issues were closed. The 61% throughput rate is below the 79–91% seen in well-flowing repos. However, unlike the inaction cases above, this block reflects a **deliberate capacity constraint**: the maintainer reports high satisfaction with merged PR quality (33 RA PRs merged in 2 months = 62% of 2025's total output), but chose to pause the workflow to manage notification pressure during a period of reduced bandwidth (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)). Some rejected PRs were intentionally experimental. This case illustrates that BLOCKED status can reflect legitimate human factors — burnout avoidance, life circumstances — rather than workflow failure.
 
 ### Cycle Time Analysis
 
@@ -159,7 +161,7 @@ Based on the factory analysis, the repositories fall into clear operational tier
 - **FLOWING**: TaskSeq, FSharp.Formatting, TypeProviders.SDK, licensee — pipeline operating normally with work still in progress. Maintainers keeping pace with agent output.
 - **BLOCKED — Inaction**: FSharp.Stats, dowhy — the agent is generating both PRs and investigation comments but the factory is stalled at human action on **both** paths. **The constraint is maintainer engagement, not issue complexity.** Unlocking these repos requires maintainers to review the existing PR queue and act on the agent's triage comments.
 - **BLOCKED — Rejection**: fantomas — maintainers are engaged but the automated PRs don't meet the codebase's exacting standards. The comment path is partially flowing (28/75 closed), suggesting the agent's investigation/triage function adds value even when its code changes are rejected.
-- **BLOCKED — Mixed**: FsAutoComplete — partial maintainer engagement with both accumulation and rejection on the PR path, and low action on the comment path (27/89). Needs more consistent review cadence across both paths.
+- **BLOCKED — Mixed**: FsAutoComplete — accumulation and some rejection on the PR path, with low action on the comment path (27/89). However, the maintainer reports high satisfaction with merged PR quality and paused the workflow deliberately to manage notification load during reduced bandwidth — a legitimate capacity constraint rather than disengagement (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)).
 
 ## Per-Repository Detail
 
@@ -212,9 +214,13 @@ Went from 153 open issues to just 2 — a complete backlog clearance. Issue clos
 ![dowhy Merge Rate](graphs/py-why-dowhy/merge-rate.png)
 
 ### ionide/FsAutoComplete
-*Adopted 2026-02-22 · Pipeline BLOCKED (mixed)*
+*Adopted 2026-02-22 · Pipeline BLOCKED (mixed) · Workflow paused by maintainer*
 
-86 → 73 open issues. Pipeline analysis shows a **mixed bottleneck** across both paths: on the PR path, 14 PRs sit in the review queue with an average wait of 44.9 days (the longest of any repo) while 7 others were rejected. On the comment path, only 27 of 89 investigated issues were closed — most RA investigation output is being ignored. The 61% throughput ratio reflects partial maintainer engagement — some PRs are merged quickly (2.3d avg), but others are left unreviewed indefinitely. Improving review cadence on both paths would unlock more of the pipeline's capacity.
+86 → 73 open issues. In raw throughput terms, the pipeline shows a **mixed bottleneck**: 14 PRs in the review queue (avg wait 44.9 days, the longest of any repo), 7 rejected, and only 27 of 89 investigated issues closed on the comment path. The 61% PR throughput ratio is below the 79–91% seen in well-flowing repos.
+
+However, the maintainer's perspective (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)) reveals important nuance. The merged PRs are **high quality** — in just two months, Repo Assist produced 33 merged PRs, equivalent to 62% of the repository's entire 2025 output of 53 PRs, and the maintainer reports that many were more impactful than typical contributions, following repository best practices including comprehensive integration tests. The codebase's complexity (FsAutoComplete is the core language server for F#, with broad ecosystem impact) means PRs require careful review — a legitimate quality constraint, not disengagement.
+
+Some of the rejected PRs were **intentionally experimental** — prompted to investigate whether old bugs still existed or to explore specific approaches, rather than expected to merge directly. The maintainer ultimately **chose to disable the workflow** — not due to dissatisfaction with its output, but to manage notification pressure and protect against burnout during a period of reduced personal bandwidth. This represents a deliberate production-rate decision: the factory's human operator temporarily shut down the line rather than let unreviewed work accumulate. The maintainer intends to re-enable the workflow when capacity returns.
 
 ![FsAutoComplete Open Issues](graphs/ionide-FsAutoComplete/open-issues-over-time.png)
 ![FsAutoComplete Merge Rate](graphs/ionide-FsAutoComplete/merge-rate.png)
@@ -308,7 +314,7 @@ The scatter plot shows that **blocked repos (red) tend to have lower human inter
 - **Quality (backlog clearance)** is the proportion of issues that were open at the time of Repo Assist adoption that have since been closed. This measures how well accumulated technical and feature debt is being addressed.
 - **Repo-assist detection**: A repository is classified as using repo-assist based on PRs with `[repo-assist]` in the title or issues/PRs with the `repo-assist` label. The adoption date is the earliest such item.
 - **Inclusion criteria**: Repos were included only if (a) repo-assist workflow runs have succeeded in the last week, and (b) adoption was more than 3 weeks ago.
-- **Limitations**: This analysis measures correlation, not strict causation. The adoption of Repo Assist may have coincided with increased human maintainer activity. However, the consistency of the pattern across all 11 repositories — and the near-zero baseline activity in many repos before adoption — strongly suggests Repo Assist is the primary driver. The non-F# repos (dowhy, licensee) provide cross-ecosystem validation.
+- **Limitations**: This analysis measures correlation, not strict causation. The adoption of Repo Assist may have coincided with increased human maintainer activity. However, the consistency of the pattern across all 12 repositories — and the near-zero baseline activity in many repos before adoption — strongly suggests Repo Assist is the primary driver. The non-F# repos (dowhy, licensee) provide cross-ecosystem validation.
 - **Issue quality caveat**: Some closed issues may have been closed as "won't fix" or triaged rather than fixed. The current analysis counts all closures equally. A more nuanced analysis could distinguish closure reasons.
 - **Pipeline bottleneck analysis**: Models the repository as a multi-stage human-agent software factory. Uses Little's Law ($L = \lambda W$) to compute implied cycle times and identify WIP accumulation. Throughput ratio (PRs merged / PRs created) is the primary bottleneck metric. Bottleneck types are classified as: INACTION (high WIP, low review activity), REJECTION (high rejection rate, low WIP), or MIXED (both). Status levels: BLOCKED (score ≥5), FLOWING (0), IDLE (≤5 open issues and ≤2 open PRs with no bottleneck).
 - **Workflow invocation analysis**: Uses the GitHub Actions API to retrieve all runs of the "Repo Assist" workflow. **Runs with "skipped", "cancelled", or "action_required" conclusions are excluded** — these represent trigger firings that never actually executed the agent (e.g. `issue_comment` events where no `/repo-assist` command was found, or runs awaiting approval). Active runs are classified into three categories: *Automated (scheduled)* (cron-triggered), *Automated (additional)* (manual dispatch from the Actions UI), and *Human intervention (/repo-assist)* (event-triggered runs that passed pre-activation — issue comments, PR comments, issue events, PR events). The human intervention ratio measures direct maintainer engagement with the workflow.
@@ -388,3 +394,21 @@ All data and scripts used in this analysis are available in this repository:
 | AsyncSeq | 1.7d | 13.6d | 8.0× | IDLE |
 | TaskSeq | 2.0d | 0.0d | — | FLOWING |
 | licensee | 1.0d | 0.7d | 0.7× | FLOWING |
+
+### Appendix D: Maintainer Notes — FsAutoComplete
+
+The following are lightly edited notes from the FsAutoComplete maintainer (Krzysztof Cieślak), providing qualitative context for the quantitative analysis above.
+
+> FSAC is an interesting case. Couple of notes related to it:
+>
+> * The repository is not really actively maintained at all [there's new release every few months, and development is not really active]
+> * Enabling Repo Assist definitely created a surge in activity - in ~2 months it was active we merged almost as much (probably could get exact numbers here easily) PRs as in whole 2025 year (and I'd say that many of Repo Assist PRs were more impactful)
+> * Due to the type of software it is, there's certain level of code complexity + potential huge impact on the ecosystem if something goes wrong. Which means it requires rather careful reviews
+> * In general I'm very happy with most PRs I merged - there are high quality, useful, meaningful, follows best practices of the repository [like adding a lot of integration tests for new features]
+> * Some of the open PRs, at glance, looks good, but as I've mentioned they need more review...
+> * Some of the non-merged PRs were very specifically prompted to be an experiments / "check if this old bug is still happening" type of things. They would require more follow-up, and maybe some of them should be just closed.
+> * But I just don't have a time (nor I'm in the right mindset at the moment) to review stuff - this has nothing to do with Repo Assist on its own, but with me - after experiences of last year I'm very careful not to burn out myself, so I'm trying to minimise some of the external pressures [like OSS] + I have plenty stuff to do outside of software development [new apartment etc]
+> * Which resulted in me disabling the workflow (= reducing its production rate to zero) - but when I'll have more spare time / better mindset for FSAC work, I'll 100% enable again.
+> * Keeping it enabled while I didn't had time created a bit of "notification anxiety" thing, that probably many of maintainers know well - you know, you wake up, open GH and see whole bunch of notifications, and you're like "oh no my life sucks"
+
+*Editorial note: The exact numbers confirm the maintainer's observation — 33 Repo Assist PRs were merged in the ~2 month active period (Feb 22 – Apr 15, 2026), compared to 53 total PRs merged across all of 2025. This represents 62% of a full year's output in roughly one-sixth of the time.*
