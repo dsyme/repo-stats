@@ -15,6 +15,8 @@ REPOS=(
     "ionide/FsAutoComplete"
     "fsprojects/FSharp.TypeProviders.SDK"
     "fslaborg/FSharp.Stats"
+    "fsprojects/SwaggerProvider"
+    "py-why/dowhy"
 )
 
 for REPO in "${REPOS[@]}"; do

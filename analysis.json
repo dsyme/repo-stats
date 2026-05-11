@@ -231,6 +231,39 @@
     }
   },
   {
+    "repo": "fsprojects/SwaggerProvider",
+    "has_repo_assist": true,
+    "adoption_date": "2026-03-08",
+    "ra_prs_total": 62,
+    "ra_prs_merged": 56,
+    "open_6mo_ago": 32,
+    "open_now": 4,
+    "net_change": -28,
+    "backlog_addressed": 31,
+    "backlog_ratio": 0.969,
+    "new_issues_in_period": 35,
+    "issues_closed_in_period": 63,
+    "prs_merged_in_period": 109,
+    "issues_closed_per_week": 2.42,
+    "prs_merged_per_week": 4.2,
+    "new_issues_per_week": 1.35,
+    "before_after": {
+      "adoption_date": "2026-03-08",
+      "period_days": 63,
+      "before_issues_closed": 2,
+      "after_issues_closed": 55,
+      "before_issues_closed_per_week": 0.2222222222222222,
+      "after_issues_closed_per_week": 6.111111111111111,
+      "before_prs_merged": 7,
+      "after_prs_merged": 93,
+      "before_prs_merged_per_week": 0.7777777777777778,
+      "after_prs_merged_per_week": 10.333333333333334,
+      "open_at_adoption": 32,
+      "adoption_backlog_addressed": 31,
+      "adoption_backlog_ratio": 0.96875
+    }
+  },
+  {
     "repo": "fsprojects/fantomas",
     "has_repo_assist": true,
     "adoption_date": "2026-02-23",
@@ -294,6 +327,39 @@
       "open_at_adoption": 87,
       "adoption_backlog_addressed": 27,
       "adoption_backlog_ratio": 0.3103448275862069
+    }
+  },
+  {
+    "repo": "py-why/dowhy",
+    "has_repo_assist": true,
+    "adoption_date": "2026-03-18",
+    "ra_prs_total": 59,
+    "ra_prs_merged": 13,
+    "open_6mo_ago": 143,
+    "open_now": 125,
+    "net_change": -18,
+    "backlog_addressed": 39,
+    "backlog_ratio": 0.273,
+    "new_issues_in_period": 33,
+    "issues_closed_in_period": 51,
+    "prs_merged_in_period": 53,
+    "issues_closed_per_week": 1.96,
+    "prs_merged_per_week": 2.04,
+    "new_issues_per_week": 1.27,
+    "before_after": {
+      "adoption_date": "2026-03-18",
+      "period_days": 53,
+      "before_issues_closed": 4,
+      "after_issues_closed": 41,
+      "before_issues_closed_per_week": 0.5283018867924528,
+      "after_issues_closed_per_week": 5.415094339622642,
+      "before_prs_merged": 14,
+      "after_prs_merged": 39,
+      "before_prs_merged_per_week": 1.849056603773585,
+      "after_prs_merged_per_week": 5.150943396226415,
+      "open_at_adoption": 142,
+      "adoption_backlog_addressed": 34,
+      "adoption_backlog_ratio": 0.23943661971830985
     }
   }
 ]
