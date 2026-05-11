@@ -3,12 +3,13 @@
 Analyze repo-assist workflow invocation rates over time, broken down by trigger type.
 
 Three invocation categories:
-  - Scheduled:      Automated scheduled runs (the factory's own clock)
-  - /repo-assist:   Event-triggered runs that actually executed — issue comments,
-                    PR review comments, issue events, PR events. These represent
-                    actual /repo-assist invocations that passed pre-activation.
-  - Extra:          Manual dispatch from the GitHub Actions UI. Human-boosted
-                    automation — the maintainer dialing up the rate of runs.
+  - Automated (scheduled): Automated scheduled runs (the factory's own clock)
+  - Automated (additional): Manual dispatch from the GitHub Actions UI — the
+                    maintainer dialing up the rate of automation.
+  - Human intervention (/repo-assist): Event-triggered runs that actually
+                    executed — issue comments, PR review comments, issue events,
+                    PR events. These represent actual /repo-assist invocations
+                    that passed pre-activation.
 
 Filtering: Runs with conclusion 'skipped', 'cancelled', or 'action_required'
 are excluded. Skipped runs are trigger firings (e.g. issue_comment events)
@@ -172,26 +173,26 @@ def generate_invocation_graphs(all_results, output_dir):
     x = np.arange(len(repos))
 
     sched_rates = [r["scheduled_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
-    ra_rates = [r["repo_assist_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
     extra_rates = [r["extra_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
+    ra_rates = [r["repo_assist_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
 
-    ax.bar(x, sched_rates, label="Scheduled", color="#2196F3")
-    ax.bar(x, ra_rates, bottom=sched_rates,
-           label="/repo-assist", color="#FF9800")
-    ax.bar(x, extra_rates, bottom=[s + r for s, r in zip(sched_rates, ra_rates)],
-           label="Extra (dispatch)", color="#9C27B0")
+    ax.bar(x, sched_rates, label="Automated (scheduled)", color="#1565C0")
+    ax.bar(x, extra_rates, bottom=sched_rates,
+           label="Automated (additional)", color="#64B5F6")
+    ax.bar(x, ra_rates, bottom=[s + e for s, e in zip(sched_rates, extra_rates)],
+           label="Human intervention (/repo-assist)", color="#4CAF50")
 
-    # Add /repo-assist ratio labels
+    # Add human intervention ratio labels
     for i, r in enumerate(results_sorted):
-        total = sched_rates[i] + ra_rates[i] + extra_rates[i]
+        total = sched_rates[i] + extra_rates[i] + ra_rates[i]
         if total > 0:
             ax.text(i, total + 0.3, f"{r['repo_assist_ratio']:.0%}",
-                    ha="center", va="bottom", fontsize=8, color="#E65100")
+                    ha="center", va="bottom", fontsize=8, color="#2E7D32")
 
     ax.set_xlabel("Repository")
     ax.set_ylabel("Workflow Runs per Week")
     ax.set_title("Repo Assist Invocation Rate by Category\n"
-                 "(% = proportion of /repo-assist invocations)")
+                 "(% = human intervention rate)")
     ax.set_xticks(x)
     ax.set_xticklabels(repos, rotation=45, ha="right")
     ax.legend()
@@ -204,13 +205,13 @@ def generate_invocation_graphs(all_results, output_dir):
     fig, ax = plt.subplots(figsize=(14, 7))
 
     sched_vals = [r["scheduled_runs"] for r in results_sorted]
-    ra_vals = [r["repo_assist_runs"] for r in results_sorted]
     extra_vals = [r["extra_runs"] for r in results_sorted]
+    ra_vals = [r["repo_assist_runs"] for r in results_sorted]
 
-    ax.bar(x, sched_vals, label="Scheduled", color="#2196F3")
-    ax.bar(x, ra_vals, bottom=sched_vals, label="/repo-assist", color="#FF9800")
-    ax.bar(x, extra_vals, bottom=[s + r for s, r in zip(sched_vals, ra_vals)],
-           label="Extra (dispatch)", color="#9C27B0")
+    ax.bar(x, sched_vals, label="Automated (scheduled)", color="#1565C0")
+    ax.bar(x, extra_vals, bottom=sched_vals, label="Automated (additional)", color="#64B5F6")
+    ax.bar(x, ra_vals, bottom=[s + e for s, e in zip(sched_vals, extra_vals)],
+           label="Human intervention (/repo-assist)", color="#4CAF50")
 
     ax.set_xlabel("Repository")
     ax.set_ylabel("Total Active Workflow Runs")
@@ -291,9 +292,9 @@ def generate_invocation_graphs(all_results, output_dir):
             ax.annotate(label, (r["repo_assist_ratio"] * 100, bn["throughput_ratio"] * 100),
                         textcoords="offset points", xytext=(8, 5), fontsize=9)
 
-        ax.set_xlabel("/repo-assist Invocation Rate (% of active runs)")
+        ax.set_xlabel("Human Intervention Rate (% of active runs)")
         ax.set_ylabel("Pipeline Throughput (% of RA PRs merged)")
-        ax.set_title("/repo-assist Invocation Rate vs Pipeline Throughput\n"
+        ax.set_title("Human Intervention Rate vs Pipeline Throughput\n"
                      "(Red=BLOCKED, Green=FLOWING, Blue=IDLE)")
         ax.grid(True, alpha=0.3)
         ax.set_xlim(-5, 105)
@@ -310,14 +311,14 @@ def print_summary(all_results):
     print(f"\n{'='*120}")
     print("REPO-ASSIST INVOCATION ANALYSIS (excluding skipped/cancelled/action_required runs)")
     print(f"{'='*120}")
-    print(f"\n{'Repository':<35} {'Total':>6} {'Active':>7} {'Runs/wk':>8} {'Sched':>6} {'/RA':>5} "
-          f"{'Extra':>6} {'RA%':>5} {'Succ%':>6}")
+    print(f"\n{'Repository':<35} {'Total':>6} {'Active':>7} {'Runs/wk':>8} {'A(sched)':>8} {'A(addl)':>7} "
+          f"{'Human':>6} {'Hum%':>5} {'Succ%':>6}")
     print("-" * 100)
 
     for r in results:
         print(f"{r['repo']:<35} {r['total_runs']:>6} {r['active_runs']:>7} {r['runs_per_week']:>8.1f} "
-              f"{r['scheduled_runs']:>6} {r['repo_assist_runs']:>5} "
-              f"{r['extra_runs']:>6} "
+              f"{r['scheduled_runs']:>8} {r['extra_runs']:>7} "
+              f"{r['repo_assist_runs']:>6} "
               f"{r['repo_assist_ratio']*100:>4.0f}% "
               f"{r['success_rate']*100:>5.0f}%")
 
@@ -330,10 +331,10 @@ def print_summary(all_results):
     total_excluded = sum(r["excluded_runs"] for r in results)
     print(f"Total: {total_runs} runs, {total_excluded} excluded ({total_excluded/total_runs*100:.0f}%), "
           f"{total_active} active "
-          f"({total_sched} scheduled, {total_ra} /repo-assist, {total_extra} extra)")
-    print(f"  Scheduled: {total_sched/total_active*100:.0f}%, "
-          f"/repo-assist: {total_ra/total_active*100:.0f}%, "
-          f"Extra: {total_extra/total_active*100:.0f}%")
+          f"({total_sched} auto-scheduled, {total_extra} auto-additional, {total_ra} human)")
+    print(f"  Automated (scheduled): {total_sched/total_active*100:.0f}%, "
+          f"Automated (additional): {total_extra/total_active*100:.0f}%, "
+          f"Human intervention: {total_ra/total_active*100:.0f}%")
 
 
 def main():
