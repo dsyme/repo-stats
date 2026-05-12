@@ -160,7 +160,7 @@ def graph_merge_rate(pulls, cutoff, output_path, repo_name="", adoption_date=Non
     counts = [w[1] for w in sorted_weeks]
 
     fig, ax = plt.subplots(figsize=(12, 5))
-    ax.bar(dates, counts, width=5, alpha=0.7)
+    ax.bar(dates, counts, width=6, alpha=0.7, align='edge')
     ax.set_title(f"{repo_name} — PRs Merged Per Week" if repo_name else "PRs Merged Per Week")
     ax.set_xlabel("Week starting")
     ax.set_ylabel("PRs Merged")

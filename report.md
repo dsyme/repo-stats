@@ -48,8 +48,6 @@ The velocity increases are large across the board. The median issue closure velo
 
 The mean velocity increase is even larger (31× for issues, 14× for PRs), but the mean is pulled up by a few repositories (FSharp.Data at 102×, Deedle at 144×) that went from essentially zero prior activity to high throughput. The median is a more representative measure of the typical experience. Full per-repository velocity data is available in [Appendix A](#appendix-a-velocity-data).
 
-![Before/After Comparison](graphs/comparative-before-after.png)
-
 ## Social Factors
 
 It is highly likely that, like all automation technologies, successful use will be driven by human-social factors and incentives.
@@ -144,14 +142,6 @@ The ratio between these two measures is diagnostic. If open PRs have been waitin
 ![Cycle Times](graphs/bottleneck-cycle-times.png)
 
 ![WIP Accumulation](graphs/bottleneck-wip.png)
-
-### Correlation: Resolution Rate Predicts Clearance
-
-The scatter plot below shows that **combined resolution rate (PR merges + comment-path closures) is the strongest predictor of backlog clearance** — stronger than time since adoption, codebase complexity, or language.
-
-![Bottleneck Impact](graphs/bottleneck-impact-scatter.png)
-
-Repos with ≥75% combined resolution rate all achieve ≥77% backlog clearance. Repos with <50% resolution rate all achieve <75% clearance. The dual-path model reveals that repos where maintainers act on *both* RA's investigation comments *and* its PRs achieve the best outcomes — the comment path alone can drive significant issue resolution without any PR review overhead.
 
 ### Summary Classification
 
@@ -288,25 +278,11 @@ An important subtlety: the workflow's trigger configuration includes `issue_comm
 
 ![Invocation Rate by Type](graphs/invocation-rate-by-type.png)
 
-![Invocation Trigger Breakdown](graphs/invocation-trigger-breakdown.png)
-
 ### Human Intervention as a Measure of Engagement
 
 Across all repositories, **31% of active workflow runs are human interventions** (551 of 1,752) — direct `/repo-assist` invocations where a maintainer explicitly asked the agent to work on a specific issue. The remaining 69% is automated: 41% from scheduled runs and 28% from additional dispatched runs. The human intervention rate is particularly informative: it represents a maintainer choosing to direct the agent's efforts — a synchronous intervention in the software factory. Repos with high human intervention rates (FSharp.Formatting: 52%, Deedle: 47%, fantomas: 41%) also tend to have the highest pipeline throughput.
 
-![Human Intervention Rate vs Throughput](graphs/invocation-vs-throughput.png)
-
-The scatter plot shows that **blocked repos (red) tend to have lower human intervention rates**, confirming that the bottleneck is maintainer engagement, not workflow capability. The well-flowing and idle repos have maintainers who actively direct the agent's efforts.
-
 ![Activity Over Time](graphs/invocation-over-time.png)
-
-## Comparative Graphs
-
-![Open Issues: 6 Months Ago vs Now](graphs/comparative-open-issues.png)
-
-![Issue Closure Velocity](graphs/comparative-issue-velocity.png)
-
-![PR Merge Velocity](graphs/comparative-pr-velocity.png)
 
 ## Methodology
 
