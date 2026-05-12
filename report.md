@@ -70,16 +70,14 @@ The [Theory of Constraints](https://en.wikipedia.org/wiki/Theory_of_constraints)
 
 Each repository operates as a multi-stage "software factory" with **two distinct output paths**:
 
-```
-                          ┌─── COMMENT PATH ──→ [Human Review/Close] ──→ Issue Resolution
- Issue Backlog            │     (investigation,                          (no PR needed)
-       │                  │      triage, Q&A)
-       ▼                  │
-  [Investigation]  ───────┤
-   (automated)            │
-                          └─── PR PATH ──→ [PR Review Queue] ──→ [PR Merge] ──→ Issue Resolution
-                                (draft PR      (WIP buffer)       (human)        (code change)
-                                 created)
+```mermaid
+flowchart LR
+    A[Issue Backlog] --> B["Investigation\n(automated)"]
+    B -->|COMMENT PATH\ninvestigation, triage, Q&A| C["Human Review/Close"]
+    C --> D1["Issue Resolution\n(no PR needed)"]
+    B -->|PR PATH\ndraft PR created| E["PR Review Queue\n(WIP buffer)"]
+    E --> F["PR Merge\n(human)"]
+    F --> D2["Issue Resolution\n(code change)"]
 ```
 
 Repo-assist automates the Investigation stage. For each issue it processes, it produces one of two outputs:
