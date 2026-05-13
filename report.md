@@ -2,7 +2,7 @@
 
 **Date:** May 11, 2026
 
-**Authors:** Don Syme, Peli de Halleux, Krzysztof Cieślak, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita, Terkel Gjervig Nielsen
+**Authors:** Don Syme, Florian Verdonck, Krzysztof Cieślak, Peli de Halleux, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita, Terkel Gjervig Nielsen
 
 ## Overview
 
@@ -50,7 +50,7 @@ The mean velocity increase is even larger (31× for issues, 14× for PRs), but t
 
 ## Social Factors
 
-It is highly likely that, like all automation technologies, successful use will be driven by human-social factors and incentives.
+It is highly likely that, like all automation technologies, successful use of agentic repository automation will be driven by human-social factors and incentives.
 
 For example, the creator of Repo Assist (@dsyme) was a maintainer and community leader in the software community which adopted Repo Assist here, and was the maintainer of some (but not all) of the repositories analyzed here. This clearly will influence adoption and usage rates.
 
