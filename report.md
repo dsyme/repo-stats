@@ -2,7 +2,7 @@
 
 **Date:** May 11, 2026
 
-**Authors:** Don Syme, Peli de Halleux, Krzysztof Cieślak, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita
+**Authors:** Don Syme, Peli de Halleux, Krzysztof Cieślak, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita, Terkel Gjervig Nielsen
 
 ## Overview
 
