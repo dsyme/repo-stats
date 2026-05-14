@@ -10,7 +10,7 @@ We analyze the impact of Repo Assist, a proactive AI repository agent, across 13
 
 The agent **reduced open issue counts in every repository** — 578 issues total — with median velocity increases of 8× for issue closure and 10× for PR merges, transforming largely dormant projects into actively maintained ones.
 
-Across all repositories, which were previously largely dormant, **issue closure velocity increased by a median of 8×** and **PR merge velocity by a median of 10×** after adoption
+Across all repositories, which were previously largely dormant, **issue closure velocity increased by a median of 8×** and **PR merge velocity by a median of 10×** after adoption.
 
 Modeling repositories as human-agent software factories reveals that, the single most important factor determining outcomes is the rate at which maintainers decide to act on the agent's output: the human is firmly in the loop, and the factory's throughput is gated by human decision-making.
 
