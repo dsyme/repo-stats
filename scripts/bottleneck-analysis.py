@@ -486,12 +486,12 @@ def generate_bottleneck_graphs(all_results, output_dir):
         marker_color=colors,
         showlegend=False,
     ))
-    fig.add_hline(y=75, line_dash="dash", line_color=COLORS["secondary"], line_width=1,
+    fig.add_hline(y=75, line_dash="dash", line_color=COLORS["secondary"], line_width=1.5,
                   annotation_text="Healthy (75%)", annotation_position="top left",
                   annotation_font=dict(color=COLORS["secondary"], size=11))
-    fig.add_hline(y=50, line_dash="dash", line_color=COLORS["accent"], line_width=1,
+    fig.add_hline(y=50, line_dash="dash", line_color=COLORS["rust"], line_width=1.5,
                   annotation_text="Warning (50%)", annotation_position="bottom left",
-                  annotation_font=dict(color=COLORS["accent"], size=11))
+                  annotation_font=dict(color=COLORS["rust"], size=11))
     fig.update_layout(
         xaxis_title="Repository",
         yaxis_title="Throughput Ratio (%)",

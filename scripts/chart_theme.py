@@ -67,7 +67,7 @@ STATUS_COLORS = {
     "CONSTRAINED": "#ca6702",   # burnt orange
     "MINOR": "#ee9b00",         # amber
     "FLOWING": "#0a9396",       # teal
-    "IDLE": "#94d2bd",          # light teal
+    "IDLE": "#e9d8a6",          # sand/wheat (distinct from teal)
 }
 
 # Before/after comparison colors
