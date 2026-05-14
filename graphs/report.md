@@ -1,6 +1,6 @@
 # Repo-Assist Impact Analysis
 
-**Generated**: 2026-05-14 14:08 UTC
+**Generated**: 2026-05-14 15:50 UTC
 **Period**: Last 6 months
 **Repositories analyzed**: 14
 **With repo-assist**: 14
@@ -34,7 +34,7 @@ For repositories with repo-assist, comparing equal-length periods before and aft
 
 | Repository | Adoption | Period (days) | Issues Closed/wk Before | After | Change | PRs Merged/wk Before | After | Change | Backlog at Adoption | Addressed Since |
 |---|---|---|---|---|---|---|---|---|---|---|
-| dotnet/fsharp | 2026-03-16 | 58 | 8.69 | 13.64 | +4.95 | 17.62 | 24.74 | +7.12 | 1225 | 90 (7.3%) |
+| dotnet/fsharp | 2026-03-16 | 59 | 8.54 | 13.41 | +4.86 | 17.32 | 24.32 | +7.00 | 1225 | 90 (7.3%) |
 | fslaborg/Deedle | 2026-03-08 | 66 | 0.11 | 12.09 | +11.98 | 0.11 | 10.71 | +10.61 | 108 | 106 (98.1%) |
 | fslaborg/FSharp.Stats | 2026-03-23 | 52 | 0.13 | 0.40 | +0.27 | 0.13 | 0.27 | +0.13 | 60 | 3 (5.0%) |
 | fsprojects/FSharp.Control.AsyncSeq | 2026-02-20 | 82 | 0.26 | 1.71 | +1.45 | 0.34 | 5.63 | +5.29 | 12 | 12 (100.0%) |
