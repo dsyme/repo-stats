@@ -1,5 +1,14 @@
 [
   {
+    "conclusion": "failure",
+    "created_at": "2026-05-14T06:02:56Z",
+    "event": "schedule",
+    "id": 25844681657,
+    "run_attempt": 1,
+    "status": "completed",
+    "updated_at": "2026-05-14T06:03:07Z"
+  },
+  {
     "conclusion": "skipped",
     "created_at": "2026-05-08T13:19:28Z",
     "event": "pull_request",

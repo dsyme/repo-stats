@@ -2,11 +2,11 @@
 
 **Date:** May 14, 2026
 
-**Authors:** Don Syme, Florian Verdonck, Krzysztof Cieślak, Tomas Grosup, Peli de Halleux, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita, Terkel Gjervig Nielsen
+**Authors:** Don Syme, Florian Verdonck, Krzysztof Cieślak, Tomas Grosup, Scott Hanselman, Peli de Halleux, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita, Terkel Gjervig Nielsen
 
 ## Executive Summary
 
-We analyze the impact of Repo Assist, a proactive AI repository agent, across 14 open source repositories that adopted it between February and March 2026. The agent **reduced open issue counts in every repository** — 651 issues net in total. Across all repositories, which were previously largely dormant, **issue closure velocity increased by a median of 9×** and **PR merge velocity by a median of 9×** after adoption, transforming largely dormant projects into actively maintained ones.
+We analyze the impact of Repo Assist, a proactive AI repository agent, across 15 open source repositories that adopted it between February and March 2026. The agent **reduced open issue counts in every repository** — 651 issues net. Across all repositories, some of which were previously largely dormant, **issue closure velocity increased by a median of 9×** and **PR merge velocity by a median of 9×** after adoption, transforming largely dormant projects into actively maintained ones.
 
 Modeling repositories as **human-agent software factories** reveals that the single most important factor determining outcomes is the rate at which maintainers decide to act on the agent's output: the human is firmly in the loop, and the factory's throughput is gated by human decision-making. Maintainers pushed additional commits to **37% of Repo Assist PRs**, often using Copilot as a secondary agent to extend the work, while the issue reopen rate after agent-assisted closure is just 3.3%.
 
@@ -14,11 +14,11 @@ Modeling repositories as **human-agent software factories** reveals that the sin
 
 [Repo Assist](https://github.com/githubnext/agentics/blob/main/docs/repo-assist.md) is a proactive AI repository agent that performs maintenance tasks in an open source repository, effectively as a virtual assistant member of an open source repository's maintenance team. Unlike one-shot AI coding assistants that respond to individual prompts, Repo Assist runs autonomously on a schedule and in response to events — triaging issues, investigating bugs, creating draft pull requests, and responding to contributor questions. It represents an emerging model of **continuous AI-assisted repository automation**, where the AI agent is always on, always watching, and always ready to act.
 
-This report analyzes the impact of Repo Assist across 14 open source repositories (11 F#, 1 Python, 1 Ruby, 1 multi-language) that adopted the workflow between February and March 2026. The results paint a nuanced picture: the AI agent produces dramatic results in some repositories, but **outcomes depend critically on human engagement**. The human is still firmly in the loop — Repo Assist creates draft PRs that require human review and merge, and its investigation comments require human judgment to act on. Maintainers remain the final authority on what gets merged, what gets closed, and what gets ignored. As we will see, **this human-in-the-loop dynamic is the single most important factor in determining whether a repository achieves higher development velocity**.
+This report analyzes the impact of Repo Assist across 15 open source repositories (11 F#, 1 C#, 1 Python, 1 Ruby, 1 multi-language) that adopted the workflow between February and March 2026. The results paint a nuanced picture: the AI agent produces dramatic results in some repositories, but **outcomes depend critically on human engagement**. The human is still firmly in the loop — Repo Assist creates draft PRs that require human review and merge, and its investigation comments require human judgment to act on. Maintainers remain the final authority on what gets merged, what gets closed, and what gets ignored. As we will see, **this human-in-the-loop dynamic is the single most important factor in determining whether a repository achieves higher development velocity**.
 
 The analysis draws on an emerging view of repositories as **human-agent software factories** — systems where human maintainers and AI agents collaborate in a structured production pipeline. This framing, explored in a recent [SIGPLAN blog post on human-agent software factories](https://blog.sigplan.org/2026/04/21/repositories-are-human-agent-knowledge-factories/), allows us to apply classical production theory (Theory of Constraints, Little's Law, cycle time analysis) to understand where work flows and where it stalls.
 
-Repo Assist is implemented as a [GitHub Agentic Workflow](https://gh.io/gh-aw/), but the findings here should apply to any repository-level AI automation that produces similar outputs (investigation comments, draft PRs) and relies on human review. The results should hold across different languages (here F#, Python, Ruby) and project types (here compilers, libraries, tools), though outcomes will vary widely based on other factors such as maintainer engagement, codebase complexity, and social dynamics.
+Repo Assist is implemented as a [GitHub Agentic Workflow](https://gh.io/gh-aw/), but the findings here should apply to any repository-level AI automation that produces similar outputs (investigation comments, draft PRs) and relies on human review. The results should hold across different languages (here F#, C#, Python, Ruby) and project types (here compilers, libraries, tools), though outcomes will vary widely based on other factors such as maintainer engagement, codebase complexity, and social dynamics.
 
 ## Measuring the Impact on Quality: Backlog Reduction
 
@@ -36,7 +36,7 @@ Full per-repository backlog clearance data is available in [Appendix B](#appendi
 
 In software engineering, *velocity* measures the rate at which a team completes work — here, the number of issues closed per week and PRs merged per week. Velocity is a key indicator of a project's activity: a dormant project has near-zero velocity, while an active one shows sustained throughput.
 
-All 14 repositories show an increase in both issue closure rate and PR merge rate after Repo Assist adoption. The chart below uses a dumbbell plot to visualize the before/after comparison — each arrow shows the magnitude of acceleration for a single repository, with the multiplier on the right. The "before" period is an equal-length window prior to adoption for fair comparison.
+All 15 repositories show an increase in both issue closure rate and PR merge rate after Repo Assist adoption. The chart below uses a dumbbell plot to visualize the before/after comparison — each arrow shows the magnitude of acceleration for a single repository, with the multiplier on the right. The "before" period is an equal-length window prior to adoption for fair comparison.
 
 ![Velocity Before and After](graphs/velocity-before-after.png)
 
@@ -83,6 +83,7 @@ Both paths contribute to issue resolution. The comment path is a "fast lane" tha
 | FSharp.Formatting | 51/65 | 118 | 94 | 22 | 2 | 80% | FLOWING |
 | TypeProviders.SDK | 11/16 | 50 | 45 | 4 | 1 | 90% | FLOWING |
 | licensee | 10/16 | 29 | 23 | 5 | 1 | 79% | FLOWING |
+| openclaw | 18/38 | 102 | 74 | 27 | 1 | 73% | FLOWING |
 | dotnet/fsharp | 54/87 | 0 | — | — | — | — | COMMENT-ONLY |
 | AsyncSeq | 7/7 | 69 | 56 | 11 | 2 | 81% | IDLE |
 | FSharp.Data | 104/110 | 102 | 86 | 15 | 1 | 84% | IDLE |
@@ -106,7 +107,7 @@ The repositories fall into four distinct operational states:
 
 **1. IDLE — Backlog cleared** (FSharp.Data, Deedle, SwaggerProvider, AsyncSeq, GenPRES): These factories have effectively completed their work. With ≤5 open issues and ≤2 open PRs, they are waiting for new input rather than being constrained. Their high throughput ratios (81–100%) and high comment-path closure rates (93–100%) reflect a well-functioning human-agent collaboration that has run out of backlog to process.
 
-**2. FLOWING — Pipeline operating normally** (TaskSeq, FSharp.Formatting, TypeProviders.SDK, licensee): These factories still have work to do and are processing it at a healthy rate. Throughput ratios of 79–90% indicate maintainers are keeping pace with the agent's output on both paths.
+**2. FLOWING — Pipeline operating normally** (TaskSeq, FSharp.Formatting, TypeProviders.SDK, licensee, openclaw): These factories still have work to do and are processing it at a healthy rate. Throughput ratios of 73–90% indicate maintainers are keeping pace with the agent's output on both paths.
 
 **3. BLOCKED — INACTION bottleneck** (FSharp.Stats, dowhy): Repo Assist is producing both investigation comments and PRs, but maintainers are not acting on either. The WIP queue grows without bound and comment-path closures are minimal.
 
@@ -133,7 +134,7 @@ A key question for any AI-assisted workflow is: how much does a human need to in
 
 ### Directed Invocations
 
-Across all repositories, **29% of active workflow runs are human interventions** (647 of 2,221) — direct `/repo-assist` invocations where a maintainer explicitly asked the agent to work on a specific issue. A further **23% are additional dispatches** (504 runs) where maintainers manually triggered the workflow from the GitHub Actions UI, dialing up the rate of automation beyond the scheduled cadence. Together, **52% of active runs involved some form of human direction**, with the remaining 48% from scheduled automation.
+Across all repositories, **30% of active workflow runs are human interventions** (687 of 2,318) — direct `/repo-assist` invocations where a maintainer explicitly asked the agent to work on a specific issue. A further **22% are additional dispatches** (506 runs) where maintainers manually triggered the workflow from the GitHub Actions UI, dialing up the rate of automation beyond the scheduled cadence. Together, **52% of active runs involved some form of human direction**, with the remaining 49% from scheduled automation.
 
 The human intervention rate varies dramatically by repository. Repos with high human intervention rates (FSharp.Formatting: 52%, Deedle: 47%, fantomas: 41%) also tend to have the highest pipeline throughput — suggesting that active human direction of the agent correlates with better outcomes. GenPRES is a notable outlier with 0% human intervention — reflecting its pure work-queue pattern where the maintainer creates issues and lets the scheduled automation handle them.
 
@@ -274,10 +275,20 @@ Some of the rejected PRs were **intentionally experimental** — prompted to inv
 ### licensee/licensee
 *Adopted 2026-03-02 · Factory FLOWING*
 
-16 → 5 open issues (69% backlog clearance). A Ruby gem for open source license detection with 881 stars — the first non-Python, non-F# repo in the analysis, validating that Repo Assist works across language ecosystems. On the PR path, 23 of 29 PRs merged (79% throughput) with a fast 1.0d average merge cycle. On the comment path, 10 of 16 investigated issues were closed. Maintainers are actively reviewing and merging — the pipeline is flowing well with low WIP (1 open PR).
+16 → 5 open issues (69% backlog clearance). A Ruby gem for open source license detection with 881 stars — validating that Repo Assist works across language ecosystems. On the PR path, 23 of 29 PRs merged (79% throughput) with a fast 1.0d average merge cycle. On the comment path, 10 of 16 investigated issues were closed. Maintainers are actively reviewing and merging — the pipeline is flowing well with low WIP (1 open PR).
 
 ![licensee Open Issues](graphs/licensee-licensee/open-issues-over-time.png)
 ![licensee Merge Rate](graphs/licensee-licensee/merge-rate.png)
+
+### openclaw/openclaw-windows-node
+*Adopted 2026-03-17 · Factory FLOWING*
+
+A C# application with 518 stars — the first C# repo in the analysis, further validating cross-ecosystem applicability. openclaw had only 3 open issues at adoption, but rapidly grew its backlog as the project scaled: 123 new issues were filed in just 8 weeks, with 85 closed (4.73 new/week, 3.27 closed/week). Repo Assist created 102 PRs, of which 74 were merged (73% throughput) and 27 rejected — a healthy rejection rate suggesting active maintainer engagement. The merge cycle time averages 2.8 days. On the comment path, 18 of 38 investigated issues were closed (47%).
+
+The velocity increase is striking: issue closure went from 1.45/week to 8.81/week (6×), and PR merges from 1.21/week to 22.45/week (19×). With 121 active workflow runs — nearly all scheduled (118) with only 3 manual dispatches and 0 human interventions — this repo follows a primarily automated pattern similar to GenPRES, where the workflow runs on schedule with minimal human direction.
+
+![openclaw Open Issues](graphs/openclaw-openclaw-windows-node/open-issues-over-time.png)
+![openclaw Merge Rate](graphs/openclaw-openclaw-windows-node/merge-rate.png)
 
 ### dotnet/fsharp
 *Adopted 2026-03-16 · Comment-path only*
@@ -334,12 +345,13 @@ Repo Assist workflow runs fall into three categories:
 | AsyncSeq | 95 | 8.8 | 43 | 24 | 28 |
 | GenPRES | 78 | 7.2 | 77 | 1 | 0 |
 | FSharp.Stats | 46 | 6.6 | 31 | 4 | 11 |
+| openclaw | 121 | 14.6 | 118 | 3 | 0 |
 
 ![Invocation Rate by Type](graphs/invocation-rate-by-type.png)
 
 ### Human Intervention Rates
 
-The breakdown of human vs. automated runs is discussed in detail in [Human Engagement and Maintainer Override](#human-engagement-and-maintainer-override) above. The key finding: 29% of active runs are human-directed `/repo-assist` invocations and 23% are additional manual dispatches, with the remaining 48% from scheduled automation.
+The breakdown of human vs. automated runs is discussed in detail in [Human Engagement and Maintainer Override](#human-engagement-and-maintainer-override) above. The key finding: 30% of active runs are human-directed `/repo-assist` invocations and 22% are additional manual dispatches, with the remaining 49% from scheduled automation.
 
 ![Activity Over Time](graphs/invocation-over-time.png)
 
@@ -350,10 +362,10 @@ The breakdown of human vs. automated runs is discussed in detail in [Human Engag
 - **Repo-assist detection**: A repository is classified as using repo-assist based on PRs with `[repo-assist]` in the title or issues/PRs with the `repo-assist` label. The adoption date is the earliest such item.
 - **Inclusion criteria**: Repos were included only if (a) repo-assist workflow runs have succeeded in the last week, and (b) adoption was more than 3 weeks ago.
 - **Bot issue exclusion**: Issues created by `github-actions[bot]` are excluded from all counting and analysis (backlog metrics, velocity, incoming rates). These include monthly activity reports, failure notifications, and other automated outputs that would inflate issue counts. Bot issues are *not* excluded from adoption date detection, since they signal when Repo Assist was deployed.
-- **Limitations**: This analysis measures correlation, not strict causation. The adoption of Repo Assist may have coincided with increased human maintainer activity. However, the consistency of the pattern across all 14 repositories — and the near-zero baseline activity in many repos before adoption — strongly suggests Repo Assist is the primary driver. The non-F# repos (dowhy, licensee) provide cross-ecosystem validation.
+- **Limitations**: This analysis measures correlation, not strict causation. The adoption of Repo Assist may have coincided with increased human maintainer activity. However, the consistency of the pattern across all 15 repositories — and the near-zero baseline activity in many repos before adoption — strongly suggests Repo Assist is the primary driver. The non-F# repos (dowhy, licensee, openclaw) provide cross-ecosystem validation.
 - **Issue quality caveat**: Some closed issues may have been closed as "won't fix" or triaged rather than fixed. The current analysis counts all closures equally. A more nuanced analysis could distinguish closure reasons.
 - **Pipeline bottleneck analysis**: Models the repository as a multi-stage human-agent software factory. Uses Little's Law ($L = \lambda W$) to compute implied cycle times and identify WIP accumulation. Throughput ratio (PRs merged / PRs created) is the primary bottleneck metric. Bottleneck types are classified as: INACTION (high WIP, low review activity), REJECTION (high rejection rate, low WIP), or MIXED (both). Status levels: BLOCKED (score ≥5), FLOWING (0), IDLE (≤5 open issues and ≤2 open PRs with no bottleneck).
-- **Workflow invocation analysis**: Uses the GitHub Actions API to retrieve all runs of the "Repo Assist" workflow. The workflow's trigger configuration includes `issue_comment`, `pull_request_review_comment`, and `pull_request` events primarily so it can detect `/repo-assist` slash commands in comments. Most of these triggered runs are **immediately skipped** by the workflow's pre-activation check when no `/repo-assist` command is found. Additionally, some runs conclude with `cancelled` or `action_required` status and never actually execute. Across all repos, **63% of all workflow runs (3,810 of 6,031) never executed** and are excluded — only *active* runs that actually proceeded to execute the agent are counted. Active runs are classified into three categories: *Automated (scheduled)* (cron-triggered), *Automated (additional)* (manual dispatch from the Actions UI), and *Human intervention (/repo-assist)* (event-triggered runs that passed pre-activation — issue comments, PR comments, issue events, PR events). The human intervention ratio measures direct maintainer engagement with the workflow.
+- **Workflow invocation analysis**: Uses the GitHub Actions API to retrieve all runs of the "Repo Assist" workflow. The workflow's trigger configuration includes `issue_comment`, `pull_request_review_comment`, and `pull_request` events primarily so it can detect `/repo-assist` slash commands in comments. Most of these triggered runs are **immediately skipped** by the workflow's pre-activation check when no `/repo-assist` command is found. Additionally, some runs conclude with `cancelled` or `action_required` status and never actually execute. Across all repos, **60% of all workflow runs (3,429 of 5,747) never executed** and are excluded — only *active* runs that actually proceeded to execute the agent are counted. Active runs are classified into three categories: *Automated (scheduled)* (cron-triggered), *Automated (additional)* (manual dispatch from the Actions UI), and *Human intervention (/repo-assist)* (event-triggered runs that passed pre-activation — issue comments, PR comments, issue events, PR events). The human intervention ratio measures direct maintainer engagement with the workflow.
 - **Dual-path model**: Repo Assist produces two types of output per issue: investigation comments (comment path) and draft PRs (PR path). Bot comments are detected via `github-actions[bot]` comments containing "automated response from Repo Assist". PR-path issues are identified by comments mentioning "Pull request created". Issues resolved via the comment path are those with investigation comments where the issue was subsequently closed without a PR being created.
 - **Maintainer override analysis**: Code-level modifications are measured by fetching commit lists for all 877 RA PRs via the GitHub API (`/repos/{owner}/{repo}/pulls/{number}/commits`). Commits authored by `github-actions[bot]`, `web-flow`, or `actions-user` are classified as bot/system commits. Commits by `Copilot` are classified as Copilot agent commits (from assign-to-copilot). All other commits are classified as human pushes. Force pushes are detected via `head_ref_force_pushed` events on RA PR branches by non-bot actors. Copilot assign usage is measured via `copilot_work_started` events. Code review comments are downloaded via the pull review comments API (`/repos/{owner}/{repo}/pulls/comments`); comments by `github-actions[bot]`, `github-advanced-security[bot]`, and `greptile-apps[bot]` are classified as bot comments, `Copilot` as Copilot review comments, and all others as human review comments. Draft-to-ready transitions are measured via `ready_for_review` events by non-bot actors. Issue reopen rate is measured by `reopened` events on RA-investigated issues (post-adoption only, excluding RA PRs from the denominator).
 
@@ -395,6 +407,7 @@ All data and scripts used in this analysis are available in this repository:
 | fsprojects/FSharp.Control.AsyncSeq | 2026-02-20 | 82d | 0.26 | 1.71 | +1.45 | 0.34 | 5.63 | **+5.29** |
 | licensee/licensee | 2026-03-02 | 73d | 0.67 | 1.34 | +0.67 | 1.73 | 4.32 | +2.59 |
 | fslaborg/FSharp.Stats | 2026-03-23 | 52d | 0.13 | 0.40 | +0.27 | 0.13 | 0.27 | +0.13 |
+| openclaw/openclaw-windows-node | 2026-03-17 | 58d | 1.45 | 8.81 | **+7.36** | 1.21 | 22.45 | **+21.24** |
 | dotnet/fsharp † | 2026-03-16 | 58d | 8.69 | 13.64 | +4.95 | 17.62 | 24.74 | +7.12 |
 | **Average (excl. dotnet/fsharp)** | | | **0.22** | **4.85** | **+4.63** | **0.75** | **7.22** | **+6.47** |
 | **Median (excl. dotnet/fsharp)** | | | **0.13** | **3.61** | | **0.34** | **5.63** | |
@@ -419,10 +432,11 @@ All data and scripts used in this analysis are available in this repository:
 | py-why/dowhy | 142 | 34 | 23.9% | 108 | −34 |
 | dotnet/fsharp † | 1225 | 90 | 7.3% | 1157 | −68 |
 | fslaborg/FSharp.Stats | 60 | 3 | 5.0% | 57 | −3 |
-| **Total (excl. dotnet/fsharp)** | **883** | **561** | **63.5%** | **337** | **−546** |
-| **Total (all 14 repos)** | **2108** | **651** | **30.9%** | **1494** | **−614** |
+| openclaw/openclaw-windows-node | 3 | 3 | **100.0%** | 38 | +35 |
+| **Total (excl. dotnet/fsharp)** | **886** | **564** | **63.7%** | **375** | **−511** |
+| **Total (all 15 repos)** | **2111** | **654** | **31.0%** | **1532** | **−579** |
 
-† dotnet/fsharp's large issue count (1,225 at adoption) significantly shifts the aggregate backlog clearance percentage. The separate totals show the impact with and without this outlier.
+† dotnet/fsharp's large issue count (1,225 at adoption) significantly shifts the aggregate backlog clearance percentage. The separate totals show the impact with and without this outlier. openclaw shows a net increase in open issues despite 100% adoption-backlog clearance, because rapid issue creation (123 new issues in 8 weeks) outpaced closure.
 
 ### Appendix C: Cycle Time Data
 
@@ -440,6 +454,7 @@ All data and scripts used in this analysis are available in this repository:
 | AsyncSeq | 1.7d | 13.6d | 8.0× | IDLE |
 | TaskSeq | 2.0d | 0.0d | — | FLOWING |
 | licensee | 1.0d | 0.7d | 0.7× | FLOWING |
+| openclaw | 2.8d | 0.3d | 0.1× | FLOWING |
 | GenPRES | 0.9d | 0.0d | — | IDLE |
 
 ### Appendix D: Maintainer Notes — FsAutoComplete

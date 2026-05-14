@@ -1,0 +1,3928 @@
+[
+  {
+    "number": 1,
+    "title": "Add unit tests and code review for Moltbot.Shared",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-29T01:55:33Z",
+    "merged_at": "2026-01-29T02:20:23Z",
+    "closed_at": "2026-01-29T02:20:23Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/1"
+  },
+  {
+    "number": 2,
+    "title": "Rename MoltBot to OpenClaw across entire codebase",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-30T16:22:14Z",
+    "merged_at": "2026-01-30T18:34:04Z",
+    "closed_at": "2026-01-30T18:34:04Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/2"
+  },
+  {
+    "number": 4,
+    "title": "Fix WinUI tray menu crash with invisible anchor window pattern",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-30T23:49:30Z",
+    "merged_at": null,
+    "closed_at": "2026-02-02T05:22:02Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/4"
+  },
+  {
+    "number": 8,
+    "title": "Add DEVELOPMENT.md \u2014 contributor setup and architecture docs",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-01T06:49:08Z",
+    "merged_at": "2026-02-02T07:20:17Z",
+    "closed_at": "2026-02-02T07:20:17Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/8"
+  },
+  {
+    "number": 11,
+    "title": "Streamline WinUI tray menu parity with WinForms",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-01T21:14:02Z",
+    "merged_at": null,
+    "closed_at": "2026-02-02T05:22:02Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/11"
+  },
+  {
+    "number": 13,
+    "title": "Fix CI: Add runtime identifier to WinUI build",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-02T07:24:48Z",
+    "merged_at": "2026-02-02T07:28:28Z",
+    "closed_at": "2026-02-02T07:28:28Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/13"
+  },
+  {
+    "number": 14,
+    "title": "Add spec for enhanced notification categorization",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-02T07:29:44Z",
+    "merged_at": null,
+    "closed_at": "2026-02-08T02:22:33Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/14"
+  },
+  {
+    "number": 15,
+    "title": "feat: enhanced notification categorization pipeline",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-08T01:22:57Z",
+    "merged_at": "2026-02-08T01:24:11Z",
+    "closed_at": "2026-02-08T01:24:11Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/15"
+  },
+  {
+    "number": 17,
+    "title": "Fix auto-updater loop by removing hardcoded FileVersion and AssemblyVersion",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-10T02:01:32Z",
+    "merged_at": "2026-02-10T08:17:47Z",
+    "closed_at": "2026-02-10T08:17:47Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/17"
+  },
+  {
+    "number": 20,
+    "title": "Support HTTPS gateway URLs for Tailscale Serve and reverse proxies",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-14T04:06:41Z",
+    "merged_at": null,
+    "closed_at": "2026-02-17T04:41:29Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/20"
+  },
+  {
+    "number": 21,
+    "title": "Fix allowCommands JSON example indentation in README",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-14T04:06:51Z",
+    "merged_at": null,
+    "closed_at": "2026-02-17T05:22:51Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/21"
+  },
+  {
+    "number": 23,
+    "title": "Add credential extraction and normalization for gateway URLs",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-21T00:35:52Z",
+    "merged_at": null,
+    "closed_at": "2026-02-24T06:46:06Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/23"
+  },
+  {
+    "number": 24,
+    "title": "Fix UnobservedTaskException crash on startup when gateway is unreachable",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-22T01:31:08Z",
+    "merged_at": "2026-02-24T05:52:57Z",
+    "closed_at": "2026-02-24T05:52:57Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/24"
+  },
+  {
+    "number": 25,
+    "title": "Add comprehensive unit tests to improve OpenClaw.Shared coverage",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-24T06:18:58Z",
+    "merged_at": "2026-02-24T06:45:33Z",
+    "closed_at": "2026-02-24T06:45:33Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/25"
+  },
+  {
+    "number": 27,
+    "title": "Fix channel status icon showing red for 'ready'/'active' channels in Status dialog",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-24T19:04:17Z",
+    "merged_at": "2026-02-26T00:25:59Z",
+    "closed_at": "2026-02-26T00:25:59Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/27"
+  },
+  {
+    "number": 29,
+    "title": "Fix system.run hanging indefinitely for IPC-connected CLI tools (regression after v0.4.3)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-26T00:46:20Z",
+    "merged_at": null,
+    "closed_at": "2026-03-17T01:32:08Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/29"
+  },
+  {
+    "number": 30,
+    "title": "Add Chinese (Simplified) localization",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-26T08:38:37Z",
+    "merged_at": null,
+    "closed_at": "2026-03-17T02:00:33Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/30"
+  },
+  {
+    "number": 31,
+    "title": "Title: fix(win10): tray popup positioning and global hotkey reliability",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-10T15:59:13Z",
+    "merged_at": null,
+    "closed_at": "2026-03-17T01:11:49Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/31"
+  },
+  {
+    "number": 32,
+    "title": "fix(system.run): quote argv args containing spaces before shell join",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-10T20:04:15Z",
+    "merged_at": null,
+    "closed_at": "2026-03-17T01:32:08Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/32"
+  },
+  {
+    "number": 33,
+    "title": "Add agentic workflow repo-assist",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T00:01:17Z",
+    "merged_at": "2026-03-17T00:01:31Z",
+    "closed_at": "2026-03-17T00:01:31Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/33"
+  },
+  {
+    "number": 36,
+    "title": "Use native ARM64 runner for ARM64 builds",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T00:47:17Z",
+    "merged_at": "2026-03-17T00:55:20Z",
+    "closed_at": "2026-03-17T00:55:20Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/36"
+  },
+  {
+    "number": 37,
+    "title": "fix(win10): tray popup positioning and global hotkey reliability",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T01:08:31Z",
+    "merged_at": "2026-03-17T01:23:25Z",
+    "closed_at": "2026-03-17T01:23:25Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/37"
+  },
+  {
+    "number": 38,
+    "title": "Fix system.run hang, harden argv quoting, and add ShellQuoting tests",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T01:28:21Z",
+    "merged_at": "2026-03-17T01:31:57Z",
+    "closed_at": "2026-03-17T01:31:58Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/38"
+  },
+  {
+    "number": 39,
+    "title": "perf: hoist shell normalisation and cache notification regex objects",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T01:31:40Z",
+    "merged_at": "2026-03-17T01:38:35Z",
+    "closed_at": "2026-03-17T01:38:35Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/39"
+  },
+  {
+    "number": 42,
+    "title": "fix: persist NotificationSound by stable key, not display text",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T02:14:22Z",
+    "merged_at": "2026-03-17T02:21:03Z",
+    "closed_at": "2026-03-17T02:21:03Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/42"
+  },
+  {
+    "number": 45,
+    "title": "feat: add WinUI test project with extracted shared helpers",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T02:41:03Z",
+    "merged_at": "2026-03-17T04:40:55Z",
+    "closed_at": "2026-03-17T04:40:56Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/45"
+  },
+  {
+    "number": 46,
+    "title": "feat: add localization infrastructure with .resw resource files (en-US + zh-CN)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T03:06:34Z",
+    "merged_at": "2026-03-17T04:44:17Z",
+    "closed_at": "2026-03-17T04:44:18Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/46"
+  },
+  {
+    "number": 48,
+    "title": "fix(winui): guard missing SendMessage deep link handler",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T03:53:25Z",
+    "merged_at": null,
+    "closed_at": "2026-03-17T04:49:20Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/48"
+  },
+  {
+    "number": 49,
+    "title": "fix(winui): guard missing SendMessage deep link handler",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T04:48:47Z",
+    "merged_at": "2026-03-17T04:56:52Z",
+    "closed_at": "2026-03-17T04:56:52Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/49"
+  },
+  {
+    "number": 50,
+    "title": "chore: remove WinForms tray app in favor of WinUI",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T04:49:08Z",
+    "merged_at": "2026-03-17T04:58:20Z",
+    "closed_at": "2026-03-17T04:58:20Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/50"
+  },
+  {
+    "number": 51,
+    "title": "chore: clean up stale files, fix repo URLs, delete 10 stale branches",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T05:02:23Z",
+    "merged_at": "2026-03-17T05:25:33Z",
+    "closed_at": "2026-03-17T05:25:33Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/51"
+  },
+  {
+    "number": 53,
+    "title": "feat: improve debug instrumentation across WinUI tray app",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T05:54:51Z",
+    "merged_at": "2026-03-17T06:02:31Z",
+    "closed_at": "2026-03-17T06:02:31Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/53"
+  },
+  {
+    "number": 54,
+    "title": "fix: surface gateway error messages in Settings test connection",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T06:27:58Z",
+    "merged_at": "2026-03-17T06:43:12Z",
+    "closed_at": "2026-03-17T06:43:12Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/54"
+  },
+  {
+    "number": 57,
+    "title": "[Repo Assist] fix: refresh channel list when channels are added/removed on gateway",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T17:48:43Z",
+    "merged_at": "2026-03-17T17:49:23Z",
+    "closed_at": "2026-03-17T17:49:23Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/57"
+  },
+  {
+    "number": 59,
+    "title": "[Repo Assist] ci: add OpenClaw.Tray.Tests to the CI test job",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T02:02:30Z",
+    "merged_at": "2026-03-18T02:02:40Z",
+    "closed_at": "2026-03-18T02:02:40Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/59"
+  },
+  {
+    "number": 60,
+    "title": "feat: complete Chinese localization + contributor guide",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T03:21:18Z",
+    "merged_at": "2026-03-18T04:12:45Z",
+    "closed_at": "2026-03-18T04:12:45Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/60"
+  },
+  {
+    "number": 62,
+    "title": "Security: ExecApprovalPolicy bypass, thread safety, dispose races",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T04:44:46Z",
+    "merged_at": "2026-03-18T04:55:52Z",
+    "closed_at": "2026-03-18T04:55:52Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/62"
+  },
+  {
+    "number": 64,
+    "title": "Refactor: Extract WebSocketClientBase (DRY #63)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T05:22:47Z",
+    "merged_at": "2026-03-18T16:59:00Z",
+    "closed_at": "2026-03-18T16:59:00Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/64"
+  },
+  {
+    "number": 67,
+    "title": "ci: add NuGet package caching to test job",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T17:07:32Z",
+    "merged_at": "2026-03-18T17:18:37Z",
+    "closed_at": "2026-03-18T17:18:37Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/67"
+  },
+  {
+    "number": 68,
+    "title": "perf: cache JsonSerializerOptions and compiled Regex in WindowsNodeClient",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T17:10:27Z",
+    "merged_at": "2026-03-18T17:18:41Z",
+    "closed_at": "2026-03-18T17:18:41Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/68"
+  },
+  {
+    "number": 69,
+    "title": "feat: complete french localization",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T22:17:28Z",
+    "merged_at": "2026-04-01T00:34:58Z",
+    "closed_at": "2026-04-01T00:34:58Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/69"
+  },
+  {
+    "number": 79,
+    "title": "fix: stabilize tray pairing state and operator scopes",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-20T14:42:23Z",
+    "merged_at": null,
+    "closed_at": "2026-03-20T15:05:44Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/79"
+  },
+  {
+    "number": 80,
+    "title": "fix: stabilize tray pairing and reconnect behavior",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-20T17:20:10Z",
+    "merged_at": null,
+    "closed_at": "2026-04-01T07:00:21Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/80"
+  },
+  {
+    "number": 83,
+    "title": "Bugfix/issue 82 tray menu overflow",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-20T23:26:54Z",
+    "merged_at": "2026-04-01T06:40:37Z",
+    "closed_at": "2026-04-01T06:40:37Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/83"
+  },
+  {
+    "number": 93,
+    "title": "[Repo Assist] fix: pass UserRules to NotificationCategorizer in OpenClawGatewayClient",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-22T13:02:44Z",
+    "merged_at": "2026-04-01T06:43:13Z",
+    "closed_at": "2026-04-01T06:43:13Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/93"
+  },
+  {
+    "number": 95,
+    "title": "[Repo Assist] fix: apply NotificationSound setting to all toast notifications",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-23T01:09:59Z",
+    "merged_at": null,
+    "closed_at": "2026-04-01T00:34:02Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/95"
+  },
+  {
+    "number": 96,
+    "title": "[Repo Assist] refactor: extract TryParseArgv helper in SystemCapability, fix operator precedence",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-03-23T01:10:02Z",
+    "merged_at": null,
+    "closed_at": "2026-04-01T00:34:05Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/96"
+  },
+  {
+    "number": 97,
+    "title": "[Repo Assist] eng: sync xunit.runner.visualstudio to 3.1.4 and add coverlet.collector to Tray.Tests",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-23T01:10:05Z",
+    "merged_at": null,
+    "closed_at": "2026-04-01T00:34:07Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/97"
+  },
+  {
+    "number": 98,
+    "title": "[Repo Assist] refactor: remove dead ClassifyNotification method, fix reflection tests",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-03-23T01:10:08Z",
+    "merged_at": "2026-04-01T06:39:01Z",
+    "closed_at": "2026-04-01T06:39:01Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/98"
+  },
+  {
+    "number": 100,
+    "title": "add zh_tw",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T07:05:02Z",
+    "merged_at": "2026-04-01T00:34:54Z",
+    "closed_at": "2026-04-01T00:34:54Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/100"
+  },
+  {
+    "number": 101,
+    "title": "[Repo Assist] perf: eliminate string allocations in ClassifyByKeywords and ClassifyTool",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-23T12:58:15Z",
+    "merged_at": "2026-04-01T06:43:55Z",
+    "closed_at": "2026-04-01T06:43:55Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/101"
+  },
+  {
+    "number": 104,
+    "title": "[Repo Assist] fix: honour PreferStructuredCategories setting in notification categorizer",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-24T01:02:08Z",
+    "merged_at": null,
+    "closed_at": "2026-04-01T06:45:51Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/104"
+  },
+  {
+    "number": 105,
+    "title": "[Repo Assist] perf: cache HTML sanitize regex; replace ToLowerInvariant with FrozenDictionary; fix GetRawText double-call",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-24T13:05:49Z",
+    "merged_at": "2026-04-01T06:43:49Z",
+    "closed_at": "2026-04-01T06:43:49Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/105"
+  },
+  {
+    "number": 107,
+    "title": "[Repo Assist] eng: add .editorconfig to enforce consistent C# code style",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-25T01:11:15Z",
+    "merged_at": "2026-04-01T06:38:56Z",
+    "closed_at": "2026-04-01T06:38:56Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/107"
+  },
+  {
+    "number": 108,
+    "title": "[Repo Assist] refactor: use result.Parameters in DeepLinkHandler instead of re-parsing query",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-25T13:04:25Z",
+    "merged_at": "2026-04-01T06:39:05Z",
+    "closed_at": "2026-04-01T06:39:05Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/108"
+  },
+  {
+    "number": 109,
+    "title": "[Repo Assist] fix: prevent double PairingStatusChanged fire in hello-ok handler",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-26T01:17:35Z",
+    "merged_at": "2026-04-01T06:43:28Z",
+    "closed_at": "2026-04-01T06:43:28Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/109"
+  },
+  {
+    "number": 110,
+    "title": "[Repo Assist] docs: add SETUP.md and POWERTOYS.md; fix stale CommandPalette README",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-26T12:58:19Z",
+    "merged_at": "2026-04-01T06:44:19Z",
+    "closed_at": "2026-04-01T06:44:19Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/110"
+  },
+  {
+    "number": 111,
+    "title": "[Repo Assist] refactor: extract ModelFormatting helper; deduplicate FormatTokenCount/FormatCount",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-03-27T01:13:04Z",
+    "merged_at": "2026-04-01T06:39:19Z",
+    "closed_at": "2026-04-01T06:39:19Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/111"
+  },
+  {
+    "number": 113,
+    "title": "[Repo Assist] fix: add operator.write scope to gateway connect handshake (closes #112)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-27T12:56:17Z",
+    "merged_at": "2026-04-01T06:39:23Z",
+    "closed_at": "2026-04-01T06:39:23Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/113"
+  },
+  {
+    "number": 115,
+    "title": "[Repo Assist] fix: reset node/gateway state on settings save; clear _isPendingApproval on disconnect",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-29T01:21:00Z",
+    "merged_at": "2026-04-01T06:43:33Z",
+    "closed_at": "2026-04-01T06:43:34Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/115"
+  },
+  {
+    "number": 117,
+    "title": "Feature/ssh tunnel gateway",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-29T01:38:41Z",
+    "merged_at": "2026-04-01T07:03:43Z",
+    "closed_at": "2026-04-01T07:03:43Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/117"
+  },
+  {
+    "number": 118,
+    "title": "[Repo Assist] refactor \u2014 eliminate ToLowerInvariant allocations in ChannelHealth; use TryGetValue in UpdateTrackedSession",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-29T13:04:04Z",
+    "merged_at": "2026-04-01T06:44:06Z",
+    "closed_at": "2026-04-01T06:44:06Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/118"
+  },
+  {
+    "number": 119,
+    "title": "[Repo Assist] perf: skip StringBuilder in single-frame WebSocket receive; fix double payload.ToString()",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-30T01:19:10Z",
+    "merged_at": "2026-04-01T06:44:01Z",
+    "closed_at": "2026-04-01T06:44:01Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/119"
+  },
+  {
+    "number": 120,
+    "title": "Add first-pass Windows Voice Mode",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-30T18:29:40Z",
+    "merged_at": null,
+    "closed_at": "2026-05-07T22:00:03Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/120"
+  },
+  {
+    "number": 121,
+    "title": "[Repo Assist] fix: null _gatewayClient after dispose in OnSettingsSaved",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-31T01:13:04Z",
+    "merged_at": "2026-04-01T06:38:39Z",
+    "closed_at": "2026-04-01T06:38:39Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/121"
+  },
+  {
+    "number": 122,
+    "title": "[Repo Assist] fix: respect sound=false in system.notify node notifications",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-31T13:07:48Z",
+    "merged_at": null,
+    "closed_at": "2026-04-01T00:34:10Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/122"
+  },
+  {
+    "number": 124,
+    "title": "chore: quick-win triage \u2014 global.json, test tooling, localization tests",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-31T21:02:46Z",
+    "merged_at": "2026-03-31T22:54:34Z",
+    "closed_at": "2026-03-31T22:54:34Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/124"
+  },
+  {
+    "number": 125,
+    "title": "fix: notification sound + TryParseArgv refactor (closes #91, #92, #71)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-31T21:25:36Z",
+    "merged_at": "2026-03-31T22:54:37Z",
+    "closed_at": "2026-03-31T22:54:37Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/125"
+  },
+  {
+    "number": 126,
+    "title": "[Repo Assist] fix: add ReDoS timeout to ExecApprovalPolicy glob matching",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-01T01:21:03Z",
+    "merged_at": "2026-04-01T06:39:29Z",
+    "closed_at": "2026-04-01T06:39:29Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/126"
+  },
+  {
+    "number": 128,
+    "title": "fix: honour PreferStructuredCategories in notification pipeline",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-01T06:48:05Z",
+    "merged_at": "2026-04-01T07:05:51Z",
+    "closed_at": "2026-04-01T07:05:51Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/128"
+  },
+  {
+    "number": 129,
+    "title": "[Repo Assist] refactor: modernize string operations in GatewayUrlHelper and SettingsData",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-01T13:02:36Z",
+    "merged_at": "2026-04-01T17:01:59Z",
+    "closed_at": "2026-04-01T17:01:59Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/129"
+  },
+  {
+    "number": 130,
+    "title": "[Repo Assist] eng: enhance .editorconfig with modern C# idiom preferences",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-01T13:02:41Z",
+    "merged_at": "2026-04-01T17:01:59Z",
+    "closed_at": "2026-04-01T17:01:59Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/130"
+  },
+  {
+    "number": 133,
+    "title": "Fix SSH tunnel not restarted on unexpected process exit",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-01T17:17:36Z",
+    "merged_at": null,
+    "closed_at": "2026-04-02T16:56:18Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/133"
+  },
+  {
+    "number": 134,
+    "title": "Fix: Signature mode fallback never retried connect message",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-01T17:17:38Z",
+    "merged_at": null,
+    "closed_at": "2026-04-02T16:56:15Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/134"
+  },
+  {
+    "number": 136,
+    "title": "[Repo Assist] perf: make ExecApprovalPolicy regex cache thread-safe (ConcurrentDictionary)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-02T01:07:46Z",
+    "merged_at": "2026-04-02T16:57:41Z",
+    "closed_at": "2026-04-02T16:57:41Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/136"
+  },
+  {
+    "number": 137,
+    "title": "[Repo Assist] perf: replace List.Insert(0) with LinkedList.AddFirst in ActivityStreamService",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-02T13:02:07Z",
+    "merged_at": "2026-04-02T16:57:46Z",
+    "closed_at": "2026-04-02T16:57:46Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/137"
+  },
+  {
+    "number": 138,
+    "title": "[Repo Assist] refactor: remove redundant CategoryTitles dict in NotificationCategorizer",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-02T13:02:11Z",
+    "merged_at": null,
+    "closed_at": "2026-04-02T16:57:49Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/138"
+  },
+  {
+    "number": 139,
+    "title": "ci: add NuGet cache to build and build-msix jobs",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-02T16:37:22Z",
+    "merged_at": null,
+    "closed_at": "2026-04-02T16:56:13Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/139"
+  },
+  {
+    "number": 140,
+    "title": "ci: add NuGet cache to build and build-msix CI jobs (closes #135)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-02T16:42:34Z",
+    "merged_at": "2026-04-02T16:50:43Z",
+    "closed_at": "2026-04-02T16:50:44Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/140"
+  },
+  {
+    "number": 141,
+    "title": "fix: signature fallback retries connect + SSH tunnel auto-restart (closes #131, #132)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-02T16:46:15Z",
+    "merged_at": "2026-04-02T16:53:13Z",
+    "closed_at": "2026-04-02T16:53:13Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/141"
+  },
+  {
+    "number": 142,
+    "title": "[Repo Assist] test: add MenuSizingHelper unit tests + ShellQuoting edge cases",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-03T01:13:43Z",
+    "merged_at": "2026-04-08T20:08:59Z",
+    "closed_at": "2026-04-08T20:08:59Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/142"
+  },
+  {
+    "number": 143,
+    "title": "[Repo Assist] perf: replace List.Insert(0) with LinkedList.AddFirst in NotificationHistoryService",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-03T12:56:15Z",
+    "merged_at": null,
+    "closed_at": "2026-04-08T21:25:31Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/143"
+  },
+  {
+    "number": 144,
+    "title": "fix: handle node pairing events on current master",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-03T20:55:41Z",
+    "merged_at": null,
+    "closed_at": "2026-04-09T21:45:10Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/144"
+  },
+  {
+    "number": 145,
+    "title": "[Repo Assist] test: add BuildMissingScopeFixCommands and BuildPairingApprovalFixCommands unit tests",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-04T01:09:53Z",
+    "merged_at": "2026-04-08T20:09:05Z",
+    "closed_at": "2026-04-08T20:09:05Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/145"
+  },
+  {
+    "number": 146,
+    "title": "[Repo Assist] docs: update TEST_COVERAGE.md to reflect current test counts (624 tests)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-05T01:18:37Z",
+    "merged_at": null,
+    "closed_at": "2026-04-08T21:13:56Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/146"
+  },
+  {
+    "number": 147,
+    "title": "[Repo Assist] fix: ClassifyByKeywords recognises CI/CD patterns (ci/ prefix)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-05T13:07:16Z",
+    "merged_at": "2026-04-08T20:09:11Z",
+    "closed_at": "2026-04-08T20:09:11Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/147"
+  },
+  {
+    "number": 148,
+    "title": "[Repo Assist] improve: SettingsData.FromJson null safety + GatewayUrlHelper static array",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-05T13:07:24Z",
+    "merged_at": "2026-04-08T20:09:17Z",
+    "closed_at": "2026-04-08T20:09:17Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/148"
+  },
+  {
+    "number": 150,
+    "title": "[Repo Assist] improve: remove debug scaffolding and double-serialization from WindowsNodeClient",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-06T01:17:09Z",
+    "merged_at": "2026-04-08T21:22:46Z",
+    "closed_at": "2026-04-08T21:22:46Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/150"
+  },
+  {
+    "number": 153,
+    "title": "[Repo Assist] perf: O(1) command dispatch index in WindowsNodeClient",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-07T01:12:28Z",
+    "merged_at": null,
+    "closed_at": "2026-04-08T21:25:29Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/153"
+  },
+  {
+    "number": 154,
+    "title": "[Repo Assist] improve: extract FormatAge into ModelFormatting, removing duplicate logic",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-07T13:09:26Z",
+    "merged_at": "2026-04-08T20:09:23Z",
+    "closed_at": "2026-04-08T20:09:23Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/154"
+  },
+  {
+    "number": 155,
+    "title": "feat: add Dutch (nl-NL) localization for OpenClaw Tray",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-07T20:47:56Z",
+    "merged_at": "2026-04-08T21:30:42Z",
+    "closed_at": "2026-04-08T21:30:42Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/155"
+  },
+  {
+    "number": 156,
+    "title": "[Repo Assist] perf: eliminate unnecessary List(T) allocations in DisplayText and GetSessionListInternal",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-08T01:12:43Z",
+    "merged_at": null,
+    "closed_at": "2026-04-08T21:12:08Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/156"
+  },
+  {
+    "number": 157,
+    "title": "[Repo Assist] test: expand WindowsNodeClient coverage with 10 new unit tests",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-08T13:07:51Z",
+    "merged_at": "2026-04-08T20:09:29Z",
+    "closed_at": "2026-04-08T20:09:29Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/157"
+  },
+  {
+    "number": 158,
+    "title": "fix: use invariant culture in numeric display formatting",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-08T17:39:08Z",
+    "merged_at": "2026-04-08T19:52:32Z",
+    "closed_at": "2026-04-08T19:52:32Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/158"
+  },
+  {
+    "number": 159,
+    "title": "feat: add screen recording capability",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-08T17:39:18Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T05:21:37Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/159"
+  },
+  {
+    "number": 160,
+    "title": "ci: collect coverage and upload test results in CI",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-08T22:23:57Z",
+    "merged_at": "2026-04-08T22:29:56Z",
+    "closed_at": "2026-04-08T22:29:56Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/160"
+  },
+  {
+    "number": 161,
+    "title": "[Repo Assist] improve: add GetStringArrayArg helper and expand test coverage",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-04-09T01:11:52Z",
+    "merged_at": "2026-04-10T00:43:43Z",
+    "closed_at": "2026-04-10T00:43:43Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/161"
+  },
+  {
+    "number": 162,
+    "title": "[Repo Assist] eng: add tests/Directory.Build.props to DRY up shared test project config",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-04-09T13:02:42Z",
+    "merged_at": "2026-04-10T00:39:59Z",
+    "closed_at": "2026-04-10T00:39:59Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/162"
+  },
+  {
+    "number": 163,
+    "title": "fix: handle node pairing approval events safely",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-09T21:37:19Z",
+    "merged_at": "2026-04-09T21:45:05Z",
+    "closed_at": "2026-04-09T21:45:05Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/163"
+  },
+  {
+    "number": 165,
+    "title": "[Repo Assist] perf: use ArrayPool(byte) in WebSocketClientBase.SendRawAsync to eliminate per-send heap allocs",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-04-12T01:11:31Z",
+    "merged_at": "2026-04-13T21:00:41Z",
+    "closed_at": "2026-04-13T21:00:41Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/165"
+  },
+  {
+    "number": 167,
+    "title": "[Repo Assist] perf: O(1) command dispatch index in WindowsNodeClient",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-04-13T01:15:18Z",
+    "merged_at": null,
+    "closed_at": "2026-04-13T22:01:20Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/167"
+  },
+  {
+    "number": 168,
+    "title": "[Repo Assist] refactor: remove write-only _nodes dictionary from OpenClawGatewayClient",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-04-13T12:56:06Z",
+    "merged_at": "2026-04-13T20:59:43Z",
+    "closed_at": "2026-04-13T20:59:43Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/168"
+  },
+  {
+    "number": 169,
+    "title": "test: cover websocket auto-reconnect regression",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-14T00:49:02Z",
+    "merged_at": "2026-04-14T00:55:48Z",
+    "closed_at": "2026-04-14T00:55:48Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/169"
+  },
+  {
+    "number": 170,
+    "title": "ci: add NuGet cache to build-extension job",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-14T01:09:13Z",
+    "merged_at": "2026-04-14T01:09:45Z",
+    "closed_at": "2026-04-14T01:09:45Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/170"
+  },
+  {
+    "number": 171,
+    "title": "[Repo Assist] improve: use FrozenDictionary for NotificationCategorizer lookup tables",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-14T01:12:47Z",
+    "merged_at": "2026-04-14T01:32:47Z",
+    "closed_at": "2026-04-14T01:32:47Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/171"
+  },
+  {
+    "number": 172,
+    "title": "[Repo Assist] perf: eliminate List(T) allocations in SessionInfo.DisplayText and GetSessionListInternal",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-04-14T12:51:56Z",
+    "merged_at": "2026-04-20T05:36:23Z",
+    "closed_at": "2026-04-20T05:36:23Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/172"
+  },
+  {
+    "number": 173,
+    "title": "[Repo Assist] perf: eliminate List(T) allocation in BuildProviderSummary",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-04-15T01:19:20Z",
+    "merged_at": "2026-04-20T05:36:27Z",
+    "closed_at": "2026-04-20T05:36:27Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/173"
+  },
+  {
+    "number": 174,
+    "title": "[Repo Assist] test: add ParseChannelHealth status-derivation and property-parsing coverage",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-04-15T01:19:25Z",
+    "merged_at": "2026-04-20T05:36:10Z",
+    "closed_at": "2026-04-20T05:36:10Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/174"
+  },
+  {
+    "number": 175,
+    "title": "[Repo Assist] perf: FrozenSet/FrozenDictionary for ChannelHealth status lookups; eliminate List(T) in GatewayUsageInfo.DisplayText",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-04-15T12:55:45Z",
+    "merged_at": "2026-04-20T05:36:31Z",
+    "closed_at": "2026-04-20T05:36:31Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/175"
+  },
+  {
+    "number": 176,
+    "title": "[Repo Assist] perf: eliminate List(T) allocation in SessionInfo.RichDisplayText",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-04-15T12:55:49Z",
+    "merged_at": "2026-04-20T05:36:18Z",
+    "closed_at": "2026-04-20T05:36:18Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/176"
+  },
+  {
+    "number": 177,
+    "title": "[Repo Assist] eng: fix three compiler/analyzer warnings in test suite",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-16T01:15:12Z",
+    "merged_at": "2026-04-20T05:36:06Z",
+    "closed_at": "2026-04-20T05:36:06Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/177"
+  },
+  {
+    "number": 178,
+    "title": "[Repo Assist] improve: eliminate List(T) allocation in GatewayNodeInfo.DetailText; +2 edge-case tests",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-16T12:53:55Z",
+    "merged_at": "2026-04-20T05:36:14Z",
+    "closed_at": "2026-04-20T05:36:14Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/178"
+  },
+  {
+    "number": 180,
+    "title": "[Repo Assist] improve: modernize Substring\u2192range syntax; consolidate TruncateLabel duplicate",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-18T01:13:03Z",
+    "merged_at": "2026-04-23T17:26:03Z",
+    "closed_at": "2026-04-23T17:26:03Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/180"
+  },
+  {
+    "number": 181,
+    "title": "[Repo Assist] improve: modernize HandleRunAsync syntax; add exec-policy regression tests",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-18T12:43:48Z",
+    "merged_at": "2026-04-23T17:26:24Z",
+    "closed_at": "2026-04-23T17:26:24Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/181"
+  },
+  {
+    "number": 182,
+    "title": "[Repo Assist] improve: use SearchValues(char) in ShellQuoting.NeedsQuoting for SIMD metachar scan",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-19T01:15:04Z",
+    "merged_at": "2026-04-20T05:36:35Z",
+    "closed_at": "2026-04-20T05:36:35Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/182"
+  },
+  {
+    "number": 183,
+    "title": "[Repo Assist] fix: use integer truncation in FormatAge to prevent rounding past display boundaries",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-19T12:40:32Z",
+    "merged_at": "2026-04-20T05:36:39Z",
+    "closed_at": "2026-04-20T05:36:39Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/183"
+  },
+  {
+    "number": 185,
+    "title": "[Repo Assist] perf: eliminate LINQ allocations in command execution path",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-20T01:19:02Z",
+    "merged_at": "2026-04-20T05:36:43Z",
+    "closed_at": "2026-04-20T05:36:43Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/185"
+  },
+  {
+    "number": 186,
+    "title": "[Repo Assist] security: add ExecEnvSanitizer to block env-var injection in system.run",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-04-20T01:19:07Z",
+    "merged_at": null,
+    "closed_at": "2026-04-20T04:48:05Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/186"
+  },
+  {
+    "number": 187,
+    "title": "security: harden system.run against env injection and shell-wrapper bypass",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-20T04:32:29Z",
+    "merged_at": null,
+    "closed_at": "2026-04-20T04:33:07Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/187"
+  },
+  {
+    "number": 188,
+    "title": "security: harden system.run against env injection and shell-wrapper bypass",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-20T04:33:05Z",
+    "merged_at": "2026-04-20T04:48:05Z",
+    "closed_at": "2026-04-20T04:48:05Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/188"
+  },
+  {
+    "number": 189,
+    "title": "[Repo Assist] perf: pre-allocate arrays from JSON array length; replace LINQ sort with Array.Sort",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-04-20T12:54:55Z",
+    "merged_at": "2026-04-23T17:26:13Z",
+    "closed_at": "2026-04-23T17:26:13Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/189"
+  },
+  {
+    "number": 190,
+    "title": "[Repo Assist] eng: enforce TreatWarningsAsErrors in test projects",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-20T12:55:00Z",
+    "merged_at": "2026-04-23T17:25:11Z",
+    "closed_at": "2026-04-23T17:25:11Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/190"
+  },
+  {
+    "number": 192,
+    "title": "[Repo Assist] feat: wire WebView2 bidirectional native\u2194SPA bridge in WebChatWindow",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-21T01:14:06Z",
+    "merged_at": "2026-04-28T03:25:28Z",
+    "closed_at": "2026-04-28T03:25:28Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/192"
+  },
+  {
+    "number": 193,
+    "title": "[Repo Assist] perf: eliminate LINQ Skip allocations in ExecShellWrapperParser",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-21T13:02:41Z",
+    "merged_at": "2026-04-23T17:25:31Z",
+    "closed_at": "2026-04-23T17:25:31Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/193"
+  },
+  {
+    "number": 194,
+    "title": "[Repo Assist] improve: use FrozenSet for ExecEnvSanitizer blocked-names lookup",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-21T13:02:47Z",
+    "merged_at": "2026-04-23T17:25:51Z",
+    "closed_at": "2026-04-23T17:25:51Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/194"
+  },
+  {
+    "number": 196,
+    "title": "[Repo Assist] feat: add Tags routing to NotificationCategorizer structured metadata pipeline",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-22T01:13:56Z",
+    "merged_at": null,
+    "closed_at": "2026-04-23T17:43:59Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/196"
+  },
+  {
+    "number": 197,
+    "title": "[Repo Assist] improve: FrozenDictionary command dispatch map in WindowsNodeClient",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-22T13:10:39Z",
+    "merged_at": null,
+    "closed_at": "2026-04-23T17:45:42Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/197"
+  },
+  {
+    "number": 200,
+    "title": "eng: add --no-restore to CI build steps after dotnet restore",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-23T00:00:24Z",
+    "merged_at": "2026-04-23T17:04:27Z",
+    "closed_at": "2026-04-23T17:04:27Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/200"
+  },
+  {
+    "number": 201,
+    "title": "feat: add setup wizard with pairing-aware connection test",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-23T01:13:15Z",
+    "merged_at": "2026-04-23T01:22:29Z",
+    "closed_at": "2026-04-23T01:22:29Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/201"
+  },
+  {
+    "number": 202,
+    "title": "[Repo Assist] test: add HandleRequestError coverage for auth/scope/unknown-method paths",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-23T01:20:28Z",
+    "merged_at": "2026-04-23T17:25:21Z",
+    "closed_at": "2026-04-23T17:25:21Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/202"
+  },
+  {
+    "number": 203,
+    "title": "fix: address WinUI3 code review findings (159 issues)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-23T02:00:21Z",
+    "merged_at": "2026-04-23T05:28:54Z",
+    "closed_at": "2026-04-23T05:28:54Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/203"
+  },
+  {
+    "number": 204,
+    "title": "[Repo Assist] improve: pool receive buffer in WebSocketClientBase via ArrayPool",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-23T12:50:55Z",
+    "merged_at": "2026-04-23T17:25:41Z",
+    "closed_at": "2026-04-23T17:25:41Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/204"
+  },
+  {
+    "number": 205,
+    "title": "improve: FrozenDictionary command dispatch map in WindowsNodeClient",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-23T17:45:45Z",
+    "merged_at": "2026-04-23T17:54:20Z",
+    "closed_at": "2026-04-23T17:54:20Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/205"
+  },
+  {
+    "number": 206,
+    "title": "fix: stop aggressive retry on auth failures, show setup nudge",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-23T18:51:00Z",
+    "merged_at": "2026-04-23T19:10:32Z",
+    "closed_at": "2026-04-23T19:10:32Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/206"
+  },
+  {
+    "number": 207,
+    "title": "[Repo Assist] test: add terminal auth-failure coverage for PR #206 fix",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-24T01:16:42Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T02:57:33Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/207"
+  },
+  {
+    "number": 209,
+    "title": "[Repo Assist] improve: SearchValues in GatewayUrlHelper + 10 SystemCapability tests",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-24T12:50:39Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T02:51:47Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/209"
+  },
+  {
+    "number": 210,
+    "title": "feat: add camera.clip, location.get, and canvas local file serving",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-24T19:24:56Z",
+    "merged_at": "2026-04-26T06:19:16Z",
+    "closed_at": "2026-04-26T06:19:16Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/210"
+  },
+  {
+    "number": 211,
+    "title": "[Repo Assist] eng: add src/Directory.Build.props with analyzer and NuGet audit settings",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-25T01:13:37Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T03:04:30Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/211"
+  },
+  {
+    "number": 212,
+    "title": "[Repo Assist] test: add ExecShellWrapperParser and ExecEnvSanitizer unit tests (+98 tests)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-25T12:42:09Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T02:57:37Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/212"
+  },
+  {
+    "number": 213,
+    "title": "[Repo Assist] improve: remove System.Linq from SystemCapability",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-26T01:20:13Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T02:48:05Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/213"
+  },
+  {
+    "number": 215,
+    "title": "eng: add root NuGet.Config with package source mapping",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-26T13:30:10Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T04:08:49Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/215"
+  },
+  {
+    "number": 216,
+    "title": "feat: add a stable routing seam for system.run exec approvals",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-26T16:39:08Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T04:08:51Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/216"
+  },
+  {
+    "number": 217,
+    "title": "[Repo Assist] perf: eliminate ToLowerInvariant() allocations in shell-type comparison hot paths",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-27T01:23:11Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T02:48:10Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/217"
+  },
+  {
+    "number": 218,
+    "title": "eng: handle repo-assist easy wins",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-27T02:47:52Z",
+    "merged_at": "2026-04-27T03:26:07Z",
+    "closed_at": "2026-04-27T03:26:07Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/218"
+  },
+  {
+    "number": 219,
+    "title": "fix: audit transitive packages and update System.Drawing.Common",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-27T03:04:28Z",
+    "merged_at": "2026-04-27T03:26:07Z",
+    "closed_at": "2026-04-27T03:26:07Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/219"
+  },
+  {
+    "number": 220,
+    "title": "chore(deps): bump actions/upload-artifact from 4 to 7",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T03:26:44Z",
+    "merged_at": "2026-04-27T04:06:00Z",
+    "closed_at": "2026-04-27T04:06:00Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/220"
+  },
+  {
+    "number": 221,
+    "title": "chore(deps): bump actions/download-artifact from 4 to 8",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T03:26:44Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T04:24:43Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/221"
+  },
+  {
+    "number": 222,
+    "title": "chore(deps): bump microsoft/setup-msbuild from 2 to 3",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T03:26:46Z",
+    "merged_at": "2026-04-27T04:06:03Z",
+    "closed_at": "2026-04-27T04:06:03Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/222"
+  },
+  {
+    "number": 223,
+    "title": "chore(deps): bump github/gh-aw-actions from ba90f2186d7ad780ec640f364005fa24e797b360 to abea67e08ee83539ea33aaae67bf0cddaa0b03b5",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T03:26:48Z",
+    "merged_at": "2026-04-27T04:05:22Z",
+    "closed_at": "2026-04-27T04:05:22Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/223"
+  },
+  {
+    "number": 224,
+    "title": "chore(deps): bump azure/login from 2 to 3",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T03:26:53Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T04:24:26Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/224"
+  },
+  {
+    "number": 225,
+    "title": "Bump coverlet.collector from 6.0.4 to 10.0.0",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": ".NET"
+      }
+    ],
+    "created_at": "2026-04-27T03:28:34Z",
+    "merged_at": null,
+    "closed_at": "2026-04-27T04:05:44Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/225"
+  },
+  {
+    "number": 226,
+    "title": "Bump Microsoft.NET.Test.Sdk from 17.14.1 to 18.4.0",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": ".NET"
+      }
+    ],
+    "created_at": "2026-04-27T03:29:03Z",
+    "merged_at": "2026-04-27T04:05:25Z",
+    "closed_at": "2026-04-27T04:05:25Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/226"
+  },
+  {
+    "number": 227,
+    "title": "Bump xunit.runner.visualstudio from 3.1.4 to 3.1.5",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": ".NET"
+      }
+    ],
+    "created_at": "2026-04-27T03:30:03Z",
+    "merged_at": "2026-04-27T04:03:59Z",
+    "closed_at": "2026-04-27T04:03:59Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/227"
+  },
+  {
+    "number": 228,
+    "title": "chore(deps): bump actions/checkout from 4 to 6",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T06:42:48Z",
+    "merged_at": "2026-04-28T01:26:36Z",
+    "closed_at": "2026-04-28T01:26:36Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/228"
+  },
+  {
+    "number": 229,
+    "title": "chore(deps): bump softprops/action-gh-release from 2 to 3",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T06:42:51Z",
+    "merged_at": "2026-04-28T01:26:41Z",
+    "closed_at": "2026-04-28T01:26:41Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/229"
+  },
+  {
+    "number": 230,
+    "title": "chore(deps): bump actions/cache from 4 to 5",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T06:42:54Z",
+    "merged_at": "2026-04-28T01:26:45Z",
+    "closed_at": "2026-04-28T01:26:45Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/230"
+  },
+  {
+    "number": 231,
+    "title": "chore(deps): bump github/gh-aw-actions from 0.68.3 to 0.71.1",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T06:42:59Z",
+    "merged_at": "2026-04-28T01:26:49Z",
+    "closed_at": "2026-04-28T01:26:49Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/231"
+  },
+  {
+    "number": 232,
+    "title": "chore(deps): bump actions/setup-dotnet from 4 to 5",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-04-27T06:43:02Z",
+    "merged_at": "2026-04-28T01:26:53Z",
+    "closed_at": "2026-04-28T01:26:53Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/232"
+  },
+  {
+    "number": 233,
+    "title": "[Repo Assist] test: add CommandCenterDiagnostics and ScreenCapability coverage",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-27T13:06:55Z",
+    "merged_at": "2026-04-28T01:50:33Z",
+    "closed_at": "2026-04-28T01:50:33Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/233"
+  },
+  {
+    "number": 234,
+    "title": "feat: local MCP HTTP server mode for the Windows tray",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-27T17:56:08Z",
+    "merged_at": "2026-04-27T18:53:09Z",
+    "closed_at": "2026-04-27T18:53:09Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/234"
+  },
+  {
+    "number": 236,
+    "title": "[Repo Assist] test: add CommandCenterDiagnostics and ScreenCapability coverage (rebase of #233)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-28T01:35:21Z",
+    "merged_at": null,
+    "closed_at": "2026-04-28T01:52:11Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/236"
+  },
+  {
+    "number": 237,
+    "title": "feat(onboarding): add wizard with minimal FunctionalUI helper",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-28T10:32:03Z",
+    "merged_at": null,
+    "closed_at": "2026-04-28T20:12:23Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/237"
+  },
+  {
+    "number": 238,
+    "title": "[Repo Assist] fix: McpHttpServer localhost prefix and Linux test compatibility",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-28T13:09:58Z",
+    "merged_at": "2026-05-01T17:39:40Z",
+    "closed_at": "2026-05-01T17:39:40Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/238"
+  },
+  {
+    "number": 239,
+    "title": "feat: native WinUI A2UI renderer + MCP/security hardening",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-28T18:32:15Z",
+    "merged_at": "2026-04-30T05:53:51Z",
+    "closed_at": "2026-04-30T05:53:51Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/239"
+  },
+  {
+    "number": 241,
+    "title": "feat(tray): add onboarding wizard updates",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-28T20:12:07Z",
+    "merged_at": "2026-05-01T16:12:36Z",
+    "closed_at": "2026-05-01T16:12:36Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/241"
+  },
+  {
+    "number": 242,
+    "title": "[Repo Assist] feat(device): enhance device.status with os/cpu/memory/disk sections and sections filter",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-29T01:23:43Z",
+    "merged_at": null,
+    "closed_at": "2026-05-01T16:43:01Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/242"
+  },
+  {
+    "number": 243,
+    "title": "[Repo Assist] perf(mcp): eliminate LINQ and ToArray() allocations in McpToolBridge",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-04-29T13:10:20Z",
+    "merged_at": "2026-05-01T17:20:36Z",
+    "closed_at": "2026-05-01T17:20:36Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/243"
+  },
+  {
+    "number": 244,
+    "title": "feat: add structural input validation for system.run exec approvals",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-29T23:21:09Z",
+    "merged_at": "2026-05-01T21:31:49Z",
+    "closed_at": "2026-05-01T21:31:49Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/244"
+  },
+  {
+    "number": 245,
+    "title": "[Repo Assist] test: add coverage for SshTunnelCommandLine, ExecApprovalV2Result, and McpToolBridge gaps",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-30T01:20:31Z",
+    "merged_at": "2026-05-01T16:54:46Z",
+    "closed_at": "2026-05-01T16:54:46Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/245"
+  },
+  {
+    "number": 247,
+    "title": "[Repo Assist] fix(security): catch all-wildcard allow patterns in exec approval policy",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-04-30T13:12:33Z",
+    "merged_at": "2026-05-01T16:54:37Z",
+    "closed_at": "2026-05-01T16:54:37Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/247"
+  },
+  {
+    "number": 248,
+    "title": "[Repo Assist] feat(device): add BatteryStatusRequested event to DeviceCapability",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-30T13:12:39Z",
+    "merged_at": null,
+    "closed_at": "2026-05-01T16:43:03Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/248"
+  },
+  {
+    "number": 249,
+    "title": "feat(device): enhance device.status with rich system health sections \u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-30T16:36:28Z",
+    "merged_at": "2026-05-01T18:54:51Z",
+    "closed_at": "2026-05-01T18:54:51Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/249"
+  },
+  {
+    "number": 250,
+    "title": "feat: winnode CLI for invoking node commands over local MCP",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-30T18:07:03Z",
+    "merged_at": "2026-05-01T16:27:50Z",
+    "closed_at": "2026-05-01T16:27:50Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/250"
+  },
+  {
+    "number": 251,
+    "title": "refactor(tray): remove two unused tray menu helpers (~240 lines)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-30T21:07:23Z",
+    "merged_at": "2026-05-01T17:15:25Z",
+    "closed_at": "2026-05-01T17:15:25Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/251"
+  },
+  {
+    "number": 253,
+    "title": "Add Windows node text-to-speech",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-30T22:36:20Z",
+    "merged_at": "2026-05-01T18:31:59Z",
+    "closed_at": "2026-05-01T18:31:59Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/253"
+  },
+  {
+    "number": 255,
+    "title": "[Repo Assist] fix(security): block dangerous stem+wildcard allow patterns in execApprovals.set",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-05-01T12:55:44Z",
+    "merged_at": "2026-05-01T16:54:41Z",
+    "closed_at": "2026-05-01T16:54:41Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/255"
+  },
+  {
+    "number": 256,
+    "title": "[Repo Assist] improve(policy): default exec rules now match commands with or without args",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-01T12:55:48Z",
+    "merged_at": null,
+    "closed_at": "2026-05-01T16:42:58Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/256"
+  },
+  {
+    "number": 257,
+    "title": "fix(onboarding): use dark text on yellow warning cards",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-01T21:20:16Z",
+    "merged_at": null,
+    "closed_at": "2026-05-02T00:01:51Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/257"
+  },
+  {
+    "number": 259,
+    "title": "feat: wire WebView2 native\u2194SPA bridge in CanvasWindow",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-01T23:16:28Z",
+    "merged_at": "2026-05-07T15:19:16Z",
+    "closed_at": "2026-05-07T15:19:16Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/259"
+  },
+  {
+    "number": 260,
+    "title": "feat: normalize, resolve, and build canonical command identity",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-02T00:41:39Z",
+    "merged_at": "2026-05-07T23:26:48Z",
+    "closed_at": "2026-05-07T23:26:48Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/260"
+  },
+  {
+    "number": 261,
+    "title": "[Repo Assist] feat: implement ExecApprovalV2PolicyHandler (PR7 coordinator)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-02T01:27:16Z",
+    "merged_at": null,
+    "closed_at": "2026-05-07T22:00:00Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/261"
+  },
+  {
+    "number": 262,
+    "title": "[Repo Assist] feat(mcp): add per-command JSON Schema to tools/list",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-02T12:51:49Z",
+    "merged_at": null,
+    "closed_at": "2026-05-07T21:59:57Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/262"
+  },
+  {
+    "number": 263,
+    "title": "[Repo Assist] test: expand TokenSanitizer coverage + refactor ExecApprovalPolicy.Save()",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-03T01:25:21Z",
+    "merged_at": "2026-05-05T17:25:06Z",
+    "closed_at": "2026-05-05T17:25:06Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/263"
+  },
+  {
+    "number": 264,
+    "title": "[Repo Assist] fix(canvas): skip GetFinalPathFromHandle containment check on non-Windows",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-03T12:47:37Z",
+    "merged_at": "2026-05-05T17:18:58Z",
+    "closed_at": "2026-05-05T17:18:58Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/264"
+  },
+  {
+    "number": 265,
+    "title": "[Repo Assist] test(tray): add WindowsFactAttribute; skip DPAPI test on non-Windows",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-03T12:47:41Z",
+    "merged_at": "2026-05-05T17:20:30Z",
+    "closed_at": "2026-05-05T17:20:30Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/265"
+  },
+  {
+    "number": 266,
+    "title": "chore(deps): bump github/gh-aw-actions from 0.71.1 to 0.71.3",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-05-04T06:52:21Z",
+    "merged_at": "2026-05-05T03:17:54Z",
+    "closed_at": "2026-05-05T03:17:55Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/266"
+  },
+  {
+    "number": 267,
+    "title": "chore(deps): bump actions/github-script from 373c709c69115d41ff229c7e5df9f8788daa9553 to 3a2844b7e9c422d3c10d287c895573f7108da1b3",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-05-04T06:52:29Z",
+    "merged_at": "2026-05-05T03:18:02Z",
+    "closed_at": "2026-05-05T03:18:02Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/267"
+  },
+  {
+    "number": 268,
+    "title": "Bump Microsoft.Windows.SDK.BuildTools from 10.0.26100.4654 to 10.0.28000.1839",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": ".NET"
+      }
+    ],
+    "created_at": "2026-05-04T06:54:47Z",
+    "merged_at": null,
+    "closed_at": "2026-05-06T04:20:49Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/268"
+  },
+  {
+    "number": 269,
+    "title": "Bump Microsoft.WindowsAppSDK from 1.8.260101001 to 2.0.1",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": ".NET"
+      }
+    ],
+    "created_at": "2026-05-04T06:55:40Z",
+    "merged_at": null,
+    "closed_at": "2026-05-05T05:41:50Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/269"
+  },
+  {
+    "number": 270,
+    "title": "[Repo Assist] fix(security): handle all PowerShell -EncodedCommand abbreviations and separator forms in ExecShellWrapperParser",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-05-04T13:08:08Z",
+    "merged_at": "2026-05-07T22:12:46Z",
+    "closed_at": "2026-05-07T22:12:46Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/270"
+  },
+  {
+    "number": 271,
+    "title": "[Repo Assist] test: expand HttpUrlRiskEvaluator and BrowserProxy coverage",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-05T01:19:32Z",
+    "merged_at": "2026-05-05T17:26:43Z",
+    "closed_at": "2026-05-05T17:26:43Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/271"
+  },
+  {
+    "number": 272,
+    "title": "Companion application refactoring",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-05T03:13:05Z",
+    "merged_at": "2026-05-05T03:48:25Z",
+    "closed_at": "2026-05-05T03:48:25Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/272"
+  },
+  {
+    "number": 273,
+    "title": "fix: graceful chat error handling when gateway offline + tray menu bottom spacing",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-05T05:12:14Z",
+    "merged_at": "2026-05-05T05:39:43Z",
+    "closed_at": "2026-05-05T05:39:43Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/273"
+  },
+  {
+    "number": 274,
+    "title": "feat(onboarding): WSL local gateway setup, onboarding wizard, and security hardening",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-05T12:34:45Z",
+    "merged_at": "2026-05-08T15:50:52Z",
+    "closed_at": "2026-05-08T15:50:52Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/274"
+  },
+  {
+    "number": 275,
+    "title": "Remove fake/sample data from 6 UI pages",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-05T12:45:07Z",
+    "merged_at": "2026-05-05T16:58:29Z",
+    "closed_at": "2026-05-05T16:58:29Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/275"
+  },
+  {
+    "number": 277,
+    "title": "fix: standardize titlebar treatment across all windows",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-05T15:57:56Z",
+    "merged_at": "2026-05-05T23:44:26Z",
+    "closed_at": "2026-05-05T23:44:26Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/277"
+  },
+  {
+    "number": 278,
+    "title": "fix: restore consistent v0.68.3 SHA in repo-assist.lock.yml",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-05T17:15:40Z",
+    "merged_at": "2026-05-05T18:00:56Z",
+    "closed_at": "2026-05-05T18:00:56Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/278"
+  },
+  {
+    "number": 282,
+    "title": "[Repo Assist] chore(deps): bump Microsoft.Windows.SDK.BuildTools to 10.0.28000.1839 (supersedes #268)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-06T01:18:25Z",
+    "merged_at": "2026-05-07T14:56:10Z",
+    "closed_at": "2026-05-07T14:56:10Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/282"
+  },
+  {
+    "number": 284,
+    "title": "Agent events UI cleanup and redesign",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-06T02:30:07Z",
+    "merged_at": "2026-05-06T04:16:11Z",
+    "closed_at": "2026-05-06T04:16:11Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/284"
+  },
+  {
+    "number": 285,
+    "title": "Quick Send: align custom titlebar behavior and remove focus/z-order interference",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-06T04:06:02Z",
+    "merged_at": "2026-05-07T23:04:39Z",
+    "closed_at": "2026-05-07T23:04:39Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/285"
+  },
+  {
+    "number": 286,
+    "title": "[Repo Assist] perf: pre-compile redaction and UI regexes (CommandCenterTextHelper, WizardPage, SchemaConfigEditor, QuickSendDialog)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-06T13:11:36Z",
+    "merged_at": "2026-05-07T22:12:41Z",
+    "closed_at": "2026-05-07T22:12:41Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/286"
+  },
+  {
+    "number": 287,
+    "title": "fix: connection stability \u2014 stop node reconnect storms, fix bootstrap token handling",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-06T14:43:23Z",
+    "merged_at": "2026-05-06T15:13:56Z",
+    "closed_at": "2026-05-06T15:13:56Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/287"
+  },
+  {
+    "number": 288,
+    "title": "audio: Whisper STT + Piper TTS as MCP-callable node capabilities",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-07T01:16:54Z",
+    "merged_at": "2026-05-07T20:22:19Z",
+    "closed_at": "2026-05-07T20:22:19Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/288"
+  },
+  {
+    "number": 289,
+    "title": "[Repo Assist] perf: vectorize ASCII control/whitespace scan in ExecEnvSanitizer.IsBlocked",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-07T01:25:32Z",
+    "merged_at": "2026-05-07T17:16:58Z",
+    "closed_at": "2026-05-07T17:16:58Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/289"
+  },
+  {
+    "number": 290,
+    "title": "[Repo Assist] refactor: extract BaseOptions constant in SshTunnelCommandLine",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-07T01:25:36Z",
+    "merged_at": "2026-05-07T14:56:04Z",
+    "closed_at": "2026-05-07T14:56:04Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/290"
+  },
+  {
+    "number": 291,
+    "title": "[Repo Assist] fix(security): stop echoing ex.Message into node capability error responses",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-05-07T13:17:38Z",
+    "merged_at": "2026-05-07T22:12:37Z",
+    "closed_at": "2026-05-07T22:12:37Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/291"
+  },
+  {
+    "number": 292,
+    "title": "feat: video capture frontend \u2014 consent, notifications, activity stream & settings",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-07T13:53:51Z",
+    "merged_at": "2026-05-07T21:05:18Z",
+    "closed_at": "2026-05-07T21:05:18Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/292"
+  },
+  {
+    "number": 293,
+    "title": "fix: enforce min window size and pin navigation sidebar",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-07T19:12:06Z",
+    "merged_at": "2026-05-07T22:12:33Z",
+    "closed_at": "2026-05-07T22:12:33Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/293"
+  },
+  {
+    "number": 294,
+    "title": "[Repo Assist] fix(security): stop leaking ex.Message in CanvasCapability and BrowserProxyCapability",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-05-08T01:26:13Z",
+    "merged_at": "2026-05-10T22:16:25Z",
+    "closed_at": "2026-05-10T22:16:25Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/294"
+  },
+  {
+    "number": 295,
+    "title": "feat: add ExecApprovalsStore read path",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "created_at": "2026-05-08T03:12:28Z",
+    "merged_at": "2026-05-12T20:25:06Z",
+    "closed_at": "2026-05-12T20:25:06Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/295"
+  },
+  {
+    "number": 296,
+    "title": "[Repo Assist] feat: add ExecApprovalsEvaluator policy evaluation step",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-08T13:05:15Z",
+    "merged_at": null,
+    "closed_at": "2026-05-14T01:50:15Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/296"
+  },
+  {
+    "number": 297,
+    "title": "refactor(tray): extract CommandCenterStateBuilder from App.xaml.cs",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-05-08T18:00:21Z",
+    "merged_at": "2026-05-12T01:21:17Z",
+    "closed_at": "2026-05-12T01:21:17Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/297"
+  },
+  {
+    "number": 298,
+    "title": "Add MXC Sandbox example to Windows Node",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "enhancement"
+      }
+    ],
+    "created_at": "2026-05-08T21:06:48Z",
+    "merged_at": null,
+    "closed_at": "2026-05-12T20:05:59Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/298"
+  },
+  {
+    "number": 299,
+    "title": "feat: gateway registry (multi-gateway support)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "created_at": "2026-05-08T21:25:57Z",
+    "merged_at": null,
+    "closed_at": "2026-05-10T20:13:34Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/299"
+  },
+  {
+    "number": 300,
+    "title": "[Repo Assist] fix(security): apply TokenSanitizer to WSL diagnostic output",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-05-09T01:23:15Z",
+    "merged_at": "2026-05-10T22:16:20Z",
+    "closed_at": "2026-05-10T22:16:20Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/300"
+  },
+  {
+    "number": 301,
+    "title": "[Repo Assist] fix(wsl): add mountFsTab=false + [time] section to wsl.conf; make IsAlreadyConfigured probe section-aware",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-05-09T12:53:36Z",
+    "merged_at": "2026-05-14T02:13:37Z",
+    "closed_at": "2026-05-14T02:13:37Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/301"
+  },
+  {
+    "number": 303,
+    "title": "[Repo Assist] fix(wsl): terminate process tree on caller cancellation in WslExeCommandRunner",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-10T12:54:12Z",
+    "merged_at": "2026-05-10T22:09:47Z",
+    "closed_at": "2026-05-10T22:09:47Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/303"
+  },
+  {
+    "number": 304,
+    "title": "Connection architecture refactoring: manager-owned lifecycle, setup integration, diagnostics",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-10T18:45:55Z",
+    "merged_at": "2026-05-10T21:30:35Z",
+    "closed_at": "2026-05-10T21:30:35Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/304"
+  },
+  {
+    "number": 305,
+    "title": "fix: setup flow, connection page, and chat token bugs",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-11T01:20:13Z",
+    "merged_at": "2026-05-11T04:35:10Z",
+    "closed_at": "2026-05-11T04:35:10Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/305"
+  },
+  {
+    "number": 306,
+    "title": "[Repo Assist] fix(security): stop leaking ex.Message in node client, device capability, and approval prompts",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-05-11T01:32:02Z",
+    "merged_at": "2026-05-14T02:13:41Z",
+    "closed_at": "2026-05-14T02:13:41Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/306"
+  },
+  {
+    "number": 307,
+    "title": "fix(onboarding): verify bootstrap message rendered before consuming one-shot gate",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-11T04:56:28Z",
+    "merged_at": "2026-05-11T09:08:59Z",
+    "closed_at": "2026-05-11T09:08:59Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/307"
+  },
+  {
+    "number": 308,
+    "title": "chore(deps): bump github/gh-aw-actions from 0.71.3 to 0.73.0",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "github_actions"
+      }
+    ],
+    "created_at": "2026-05-11T07:27:43Z",
+    "merged_at": "2026-05-12T01:16:30Z",
+    "closed_at": "2026-05-12T01:16:30Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/308"
+  },
+  {
+    "number": 309,
+    "title": "Bump Microsoft.ML.OnnxRuntime from 1.25.1 to 1.26.0",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": ".NET"
+      }
+    ],
+    "created_at": "2026-05-11T07:29:32Z",
+    "merged_at": "2026-05-11T09:08:28Z",
+    "closed_at": "2026-05-11T09:08:28Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/309"
+  },
+  {
+    "number": 310,
+    "title": "feat(uninstall): WSL gateway uninstall \u2014 engine, CLI, Inno hook, MSIX docs, Settings UI",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-11T13:06:58Z",
+    "merged_at": "2026-05-12T18:54:40Z",
+    "closed_at": "2026-05-12T18:54:40Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/310"
+  },
+  {
+    "number": 312,
+    "title": "fix(onboarding): restore post-wizard handoff and chat connection; properly bootstrap hatching prompt",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-11T14:53:45Z",
+    "merged_at": "2026-05-12T18:20:58Z",
+    "closed_at": "2026-05-12T18:20:58Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/312"
+  },
+  {
+    "number": 313,
+    "title": "feat(cron): Redesign Cron Jobs page with card UI, inline editing, and run history",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-11T17:24:07Z",
+    "merged_at": "2026-05-12T01:12:53Z",
+    "closed_at": "2026-05-12T01:12:54Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/313"
+  },
+  {
+    "number": 314,
+    "title": "chore(repo): keep squad artifacts out of git",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-11T20:03:53Z",
+    "merged_at": "2026-05-11T20:34:42Z",
+    "closed_at": "2026-05-11T20:34:42Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/314"
+  },
+  {
+    "number": 315,
+    "title": "Native WinUI chat experience",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-12T01:29:48Z",
+    "merged_at": "2026-05-12T21:30:26Z",
+    "closed_at": "2026-05-12T21:30:26Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/315"
+  },
+  {
+    "number": 317,
+    "title": "Add Test Voice Input button to Voice & Audio settings",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-12T16:34:41Z",
+    "merged_at": "2026-05-12T18:15:20Z",
+    "closed_at": "2026-05-12T18:15:20Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/317"
+  },
+  {
+    "number": 318,
+    "title": "fix(cron): address post-merge review feedback from PR #313",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-12T17:39:05Z",
+    "merged_at": "2026-05-12T18:01:14Z",
+    "closed_at": "2026-05-12T18:01:15Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/318"
+  },
+  {
+    "number": 319,
+    "title": "MXC AppContainer sandboxing for system.run + Sandbox settings page",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-12T17:41:31Z",
+    "merged_at": "2026-05-12T20:03:57Z",
+    "closed_at": "2026-05-12T20:03:57Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/319"
+  },
+  {
+    "number": 320,
+    "title": "Fix Repo Assist Copilot driver setup pin",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-12T17:49:24Z",
+    "merged_at": null,
+    "closed_at": "2026-05-14T01:50:13Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/320"
+  },
+  {
+    "number": 321,
+    "title": "feat(connection): auto-reconnect to last successful gateway on startup",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-12T18:23:32Z",
+    "merged_at": "2026-05-12T19:16:27Z",
+    "closed_at": "2026-05-12T19:16:27Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/321"
+  },
+  {
+    "number": 322,
+    "title": "fix(usage): make 7/30 day toggle work + redesign with Fluent SelectorBar",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-12T20:31:29Z",
+    "merged_at": "2026-05-12T21:39:48Z",
+    "closed_at": "2026-05-12T21:39:48Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/322"
+  },
+  {
+    "number": 323,
+    "title": "fix(onboarding): setup code bootstrap flow, connection error handling, and token priority",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-12T20:32:24Z",
+    "merged_at": null,
+    "closed_at": "2026-05-12T21:32:07Z",
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/323"
+  },
+  {
+    "number": 324,
+    "title": "feat(nodes): rich node cards with rename, forget, and tray cleanup",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-12T23:05:05Z",
+    "merged_at": "2026-05-13T05:18:38Z",
+    "closed_at": "2026-05-13T05:18:38Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/324"
+  },
+  {
+    "number": 325,
+    "title": "fix(onboarding): restore pairing setup flow",
+    "state": "open",
+    "labels": [],
+    "created_at": "2026-05-13T00:04:42Z",
+    "merged_at": null,
+    "closed_at": null,
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/325"
+  },
+  {
+    "number": 326,
+    "title": "fix: native chat UX improvements \u2014 focus, flickering, bubbles, notifications",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T00:23:27Z",
+    "merged_at": "2026-05-13T00:49:29Z",
+    "closed_at": "2026-05-13T00:49:29Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/326"
+  },
+  {
+    "number": 327,
+    "title": "Add exec approval evaluator, typed outcomes, and allowlist matcher",
+    "state": "open",
+    "labels": [],
+    "created_at": "2026-05-13T04:23:30Z",
+    "merged_at": null,
+    "closed_at": null,
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/327"
+  },
+  {
+    "number": 328,
+    "title": "[Repo Assist] fix(security): remove residual ex.Message leak in canvas jsonlPath error path",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "created_at": "2026-05-13T13:17:27Z",
+    "merged_at": "2026-05-14T02:27:33Z",
+    "closed_at": "2026-05-14T02:27:33Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/328"
+  },
+  {
+    "number": 329,
+    "title": "fix(setup): WSL gateway easy-button hardening + wizard navigation + error surface",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T13:35:52Z",
+    "merged_at": "2026-05-13T17:42:37Z",
+    "closed_at": "2026-05-13T17:42:37Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/329"
+  },
+  {
+    "number": 332,
+    "title": "fix(onboarding): surface gateway wizard terminal-error status instead of silent complete",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T16:48:21Z",
+    "merged_at": "2026-05-13T17:42:31Z",
+    "closed_at": "2026-05-13T17:42:32Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/332"
+  },
+  {
+    "number": 333,
+    "title": "docs(agents): note --no-restore first-run gotcha in test validation",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T17:00:29Z",
+    "merged_at": "2026-05-13T18:07:11Z",
+    "closed_at": "2026-05-13T18:07:11Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/333"
+  },
+  {
+    "number": 334,
+    "title": "Fix incomplete onboarding Finish recovery",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T18:38:12Z",
+    "merged_at": "2026-05-13T18:52:55Z",
+    "closed_at": "2026-05-13T18:52:55Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/334"
+  },
+  {
+    "number": 335,
+    "title": "UI fixes: skills redesign, workspace caching, sidebar/voice width",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T18:47:59Z",
+    "merged_at": "2026-05-13T20:04:28Z",
+    "closed_at": "2026-05-13T20:04:28Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/335"
+  },
+  {
+    "number": 336,
+    "title": "refactor: extract CopyDiagnostic helper for diagnostic copy methods",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T19:22:30Z",
+    "merged_at": "2026-05-13T20:13:54Z",
+    "closed_at": "2026-05-13T20:13:54Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/336"
+  },
+  {
+    "number": 337,
+    "title": "Privacy & security: consolidate Capabilities + Sandbox + Permissions into one page with a 3-tier preset system",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T19:42:03Z",
+    "merged_at": null,
+    "closed_at": "2026-05-13T19:53:51Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/337"
+  },
+  {
+    "number": 339,
+    "title": "Refactor WinUI clipboard text copies",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T20:22:06Z",
+    "merged_at": "2026-05-13T20:52:48Z",
+    "closed_at": "2026-05-13T20:52:48Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/339"
+  },
+  {
+    "number": 340,
+    "title": "fix(onboarding): skip wizard for paired operators and make \"Keep my setup\" actually dismiss",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T21:46:42Z",
+    "merged_at": "2026-05-14T04:44:00Z",
+    "closed_at": "2026-05-14T04:44:00Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/340"
+  },
+  {
+    "number": 352,
+    "title": "feat: unify Sessions and Conversations into single Sessions page",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-13T23:57:39Z",
+    "merged_at": "2026-05-14T01:41:42Z",
+    "closed_at": "2026-05-14T01:41:42Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/352"
+  },
+  {
+    "number": 373,
+    "title": "Merge Capabilities into Permissions; redesign Settings & Permissions with Fluent rows",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-14T00:56:16Z",
+    "merged_at": "2026-05-14T01:21:57Z",
+    "closed_at": "2026-05-14T01:21:57Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/373"
+  },
+  {
+    "number": 375,
+    "title": "Fix startup setup check for per-gateway node tokens",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-14T05:09:48Z",
+    "merged_at": "2026-05-14T20:01:47Z",
+    "closed_at": "2026-05-14T20:01:47Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/375"
+  },
+  {
+    "number": 376,
+    "title": "refactor(tray): extract TrayTooltipBuilder from App.xaml.cs",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-14T06:33:59Z",
+    "merged_at": "2026-05-14T19:19:30Z",
+    "closed_at": "2026-05-14T19:19:30Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/376"
+  },
+  {
+    "number": 377,
+    "title": "fix(exec-shell): add zsh/dash/ash/ksh/fish to V1 POSIX shell recognizer",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-14T07:13:34Z",
+    "merged_at": "2026-05-14T20:06:06Z",
+    "closed_at": "2026-05-14T20:06:06Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/377"
+  },
+  {
+    "number": 378,
+    "title": "fix(node): route capture/record toasts through App.ShowToast",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-14T07:13:52Z",
+    "merged_at": "2026-05-14T20:12:58Z",
+    "closed_at": "2026-05-14T20:12:58Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/378"
+  },
+  {
+    "number": 379,
+    "title": "fix(exec-approvals): reject Allow rules with absolute file paths",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-14T07:14:11Z",
+    "merged_at": "2026-05-14T20:09:26Z",
+    "closed_at": "2026-05-14T20:09:26Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/379"
+  },
+  {
+    "number": 380,
+    "title": "[Repo Assist] fix(a2ui): apply CardBackground theme override to Card renderer",
+    "state": "open",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-14T13:04:28Z",
+    "merged_at": null,
+    "closed_at": null,
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/380"
+  },
+  {
+    "number": 381,
+    "title": "V2 onboarding redesign (mount + bridge + theme + Hanselman fixes)",
+    "state": "open",
+    "labels": [],
+    "created_at": "2026-05-14T16:17:06Z",
+    "merged_at": null,
+    "closed_at": null,
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/381"
+  },
+  {
+    "number": 382,
+    "title": "fix: use node.pair.approve for node command auto-approval",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-14T17:24:59Z",
+    "merged_at": "2026-05-14T19:19:22Z",
+    "closed_at": "2026-05-14T19:19:22Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/382"
+  },
+  {
+    "number": 383,
+    "title": "Tray menu (right-click): Fluent style tray-menu redesign",
+    "state": "open",
+    "labels": [],
+    "created_at": "2026-05-14T18:37:27Z",
+    "merged_at": null,
+    "closed_at": null,
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/383"
+  },
+  {
+    "number": 384,
+    "title": "Bump Windows tray clients to advertise protocol v4 (unblocks fresh-install pairing)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-14T18:53:02Z",
+    "merged_at": "2026-05-14T19:44:49Z",
+    "closed_at": "2026-05-14T19:44:49Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/384"
+  },
+  {
+    "number": 385,
+    "title": "Consolidate 6 gateway pages under Advanced nav group",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-14T19:06:10Z",
+    "merged_at": "2026-05-14T19:55:26Z",
+    "closed_at": "2026-05-14T19:55:26Z",
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/385"
+  },
+  {
+    "number": 386,
+    "title": "[WIP] Fix failing GitHub Actions job 'test'",
+    "state": "open",
+    "labels": [],
+    "created_at": "2026-05-14T19:32:11Z",
+    "merged_at": null,
+    "closed_at": null,
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/386"
+  },
+  {
+    "number": 387,
+    "title": "Fix Repo Assist bundle checkout depth",
+    "state": "open",
+    "labels": [],
+    "created_at": "2026-05-14T19:42:45Z",
+    "merged_at": null,
+    "closed_at": null,
+    "draft": false,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/387"
+  },
+  {
+    "number": 388,
+    "title": "[WIP] Fix the failing GitHub Actions job 'safe_outputs'",
+    "state": "open",
+    "labels": [],
+    "created_at": "2026-05-14T20:14:28Z",
+    "merged_at": null,
+    "closed_at": null,
+    "draft": true,
+    "html_url": "https://github.com/openclaw/openclaw-windows-node/pull/388"
+  }
+]

@@ -1,0 +1,2236 @@
+[
+  {
+    "number": 3,
+    "title": "WinUI tray menu crashes in Microsoft.UI.Windowing.Core.dll after idle/interaction",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-01-30T23:48:44Z",
+    "closed_at": "2026-02-08T00:59:08Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 5,
+    "title": "Canvas Panel \u2014 WebView2-based canvas viewer in tray app",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-01T03:02:07Z",
+    "closed_at": "2026-02-08T01:13:48Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 6,
+    "title": "Skills Settings UI \u2014 browse and configure installed skills",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-01T03:02:21Z",
+    "closed_at": "2026-02-08T01:35:41Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 7,
+    "title": "DEVELOPMENT.md \u2014 contributor setup and architecture docs",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-01T03:02:37Z",
+    "closed_at": "2026-02-02T07:20:18Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 9,
+    "title": "WebView2 fails to initialize in WinUI 3 unpackaged app on ARM64",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-01T06:56:52Z",
+    "closed_at": "2026-02-01T23:19:01Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 10,
+    "title": "dotnet run --project src/OpenClaw.Tray gives error",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-01T10:08:23Z",
+    "closed_at": "2026-02-01T22:30:48Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "rwijnhov"
+    }
+  },
+  {
+    "number": 12,
+    "title": "Enhanced notification categorization system",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-02T06:23:09Z",
+    "closed_at": "2026-02-08T01:24:12Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 16,
+    "title": "Auto updated keeps wanting to update",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-10T01:00:36Z",
+    "closed_at": "2026-02-10T08:17:48Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "demyte"
+    }
+  },
+  {
+    "number": 18,
+    "title": "allow list trouble",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-11T15:58:09Z",
+    "closed_at": "2026-02-17T05:22:50Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "gansxx"
+    }
+  },
+  {
+    "number": 19,
+    "title": "Can't connect to OpenClaw behind Tailscale Serve (hardcoded localhost/port, WS fails)",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-13T01:38:20Z",
+    "closed_at": "2026-02-17T04:41:28Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "mekwall"
+    }
+  },
+  {
+    "number": 22,
+    "title": "UnobservedTaskException crash on startup when gateway is unreachable",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-18T13:27:59Z",
+    "closed_at": "2026-02-24T05:52:58Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "aaronvstory"
+    }
+  },
+  {
+    "number": 26,
+    "title": "Minor: Wrong StatusIcon colour in Status dialog",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-02-24T15:42:00Z",
+    "closed_at": "2026-02-26T00:26:00Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "DanAtkinson"
+    }
+  },
+  {
+    "number": 28,
+    "title": "system.run hangs indefinitely for CLI tools that connect to a running process via local IPC (regression after v0.4.3)",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-02-24T21:34:13Z",
+    "closed_at": "2026-03-17T01:31:59Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "milosm"
+    }
+  },
+  {
+    "number": 35,
+    "title": "[Repo Assist] Monthly Activity 2026-03",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T00:46:37Z",
+    "closed_at": "2026-04-01T01:21:05Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 34,
+    "title": "[Repo Assist] perf: hoist shell normalisation and cache notification regex objects",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T00:46:37Z",
+    "closed_at": "2026-03-17T01:38:37Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 40,
+    "title": "Implement proper localization infrastructure (i18n) with .resw resource files",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T02:00:59Z",
+    "closed_at": "2026-03-17T04:57:07Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 41,
+    "title": "fix: NotificationSound persisted by display text instead of stable key",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T02:04:15Z",
+    "closed_at": "2026-03-17T02:21:04Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 43,
+    "title": "Add WinUI test project for tray app coverage",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T02:21:52Z",
+    "closed_at": "2026-03-17T04:40:56Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 44,
+    "title": "Sunset WinForms tray app (OpenClaw.Tray) in favor of WinUI",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T02:22:13Z",
+    "closed_at": "2026-03-17T04:58:21Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 47,
+    "title": "[Repo Assist] fix: replace null-forgiving operator with proper null guard in DeepLinkHandler",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T03:28:01Z",
+    "closed_at": "2026-03-17T04:56:54Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 52,
+    "title": "Improve debug instrumentation across WinUI tray app",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T05:47:35Z",
+    "closed_at": "2026-03-17T06:02:32Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 55,
+    "title": "Channel list doesn't refresh when channels are removed/added on gateway",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T06:44:22Z",
+    "closed_at": "2026-03-17T17:49:25Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 56,
+    "title": "[Repo Assist] fix: refresh channel list when channels are added/removed on gateway",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-17T14:05:55Z",
+    "closed_at": "2026-03-17T17:50:59Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 58,
+    "title": "[Repo Assist] ci: add OpenClaw.Tray.Tests to the CI test job",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-18T01:04:02Z",
+    "closed_at": "2026-03-18T02:02:41Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 61,
+    "title": "\ud83c\udf0d Call for Translations: Help localize OpenClaw Tray",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "help wanted"
+      },
+      {
+        "name": "good first issue"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-18T03:21:34Z",
+    "closed_at": "2026-04-08T21:30:44Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 63,
+    "title": "Refactor: Extract shared WebSocket lifecycle from Gateway/Node clients",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-18T04:45:04Z",
+    "closed_at": "2026-03-18T16:59:02Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 65,
+    "title": "[Repo Assist] perf: cache JsonSerializerOptions and compile command-format Regex in WindowsNodeClient",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-18T13:07:53Z",
+    "closed_at": "2026-03-18T17:15:58Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 66,
+    "title": "[Repo Assist] ci: add NuGet package caching to test job",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-18T13:07:56Z",
+    "closed_at": "2026-03-18T17:16:01Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 70,
+    "title": "[Repo Assist] test: validate localization key parity and format placeholders",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-19T01:07:23Z",
+    "closed_at": "2026-03-31T22:54:36Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 71,
+    "title": "[Repo Assist] bug: NotificationSound setting has no effect \u2014 sound is never applied to toast notifications",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "good first issue"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-19T01:07:25Z",
+    "closed_at": "2026-03-31T22:54:39Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 72,
+    "title": "[Repo Assist] fix: apply NotificationSound setting to all toast notifications",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-19T12:57:43Z",
+    "closed_at": "2026-03-22T00:46:30Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 73,
+    "title": "[Repo Assist] eng: sync test tooling between OpenClaw.Tray.Tests and OpenClaw.Shared.Tests",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-19T12:57:46Z",
+    "closed_at": "2026-03-31T20:59:56Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 74,
+    "title": "[Repo Assist] eng: sync xunit.runner.visualstudio to 3.1.4 and add coverlet.collector to Tray.Tests",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-20T01:03:30Z",
+    "closed_at": "2026-03-22T00:46:37Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 75,
+    "title": "[Repo Assist] refactor: extract TryParseArgv helper in SystemCapability, fix operator precedence",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-20T01:03:33Z",
+    "closed_at": "2026-03-22T00:46:45Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 76,
+    "title": "[Repo Assist] fix: apply NotificationSound setting to all toast notifications",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-20T12:53:57Z",
+    "closed_at": "2026-03-22T00:46:50Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 77,
+    "title": "[Repo Assist] eng: sync xunit.runner.visualstudio to 3.1.4 and add coverlet.collector to Tray.Tests",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-20T12:54:00Z",
+    "closed_at": "2026-03-22T00:46:58Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 78,
+    "title": "[Repo Assist] refactor: extract TryParseArgv helper in SystemCapability, fix operator precedence",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-20T12:54:03Z",
+    "closed_at": "2026-03-22T00:47:03Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 81,
+    "title": "Missing deviceToken",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-20T17:56:00Z",
+    "closed_at": "2026-04-01T07:04:27Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "andyeskridge"
+    }
+  },
+  {
+    "number": 82,
+    "title": "Overheight menu doesn't scroll vertically",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-20T21:41:06Z",
+    "closed_at": "2026-04-01T06:40:41Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "NichUK"
+    }
+  },
+  {
+    "number": 84,
+    "title": "[Repo Assist] eng: sync xunit.runner.visualstudio to 3.1.4 and add coverlet.collector to Tray.Tests",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-21T01:00:09Z",
+    "closed_at": "2026-03-22T00:47:07Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 85,
+    "title": "[Repo Assist] fix: apply NotificationSound setting to all toast notifications",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-21T01:00:13Z",
+    "closed_at": "2026-03-22T00:47:13Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 86,
+    "title": "[Repo Assist] refactor: extract TryParseArgv helper in SystemCapability, fix operator precedence",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-21T01:00:15Z",
+    "closed_at": "2026-03-22T00:47:16Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 87,
+    "title": "[Repo Assist] fix: apply NotificationSound setting to all toast notifications",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-21T12:55:19Z",
+    "closed_at": "2026-03-22T00:47:20Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 88,
+    "title": "[Repo Assist] eng: sync xunit.runner.visualstudio to 3.1.4 and add coverlet.collector to Tray.Tests",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-21T12:55:21Z",
+    "closed_at": "2026-03-22T00:47:24Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 89,
+    "title": "[Repo Assist] refactor: extract TryParseArgv helper in SystemCapability, fix operator precedence",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-21T12:55:22Z",
+    "closed_at": "2026-03-22T00:47:26Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 90,
+    "title": "[Repo Assist] eng: sync xunit.runner.visualstudio to 3.1.4 and add coverlet.collector to Tray.Tests",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-22T01:10:34Z",
+    "closed_at": "2026-03-31T22:54:35Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 91,
+    "title": "[Repo Assist] refactor: extract TryParseArgv helper in SystemCapability, fix operator precedence",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-22T01:10:36Z",
+    "closed_at": "2026-03-31T22:54:38Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 92,
+    "title": "[Repo Assist] fix: apply NotificationSound setting to all toast notifications",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-22T01:10:38Z",
+    "closed_at": "2026-03-31T22:54:39Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 94,
+    "title": "[Repo Assist] fix: pass UserRules to NotificationCategorizer in OpenClawGatewayClient",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-22T13:02:46Z",
+    "closed_at": "2026-04-01T06:43:15Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 99,
+    "title": "Feature Request: Voice Mode",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-03-23T02:19:44Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "NichUK"
+    }
+  },
+  {
+    "number": 102,
+    "title": "[Repo Assist] eng: add NuGet package cache to build, build-msix, and build-extension CI jobs",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-23T12:58:19Z",
+    "closed_at": "2026-03-31T20:59:58Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 103,
+    "title": "Improve Windows Node setup documentation and PowerToys guide",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-24T00:58:20Z",
+    "closed_at": "2026-04-01T06:44:20Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "yurtzy"
+    }
+  },
+  {
+    "number": 106,
+    "title": "[Repo Assist] eng: add global.json to pin .NET SDK to 10.0.x (rollForward: latestFeature)",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-24T13:05:52Z",
+    "closed_at": "2026-03-31T20:59:54Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 112,
+    "title": "I developed a client to send messages to openclaw, but it consistently fails to send. Even using the demo's quick send feature also fails to work",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "needs investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-27T10:09:44Z",
+    "closed_at": "2026-04-01T06:39:25Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "society2012"
+    }
+  },
+  {
+    "number": 114,
+    "title": "Node mode not work",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "needs investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-28T04:19:24Z",
+    "closed_at": "2026-04-01T06:43:35Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "statsmind"
+    }
+  },
+  {
+    "number": 116,
+    "title": "[Repo Assist] eng: add global.json to pin .NET SDK to 10.0.x (rollForward: latestFeature)",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-29T01:21:04Z",
+    "closed_at": "2026-03-31T20:59:51Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 123,
+    "title": "[Repo Assist] eng: add global.json to pin .NET SDK to 10.0.x",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-31T13:07:53Z",
+    "closed_at": "2026-03-31T22:54:35Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 127,
+    "title": "[Repo Assist] Monthly Activity 2026-04",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-01T01:21:07Z",
+    "closed_at": "2026-05-01T01:29:17Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 132,
+    "title": "Bug: SSH tunnel not restarted on unexpected exit",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-01T17:16:17Z",
+    "closed_at": "2026-04-02T16:56:20Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 131,
+    "title": "Bug: Signature mode fallback never retries connect message",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-01T17:16:17Z",
+    "closed_at": "2026-04-02T16:53:15Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 135,
+    "title": "[Repo Assist] eng: add NuGet cache to build and build-msix CI jobs",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-02T01:07:44Z",
+    "closed_at": "2026-04-02T16:50:45Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 149,
+    "title": "Windows Tray App does not auto-reconnect after Gateway restart",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "needs investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-05T15:32:47Z",
+    "closed_at": "2026-04-14T00:55:52Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "iliujiannan"
+    }
+  },
+  {
+    "number": 151,
+    "title": "[Windows] ollama launch openclaw starts duplicate gateway when Scheduled Task is already running",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "needs investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-06T12:07:20Z",
+    "closed_at": "2026-04-14T01:03:49Z",
+    "author_association": "NONE",
+    "user": {
+      "login": "friendfish"
+    }
+  },
+  {
+    "number": 152,
+    "title": "[Repo Assist] eng: collect code coverage and upload test results in CI",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-06T13:02:29Z",
+    "closed_at": "2026-04-08T22:29:57Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 164,
+    "title": "[aw] Repo Assist failed",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-10T01:17:53Z",
+    "closed_at": "2026-04-13T23:53:18Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 166,
+    "title": "[Repo Assist] eng: add NuGet cache to build-extension CI job",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-12T12:39:03Z",
+    "closed_at": "2026-04-14T01:10:07Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 179,
+    "title": "[aw] No-Op Runs",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-04-17T01:07:51Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 184,
+    "title": "[Security] system.run: env variable injection and shell wrapper approval bypass",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-19T22:01:56Z",
+    "closed_at": "2026-04-20T04:48:04Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "AlexAlves87"
+    }
+  },
+  {
+    "number": 191,
+    "title": "[Proposal] Add a formal WebView2 bridge for native \u2194 SPA communication",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-04-20T18:35:20Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "AlexAlves87"
+    }
+  },
+  {
+    "number": 195,
+    "title": "[Repo Assist] eng: add --no-restore to CI build steps after dotnet restore",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-22T01:13:53Z",
+    "closed_at": "2026-04-23T17:04:28Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 198,
+    "title": "bug: aggressive retry loop on authentication failures triggers gateway rate limiter",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-22T21:59:14Z",
+    "closed_at": "2026-04-23T19:10:34Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 199,
+    "title": "Implement guided onboarding/setup wizard with contextual error recovery",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-22T22:09:22Z",
+    "closed_at": "2026-04-23T19:10:34Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 208,
+    "title": "[Repo Assist] eng: add Dependabot config for NuGet and GitHub Actions updates",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-24T01:16:46Z",
+    "closed_at": "2026-04-27T03:26:07Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 214,
+    "title": "[Repo Assist] eng: add root NuGet.Config with package source mapping",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-26T12:41:05Z",
+    "closed_at": "2026-04-27T03:26:07Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 235,
+    "title": "[Repo Assist] ci: bundle Dependabot action bumps (5 PRs)",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-28T01:35:16Z",
+    "closed_at": "2026-05-05T03:18:05Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 240,
+    "title": "feat: add device.status capability for system health reporting",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-28T18:59:32Z",
+    "closed_at": "2026-05-01T18:54:52Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "RBrid"
+    }
+  },
+  {
+    "number": 246,
+    "title": "Decide Windows packaging and auto-update strategy",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "question"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-04-30T07:01:46Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 252,
+    "title": "feat: Add Windows node text-to-speech command (`tts.speak`)",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-30T22:26:04Z",
+    "closed_at": "2026-05-01T18:32:00Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "RBrid"
+    }
+  },
+  {
+    "number": 254,
+    "title": "[Repo Assist] Monthly Activity 2026-05",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-01T01:29:16Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 258,
+    "title": "Onboarding: white/light cards render unreadable text in dark mode (PR 241 follow-up)",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-05-01T22:04:57Z",
+    "closed_at": "2026-05-02T00:01:53Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "indierawk2k2"
+    }
+  },
+  {
+    "number": 276,
+    "title": "[aw] Repo Assist failed",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-05-05T12:48:34Z",
+    "closed_at": "2026-05-05T18:00:57Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 279,
+    "title": "Chat textbox should auto-focus when window opens",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-05-05T17:19:30Z",
+    "closed_at": "2026-05-05T17:40:01Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "christineyan4"
+    }
+  },
+  {
+    "number": 280,
+    "title": "Tray menu flyout renders squished after display scaling change until dismissed and reopened",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-05-05T20:02:55Z",
+    "closed_at": "2026-05-05T21:32:36Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "christineyan4"
+    }
+  },
+  {
+    "number": 281,
+    "title": "WSL local gateway onboarding validation blockers from PR #274",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-05T21:49:53Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "shanselman"
+    }
+  },
+  {
+    "number": 283,
+    "title": "Quick Send dialog: titlebar styling mismatch, focus/z-order issues",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-05-06T02:14:01Z",
+    "closed_at": "2026-05-07T23:04:40Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "christineyan4"
+    }
+  },
+  {
+    "number": 302,
+    "title": "[Repo Assist] ci: include Directory.Packages.props in NuGet cache key hash",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-05-10T01:25:59Z",
+    "closed_at": "2026-05-11T02:37:40Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 311,
+    "title": "[Repo Assist] chore(deps): align Microsoft.Windows.SDK.BuildTools version in CommandPalette",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-11T13:32:24Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 316,
+    "title": "[aw] Repo Assist failed",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-05-12T13:01:26Z",
+    "closed_at": "2026-05-13T04:21:11Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 330,
+    "title": "Wedge B: OnboardingWindow.OnWizardComplete silently closes window when setupStillRequired=true (Finish from Ready)",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-05-13T16:38:17Z",
+    "closed_at": "2026-05-13T18:52:56Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "indierawk2k2"
+    }
+  },
+  {
+    "number": 331,
+    "title": "Gap A: Gateway wizard has no per-step Back navigation (server-driven, needs wizard.previous RPC)",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T16:38:19Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "indierawk2k2"
+    }
+  },
+  {
+    "number": 338,
+    "title": "Add onboarding step to configure Windows node capabilities",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T19:52:46Z",
+    "closed_at": null,
+    "author_association": "NONE",
+    "user": {
+      "login": "reisball"
+    }
+  },
+  {
+    "number": 341,
+    "title": "[deep-review] C1: WindowsNodeClient leaks ex.Message to gateway, defeating SttCapability privacy invariant",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:27:45Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 342,
+    "title": "[deep-review] C2: NodeService.ShowToast bypasses user sound preferences for capture/record toasts",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-05-13T23:28:15Z",
+    "closed_at": "2026-05-14T20:13:00Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 343,
+    "title": "[deep-review] C3: A2UI CardBackground theme override is parsed but never applied",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:28:51Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 344,
+    "title": "[deep-review] C4: Updatum auto-update path has no visible Authenticode verification",
+    "labels": [
+      {
+        "name": "security"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:29:36Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 345,
+    "title": "[deep-review] C5: openclaw://agent?message=\u2026 deep link sends chat.send with no UI confirmation",
+    "labels": [
+      {
+        "name": "security"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:30:16Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 346,
+    "title": "[deep-review] C6: Deep-link named pipe has no PipeSecurity / PipeOptions.CurrentUserOnly",
+    "labels": [
+      {
+        "name": "security"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:30:57Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 347,
+    "title": "[deep-review] C7: system.execApprovals.set validator accepts arbitrary file-path Allow rules",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "security"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-05-13T23:32:48Z",
+    "closed_at": "2026-05-14T20:09:27Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 348,
+    "title": "[deep-review] C8: app.settings.set over MCP accepts arbitrary keys without validation",
+    "labels": [
+      {
+        "name": "security"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:33:23Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 349,
+    "title": "[deep-review] C9: Plain ws:// gateway URLs are accepted with no TLS warning",
+    "labels": [
+      {
+        "name": "security"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:33:37Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 350,
+    "title": "[deep-review] C10: v3\u2192v2 signature fallback is sticky-permanent (downgrade attack)",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:34:09Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 351,
+    "title": "[deep-review] C11: Four MCP tools advertised but undescribed in tools/list",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:34:19Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 353,
+    "title": "[deep-review] C12: RecordingConsentDialog is a WindowEx, not a ContentDialog \u2014 fails assistive tech",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:59:41Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 354,
+    "title": "[deep-review] A1: App.xaml.cs (4617 lines) has accidentally become the gateway data store",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-13T23:59:59Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 355,
+    "title": "[deep-review] A2: MCP tools/list ships permissive inputSchema for every tool",
+    "labels": [
+      {
+        "name": "security"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:00:31Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 356,
+    "title": "[deep-review] A3: ComponentRendererRegistry ctor is internal \u2014 no 3rd-party A2UI renderers",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:00:53Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 357,
+    "title": "[deep-review] A4: CancellationToken contract exists on INodeCapability but WindowsNodeClient never passes one",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:01:25Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 358,
+    "title": "[deep-review] A5: Eight overlapping JSON-pull helpers across the codebase (+ 527 inline TryGetProperty walks)",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:01:40Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 359,
+    "title": "[deep-review] A6: Operator tray UI has 46 AutomationId test hooks but only 3 AutomationProperties.Name",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:02:16Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 360,
+    "title": "[deep-review] A7: RTL and HighContrast support entirely absent (FlowDirection and HighContrast appear 0 times)",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:02:39Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 361,
+    "title": "[deep-review] A8: MCP server has no initialize instructions, empty resources/prompts lists \u2014 skill.md is invisible to MCP clients",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:03:07Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 362,
+    "title": "[deep-review] A9: Build hygiene gaps \u2014 no analyzers on Tray/Shared, no dotnet format, no Debug.Assert, 12 ThrowIfNull sites",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:03:20Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 363,
+    "title": "[deep-review] A10: WindowsNodeClient single-threaded receive loop has no back-pressure (head-of-line blocking)",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:03:59Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 364,
+    "title": "[deep-review][duplication] D1: CopyTextToClipboard duplicated across 17 sites",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:04:08Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 365,
+    "title": "[deep-review][duplication] D2: 106 empty try/catch blocks across 41 files (AI-slop pattern)",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:04:48Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 366,
+    "title": "[deep-review][duplication] D3: V1 and V2 exec-wrapper detectors have diverged on shell vocabulary and flag handling",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-05-14T00:05:02Z",
+    "closed_at": "2026-05-14T20:06:08Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 367,
+    "title": "[deep-review][duplication] D4: _useV2Signature fallback state machine duplicated across operator and node clients",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:05:42Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 368,
+    "title": "[deep-review][duplication] D5: Models.cs (1972 lines) contains ~700 lines of non-DTO helper classes",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:06:05Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 369,
+    "title": "[deep-review][duplication] D6: DeepLinkActions and AppCapability are the same delegate-per-verb pattern open-coded twice",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:06:52Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 370,
+    "title": "[deep-review][duplication] D7: Per-file JsonSerializerOptions singletons with drifted defaults",
+    "labels": [
+      {
+        "name": "refactor"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:07:04Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 371,
+    "title": "[deep-review][duplication] D8: Loopback host check duplicated in 3 places with subtly different rules",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:07:46Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 372,
+    "title": "[deep-review] Tracking: 26 issues from senior-engineer multi-axis architecture review",
+    "labels": [
+      {
+        "name": "needs triage"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T00:08:12Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "codemonkeychris"
+    }
+  },
+  {
+    "number": 374,
+    "title": "[aw] Repo Assist failed",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-14T01:25:14Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  }
+]
