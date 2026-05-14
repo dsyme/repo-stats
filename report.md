@@ -1,4 +1,4 @@
-# DRAFT: The Impact of Automated Repository Maintenance Assistance
+# The Impact of Automated Repository Maintenance Assistance
 
 **Date:** May 14, 2026
 
