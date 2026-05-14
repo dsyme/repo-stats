@@ -574,7 +574,7 @@ def generate_bottleneck_graphs(all_results, output_dir):
         text=labels,
         textposition="top right",
         textfont=dict(size=11),
-        marker=dict(size=16, color=colors, line=dict(width=1, color="black")),
+        marker=dict(size=16, color=colors, line=dict(width=1, color=COLORS["dark"])),
         showlegend=False,
     ))
     fig.add_vline(x=50, line_dash="dash", line_color=COLORS["accent"], opacity=0.4)

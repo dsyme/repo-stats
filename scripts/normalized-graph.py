@@ -158,7 +158,7 @@ def generate_graph(all_timelines, output_path, bottleneck_data=None):
 
     # 100% reference line
     fig.add_hline(
-        y=100, line_dash="dot", line_color="gray", line_width=1, opacity=0.5,
+        y=100, line_dash="dot", line_color=COLORS["sand"], line_width=1, opacity=0.5,
     )
 
     fig.update_layout(

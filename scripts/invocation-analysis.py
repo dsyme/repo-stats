@@ -290,7 +290,7 @@ def generate_invocation_graphs(all_results, output_dir):
                 x=pts["x"], y=pts["y"], text=pts["text"],
                 mode="markers+text", name=status,
                 marker=dict(color=color, size=16,
-                            line=dict(color="black", width=0.5)),
+                            line=dict(color=COLORS["dark"], width=0.5)),
                 textposition="top right", textfont=dict(size=10),
             ))
 

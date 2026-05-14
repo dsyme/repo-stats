@@ -24,7 +24,7 @@ from datetime import datetime, timedelta, timezone
 
 import plotly.graph_objects as go
 
-from chart_theme import make_figure, save_figure, add_adoption_line, COLORS, PALETTE
+from chart_theme import make_figure, save_figure, add_adoption_line, COLORS, PALETTE, color_with_alpha
 
 
 def parse_dt(s):
@@ -111,7 +111,7 @@ def graph_open_issues(issues, cutoff, output_path, repo_name="", adoption_date=N
         x=dates, y=counts,
         fill="tozeroy",
         line=dict(width=1.5, color=COLORS["primary"]),
-        fillcolor="rgba(21, 101, 192, 0.3)",
+        fillcolor=color_with_alpha(COLORS["primary"], 0.3),
         name="Open Issues",
     ))
     fig.update_xaxes(title_text="Date")

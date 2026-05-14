@@ -28,7 +28,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
 import numpy as np
-from chart_theme import make_figure, save_figure, COLORS, PALETTE
+from chart_theme import make_figure, save_figure, COLORS, PALETTE, color_with_alpha
 
 
 def parse_dt(s):
@@ -324,7 +324,7 @@ def generate_comparative_graphs(all_metrics, output_dir):
         textfont=dict(size=10, color=COLORS["primary"]),
     ))
     fig.update_layout(yaxis_title="Net Change in Open Issues")
-    fig.add_hline(y=0, line_width=1, line_color="black")
+    fig.add_hline(y=0, line_width=1, line_color=COLORS["dark"])
     save_figure(fig, os.path.join(output_dir, "comparative-net-change.png"))
 
 
