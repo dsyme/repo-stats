@@ -210,13 +210,13 @@ def add_adoption_line(fig, adoption_date, label="repo-assist"):
         type="line",
         x0=adoption_date, x1=adoption_date,
         y0=0, y1=1, yref="paper",
-        line=dict(color=COLORS["secondary"], width=2, dash="dash"),
+        line=dict(color=COLORS["danger"], width=2, dash="dash"),
     )
     fig.add_annotation(
         x=adoption_date, y=1, yref="paper",
         text=f" {label}",
         showarrow=False,
-        font=dict(size=11, color=COLORS["secondary"], family="Inter, sans-serif"),
+        font=dict(size=11, color=COLORS["danger"], family="Inter, sans-serif"),
         xanchor="left", yanchor="top",
     )
     return fig
