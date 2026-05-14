@@ -187,6 +187,10 @@ def main():
     for rd in repo_dirs:
         tl = compute_open_issues_timeline(rd, day_range=(-90, 90))
         if tl:
+            # Skip repos with very small adoption backlogs where normalization is misleading
+            if tl['open_at_adoption'] < 10:
+                print(f"  {tl['repo']}: {tl['open_at_adoption']} open at adoption (skipped — too small for normalization)")
+                continue
             all_timelines.append(tl)
             print(f"  {tl['repo']}: {tl['open_at_adoption']} open at adoption, "
                   f"now {tl['normalized'][-1]:.0f}%")

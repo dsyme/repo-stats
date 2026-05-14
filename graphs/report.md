@@ -1,6 +1,6 @@
 # Repo-Assist Impact Analysis
 
-**Generated**: 2026-05-14 20:47 UTC
+**Generated**: 2026-05-14 22:04 UTC
 **Period**: Last 6 months
 **Repositories analyzed**: 15
 **With repo-assist**: 15
@@ -38,11 +38,11 @@ For repositories with repo-assist, comparing equal-length periods before and aft
 | dotnet/fsharp | 2026-03-16 | 59 | 8.78 | 14.95 | +6.17 | 17.32 | 24.32 | +7.00 | 1226 | 91 (7.4%) |
 | fslaborg/Deedle | 2026-03-08 | 66 | 0.11 | 15.27 | +15.17 | 0.11 | 10.71 | +10.61 | 108 | 106 (98.1%) |
 | fslaborg/FSharp.Stats | 2026-03-23 | 52 | 0.13 | 1.48 | +1.35 | 0.13 | 0.27 | +0.13 | 61 | 4 (6.6%) |
-| fsprojects/FSharp.Control.AsyncSeq | 2026-02-20 | 82 | 0.60 | 3.16 | +2.56 | 0.34 | 5.63 | +5.29 | 14 | 14 (100.0%) |
+| fsprojects/FSharp.Control.AsyncSeq | 2026-02-20 | 83 | 0.59 | 3.12 | +2.53 | 0.34 | 5.57 | +5.23 | 14 | 14 (100.0%) |
 | fsprojects/FSharp.Control.TaskSeq | 2026-03-07 | 68 | 0.10 | 4.63 | +4.53 | 0.10 | 7.93 | +7.82 | 18 | 14 (77.8%) |
 | fsprojects/FSharp.Data | 2026-02-21 | 82 | 0.00 | 17.67 | +17.67 | 0.26 | 8.71 | +8.45 | 155 | 155 (100.0%) |
 | fsprojects/FSharp.Formatting | 2026-02-22 | 81 | 0.00 | 11.06 | +11.06 | 0.09 | 11.15 | +11.06 | 86 | 77 (89.5%) |
-| fsprojects/FSharp.TypeProviders.SDK | 2026-02-24 | 78 | 0.00 | 6.19 | +6.19 | 0.09 | 4.22 | +4.13 | 32 | 28 (87.5%) |
+| fsprojects/FSharp.TypeProviders.SDK | 2026-02-24 | 79 | 0.00 | 6.11 | +6.11 | 0.09 | 4.16 | +4.08 | 32 | 28 (87.5%) |
 | fsprojects/SwaggerProvider | 2026-03-08 | 66 | 0.42 | 5.83 | +5.41 | 1.06 | 9.86 | +8.80 | 32 | 31 (96.9%) |
 | fsprojects/fantomas | 2026-02-23 | 80 | 0.35 | 7.70 | +7.35 | 0.61 | 5.60 | +4.99 | 121 | 49 (40.5%) |
 | informedica/GenPRES | 2026-02-28 | 75 | 0.00 | 4.57 | +4.57 | 2.71 | 17.17 | +14.47 | 21 | 21 (100.0%) |

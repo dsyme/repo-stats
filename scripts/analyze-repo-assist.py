@@ -251,11 +251,16 @@ def generate_comparative_graphs(all_metrics, output_dir):
     save_figure(fig, os.path.join(output_dir, "comparative-open-issues.png"))
 
     # 2. Backlog addressed ratio
-    backlog_pct = [m["backlog_ratio"] * 100 for m in all_metrics]
-    text_labels = [f'{m["backlog_addressed"]}/{m["open_6mo_ago"]}' for m in all_metrics]
+    # Exclude repos with very small adoption backlogs (e.g. openclaw had only 3 issues at adoption)
+    # whose backlog ratio is misleading
+    ba_metrics = [m for m in all_metrics if m["open_6mo_ago"] >= 10]
+    ba_repos = [m["repo"].split("/")[1] if "/" in m["repo"] else m["repo"] for m in ba_metrics]
+    ba_colors = [COLORS["primary"] if m["has_repo_assist"] else COLORS["muted"] for m in ba_metrics]
+    backlog_pct = [m["backlog_ratio"] * 100 for m in ba_metrics]
+    text_labels = [f'{m["backlog_addressed"]}/{m["open_6mo_ago"]}' for m in ba_metrics]
     fig = make_figure("Backlog Addressed (Quality Metric)" + subtitle)
     fig.add_trace(go.Bar(
-        x=repos, y=backlog_pct, marker_color=colors,
+        x=ba_repos, y=backlog_pct, marker_color=ba_colors,
         text=text_labels, textposition="outside", textfont=dict(size=10),
     ))
     fig.update_layout(

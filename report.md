@@ -32,6 +32,8 @@ Full per-repository backlog clearance data is available in [Appendix B](#appendi
 
 ![Backlog Addressed](graphs/comparative-backlog-addressed.png)
 
+*Note: openclaw/openclaw-windows-node is excluded from the backlog charts above. It had only 3 open issues at adoption — too few for meaningful normalization — and its open issue count has since grown to 38 as rapid new issue creation (4.73/week) outpaced closure in this early-stage, actively growing project. Its adoption-era backlog was fully addressed (100%), but the net increase in open issues reflects growth, not a backlog problem. See the [per-repository detail](#openclawopenclaw-windows-node) for full analysis.*
+
 ## Measuring the Impact on Velocity: Dormant to Active
 
 In software engineering, *velocity* measures the rate at which a team completes work — here, the number of issues closed per week and PRs merged per week. Velocity is a key indicator of a project's activity: a dormant project has near-zero velocity, while an active one shows sustained throughput.
