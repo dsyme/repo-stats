@@ -8,10 +8,9 @@ import json
 import os
 import sys
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import numpy as np
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from chart_theme import make_figure, save_figure, COLORS, PALETTE, BEFORE_COLOR, AFTER_COLOR, AFTER_COLOR_ALT, get_theme
 
 
 def main():
@@ -39,68 +38,100 @@ def main():
     repos.sort(key=lambda r: r["after_issues"] - r["before_issues"], reverse=True)
 
     n = len(repos)
-    y = np.arange(n)
-
-    # === Graph: Horizontal dumbbell chart — before/after velocity ===
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8), sharey=True)
-
     names = [r["name"] for r in repos]
 
-    # Issue closure velocity
     before_i = [r["before_issues"] for r in repos]
     after_i = [r["after_issues"] for r in repos]
-
-    for i in range(n):
-        ax1.plot([before_i[i], after_i[i]], [y[i], y[i]], color="#BDBDBD", linewidth=2, zorder=1)
-        ax1.annotate("", xy=(after_i[i], y[i]), xytext=(before_i[i], y[i]),
-                     arrowprops=dict(arrowstyle="->", color="#1565C0", lw=2), zorder=2)
-    ax1.scatter(before_i, y, color="#FFAB91", s=80, zorder=3, label="Before adoption")
-    ax1.scatter(after_i, y, color="#1565C0", s=80, zorder=3, label="After adoption")
-
-    # Add multiplier labels
-    for i in range(n):
-        if before_i[i] > 0:
-            mult = after_i[i] / before_i[i]
-            ax1.text(after_i[i] + 0.3, y[i], f"{mult:.0f}×", va="center", fontsize=8, color="#1565C0")
-        else:
-            ax1.text(after_i[i] + 0.3, y[i], "∞", va="center", fontsize=8, color="#1565C0")
-
-    ax1.set_yticks(y)
-    ax1.set_yticklabels(names)
-    ax1.set_xlabel("Issues Closed per Week")
-    ax1.set_title("Issue Closure Velocity")
-    ax1.legend(loc="lower right", fontsize=9)
-    ax1.grid(True, alpha=0.3, axis="x")
-    ax1.invert_yaxis()
-
-    # PR merge velocity
     before_p = [r["before_prs"] for r in repos]
     after_p = [r["after_prs"] for r in repos]
 
+    fig = make_subplots(
+        rows=1, cols=2,
+        shared_yaxes=True,
+        subplot_titles=("Issue Closure Velocity", "PR Merge Velocity"),
+        horizontal_spacing=0.08,
+    )
+
+    # --- Left subplot: Issue Closure Velocity ---
     for i in range(n):
-        ax2.plot([before_p[i], after_p[i]], [y[i], y[i]], color="#BDBDBD", linewidth=2, zorder=1)
-        ax2.annotate("", xy=(after_p[i], y[i]), xytext=(before_p[i], y[i]),
-                     arrowprops=dict(arrowstyle="->", color="#2E7D32", lw=2), zorder=2)
-    ax2.scatter(before_p, y, color="#FFAB91", s=80, zorder=3, label="Before adoption")
-    ax2.scatter(after_p, y, color="#2E7D32", s=80, zorder=3, label="After adoption")
+        fig.add_trace(go.Scatter(
+            x=[before_i[i], after_i[i]], y=[names[i], names[i]],
+            mode="lines", line=dict(color=COLORS["muted"], width=2),
+            showlegend=False,
+        ), row=1, col=1)
+
+    fig.add_trace(go.Scatter(
+        x=before_i, y=names, mode="markers",
+        marker=dict(color=BEFORE_COLOR, size=12),
+        name="Before adoption",
+    ), row=1, col=1)
+
+    fig.add_trace(go.Scatter(
+        x=after_i, y=names, mode="markers",
+        marker=dict(color=AFTER_COLOR, size=12),
+        name="After adoption",
+    ), row=1, col=1)
 
     for i in range(n):
-        if before_p[i] > 0:
-            mult = after_p[i] / before_p[i]
-            ax2.text(after_p[i] + 0.3, y[i], f"{mult:.0f}×", va="center", fontsize=8, color="#2E7D32")
-        else:
-            ax2.text(after_p[i] + 0.3, y[i], "∞", va="center", fontsize=8, color="#2E7D32")
+        mult = f"{after_i[i] / before_i[i]:.0f}×" if before_i[i] > 0 else "∞"
+        fig.add_annotation(
+            x=after_i[i], y=names[i], text=mult,
+            xanchor="left", xshift=8,
+            font=dict(size=11, color=AFTER_COLOR),
+            showarrow=False, row=1, col=1,
+        )
 
-    ax2.set_xlabel("PRs Merged per Week")
-    ax2.set_title("PR Merge Velocity")
-    ax2.legend(loc="lower right", fontsize=9)
-    ax2.grid(True, alpha=0.3, axis="x")
+    # --- Right subplot: PR Merge Velocity ---
+    for i in range(n):
+        fig.add_trace(go.Scatter(
+            x=[before_p[i], after_p[i]], y=[names[i], names[i]],
+            mode="lines", line=dict(color=COLORS["muted"], width=2),
+            showlegend=False,
+        ), row=1, col=2)
 
-    fig.suptitle("Velocity Before and After Repo-Assist Adoption", fontsize=14, fontweight="bold")
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "velocity-before-after.png"), dpi=150)
-    plt.close(fig)
-    print(f"Saved {os.path.join(output_dir, 'velocity-before-after.png')}")
+    fig.add_trace(go.Scatter(
+        x=before_p, y=names, mode="markers",
+        marker=dict(color=BEFORE_COLOR, size=12),
+        name="Before adoption", showlegend=False,
+    ), row=1, col=2)
+
+    fig.add_trace(go.Scatter(
+        x=after_p, y=names, mode="markers",
+        marker=dict(color=AFTER_COLOR_ALT, size=12),
+        name="After adoption (PRs)", showlegend=False,
+    ), row=1, col=2)
+
+    for i in range(n):
+        mult = f"{after_p[i] / before_p[i]:.0f}×" if before_p[i] > 0 else "∞"
+        fig.add_annotation(
+            x=after_p[i], y=names[i], text=mult,
+            xanchor="left", xshift=8,
+            font=dict(size=11, color=AFTER_COLOR_ALT),
+            showarrow=False, row=1, col=2,
+        )
+
+    # Layout
+    theme = get_theme()
+    fig.update_layout(
+        title_text="Velocity Before and After Repo-Assist Adoption",
+        title_font=dict(size=16),
+        title_x=0.5,
+        width=1200, height=max(500, n * 50 + 200),
+        paper_bgcolor=theme.get("paper_bgcolor", "#FFFFFF"),
+        plot_bgcolor=theme.get("plot_bgcolor", "#FAFAFA"),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=-0.15,
+            xanchor="center", x=0.5,
+        ),
+    )
+    fig.update_xaxes(title_text="Issues Closed per Week", row=1, col=1,
+                     gridcolor=theme.get("xaxis", {}).get("gridcolor", "#E0E0E0"))
+    fig.update_xaxes(title_text="PRs Merged per Week", row=1, col=2,
+                     gridcolor=theme.get("xaxis", {}).get("gridcolor", "#E0E0E0"))
+    fig.update_yaxes(autorange="reversed", row=1, col=1)
+
+    output_path = os.path.join(output_dir, "velocity-before-after.png")
+    save_figure(fig, output_path)
 
 
 if __name__ == "__main__":

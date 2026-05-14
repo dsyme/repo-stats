@@ -27,12 +27,8 @@ import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import matplotlib.ticker as mticker
 import numpy as np
+from chart_theme import make_figure, save_figure, COLORS, PALETTE
 
 
 def parse_dt(s):
@@ -45,31 +41,6 @@ def parse_dt(s):
 def load_json(path):
     with open(path, "r") as f:
         return json.load(f)
-
-
-def is_bot_issue(issue):
-    """Return True if the issue is a bot-created infrastructure artifact that should be excluded.
-    
-    Excludes: monthly reports, failure reports, no-op/detection run reports,
-    protected file notifications, and issues created when the bot couldn't create a PR.
-    """
-    return issue.get("user", {}).get("login") == "github-actions[bot]"
-
-
-def filter_issues(issues):
-    """Filter out bot-created infrastructure issues."""
-    return [i for i in issues if not is_bot_issue(i)]
-
-
-def classify_issue_source(issue):
-    """Classify whether an issue is intra-factory (maintainer) or extra-factory (external).
-    
-    Returns 'intra' for MEMBER/COLLABORATOR/OWNER, 'extra' for CONTRIBUTOR/NONE.
-    """
-    assoc = issue.get("author_association", "NONE")
-    if assoc in ("MEMBER", "COLLABORATOR", "OWNER"):
-        return "intra"
-    return "extra"
 
 
 def detect_repo_assist(data_dir):
@@ -113,7 +84,7 @@ def detect_repo_assist(data_dir):
 
 def compute_metrics(data_dir, months=6):
     """Compute velocity and quality metrics for a repo."""
-    issues = filter_issues(load_json(os.path.join(data_dir, "issues.json")))
+    issues = load_json(os.path.join(data_dir, "issues.json"))
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
     meta = load_json(os.path.join(data_dir, "metadata.json"))
 
@@ -229,36 +200,6 @@ def compute_metrics(data_dir, months=6):
             "adoption_backlog_ratio": adoption_backlog_addressed / open_at_adoption if open_at_adoption > 0 else 0,
         }
 
-        # --- Incoming rate analysis (intra vs extra-factory) ---
-        before_incoming_intra = 0
-        before_incoming_extra = 0
-        after_incoming_intra = 0
-        after_incoming_extra = 0
-
-        for issue in issues:
-            created = parse_dt(issue["created_at"])
-            if created:
-                source = classify_issue_source(issue)
-                if before_start <= created < adoption:
-                    if source == "intra":
-                        before_incoming_intra += 1
-                    else:
-                        before_incoming_extra += 1
-                elif adoption <= created <= now:
-                    if source == "intra":
-                        after_incoming_intra += 1
-                    else:
-                        after_incoming_extra += 1
-
-        before_after["before_incoming_intra"] = before_incoming_intra
-        before_after["before_incoming_extra"] = before_incoming_extra
-        before_after["after_incoming_intra"] = after_incoming_intra
-        before_after["after_incoming_extra"] = after_incoming_extra
-        before_after["before_incoming_intra_per_week"] = before_incoming_intra / before_weeks
-        before_after["before_incoming_extra_per_week"] = before_incoming_extra / before_weeks
-        before_after["after_incoming_intra_per_week"] = after_incoming_intra / after_weeks
-        before_after["after_incoming_extra_per_week"] = after_incoming_extra / after_weeks
-
     # Repo-assist specific PRs merged
     ra_prs_merged = sum(1 for p in ra_info["ra_prs"]
                         if parse_dt(p.get("merged_at")) is not None)
@@ -286,120 +227,105 @@ def compute_metrics(data_dir, months=6):
 
 def generate_comparative_graphs(all_metrics, output_dir):
     """Generate comparative bar charts across all repos."""
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+
     repos = [m["repo"].split("/")[1] if "/" in m["repo"] else m["repo"] for m in all_metrics]
     has_ra = [m["has_repo_assist"] for m in all_metrics]
-    colors = ["#2196F3" if ra else "#9E9E9E" for ra in has_ra]
+    colors = [COLORS["primary"] if ra else COLORS["muted"] for ra in has_ra]
+
+    subtitle = "<br><sub>(Blue = has repo-assist, Grey = no repo-assist)</sub>"
 
     # 1. Open issues: 6 months ago vs now
-    fig, ax = plt.subplots(figsize=(14, 6))
-    x = np.arange(len(repos))
-    w = 0.35
-    bars1 = ax.bar(x - w/2, [m["open_6mo_ago"] for m in all_metrics], w, label="6 months ago", color="#FFAB91")
-    bars2 = ax.bar(x + w/2, [m["open_now"] for m in all_metrics], w, label="Now", color=[c for c in colors])
-    ax.set_xlabel("Repository")
-    ax.set_ylabel("Open Issues")
-    ax.set_title("Open Issues: 6 Months Ago vs Now\n(Blue = has repo-assist, Grey = no repo-assist)")
-    ax.set_xticks(x)
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.legend()
-    ax.grid(True, alpha=0.3, axis="y")
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "comparative-open-issues.png"), dpi=150)
-    plt.close(fig)
+    fig = make_figure("Open Issues: 6 Months Ago vs Now" + subtitle)
+    fig.add_trace(go.Bar(
+        x=repos, y=[m["open_6mo_ago"] for m in all_metrics],
+        name="6 months ago", marker_color=COLORS["sand"],
+    ))
+    fig.add_trace(go.Bar(
+        x=repos, y=[m["open_now"] for m in all_metrics],
+        name="Now", marker_color=colors,
+    ))
+    fig.update_layout(barmode="group", xaxis_title="Repository", yaxis_title="Open Issues")
+    save_figure(fig, os.path.join(output_dir, "comparative-open-issues.png"))
 
     # 2. Backlog addressed ratio
-    fig, ax = plt.subplots(figsize=(14, 6))
-    bars = ax.bar(repos, [m["backlog_ratio"] * 100 for m in all_metrics], color=colors)
-    ax.set_ylabel("% of 6-month-ago backlog addressed")
-    ax.set_title("Backlog Addressed (Quality Metric)\n(Blue = has repo-assist, Grey = no repo-assist)")
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.grid(True, alpha=0.3, axis="y")
-    ax.yaxis.set_major_formatter(mticker.PercentFormatter())
-    for bar, m in zip(bars, all_metrics):
-        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
-                f'{m["backlog_addressed"]}/{m["open_6mo_ago"]}',
-                ha="center", va="bottom", fontsize=8)
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "comparative-backlog-addressed.png"), dpi=150)
-    plt.close(fig)
+    backlog_pct = [m["backlog_ratio"] * 100 for m in all_metrics]
+    text_labels = [f'{m["backlog_addressed"]}/{m["open_6mo_ago"]}' for m in all_metrics]
+    fig = make_figure("Backlog Addressed (Quality Metric)" + subtitle)
+    fig.add_trace(go.Bar(
+        x=repos, y=backlog_pct, marker_color=colors,
+        text=text_labels, textposition="outside", textfont=dict(size=10),
+    ))
+    fig.update_layout(
+        yaxis_title="% of 6-month-ago backlog addressed",
+        yaxis_ticksuffix="%",
+    )
+    save_figure(fig, os.path.join(output_dir, "comparative-backlog-addressed.png"))
 
     # 3. Issues closed per week (velocity)
-    fig, ax = plt.subplots(figsize=(14, 6))
-    ax.bar(repos, [m["issues_closed_per_week"] for m in all_metrics], color=colors)
-    ax.set_ylabel("Issues Closed per Week")
-    ax.set_title("Issue Closure Velocity\n(Blue = has repo-assist, Grey = no repo-assist)")
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.grid(True, alpha=0.3, axis="y")
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "comparative-issue-velocity.png"), dpi=150)
-    plt.close(fig)
+    fig = make_figure("Issue Closure Velocity" + subtitle)
+    fig.add_trace(go.Bar(
+        x=repos, y=[m["issues_closed_per_week"] for m in all_metrics],
+        marker_color=colors,
+    ))
+    fig.update_layout(yaxis_title="Issues Closed per Week")
+    save_figure(fig, os.path.join(output_dir, "comparative-issue-velocity.png"))
 
     # 4. PRs merged per week
-    fig, ax = plt.subplots(figsize=(14, 6))
-    ax.bar(repos, [m["prs_merged_per_week"] for m in all_metrics], color=colors)
-    ax.set_ylabel("PRs Merged per Week")
-    ax.set_title("PR Merge Velocity\n(Blue = has repo-assist, Grey = no repo-assist)")
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.grid(True, alpha=0.3, axis="y")
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "comparative-pr-velocity.png"), dpi=150)
-    plt.close(fig)
+    fig = make_figure("PR Merge Velocity" + subtitle)
+    fig.add_trace(go.Bar(
+        x=repos, y=[m["prs_merged_per_week"] for m in all_metrics],
+        marker_color=colors,
+    ))
+    fig.update_layout(yaxis_title="PRs Merged per Week")
+    save_figure(fig, os.path.join(output_dir, "comparative-pr-velocity.png"))
 
     # 5. Before/after adoption (for repos that have it)
     ra_metrics = [m for m in all_metrics if m["before_after"]]
     if ra_metrics:
-        fig, axes = plt.subplots(1, 2, figsize=(14, 6))
         ra_repos = [m["repo"].split("/")[1] for m in ra_metrics]
-        x = np.arange(len(ra_repos))
-        w = 0.35
 
-        # Issues closed per week: before vs after
-        ax = axes[0]
-        before_vals = [m["before_after"]["before_issues_closed_per_week"] for m in ra_metrics]
-        after_vals = [m["before_after"]["after_issues_closed_per_week"] for m in ra_metrics]
-        ax.bar(x - w/2, before_vals, w, label="Before repo-assist", color="#FFAB91")
-        ax.bar(x + w/2, after_vals, w, label="After repo-assist", color="#2196F3")
-        ax.set_ylabel("Issues Closed / Week")
-        ax.set_title("Issue Closure: Before vs After")
-        ax.set_xticks(x)
-        ax.set_xticklabels(ra_repos, rotation=45, ha="right")
-        ax.legend()
-        ax.grid(True, alpha=0.3, axis="y")
+        fig = make_subplots(rows=1, cols=2, subplot_titles=[
+            "Issue Closure: Before vs After",
+            "PR Merge Rate: Before vs After",
+        ])
 
-        # PRs merged per week: before vs after
-        ax = axes[1]
-        before_vals = [m["before_after"]["before_prs_merged_per_week"] for m in ra_metrics]
-        after_vals = [m["before_after"]["after_prs_merged_per_week"] for m in ra_metrics]
-        ax.bar(x - w/2, before_vals, w, label="Before repo-assist", color="#FFAB91")
-        ax.bar(x + w/2, after_vals, w, label="After repo-assist", color="#2196F3")
-        ax.set_ylabel("PRs Merged / Week")
-        ax.set_title("PR Merge Rate: Before vs After")
-        ax.set_xticks(x)
-        ax.set_xticklabels(ra_repos, rotation=45, ha="right")
-        ax.legend()
-        ax.grid(True, alpha=0.3, axis="y")
+        before_issue = [m["before_after"]["before_issues_closed_per_week"] for m in ra_metrics]
+        after_issue = [m["before_after"]["after_issues_closed_per_week"] for m in ra_metrics]
+        fig.add_trace(go.Bar(x=ra_repos, y=before_issue, name="Before repo-assist",
+                             marker_color=COLORS["sand"]), row=1, col=1)
+        fig.add_trace(go.Bar(x=ra_repos, y=after_issue, name="After repo-assist",
+                             marker_color=COLORS["primary"]), row=1, col=1)
 
-        fig.tight_layout()
-        fig.savefig(os.path.join(output_dir, "comparative-before-after.png"), dpi=150)
-        plt.close(fig)
+        before_pr = [m["before_after"]["before_prs_merged_per_week"] for m in ra_metrics]
+        after_pr = [m["before_after"]["after_prs_merged_per_week"] for m in ra_metrics]
+        fig.add_trace(go.Bar(x=ra_repos, y=before_pr, name="Before repo-assist",
+                             marker_color=COLORS["sand"], showlegend=False), row=1, col=2)
+        fig.add_trace(go.Bar(x=ra_repos, y=after_pr, name="After repo-assist",
+                             marker_color=COLORS["primary"], showlegend=False), row=1, col=2)
+
+        from chart_theme import get_theme
+        fig.update_layout(**get_theme(), barmode="group", width=1200, height=600,
+                          yaxis_title="Issues Closed / Week", yaxis2_title="PRs Merged / Week")
+        save_figure(fig, os.path.join(output_dir, "comparative-before-after.png"))
 
     # 6. Net change in open issues
-    fig, ax = plt.subplots(figsize=(14, 6))
     net = [m["net_change"] for m in all_metrics]
-    bar_colors = ["#4CAF50" if n < 0 else "#F44336" for n in net]
-    ax.bar(repos, net, color=bar_colors)
-    ax.set_ylabel("Net Change in Open Issues")
-    ax.set_title("Net Change in Open Issues (Last 6 Months)\n(Green = reduced backlog, Red = growing backlog)")
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.axhline(y=0, color="black", linewidth=0.5)
-    ax.grid(True, alpha=0.3, axis="y")
-    for i, (r, n) in enumerate(zip(repos, net)):
-        label = "RA" if has_ra[i] else ""
-        if label:
-            ax.text(i, n + (1 if n >= 0 else -2), label, ha="center", fontsize=8, color="#2196F3", fontweight="bold")
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "comparative-net-change.png"), dpi=150)
-    plt.close(fig)
+    bar_colors = [COLORS["secondary"] if n < 0 else COLORS["danger"] for n in net]
+    annotations = ["RA" if has_ra[i] else "" for i in range(len(repos))]
+    fig = make_figure(
+        "Net Change in Open Issues (Last 6 Months)"
+        "<br><sub>(Green = reduced backlog, Red = growing backlog)</sub>"
+    )
+    fig.add_trace(go.Bar(
+        x=repos, y=net, marker_color=bar_colors,
+        text=annotations, textposition="outside",
+        textfont=dict(size=10, color=COLORS["primary"]),
+    ))
+    fig.update_layout(yaxis_title="Net Change in Open Issues")
+    fig.add_hline(y=0, line_width=1, line_color="black")
+    save_figure(fig, os.path.join(output_dir, "comparative-net-change.png"))
 
 
 def generate_report(all_metrics, output_dir):
