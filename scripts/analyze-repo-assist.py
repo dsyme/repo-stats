@@ -234,7 +234,7 @@ def generate_comparative_graphs(all_metrics, output_dir):
     has_ra = [m["has_repo_assist"] for m in all_metrics]
     colors = [COLORS["primary"] if ra else COLORS["muted"] for ra in has_ra]
 
-    subtitle = "<br><sub>(Blue = has repo-assist, Grey = no repo-assist)</sub>"
+    subtitle = "<br><sub>(Dark Cyan = has repo-assist, Light Teal = no repo-assist)</sub>"
 
     # 1. Open issues: 6 months ago vs now
     fig = make_figure("Open Issues: 6 Months Ago vs Now" + subtitle)
@@ -316,7 +316,7 @@ def generate_comparative_graphs(all_metrics, output_dir):
     annotations = ["RA" if has_ra[i] else "" for i in range(len(repos))]
     fig = make_figure(
         "Net Change in Open Issues (Last 6 Months)"
-        "<br><sub>(Green = reduced backlog, Red = growing backlog)</sub>"
+        "<br><sub>(Teal = reduced backlog, Dark Red = growing backlog)</sub>"
     )
     fig.add_trace(go.Bar(
         x=repos, y=net, marker_color=bar_colors,

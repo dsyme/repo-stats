@@ -475,7 +475,7 @@ def generate_bottleneck_graphs(all_results, output_dir):
     # === Graph 2: Throughput ratio with bottleneck status ===
     fig = make_figure(
         title="Pipeline Throughput Ratio: PR Merge Rate / PR Creation Rate<br>"
-              "<sup>(Red = BLOCKED, Green = FLOWING, Blue = IDLE)</sup>",
+              "<sup>(Dark Red = BLOCKED, Teal = FLOWING, Light Teal = IDLE)</sup>",
         width=1200, height=600,
     )
     fig.add_trace(go.Bar(
@@ -503,7 +503,7 @@ def generate_bottleneck_graphs(all_results, output_dir):
 
     fig = make_figure(
         title="Cycle Time: Merged PRs vs Still-Waiting PRs<br>"
-              "<sup>(Orange >> Green indicates review bottleneck)</sup>",
+              "<sup>(Amber >> Teal indicates review bottleneck)</sup>",
         width=1200, height=600,
     )
     fig.add_trace(go.Bar(
