@@ -49,6 +49,16 @@ def load_json(path):
         return json.load(f)
 
 
+def is_bot_issue(issue):
+    """Return True if the issue is a bot-created infrastructure artifact that should be excluded."""
+    return issue.get("user", {}).get("login") == "github-actions[bot]"
+
+
+def filter_issues(issues):
+    """Filter out bot-created infrastructure issues."""
+    return [i for i in issues if not is_bot_issue(i)]
+
+
 def detect_repo_assist_adoption(data_dir):
     """Detect repo-assist adoption date."""
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
@@ -78,7 +88,7 @@ def analyze_pipeline(data_dir):
     """Perform full pipeline bottleneck analysis for a single repo."""
     meta = load_json(os.path.join(data_dir, "metadata.json"))
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
-    issues = load_json(os.path.join(data_dir, "issues.json"))
+    issues = filter_issues(load_json(os.path.join(data_dir, "issues.json")))
     issues_raw = load_json(os.path.join(data_dir, "issues-raw.json"))
     events = load_json(os.path.join(data_dir, "issue-events.json"))
 
@@ -631,7 +641,7 @@ def main():
     repo_dirs = []
     for entry in sorted(os.listdir(data_dir)):
         full = os.path.join(data_dir, entry)
-        if os.path.isdir(full) and os.path.exists(os.path.join(full, "pulls.json")):
+        if os.path.isdir(full) and os.path.exists(os.path.join(full, "pulls.json")) and os.path.exists(os.path.join(full, "metadata.json")):
             repo_dirs.append(full)
 
     print(f"Found {len(repo_dirs)} repositories in {data_dir}")

@@ -47,6 +47,31 @@ def load_json(path):
         return json.load(f)
 
 
+def is_bot_issue(issue):
+    """Return True if the issue is a bot-created infrastructure artifact that should be excluded.
+    
+    Excludes: monthly reports, failure reports, no-op/detection run reports,
+    protected file notifications, and issues created when the bot couldn't create a PR.
+    """
+    return issue.get("user", {}).get("login") == "github-actions[bot]"
+
+
+def filter_issues(issues):
+    """Filter out bot-created infrastructure issues."""
+    return [i for i in issues if not is_bot_issue(i)]
+
+
+def classify_issue_source(issue):
+    """Classify whether an issue is intra-factory (maintainer) or extra-factory (external).
+    
+    Returns 'intra' for MEMBER/COLLABORATOR/OWNER, 'extra' for CONTRIBUTOR/NONE.
+    """
+    assoc = issue.get("author_association", "NONE")
+    if assoc in ("MEMBER", "COLLABORATOR", "OWNER"):
+        return "intra"
+    return "extra"
+
+
 def detect_repo_assist(data_dir):
     """Detect repo-assist activity and estimate adoption date."""
     pulls_path = os.path.join(data_dir, "pulls.json")
@@ -88,7 +113,7 @@ def detect_repo_assist(data_dir):
 
 def compute_metrics(data_dir, months=6):
     """Compute velocity and quality metrics for a repo."""
-    issues = load_json(os.path.join(data_dir, "issues.json"))
+    issues = filter_issues(load_json(os.path.join(data_dir, "issues.json")))
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
     meta = load_json(os.path.join(data_dir, "metadata.json"))
 
@@ -203,6 +228,36 @@ def compute_metrics(data_dir, months=6):
             "adoption_backlog_addressed": adoption_backlog_addressed,
             "adoption_backlog_ratio": adoption_backlog_addressed / open_at_adoption if open_at_adoption > 0 else 0,
         }
+
+        # --- Incoming rate analysis (intra vs extra-factory) ---
+        before_incoming_intra = 0
+        before_incoming_extra = 0
+        after_incoming_intra = 0
+        after_incoming_extra = 0
+
+        for issue in issues:
+            created = parse_dt(issue["created_at"])
+            if created:
+                source = classify_issue_source(issue)
+                if before_start <= created < adoption:
+                    if source == "intra":
+                        before_incoming_intra += 1
+                    else:
+                        before_incoming_extra += 1
+                elif adoption <= created <= now:
+                    if source == "intra":
+                        after_incoming_intra += 1
+                    else:
+                        after_incoming_extra += 1
+
+        before_after["before_incoming_intra"] = before_incoming_intra
+        before_after["before_incoming_extra"] = before_incoming_extra
+        before_after["after_incoming_intra"] = after_incoming_intra
+        before_after["after_incoming_extra"] = after_incoming_extra
+        before_after["before_incoming_intra_per_week"] = before_incoming_intra / before_weeks
+        before_after["before_incoming_extra_per_week"] = before_incoming_extra / before_weeks
+        before_after["after_incoming_intra_per_week"] = after_incoming_intra / after_weeks
+        before_after["after_incoming_extra_per_week"] = after_incoming_extra / after_weeks
 
     # Repo-assist specific PRs merged
     ra_prs_merged = sum(1 for p in ra_info["ra_prs"]

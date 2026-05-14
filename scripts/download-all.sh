@@ -17,6 +17,7 @@ REPOS=(
     "fslaborg/FSharp.Stats"
     "fsprojects/SwaggerProvider"
     "py-why/dowhy"
+    "informedica/GenPRES"
 )
 
 for REPO in "${REPOS[@]}"; do

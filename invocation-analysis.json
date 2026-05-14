@@ -1,29 +1,29 @@
 [
   {
     "repo": "dotnet/fsharp",
-    "total_runs": 1205,
-    "active_runs": 389,
-    "excluded_runs": 816,
+    "total_runs": 1215,
+    "active_runs": 391,
+    "excluded_runs": 824,
     "first_run": "2026-03-16",
-    "last_run": "2026-05-13",
+    "last_run": "2026-05-14",
     "total_days": 58,
-    "runs_per_day": 6.71,
-    "runs_per_week": 46.95,
+    "runs_per_day": 6.74,
+    "runs_per_week": 47.19,
     "trigger_counts": {
       "workflow_dispatch": 12,
-      "schedule": 281,
+      "schedule": 283,
       "pull_request": 37,
       "issue_comment": 41,
       "pull_request_review_comment": 2,
       "issues": 16
     },
-    "scheduled_runs": 281,
+    "scheduled_runs": 283,
     "repo_assist_runs": 96,
     "extra_runs": 12,
-    "repo_assist_ratio": 0.247,
+    "repo_assist_ratio": 0.246,
     "successes": 331,
-    "failures": 58,
-    "success_rate": 0.851
+    "failures": 60,
+    "success_rate": 0.847
   },
   {
     "repo": "fslaborg/Deedle",
@@ -247,6 +247,28 @@
     "successes": 111,
     "failures": 32,
     "success_rate": 0.776
+  },
+  {
+    "repo": "informedica/GenPRES",
+    "total_runs": 978,
+    "active_runs": 78,
+    "excluded_runs": 900,
+    "first_run": "2026-02-26",
+    "last_run": "2026-05-14",
+    "total_days": 76,
+    "runs_per_day": 1.03,
+    "runs_per_week": 7.18,
+    "trigger_counts": {
+      "workflow_dispatch": 1,
+      "schedule": 77
+    },
+    "scheduled_runs": 77,
+    "repo_assist_runs": 0,
+    "extra_runs": 1,
+    "repo_assist_ratio": 0.0,
+    "successes": 60,
+    "failures": 18,
+    "success_rate": 0.769
   },
   {
     "repo": "ionide/FsAutoComplete",

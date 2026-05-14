@@ -19,6 +19,7 @@ REPOS=(
     "fsprojects/SwaggerProvider"
     "py-why/dowhy"
     "fsprojects/fantomas"
+    "informedica/GenPRES"
 )
 
 for REPO in "${REPOS[@]}"; do

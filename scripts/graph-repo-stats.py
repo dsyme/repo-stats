@@ -42,6 +42,16 @@ def load_json(path):
         return json.load(f)
 
 
+def is_bot_issue(issue):
+    """Return True if the issue is a bot-created infrastructure artifact that should be excluded."""
+    return issue.get("user", {}).get("login") == "github-actions[bot]"
+
+
+def filter_issues(issues):
+    """Filter out bot-created infrastructure issues."""
+    return [i for i in issues if not is_bot_issue(i)]
+
+
 def add_adoption_line(ax, adoption_date):
     """Add a vertical line marking repo-assist adoption."""
     if adoption_date is None:
@@ -296,7 +306,7 @@ def main():
     issues_path = os.path.join(data_dir, "issues.json")
     pulls_path = os.path.join(data_dir, "pulls.json")
 
-    issues = load_json(issues_path) if os.path.exists(issues_path) else []
+    issues = filter_issues(load_json(issues_path)) if os.path.exists(issues_path) else []
     pulls = load_json(pulls_path) if os.path.exists(pulls_path) else []
 
     print(f"Loaded {len(issues)} issues, {len(pulls)} PRs")

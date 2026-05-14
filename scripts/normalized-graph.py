@@ -32,6 +32,16 @@ def load_json(path):
         return json.load(f)
 
 
+def is_bot_issue(issue):
+    """Return True if the issue is a bot-created infrastructure artifact that should be excluded."""
+    return issue.get("user", {}).get("login") == "github-actions[bot]"
+
+
+def filter_issues(issues):
+    """Filter out bot-created infrastructure issues."""
+    return [i for i in issues if not is_bot_issue(i)]
+
+
 def detect_repo_assist_adoption(data_dir):
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
     issues_raw = load_json(os.path.join(data_dir, "issues-raw.json"))
@@ -56,7 +66,7 @@ def detect_repo_assist_adoption(data_dir):
 def compute_open_issues_timeline(data_dir, day_range=(-90, 90)):
     """Compute daily open issue count relative to adoption date."""
     meta = load_json(os.path.join(data_dir, "metadata.json"))
-    issues = load_json(os.path.join(data_dir, "issues.json"))
+    issues = filter_issues(load_json(os.path.join(data_dir, "issues.json")))
     adoption = detect_repo_assist_adoption(data_dir)
 
     if not adoption:
@@ -183,7 +193,7 @@ def main():
     repo_dirs = []
     for entry in sorted(os.listdir(data_dir)):
         full = os.path.join(data_dir, entry)
-        if os.path.isdir(full) and os.path.exists(os.path.join(full, "issues.json")):
+        if os.path.isdir(full) and os.path.exists(os.path.join(full, "issues.json")) and os.path.exists(os.path.join(full, "metadata.json")):
             repo_dirs.append(full)
 
     # Compute timelines
