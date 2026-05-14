@@ -546,7 +546,8 @@ def generate_report(all_metrics, output_dir):
     report.append("")
 
     report_text = "\n".join(report)
-    report_path = os.path.join(output_dir, "report.md")
+    report_path = os.path.join(output_dir, "graphs", "report.md")
+    os.makedirs(os.path.dirname(report_path), exist_ok=True)
     with open(report_path, "w") as f:
         f.write(report_text)
     print(f"Report saved to {report_path}")
