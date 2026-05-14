@@ -32,7 +32,7 @@ from collections import defaultdict
 
 import numpy as np
 import plotly.graph_objects as go
-from chart_theme import make_figure, save_figure, COLORS, PALETTE, STATUS_COLORS
+from chart_theme import make_figure, save_figure, COLORS, PALETTE, STATUS_COLORS, STATUS_TEXT_COLORS
 
 
 def parse_dt(s):
@@ -468,7 +468,7 @@ def generate_bottleneck_graphs(all_results, output_dir):
             x=repos[i], y=total,
             text=f"<b>{merged[i]+cmt_closed[i]}/{total}</b>",
             showarrow=False, yshift=12,
-            font=dict(size=11, color=colors[i]),
+            font=dict(size=11, color=STATUS_TEXT_COLORS.get(r["bottleneck_status"], colors[i])),
         )
     save_figure(fig, os.path.join(output_dir, "bottleneck-pipeline-flow.png"))
 
@@ -539,11 +539,12 @@ def generate_bottleneck_graphs(all_results, output_dir):
     ))
     for i, r in enumerate(results):
         if r["wip_count"] > 0:
+            text_color = STATUS_TEXT_COLORS.get(r["bottleneck_status"], colors[i])
             fig.add_annotation(
                 x=repos[i], y=r["wip_count"],
                 text=f"<b>{r['bottleneck_status']}</b>",
                 showarrow=False, yshift=14,
-                font=dict(size=10, color=colors[i]),
+                font=dict(size=10, color=text_color),
             )
     fig.update_layout(
         xaxis_title="Repository",

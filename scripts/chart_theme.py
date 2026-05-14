@@ -70,6 +70,15 @@ STATUS_COLORS = {
     "IDLE": "#e9d8a6",          # sand/wheat (distinct from teal)
 }
 
+# Darker text variants for status labels (legible on white backgrounds)
+STATUS_TEXT_COLORS = {
+    "BLOCKED": "#ae2012",       # same — already dark
+    "CONSTRAINED": "#ca6702",   # same
+    "MINOR": "#bb3e03",         # rust (darker than amber)
+    "FLOWING": "#005f73",       # dark cyan (darker than teal)
+    "IDLE": "#ca6702",          # burnt orange (readable on white)
+}
+
 # Before/after comparison colors
 BEFORE_COLOR = "#e9d8a6"   # sand (muted, past)
 AFTER_COLOR = "#005f73"    # dark cyan (strong, present)
