@@ -268,7 +268,9 @@ def generate_invocation_graphs(all_results, output_dir):
 
         fig = make_figure(
             title="Human Intervention Rate vs Pipeline Throughput<br>"
-                  "<sup>(Dark Red=BLOCKED, Teal=FLOWING, Light Teal=IDLE)</sup>",
+                  f'<sup>(<span style="color:{STATUS_COLORS["BLOCKED"]}">■</span> BLOCKED, '
+                  f'<span style="color:{STATUS_COLORS["FLOWING"]}">■</span> FLOWING, '
+                  f'<span style="color:{STATUS_COLORS["IDLE"]}">■</span> IDLE)</sup>',
             width=900, height=750,
         )
 
