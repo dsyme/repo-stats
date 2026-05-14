@@ -4,7 +4,17 @@
 
 **Authors:** Don Syme, Florian Verdonck, Krzysztof Cieślak, Peli de Halleux, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita, Terkel Gjervig Nielsen
 
-## Overview
+## Executive Summary
+
+We analyze the impact of Repo Assist, a proactive AI repository agent, across 13 open source repositories that adopted it between February and March 2026.
+
+The agent **reduced open issue counts in every repository** — 578 issues total — with median velocity increases of 8× for issue closure and 10× for PR merges, transforming largely dormant projects into actively maintained ones.
+
+Across all repositories, which were previously largely dormant, **issue closure velocity increased by a median of 8×** and **PR merge velocity by a median of 10×** after adoption
+
+Modeling repositories as human-agent software factories reveals that, the single most important factor determining outcomes is the rate at which maintainers decide to act on the agent's output: the human is firmly in the loop, and the factory's throughput is gated by human decision-making.
+
+## Introduction
 
 [Repo Assist](https://github.com/githubnext/agentics/blob/main/docs/repo-assist.md) is a proactive AI repository agent that performs maintenance tasks in an open source repository, effectively as a virtual assistant member of an open source repository's maintenance team. Unlike one-shot AI coding assistants that respond to individual prompts, Repo Assist runs autonomously on a schedule and in response to events — triaging issues, investigating bugs, creating draft pull requests, and responding to contributor questions. It represents an emerging model of **continuous AI-assisted repository automation**, where the AI agent is always on, always watching, and always ready to act.
 
@@ -13,16 +23,6 @@ This report analyzes the impact of Repo Assist across 13 open source repositorie
 The analysis draws on an emerging view of repositories as **human-agent software factories** — systems where human maintainers and AI agents collaborate in a structured production pipeline. This framing, explored in a recent [SIGPLAN blog post on human-agent software factories](https://blog.sigplan.org/2026/04/21/repositories-are-human-agent-knowledge-factories/), allows us to apply classical production theory (Theory of Constraints, Little's Law, cycle time analysis) to understand where work flows and where it stalls.
 
 Repo Assist is implemented as a [GitHub Agentic Workflow](https://gh.io/gh-aw/), but the findings here should apply to any repository-level AI automation that produces similar outputs (investigation comments, draft PRs) and relies on human review. The results should hold across different languages (here F#, Python, Ruby) and project types (here compilers, libraries, tools), though outcomes will vary widely based on other factors such as maintainer engagement, codebase complexity, and social dynamics.
-
-## Key Findings
-
-- **Every repository reduced its open issue count**, with a combined reduction of **578 open issues** across all 13 repos
-- Across all repositories, which were previously largely dormant, **issue closure velocity increased by a median of 8×** and **PR merge velocity by a median of 10×** after adoption
-- Seven repositories achieved **77–100% backlog clearance** where maintainers actively engaged with the workflow's output
-- Four repositories remain **pipeline-blocked** — Repo Assist is generating PRs and investigation comments, but they are not being acted on, either due to maintainer inaction, high rejection rates, or a mixture of the two
-- **Repo Assist has two output paths per issue**: a **comment path** (investigation/triage leading to human closure without a PR) and a **PR path** (code change requiring review and merge). In well-flowing repos, both paths contribute substantially to issue resolution; in blocked repos, maintainers are inactive on both paths
-- **Combined resolution rate is the strongest predictor of backlog clearance**: repos where maintainers act on both the agent's comments and PRs achieve ≥77% clearance; repos ignoring both paths achieve <10%
-- **30% of active workflow runs are human interventions** (direct `/repo-assist` invocations, 647 of 2,141), with 70% being automated — indicating active maintainer co-piloting rather than passive automation
 
 ## Measuring the Impact on Quality: Backlog Reduction
 
