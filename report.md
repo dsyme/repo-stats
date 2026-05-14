@@ -4,6 +4,8 @@
 
 **Authors:** Don Syme, Florian Verdonck, Krzysztof Cieślak, Tomas Grosup, Scott Hanselman, Peli de Halleux, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita, Terkel Gjervig Nielsen
 
+**GitHub Next** https://githubnext.com/
+
 ## Executive Summary
 
 We analyze the impact of Repo Assist, a proactive AI repository agent, across 15 open source repositories that adopted it between February and March 2026. The agent **reduced open issue counts in every repository** — 651 issues net. Across all repositories, some of which were previously largely dormant, **issue closure velocity increased by a median of 9×** and **PR merge velocity by a median of 9×** after adoption, transforming largely dormant projects into actively maintained ones.
