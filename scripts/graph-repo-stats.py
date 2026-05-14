@@ -151,7 +151,7 @@ def graph_merge_rate(pulls, cutoff, output_path, repo_name="", adoption_date=Non
     fig = make_figure(title=title)
     fig.add_trace(go.Bar(
         x=dates, y=counts,
-        marker_color=COLORS["primary"],
+        marker_color=COLORS["accent"],
         opacity=0.7,
         name="PRs Merged",
     ))
@@ -193,13 +193,13 @@ def graph_pr_time_to_merge(pulls, cutoff, output_path, repo_name="", adoption_da
     fig.add_trace(go.Scatter(
         x=dates, y=days_open,
         mode="markers",
-        marker=dict(size=5, color=COLORS["primary"], opacity=0.3),
+        marker=dict(size=5, color=COLORS["warm"], opacity=0.3),
         name="Individual PRs",
     ))
     fig.add_trace(go.Scatter(
         x=dates, y=rolling,
         mode="lines",
-        line=dict(width=2, color=COLORS["danger"]),
+        line=dict(width=2, color=COLORS["warm"]),
         name=f"Rolling avg ({window})",
     ))
     fig.update_xaxes(title_text="Merge Date")
@@ -241,7 +241,7 @@ def graph_issue_activity(issues, cutoff, output_path, repo_name="", adoption_dat
     fig.add_trace(go.Bar(
         x=all_weeks, y=opened,
         name="Opened",
-        marker_color=COLORS["danger"],
+        marker_color=COLORS["rust"],
         opacity=0.7,
     ))
     fig.add_trace(go.Bar(
