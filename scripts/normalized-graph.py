@@ -29,9 +29,15 @@ def load_json(path):
         return json.load(f)
 
 
+def load_json_safe(path):
+    if os.path.exists(path):
+        return load_json(path)
+    return []
+
+
 def detect_repo_assist_adoption(data_dir):
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
-    issues_raw = load_json(os.path.join(data_dir, "issues-raw.json"))
+    issues_raw = load_json_safe(os.path.join(data_dir, "issues-raw.json"))
     ra_dates = []
     for pr in pulls:
         title = pr.get("title", "")

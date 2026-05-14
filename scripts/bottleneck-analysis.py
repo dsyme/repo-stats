@@ -47,10 +47,16 @@ def load_json(path):
         return json.load(f)
 
 
+def load_json_safe(path):
+    if os.path.exists(path):
+        return load_json(path)
+    return []
+
+
 def detect_repo_assist_adoption(data_dir):
     """Detect repo-assist adoption date."""
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
-    issues_raw = load_json(os.path.join(data_dir, "issues-raw.json"))
+    issues_raw = load_json_safe(os.path.join(data_dir, "issues-raw.json"))
 
     ra_dates = []
     for pr in pulls:
@@ -77,8 +83,8 @@ def analyze_pipeline(data_dir):
     meta = load_json(os.path.join(data_dir, "metadata.json"))
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
     issues = load_json(os.path.join(data_dir, "issues.json"))
-    issues_raw = load_json(os.path.join(data_dir, "issues-raw.json"))
-    events = load_json(os.path.join(data_dir, "issue-events.json"))
+    issues_raw = load_json_safe(os.path.join(data_dir, "issues-raw.json"))
+    events = load_json_safe(os.path.join(data_dir, "issue-events.json"))
 
     repo_name = meta.get("repo", os.path.basename(data_dir))
     now = datetime.now(timezone.utc)
