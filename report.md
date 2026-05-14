@@ -406,7 +406,7 @@ The following are lightly edited notes from the FsAutoComplete maintainer (Krzys
 > * In general I'm very happy with most PRs I merged - there are high quality, useful, meaningful, follows best practices of the repository [like adding a lot of integration tests for new features]
 > * Some of the open PRs, at glance, looks good, but as I've mentioned they need more review...
 > * Some of the non-merged PRs were very specifically prompted to be an experiments / "check if this old bug is still happening" type of things. They would require more follow-up, and maybe some of them should be just closed.
-> * But I just don't have a time (nor I'm in the right mindset at the moment) to review stuff - this has nothing to do with Repo Assist on its own, but with me - after experiences of last year I'm very careful not to burn out myself, so I'm trying to minimise some of the external pressures [like OSS] + I have plenty stuff to do outside of software development [new apartment etc]
+> * But I just don't have a time (nor I'm in the right mindset at the moment) to review stuff - this has nothing to do with Repo Assist on its own, but with me. Maintaining OSS has not been the highest priority for a while, due to various reasons related to both professional and personal life. 
 > * Which resulted in me disabling the workflow (= reducing its production rate to zero) - but when I'll have more spare time / better mindset for FSAC work, I'll 100% enable again.
 > * Keeping it enabled while I didn't had time created a bit of "notification anxiety" thing, that probably many of maintainers know well - you know, you wake up, open GH and see whole bunch of notifications, and you're like "oh no my life sucks"
 
