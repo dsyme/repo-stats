@@ -61,7 +61,7 @@ def detect_adoption_date(data_dir):
         for item in load_json(path):
             labels = [l.get("name", "") for l in item.get("labels", [])]
             title = item.get("title", "")
-            if "repo-assist" in labels or "[repo-assist]" in title.lower():
+            if "repo-assist" in labels or "[repo-assist]" in title.lower() or "[Repo Assist]" in title:
                 dt = parse_dt(item.get("created_at"))
                 if dt:
                     ra_dates.append(dt)
