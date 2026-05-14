@@ -25,12 +25,10 @@ import sys
 from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import matplotlib.ticker as mticker
 import numpy as np
+import plotly.graph_objects as go
+
+from chart_theme import make_figure, save_figure, COLORS, STATUS_COLORS, PALETTE, CATEGORY_COLORS
 
 
 def parse_dt(s):
@@ -167,66 +165,62 @@ def generate_invocation_graphs(all_results, output_dir):
     results = [r for r in all_results if r is not None]
 
     # === Graph 1: Runs/week by repo, stacked by 3 categories ===
-    fig, ax = plt.subplots(figsize=(14, 7))
     results_sorted = sorted(results, key=lambda r: r["runs_per_week"], reverse=True)
     repos = [r["repo"].split("/")[1] if "/" in r["repo"] else r["repo"] for r in results_sorted]
-    x = np.arange(len(repos))
 
     sched_rates = [r["scheduled_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
     extra_rates = [r["extra_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
     ra_rates = [r["repo_assist_runs"] / max(r["total_days"] / 7, 1) for r in results_sorted]
 
-    ax.bar(x, sched_rates, label="Automated (scheduled)", color="#1565C0")
-    ax.bar(x, extra_rates, bottom=sched_rates,
-           label="Automated (additional)", color="#64B5F6")
-    ax.bar(x, ra_rates, bottom=[s + e for s, e in zip(sched_rates, extra_rates)],
-           label="Human intervention (/repo-assist)", color="#4CAF50")
+    # Human intervention ratio labels on top of each bar stack
+    totals = [s + e + h for s, e, h in zip(sched_rates, extra_rates, ra_rates)]
+    pct_labels = [f"{r['repo_assist_ratio']:.0%}" if t > 0 else ""
+                  for r, t in zip(results_sorted, totals)]
 
-    # Add human intervention ratio labels
-    for i, r in enumerate(results_sorted):
-        total = sched_rates[i] + extra_rates[i] + ra_rates[i]
-        if total > 0:
-            ax.text(i, total + 0.3, f"{r['repo_assist_ratio']:.0%}",
-                    ha="center", va="bottom", fontsize=8, color="#2E7D32")
-
-    ax.set_xlabel("Repository")
-    ax.set_ylabel("Workflow Runs per Week")
-    ax.set_title("Repo Assist Invocation Rate by Category\n"
-                 "(% = human intervention rate)")
-    ax.set_xticks(x)
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.legend()
-    ax.grid(True, alpha=0.3, axis="y")
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "invocation-rate-by-type.png"), dpi=150)
-    plt.close(fig)
+    fig = make_figure(
+        title="Repo Assist Invocation Rate by Category<br><sup>(% = human intervention rate)</sup>",
+        width=1200, height=650,
+    )
+    fig.add_trace(go.Bar(x=repos, y=sched_rates, name="Automated (scheduled)",
+                         marker_color=CATEGORY_COLORS["scheduled"]))
+    fig.add_trace(go.Bar(x=repos, y=extra_rates, name="Automated (additional)",
+                         marker_color=CATEGORY_COLORS["extra"]))
+    fig.add_trace(go.Bar(x=repos, y=ra_rates, name="Human intervention (/repo-assist)",
+                         marker_color=CATEGORY_COLORS["repo_assist"],
+                         text=pct_labels, textposition="outside",
+                         textfont=dict(size=10, color=COLORS["accent"])))
+    fig.update_layout(
+        barmode="stack",
+        xaxis_title="Repository",
+        yaxis_title="Workflow Runs per Week",
+        xaxis_tickangle=-45,
+    )
+    save_figure(fig, os.path.join(output_dir, "invocation-rate-by-type.png"))
 
     # === Graph 2: Total runs by 3 categories per repo ===
-    fig, ax = plt.subplots(figsize=(14, 7))
-
     sched_vals = [r["scheduled_runs"] for r in results_sorted]
     extra_vals = [r["extra_runs"] for r in results_sorted]
     ra_vals = [r["repo_assist_runs"] for r in results_sorted]
 
-    ax.bar(x, sched_vals, label="Automated (scheduled)", color="#1565C0")
-    ax.bar(x, extra_vals, bottom=sched_vals, label="Automated (additional)", color="#64B5F6")
-    ax.bar(x, ra_vals, bottom=[s + e for s, e in zip(sched_vals, extra_vals)],
-           label="Human intervention (/repo-assist)", color="#4CAF50")
-
-    ax.set_xlabel("Repository")
-    ax.set_ylabel("Total Active Workflow Runs")
-    ax.set_title("Repo Assist Workflow Runs by Category (Total)")
-    ax.set_xticks(x)
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.legend(loc="upper right", fontsize=9)
-    ax.grid(True, alpha=0.3, axis="y")
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "invocation-trigger-breakdown.png"), dpi=150)
-    plt.close(fig)
+    fig = make_figure(title="Repo Assist Workflow Runs by Category (Total)",
+                      width=1200, height=650)
+    fig.add_trace(go.Bar(x=repos, y=sched_vals, name="Automated (scheduled)",
+                         marker_color=CATEGORY_COLORS["scheduled"]))
+    fig.add_trace(go.Bar(x=repos, y=extra_vals, name="Automated (additional)",
+                         marker_color=CATEGORY_COLORS["extra"]))
+    fig.add_trace(go.Bar(x=repos, y=ra_vals, name="Human intervention (/repo-assist)",
+                         marker_color=CATEGORY_COLORS["repo_assist"]))
+    fig.update_layout(
+        barmode="stack",
+        xaxis_title="Repository",
+        yaxis_title="Total Active Workflow Runs",
+        xaxis_tickangle=-45,
+    )
+    save_figure(fig, os.path.join(output_dir, "invocation-trigger-breakdown.png"))
 
     # === Graph 3: Runs over time (7-day rolling avg), all repos overlaid ===
-    fig, ax = plt.subplots(figsize=(14, 7))
-    cmap = plt.cm.tab10
+    fig = make_figure(title="Repo-Assist Activity Over Time (7-day rolling average)",
+                      width=1200, height=650)
 
     for i, r in enumerate(results_sorted):
         runs = r["_active_runs"]
@@ -252,56 +246,64 @@ def generate_invocation_graphs(all_results, output_dir):
         dates = [first + timedelta(days=d + 3) for d in range(len(rolling))]
 
         repo_short = r["repo"].split("/")[1] if "/" in r["repo"] else r["repo"]
-        ax.plot(dates, rolling, label=repo_short,
-                color=cmap(i / len(results_sorted)), linewidth=1.5, alpha=0.8)
+        color = PALETTE[i % len(PALETTE)]
+        fig.add_trace(go.Scatter(
+            x=dates, y=rolling, mode="lines", name=repo_short,
+            line=dict(color=color, width=2), opacity=0.85,
+        ))
 
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Runs per Day (7-day rolling avg)")
-    ax.set_title("Repo-Assist Activity Over Time (7-day rolling average)")
-    ax.legend(loc="upper left", fontsize=8, ncol=2)
-    ax.grid(True, alpha=0.3)
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %d"))
-    ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=2))
-    fig.autofmt_xdate()
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "invocation-over-time.png"), dpi=150)
-    plt.close(fig)
+    fig.update_layout(
+        xaxis_title="Date",
+        yaxis_title="Runs per Day (7-day rolling avg)",
+        legend=dict(font=dict(size=10)),
+        xaxis=dict(tickformat="%b %d"),
+    )
+    save_figure(fig, os.path.join(output_dir, "invocation-over-time.png"))
 
     # === Graph 4: /repo-assist rate vs throughput (scatter) ===
-    # Load bottleneck data if available
     bottleneck_path = os.path.join(os.path.dirname(output_dir), "bottleneck-analysis.json")
     if os.path.exists(bottleneck_path):
         bottleneck_data = load_json(bottleneck_path)
         bn_map = {b["repo"]: b for b in bottleneck_data}
 
-        fig, ax = plt.subplots(figsize=(10, 8))
-        status_colors = {
-            "BLOCKED": "#D32F2F",
-            "FLOWING": "#4CAF50",
-            "IDLE": "#90CAF9",
-        }
+        fig = make_figure(
+            title="Human Intervention Rate vs Pipeline Throughput<br>"
+                  f'<sup>(<span style="color:{STATUS_COLORS["BLOCKED"]}">■</span> BLOCKED, '
+                  f'<span style="color:{STATUS_COLORS["FLOWING"]}">■</span> FLOWING, '
+                  f'<span style="color:{STATUS_COLORS["IDLE"]}">■</span> IDLE)</sup>',
+            width=900, height=750,
+        )
 
+        # Group points by status so each status gets its own legend entry
+        status_groups = defaultdict(lambda: {"x": [], "y": [], "text": []})
         for r in results:
             bn = bn_map.get(r["repo"])
             if not bn:
                 continue
-            color = status_colors.get(bn["bottleneck_status"], "#9E9E9E")
-            ax.scatter(r["repo_assist_ratio"] * 100, bn["throughput_ratio"] * 100,
-                       c=color, s=200, edgecolors="black", linewidth=0.5, zorder=5)
+            status = bn["bottleneck_status"]
             label = r["repo"].split("/")[1] if "/" in r["repo"] else r["repo"]
-            ax.annotate(label, (r["repo_assist_ratio"] * 100, bn["throughput_ratio"] * 100),
-                        textcoords="offset points", xytext=(8, 5), fontsize=9)
+            status_groups[status]["x"].append(r["repo_assist_ratio"] * 100)
+            status_groups[status]["y"].append(bn["throughput_ratio"] * 100)
+            status_groups[status]["text"].append(label)
 
-        ax.set_xlabel("Human Intervention Rate (% of active runs)")
-        ax.set_ylabel("Pipeline Throughput (% of RA PRs merged)")
-        ax.set_title("Human Intervention Rate vs Pipeline Throughput\n"
-                     "(Red=BLOCKED, Green=FLOWING, Blue=IDLE)")
-        ax.grid(True, alpha=0.3)
-        ax.set_xlim(-5, 105)
-        ax.set_ylim(-5, 105)
-        fig.tight_layout()
-        fig.savefig(os.path.join(output_dir, "invocation-vs-throughput.png"), dpi=150)
-        plt.close(fig)
+        for status, pts in status_groups.items():
+            color = STATUS_COLORS.get(status, COLORS["muted"])
+            fig.add_trace(go.Scatter(
+                x=pts["x"], y=pts["y"], text=pts["text"],
+                mode="markers+text", name=status,
+                marker=dict(color=color, size=16,
+                            line=dict(color=COLORS["dark"], width=0.5)),
+                textposition="top right", textfont=dict(size=10),
+            ))
+
+        fig.update_layout(
+            xaxis_title="Human Intervention Rate (% of active runs)",
+            yaxis_title="Pipeline Throughput (% of RA PRs merged)",
+            xaxis=dict(range=[-5, 105]),
+            yaxis=dict(range=[-5, 105]),
+            hovermode="closest",
+        )
+        save_figure(fig, os.path.join(output_dir, "invocation-vs-throughput.png"))
 
 
 def print_summary(all_results):

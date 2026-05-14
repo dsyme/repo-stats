@@ -10,9 +10,9 @@ OUTPUT_DIR defaults to DATA_DIR
 
 Generates:
   - open-issues-over-time.png: Number of open issues at each point in time
-  - commit-rate.png: Commits per week (from PR merge dates)
   - merge-rate.png: PRs merged per week
   - pr-time-to-merge.png: How long PRs stay open before merge (rolling average)
+  - issue-activity.png: Issues opened vs closed per week
 """
 
 import argparse
@@ -22,10 +22,9 @@ import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
+import plotly.graph_objects as go
+
+from chart_theme import make_figure, save_figure, add_adoption_line, COLORS, PALETTE, color_with_alpha
 
 
 def parse_dt(s):
@@ -40,25 +39,6 @@ def parse_dt(s):
 def load_json(path):
     with open(path, "r") as f:
         return json.load(f)
-
-
-def is_bot_issue(issue):
-    """Return True if the issue is a bot-created infrastructure artifact that should be excluded."""
-    return issue.get("user", {}).get("login") == "github-actions[bot]"
-
-
-def filter_issues(issues):
-    """Filter out bot-created infrastructure issues."""
-    return [i for i in issues if not is_bot_issue(i)]
-
-
-def add_adoption_line(ax, adoption_date):
-    """Add a vertical line marking repo-assist adoption."""
-    if adoption_date is None:
-        return
-    ax.axvline(x=adoption_date, color="#4CAF50", linewidth=1.5, linestyle="--", alpha=0.8, zorder=5)
-    ax.text(adoption_date, ax.get_ylim()[1] * 0.95, " repo-assist",
-            color="#4CAF50", fontsize=9, fontweight="bold", va="top", ha="left")
 
 
 def detect_adoption_date(data_dir):
@@ -125,21 +105,19 @@ def graph_open_issues(issues, cutoff, output_path, repo_name="", adoption_date=N
         counts.append(open_count)
         day += timedelta(days=1)
 
-    fig, ax = plt.subplots(figsize=(12, 5))
-    ax.fill_between(dates, counts, alpha=0.3)
-    ax.plot(dates, counts, linewidth=1.5)
-    ax.set_title(f"{repo_name} — Open Issues Over Time" if repo_name else "Open Issues Over Time")
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Open Issues")
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
-    ax.xaxis.set_major_locator(mdates.MonthLocator())
-    fig.autofmt_xdate()
-    ax.grid(True, alpha=0.3)
-    add_adoption_line(ax, adoption_date)
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=150)
-    plt.close(fig)
-    print(f"  Saved: {output_path}")
+    title = f"{repo_name} — Open Issues Over Time" if repo_name else "Open Issues Over Time"
+    fig = make_figure(title=title)
+    fig.add_trace(go.Scatter(
+        x=dates, y=counts,
+        fill="tozeroy",
+        line=dict(width=1.5, color=COLORS["primary"]),
+        fillcolor=color_with_alpha(COLORS["primary"], 0.3),
+        name="Open Issues",
+    ))
+    fig.update_xaxes(title_text="Date")
+    fig.update_yaxes(title_text="Open Issues")
+    add_adoption_line(fig, adoption_date)
+    save_figure(fig, output_path)
 
 
 # ---------------------------------------------------------------------------
@@ -169,20 +147,18 @@ def graph_merge_rate(pulls, cutoff, output_path, repo_name="", adoption_date=Non
     dates = [w[0] for w in sorted_weeks]
     counts = [w[1] for w in sorted_weeks]
 
-    fig, ax = plt.subplots(figsize=(12, 5))
-    ax.bar(dates, counts, width=6, alpha=0.7, align='edge')
-    ax.set_title(f"{repo_name} — PRs Merged Per Week" if repo_name else "PRs Merged Per Week")
-    ax.set_xlabel("Week starting")
-    ax.set_ylabel("PRs Merged")
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
-    ax.xaxis.set_major_locator(mdates.MonthLocator())
-    fig.autofmt_xdate()
-    ax.grid(True, alpha=0.3, axis="y")
-    add_adoption_line(ax, adoption_date)
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=150)
-    plt.close(fig)
-    print(f"  Saved: {output_path}")
+    title = f"{repo_name} — PRs Merged Per Week" if repo_name else "PRs Merged Per Week"
+    fig = make_figure(title=title)
+    fig.add_trace(go.Bar(
+        x=dates, y=counts,
+        marker_color=COLORS["accent"],
+        opacity=0.7,
+        name="PRs Merged",
+    ))
+    fig.update_xaxes(title_text="Week starting")
+    fig.update_yaxes(title_text="PRs Merged")
+    add_adoption_line(fig, adoption_date)
+    save_figure(fig, output_path)
 
 
 # ---------------------------------------------------------------------------
@@ -212,22 +188,24 @@ def graph_pr_time_to_merge(pulls, cutoff, output_path, repo_name="", adoption_da
         start = max(0, i - window + 1)
         rolling.append(sum(days_open[start:i+1]) / (i - start + 1))
 
-    fig, ax = plt.subplots(figsize=(12, 5))
-    ax.scatter(dates, days_open, alpha=0.3, s=15, label="Individual PRs")
-    ax.plot(dates, rolling, color="red", linewidth=2, label=f"Rolling avg ({window})")
-    ax.set_title(f"{repo_name} — PR Time to Merge (days)" if repo_name else "PR Time to Merge (days)")
-    ax.set_xlabel("Merge Date")
-    ax.set_ylabel("Days Open")
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
-    ax.xaxis.set_major_locator(mdates.MonthLocator())
-    ax.legend()
-    fig.autofmt_xdate()
-    ax.grid(True, alpha=0.3)
-    add_adoption_line(ax, adoption_date)
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=150)
-    plt.close(fig)
-    print(f"  Saved: {output_path}")
+    title = f"{repo_name} — PR Time to Merge (days)" if repo_name else "PR Time to Merge (days)"
+    fig = make_figure(title=title)
+    fig.add_trace(go.Scatter(
+        x=dates, y=days_open,
+        mode="markers",
+        marker=dict(size=5, color=COLORS["warm"], opacity=0.3),
+        name="Individual PRs",
+    ))
+    fig.add_trace(go.Scatter(
+        x=dates, y=rolling,
+        mode="lines",
+        line=dict(width=2, color=COLORS["warm"]),
+        name=f"Rolling avg ({window})",
+    ))
+    fig.update_xaxes(title_text="Merge Date")
+    fig.update_yaxes(title_text="Days Open")
+    add_adoption_line(fig, adoption_date)
+    save_figure(fig, output_path)
 
 
 # ---------------------------------------------------------------------------
@@ -258,23 +236,25 @@ def graph_issue_activity(issues, cutoff, output_path, repo_name="", adoption_dat
     opened = [opened_weeks.get(w, 0) for w in all_weeks]
     closed = [closed_weeks.get(w, 0) for w in all_weeks]
 
-    fig, ax = plt.subplots(figsize=(12, 5))
-    width = timedelta(days=2.5)
-    ax.bar([w - width/2 for w in all_weeks], opened, width=width, alpha=0.7, label="Opened", color="tab:red")
-    ax.bar([w + width/2 for w in all_weeks], closed, width=width, alpha=0.7, label="Closed", color="tab:green")
-    ax.set_title(f"{repo_name} — Issue Activity Per Week (Opened vs Closed)" if repo_name else "Issue Activity Per Week (Opened vs Closed)")
-    ax.set_xlabel("Week starting")
-    ax.set_ylabel("Count")
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
-    ax.xaxis.set_major_locator(mdates.MonthLocator())
-    ax.legend()
-    fig.autofmt_xdate()
-    ax.grid(True, alpha=0.3, axis="y")
-    add_adoption_line(ax, adoption_date)
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=150)
-    plt.close(fig)
-    print(f"  Saved: {output_path}")
+    title = f"{repo_name} — Issue Activity Per Week (Opened vs Closed)" if repo_name else "Issue Activity Per Week (Opened vs Closed)"
+    fig = make_figure(title=title)
+    fig.add_trace(go.Bar(
+        x=all_weeks, y=opened,
+        name="Opened",
+        marker_color=COLORS["rust"],
+        opacity=0.7,
+    ))
+    fig.add_trace(go.Bar(
+        x=all_weeks, y=closed,
+        name="Closed",
+        marker_color=COLORS["secondary"],
+        opacity=0.7,
+    ))
+    fig.update_layout(barmode="group")
+    fig.update_xaxes(title_text="Week starting")
+    fig.update_yaxes(title_text="Count")
+    add_adoption_line(fig, adoption_date)
+    save_figure(fig, output_path)
 
 
 # ---------------------------------------------------------------------------
@@ -306,7 +286,7 @@ def main():
     issues_path = os.path.join(data_dir, "issues.json")
     pulls_path = os.path.join(data_dir, "pulls.json")
 
-    issues = filter_issues(load_json(issues_path)) if os.path.exists(issues_path) else []
+    issues = load_json(issues_path) if os.path.exists(issues_path) else []
     pulls = load_json(pulls_path) if os.path.exists(pulls_path) else []
 
     print(f"Loaded {len(issues)} issues, {len(pulls)} PRs")

@@ -30,11 +30,9 @@ import sys
 from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
 import numpy as np
+import plotly.graph_objects as go
+from chart_theme import make_figure, save_figure, COLORS, PALETTE, STATUS_COLORS, STATUS_TEXT_COLORS
 
 
 def parse_dt(s):
@@ -49,20 +47,16 @@ def load_json(path):
         return json.load(f)
 
 
-def is_bot_issue(issue):
-    """Return True if the issue is a bot-created infrastructure artifact that should be excluded."""
-    return issue.get("user", {}).get("login") == "github-actions[bot]"
-
-
-def filter_issues(issues):
-    """Filter out bot-created infrastructure issues."""
-    return [i for i in issues if not is_bot_issue(i)]
+def load_json_safe(path):
+    if os.path.exists(path):
+        return load_json(path)
+    return []
 
 
 def detect_repo_assist_adoption(data_dir):
     """Detect repo-assist adoption date."""
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
-    issues_raw = load_json(os.path.join(data_dir, "issues-raw.json"))
+    issues_raw = load_json_safe(os.path.join(data_dir, "issues-raw.json"))
 
     ra_dates = []
     for pr in pulls:
@@ -88,9 +82,9 @@ def analyze_pipeline(data_dir):
     """Perform full pipeline bottleneck analysis for a single repo."""
     meta = load_json(os.path.join(data_dir, "metadata.json"))
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
-    issues = filter_issues(load_json(os.path.join(data_dir, "issues.json")))
-    issues_raw = load_json(os.path.join(data_dir, "issues-raw.json"))
-    events = load_json(os.path.join(data_dir, "issue-events.json"))
+    issues = load_json(os.path.join(data_dir, "issues.json"))
+    issues_raw = load_json_safe(os.path.join(data_dir, "issues-raw.json"))
+    events = load_json_safe(os.path.join(data_dir, "issue-events.json"))
 
     repo_name = meta.get("repo", os.path.basename(data_dir))
     now = datetime.now(timezone.utc)
@@ -440,147 +434,162 @@ def generate_bottleneck_graphs(all_results, output_dir):
     results.sort(key=lambda r: r["throughput_ratio"])
 
     repos = [r["repo"].split("/")[1] if "/" in r["repo"] else r["repo"] for r in results]
-    x = np.arange(len(repos))
 
-    # Color by bottleneck status
-    status_colors = {
-        "BLOCKED": "#D32F2F",
-        "CONSTRAINED": "#FF9800",
-        "MINOR": "#FFC107",
-        "FLOWING": "#4CAF50",
-        "IDLE": "#90CAF9",
-    }
-    colors = [status_colors.get(r["bottleneck_status"], "#9E9E9E") for r in results]
+    colors = [STATUS_COLORS.get(r["bottleneck_status"], COLORS["muted"]) for r in results]
 
     # === Graph 1: Pipeline Flow Diagram (stacked bar — dual path) ===
-    fig, ax = plt.subplots(figsize=(14, 7))
     merged = [r["ra_prs_merged"] for r in results]
     still_open = [r["ra_prs_open"] for r in results]
     closed_unmerged = [r["ra_prs_closed_unmerged"] for r in results]
     cmt_closed = [r["comment_path_closed"] for r in results]
     cmt_open = [r["comment_path_open"] for r in results]
 
-    # Comment path (bottom)
-    bars_cc = ax.bar(x, cmt_closed, label="Comment path → closed (no PR needed)", color="#81C784")
-    bars_co = ax.bar(x, cmt_open, bottom=cmt_closed, label="Comment path → still open", color="#C8E6C9")
+    fig = make_figure(
+        title="Dual-Path Pipeline Flow: Comment Path + PR Path<br>"
+              "<sup>(labels show resolved/total issues acted on)</sup>",
+        width=1200, height=700,
+    )
+    fig.add_trace(go.Bar(name="Comment path → closed (no PR needed)", x=repos, y=cmt_closed, marker_color=COLORS["secondary"]))
+    fig.add_trace(go.Bar(name="Comment path → still open", x=repos, y=cmt_open, marker_color=COLORS["muted"]))
+    fig.add_trace(go.Bar(name="PR path → merged", x=repos, y=merged, marker_color=COLORS["primary"]))
+    fig.add_trace(go.Bar(name="PR path → awaiting review (WIP)", x=repos, y=still_open, marker_color=COLORS["accent"]))
+    fig.add_trace(go.Bar(name="PR path → rejected", x=repos, y=closed_unmerged, marker_color=COLORS["sand"]))
+    fig.update_layout(
+        barmode="stack",
+        xaxis_title="Repository",
+        yaxis_title="Issues Acted On by Repo-Assist",
+        legend=dict(font=dict(size=10), yanchor="top", y=0.99, xanchor="left", x=0.01),
+    )
+    # Add total count annotations
     cmt_top = [cc + co for cc, co in zip(cmt_closed, cmt_open)]
-
-    # PR path (stacked on top)
-    bars1 = ax.bar(x, merged, bottom=cmt_top, label="PR path → merged", color="#2E7D32")
-    pr_bottom2 = [ct + m for ct, m in zip(cmt_top, merged)]
-    bars2 = ax.bar(x, still_open, bottom=pr_bottom2, label="PR path → awaiting review (WIP)", color="#FF9800")
-    pr_bottom3 = [b + o for b, o in zip(pr_bottom2, still_open)]
-    bars3 = ax.bar(x, closed_unmerged, bottom=pr_bottom3, label="PR path → rejected", color="#9E9E9E")
-
-    # Add total count labels
     for i, r in enumerate(results):
         total = cmt_top[i] + r["ra_prs_total"]
-        comment_pct = cmt_closed[i] / max(total, 1) * 100
-        pr_merge_pct = merged[i] / max(total, 1) * 100
-        ax.text(i, total + 1, f"{merged[i]+cmt_closed[i]}/{total}",
-                ha="center", va="bottom", fontsize=9, fontweight="bold", color=colors[i])
-
-    ax.set_xlabel("Repository")
-    ax.set_ylabel("Issues Acted On by Repo-Assist")
-    ax.set_title("Dual-Path Pipeline Flow: Comment Path + PR Path\n"
-                 "(labels show resolved/total issues acted on)")
-    ax.set_xticks(x)
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.legend(loc="upper left", fontsize=8)
-    ax.grid(True, alpha=0.3, axis="y")
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "bottleneck-pipeline-flow.png"), dpi=150)
-    plt.close(fig)
+        fig.add_annotation(
+            x=repos[i], y=total,
+            text=f"<b>{merged[i]+cmt_closed[i]}/{total}</b>",
+            showarrow=False, yshift=12,
+            font=dict(size=11, color=STATUS_TEXT_COLORS.get(r["bottleneck_status"], colors[i])),
+        )
+    save_figure(fig, os.path.join(output_dir, "bottleneck-pipeline-flow.png"))
 
     # === Graph 2: Throughput ratio with bottleneck status ===
-    fig, ax = plt.subplots(figsize=(14, 6))
-    bars = ax.bar(x, [r["throughput_ratio"] * 100 for r in results], color=colors)
-    ax.axhline(y=75, color="#4CAF50", linestyle="--", alpha=0.5, label="Healthy threshold (75%)")
-    ax.axhline(y=50, color="#FF9800", linestyle="--", alpha=0.5, label="Warning threshold (50%)")
-    ax.set_xlabel("Repository")
-    ax.set_ylabel("Throughput Ratio (%)")
-    ax.set_title("Pipeline Throughput Ratio: PR Merge Rate / PR Creation Rate\n"
-                 "(Red = BLOCKED, Green = FLOWING, Blue = IDLE)")
-    ax.set_xticks(x)
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.yaxis.set_major_formatter(mticker.PercentFormatter())
-    ax.legend()
-    ax.grid(True, alpha=0.3, axis="y")
-    ax.set_ylim(0, 105)
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "bottleneck-throughput-ratio.png"), dpi=150)
-    plt.close(fig)
+    fig = make_figure(
+        title="Pipeline Throughput Ratio: PR Merge Rate / PR Creation Rate<br>"
+              f'<sup>(<span style="color:{STATUS_COLORS["BLOCKED"]}">■</span> BLOCKED, '
+              f'<span style="color:{STATUS_COLORS["FLOWING"]}">■</span> FLOWING, '
+              f'<span style="color:{STATUS_COLORS["IDLE"]}">■</span> IDLE)</sup>',
+        width=1200, height=600,
+    )
+    fig.add_trace(go.Bar(
+        x=repos,
+        y=[r["throughput_ratio"] * 100 for r in results],
+        marker_color=colors,
+        showlegend=False,
+    ))
+    fig.add_hline(y=75, line_dash="dash", line_color=COLORS["secondary"], line_width=1.5,
+                  annotation_text="Healthy (75%)", annotation_position="top left",
+                  annotation_font=dict(color=COLORS["secondary"], size=11))
+    fig.add_hline(y=50, line_dash="dash", line_color=COLORS["rust"], line_width=1.5,
+                  annotation_text="Warning (50%)", annotation_position="bottom left",
+                  annotation_font=dict(color=COLORS["rust"], size=11))
+    fig.update_layout(
+        xaxis_title="Repository",
+        yaxis_title="Throughput Ratio (%)",
+        yaxis=dict(range=[0, 105], ticksuffix="%"),
+    )
+    save_figure(fig, os.path.join(output_dir, "bottleneck-throughput-ratio.png"))
 
     # === Graph 3: Cycle Time Comparison (merged vs waiting) ===
-    fig, ax = plt.subplots(figsize=(14, 6))
     merge_times = [r["merge_cycle_time_avg"] or 0 for r in results]
     wait_times = [r["open_wait_time_avg"] or 0 for r in results]
-    w = 0.35
-    ax.bar(x - w/2, merge_times, w, label="Avg merge cycle time (completed)", color="#4CAF50")
-    ax.bar(x + w/2, wait_times, w, label="Avg wait time (still open)", color="#FF9800")
-    ax.set_xlabel("Repository")
-    ax.set_ylabel("Days")
-    ax.set_title("Cycle Time: Merged PRs vs Still-Waiting PRs\n(Orange >> Green indicates review bottleneck)")
-    ax.set_xticks(x)
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.legend()
-    ax.grid(True, alpha=0.3, axis="y")
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "bottleneck-cycle-times.png"), dpi=150)
-    plt.close(fig)
+
+    fig = make_figure(
+        title="Cycle Time: Merged PRs vs Still-Waiting PRs<br>"
+              f'<sup>(<span style="color:{COLORS["accent"]}">■</span> &gt;&gt; '
+              f'<span style="color:{COLORS["secondary"]}">■</span> indicates review bottleneck)</sup>',
+        width=1200, height=600,
+    )
+    fig.add_trace(go.Bar(
+        name="Avg merge cycle time (completed)",
+        x=repos, y=merge_times,
+        marker_color=COLORS["secondary"],
+    ))
+    fig.add_trace(go.Bar(
+        name="Avg wait time (still open)",
+        x=repos, y=wait_times,
+        marker_color=COLORS["accent"],
+    ))
+    fig.update_layout(
+        barmode="group",
+        xaxis_title="Repository",
+        yaxis_title="Days",
+    )
+    save_figure(fig, os.path.join(output_dir, "bottleneck-cycle-times.png"))
 
     # === Graph 4: WIP Accumulation ===
-    fig, ax = plt.subplots(figsize=(14, 6))
-    ax.bar(x, [r["wip_count"] for r in results], color=colors)
-    ax.set_xlabel("Repository")
-    ax.set_ylabel("Open Repo-Assist PRs (WIP)")
-    ax.set_title("Work-In-Progress: Repo-Assist PRs Awaiting Human Review")
-    ax.set_xticks(x)
-    ax.set_xticklabels(repos, rotation=45, ha="right")
-    ax.grid(True, alpha=0.3, axis="y")
-    # Add status labels
+    fig = make_figure(
+        title="Work-In-Progress: Repo-Assist PRs Awaiting Human Review",
+        width=1200, height=600,
+    )
+    fig.add_trace(go.Bar(
+        x=repos,
+        y=[r["wip_count"] for r in results],
+        marker_color=colors,
+        showlegend=False,
+    ))
     for i, r in enumerate(results):
         if r["wip_count"] > 0:
-            ax.text(i, r["wip_count"] + 0.3, r["bottleneck_status"],
-                    ha="center", va="bottom", fontsize=8, fontweight="bold", color=colors[i])
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "bottleneck-wip.png"), dpi=150)
-    plt.close(fig)
+            text_color = STATUS_TEXT_COLORS.get(r["bottleneck_status"], colors[i])
+            fig.add_annotation(
+                x=repos[i], y=r["wip_count"],
+                text=f"<b>{r['bottleneck_status']}</b>",
+                showarrow=False, yshift=14,
+                font=dict(size=10, color=text_color),
+            )
+    fig.update_layout(
+        xaxis_title="Repository",
+        yaxis_title="Open Repo-Assist PRs (WIP)",
+    )
+    save_figure(fig, os.path.join(output_dir, "bottleneck-wip.png"))
 
     # === Graph 5: Bottleneck Impact — combined resolution rate vs backlog clearance ===
-    fig, ax = plt.subplots(figsize=(10, 8))
-    # Combined resolution rate: (merged PRs + comment-path closures) / total issues acted on
     resolution_rates = []
     for r in results:
         total_acted = r["comment_path_total"] + r["ra_prs_total"]
         total_resolved = r["comment_path_closed"] + r["ra_prs_merged"]
         resolution_rates.append(total_resolved / total_acted * 100 if total_acted > 0 else 0)
 
-    # Backlog clearance
     clearances = []
     for r in results:
         oaa = r["issues_open_at_adoption"]
         closed = r["issues_closed_after_adoption"]
         clearances.append(min(closed / oaa * 100, 100) if oaa > 0 else 0)
 
-    scatter = ax.scatter(resolution_rates, clearances, c=colors, s=200, edgecolors="black", linewidth=0.5, zorder=5)
-    for i, r in enumerate(results):
-        label = r["repo"].split("/")[1] if "/" in r["repo"] else r["repo"]
-        ax.annotate(label, (resolution_rates[i], clearances[i]),
-                    textcoords="offset points", xytext=(8, 5), fontsize=9)
+    labels = [r["repo"].split("/")[1] if "/" in r["repo"] else r["repo"] for r in results]
 
-    ax.set_xlabel("Combined Resolution Rate (% of issues acted on → resolved)")
-    ax.set_ylabel("Backlog Clearance (%)")
-    ax.set_title("Pipeline Impact: Combined Resolution Rate vs Backlog Clearance\n"
-                 "(includes both comment-path closures and PR merges)")
-    ax.axvline(x=50, color="#FF9800", linestyle="--", alpha=0.4)
-    ax.axvline(x=75, color="#4CAF50", linestyle="--", alpha=0.4)
-    ax.grid(True, alpha=0.3)
-    ax.set_xlim(-5, 105)
-    ax.set_ylim(-5, 105)
-    fig.tight_layout()
-    fig.savefig(os.path.join(output_dir, "bottleneck-impact-scatter.png"), dpi=150)
-    plt.close(fig)
+    fig = make_figure(
+        title="Pipeline Impact: Combined Resolution Rate vs Backlog Clearance<br>"
+              "<sup>(includes both comment-path closures and PR merges)</sup>",
+        width=1000, height=800,
+    )
+    fig.add_trace(go.Scatter(
+        x=resolution_rates, y=clearances,
+        mode="markers+text",
+        text=labels,
+        textposition="top right",
+        textfont=dict(size=11),
+        marker=dict(size=16, color=colors, line=dict(width=1, color=COLORS["dark"])),
+        showlegend=False,
+    ))
+    fig.add_vline(x=50, line_dash="dash", line_color=COLORS["accent"], opacity=0.4)
+    fig.add_vline(x=75, line_dash="dash", line_color=COLORS["secondary"], opacity=0.4)
+    fig.update_layout(
+        xaxis_title="Combined Resolution Rate (% of issues acted on → resolved)",
+        yaxis_title="Backlog Clearance (%)",
+        xaxis=dict(range=[-5, 105]),
+        yaxis=dict(range=[-5, 105]),
+    )
+    save_figure(fig, os.path.join(output_dir, "bottleneck-impact-scatter.png"))
 
 
 def print_summary(all_results):
@@ -641,7 +650,7 @@ def main():
     repo_dirs = []
     for entry in sorted(os.listdir(data_dir)):
         full = os.path.join(data_dir, entry)
-        if os.path.isdir(full) and os.path.exists(os.path.join(full, "pulls.json")) and os.path.exists(os.path.join(full, "metadata.json")):
+        if os.path.isdir(full) and os.path.exists(os.path.join(full, "pulls.json")):
             repo_dirs.append(full)
 
     print(f"Found {len(repo_dirs)} repositories in {data_dir}")

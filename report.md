@@ -2,13 +2,13 @@
 
 **Date:** May 14, 2026
 
-**Authors:** Don Syme, Florian Verdonck, Krzysztof Cieślak, Tomas Grosup, Peli de Halleux, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita, Terkel Gjervig Nielsen
+**Authors:** Don Syme, Florian Verdonck, Krzysztof Cieślak, Peli de Halleux, Mara Kiefer, Russell Horton, Tamás Szabó, Landon Cox, Alex Gorischek, David Slater, Idan Gazit, Insop Song, Luke Edwards, Maggie Appleton, Nate Butler, Rahul Pandita, Terkel Gjervig Nielsen
 
 ## Executive Summary
 
-We analyze the impact of Repo Assist, a proactive AI repository agent, across 14 open source repositories that adopted it between February and March 2026. The agent **reduced open issue counts in every repository** — 651 issues net in total. Across all repositories, which were previously largely dormant, **issue closure velocity increased by a median of 9×** and **PR merge velocity by a median of 9×** after adoption, transforming largely dormant projects into actively maintained ones.
+We analyze the impact of Repo Assist, a proactive AI repository agent, across 14 open source repositories that adopted it between February and March 2026. The agent **reduced open issue counts in every repository** — 651 issues total. Across all repositories, which were previously largely dormant, **issue closure velocity increased by a median of 9×** and **PR merge velocity by a median of 9×** after adoption, transforming largely dormant projects into actively maintained ones.
 
-Modeling repositories as **human-agent software factories** reveals that the single most important factor determining outcomes is the rate at which maintainers decide to act on the agent's output: the human is firmly in the loop, and the factory's throughput is gated by human decision-making. Maintainers pushed additional commits to **37% of Repo Assist PRs**, often using Copilot as a secondary agent to extend the work, while the issue reopen rate after agent-assisted closure is just 3.3%.
+Modeling repositories as **human-agent software factories** reveals that, the single most important factor determining outcomes is the rate at which maintainers decide to act on the agent's output: the human is firmly in the loop, and the factory's throughput is gated by human decision-making.
 
 ## Introduction
 
@@ -44,7 +44,19 @@ The velocity increases are large across the board. The median issue closure velo
 
 The mean velocity increase is even larger, but the mean is pulled up by a few repositories (Deedle at 114×, FSharp.Formatting at 129× on PRs) that went from essentially zero prior activity to high throughput. The median is a more representative measure of the typical experience. Full per-repository velocity data is available in [Appendix A](#appendix-a-velocity-data).
 
-## The Repository as Human-Agent Factory
+## Social Factors
+
+It is highly likely that, like all automation technologies, successful use of agentic repository automation will be driven by human-social factors and incentives.
+
+For example, the creator of Repo Assist (@dsyme) was a maintainer and community leader in the software community which adopted Repo Assist here, and was the maintainer of some (but not all) of the repositories analyzed here. This clearly will influence adoption and usage rates.
+
+Repositories with more active maintainers, or more knowledgable maintainers (e.g. original code authors), or where maintainers feel empowered to install and act, or where maintainers see each other succceeding, or where maintainers are actively seeking forward velocity for their project - these are surely more likely to see better outcomes. Those with less active maintainers, or with high levels of risk aversion, or where quality constraints make action impossible - these may struggle to unlock the forward velocity that automated repository assistance can evidently provide.
+
+One maintainer (FsAutoComplete, see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)) explicitly cited **notification anxiety** as a reason for pausing the workflow. This is a well-known dynamic in open source maintenance, and continuous AI automation can amplify it — even when the output is high quality. The ability to **control the rate of automation** either implicitly or explicitly is crucial to maintainer happiness: there is nothing wrong with wanting your factory to operate at a rate suitable to your lifestyle! It lets maintainers control the production rate to match their available bandwidth, rather than being pressured by a stream of AI-generated work.
+
+The adoption of AI automation can also have an impact on the repository as a place of human-to-human collaboration. Most the repositories in this analysis were "dormant" - that is, they had very low human-to-human interaction at point of adoption. This means **there was no significant human-to-human collaboration to impact** and so the impact on human-to-human processes is neither explored nor measurable in this report. However the general impression is that automated AI can be highly corrosive on social platforms and this should be taken into account before adopting any AI automation in a non-dormant repository. Future research should explore the social impact of AI automation in open source communities.
+
+## The Repository as Factory
 
 Why do some repositories achieve near-complete backlog clearance while others barely move? To answer this, we model each repository as a **software factory** — a production system where issues are the raw input, human-agent collaboration is the process, and resolved issues are the output. This factory metaphor is not merely illustrative: it enables the application of well-established production theory to software maintenance.
 
@@ -113,7 +125,7 @@ The repositories fall into four distinct operational states:
 - **FSharp.Stats**: 16 of 18 PRs (89%) sitting unreviewed, avg wait 32.8 days. On the comment path, only 2 of 28 investigated issues were closed — maintainers are ignoring RA's triage output too. Little's Law implies a cycle time of 43.6 days — the pipeline is effectively stalled. The low backlog clearance (7%) is **not** because the workflow is too new; it's because no one is acting on the work it produces.
 - **dowhy**: 43 of 61 PRs (70%) in the review queue, avg wait 18.2 days. On the comment path, only 16 of 87 investigated issues were closed. Arrival rate is 1.15 PRs/day but departure rate is only 0.25/day — a 4.7:1 imbalance.
 
-**4. BLOCKED — REJECTION bottleneck** (fantomas): Maintainers are actively reviewing PRs but rejecting 64% of them (41/64 closed without merge). The WIP queue is low (1 PR) because PRs are being processed — just not accepted. On the comment path, 28 of 75 investigated issues were closed, indicating moderate engagement with RA's triage comments even as PRs are rejected. The maintainer identifies three causes (see [Appendix E](#appendix-e-maintainer-notes--fantomas)): the domain requires holistic judgement that tests alone cannot capture, some open issues represent unresolved design discussions rather than actionable tasks, and the workflow's noise eventually exceeded available bandwidth — leading to a deliberate reduction to monthly cadence rather than full disablement.
+**4. BLOCKED — REJECTION bottleneck** (fantomas): Maintainers are actively reviewing PRs but rejecting 64% of them (41/64 closed without merge). The WIP queue is low (1 PR) because PRs are being processed — just not accepted. On the comment path, 28 of 75 investigated issues were closed, indicating moderate engagement with RA's triage comments even as PRs are rejected.
 
 **5. BLOCKED — MIXED bottleneck** (FsAutoComplete): Both accumulation (14 open PRs, avg wait 44.9 days) and rejection (7 rejected). On the comment path, only 26 of 89 investigated issues were closed. The 61% throughput rate is below the 79–91% seen in well-flowing repos. However, unlike the inaction cases above, this block reflects a **deliberate capacity constraint**: the maintainer reports high satisfaction with merged PR quality (33 RA PRs merged in 2 months = 62% of 2025's total output), but chose to pause the workflow to manage notification pressure during a period of reduced bandwidth (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)). Some rejected PRs were intentionally experimental. This case illustrates that BLOCKED status can reflect legitimate human factors — burnout avoidance, life circumstances — rather than workflow failure.
 
@@ -127,57 +139,16 @@ The ratio between these two measures is diagnostic. If open PRs have been waitin
 
 ![WIP Accumulation](graphs/bottleneck-wip.png)
 
-## Human Engagement and Maintainer Override
+### Summary Classification
 
-A key question for any AI-assisted workflow is: how much does a human need to intervene to correct or extend the agent's output? We measure this along several dimensions: directed invocations (human-initiated runs), code-level modifications (additional commits pushed to RA PR branches), use of secondary AI agents (Copilot assign-to-copilot), code review comments, draft-to-ready approvals, and issue reopen rates.
+Based on the factory analysis, the repositories fall into clear operational tiers:
 
-### Directed Invocations
-
-Across all repositories, **29% of active workflow runs are human interventions** (647 of 2,221) — direct `/repo-assist` invocations where a maintainer explicitly asked the agent to work on a specific issue. A further **23% are additional dispatches** (504 runs) where maintainers manually triggered the workflow from the GitHub Actions UI, dialing up the rate of automation beyond the scheduled cadence. Together, **52% of active runs involved some form of human direction**, with the remaining 48% from scheduled automation.
-
-The human intervention rate varies dramatically by repository. Repos with high human intervention rates (FSharp.Formatting: 52%, Deedle: 47%, fantomas: 41%) also tend to have the highest pipeline throughput — suggesting that active human direction of the agent correlates with better outcomes. GenPRES is a notable outlier with 0% human intervention — reflecting its pure work-queue pattern where the maintainer creates issues and lets the scheduled automation handle them.
-
-### Code-Level Modification Rate
-
-Maintainers pushed additional commits (possibly co-authored using local agents) to **328 of 877 RA PR branches (37.4%)**, contributing 650 human commits. Force pushes (which overwrite the agent's code entirely) occurred exactly **once** (0.1%), but regular pushes — adding commits on top of the agent's work — are common. The modification rate varies widely by repository: FSharp.Formatting (54%), licensee (52%), GenPRES (48%), TaskSeq (46%), and Deedle (44%) show the highest rates, while FsAutoComplete (6%), FSharp.Stats (6%), and TypeProviders.SDK (8%) are lowest.
-
-This reveals a more nuanced review dynamic than simple accept-or-reject. In roughly **two-thirds** of RA PRs, maintainers merge the agent's code without modification. But in **over a third**, maintainers are actively building on the agent's work — pushing fixes, extending implementations, or adjusting details before merging. The agent's PRs serve as both finished proposals *and* useful starting points, depending on the issue complexity and maintainer engagement style.
-
-### Copilot as Secondary Agent
-
-Maintainers also used GitHub Copilot (via assign-to-copilot) to extend RA PR branches, with Copilot commits appearing on **60 of 877 RA PRs (6.8%)** — 115 Copilot commits total. Across all issues (not just RA PRs), **398 unique issues** received `copilot_work_started` events, with 124 of those on RA PRs specifically. This represents a **multi-agent workflow**: Repo Assist creates the initial PR, and maintainers then delegate additional work to Copilot rather than coding manually. SwaggerProvider is the most intensive user (57 RA PRs with Copilot assign, 70 Copilot commits), followed by dowhy (39 RA PRs, 17 commits) and licensee (17 RA PRs, 5 commits).
-
-Copilot also participated as a **code reviewer**: 305 Copilot review comments were left on RA PRs across 7 repositories, compared to 92 human review comments on 54 PRs (6.2%). This suggests some maintainers are using Copilot not just to write additional code but also to review the agent's output — a form of AI-reviewing-AI with human oversight.
-
-### Code Review Comments
-
-Human code review comments (inline PR review comments, not issue comments) were left on **54 of 877 RA PRs (6.2%)** — 92 comments total. The most active reviewers were sergey-tihon (38 comments on SwaggerProvider), nojaf (12 on FSharp.Formatting, 1 on fantomas), dsyme (16 across several repos), and emrekiciman (9 on dowhy). The low rate of human review comments suggests that most RA PRs are evaluated at the whole-PR level (merge or reject) rather than through line-by-line code review — consistent with the draft-to-ready approval pattern.
-
-### Draft-to-Ready Approval
-
-Repo Assist creates PRs as drafts. Before a PR can be merged, a maintainer must explicitly mark it as "ready for review" — a deliberate approval step. Across all repos, **684 of 877 RA PRs (78%) were marked ready by a maintainer**. Of those reviewed (marked ready or explicitly closed), **654 of 795 were merged (82%)**. The remaining 82 open PRs are awaiting review.
-
-### Issue Reopen Rate
-
-Of 671 issues closed after Repo Assist investigation (via the comment path), **22 were subsequently reopened (3.3%)**. This low reopen rate suggests that when RA's investigation leads to issue closure — whether by identifying the issue as already fixed, answering a question, or triaging — the closure is almost always correct. The highest reopen rates were in licensee (25% of 12 closed, 3 reopened) and dotnet/fsharp (11% of 62 closed, 7 reopened), where compiler issue complexity may contribute to premature closures.
-
-### Repo-Specific Norms
-
-Repo Assist does not currently learn or encode repository-specific norms, coding conventions, or maintainer preferences. Its behavior is driven by the repository's code, documentation, and issue context at invocation time, not by accumulated memory of past interactions. This means each invocation starts fresh — the agent does not "learn" from rejected PRs or maintainer feedback. Adding persistent memory of repository norms could potentially reduce the rejection rate (currently 18% of reviewed PRs), particularly in repos like fantomas where domain-specific formatting rules cause high rejection (64%). However, there is also a risk that encoding maintainer preferences creates hidden policy that is difficult to audit or override.
-
-A related limitation is **issue readiness**: the agent treats every open issue as potentially actionable, but some issues — particularly in fantomas — represent unresolved design discussions, behavioural trade-offs, or differing opinions between maintainer and reporter. As the fantomas maintainer notes (see [Appendix E](#appendix-e-maintainer-notes--fantomas)), "an open issue is not necessarily a green light for implementation." A mechanism for maintainers to signal issue readiness (e.g. labels, issue types, or explicit opt-in) could reduce wasted work on issues that are unlikely to produce mergeable PRs.
-
-## Social Factors in the Software Factory
-
-It is highly likely that, like all automation technologies, successful use of agentic repository automation will be driven by human-social factors and incentives.
-
-For example, the creator of Repo Assist (@dsyme) was a maintainer and community leader in the software community which adopted Repo Assist here, and was the maintainer of some (but not all) of the repositories analyzed here. This clearly will influence adoption and usage rates.
-
-Repositories with more active maintainers, or more knowledgable maintainers (e.g. original code authors), or where maintainers feel empowered to install and act, or where maintainers see each other succceeding, or where maintainers are actively seeking forward velocity for their project - these are surely more likely to see better outcomes. Those with less active maintainers, or with high levels of risk aversion, or where quality constraints make action impossible - these may struggle to unlock the forward velocity that automated repository assistance can evidently provide.
-
-Two maintainers explicitly cited **automation fatigue** as a factor. The FsAutoComplete maintainer (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)) cited **notification anxiety** and chose to disable the workflow entirely during a period of reduced bandwidth. The fantomas maintainer (see [Appendix E](#appendix-e-maintainer-notes--fantomas)) described the workflow's value wearing off as it became "too noisy relative to the amount of attention I want to give that project right now" — responding by reducing the cadence to monthly rather than disabling it. Both cases illustrate the same dynamic from different angles: continuous AI automation can amplify the pressure of open source maintenance, even when the output is high quality. The ability to **control the rate of automation** is crucial to maintainer happiness: there is nothing wrong with wanting your factory to operate at a rate suitable to your lifestyle! It lets maintainers control the production rate to match their available bandwidth, rather than being pressured by a stream of AI-generated work.
-
-The adoption of AI automation can also have an impact on the repository as a place of human-to-human collaboration. Most the repositories in this analysis were "dormant" - that is, they had very low human-to-human interaction at point of adoption. This means **there was no significant human-to-human collaboration to impact** and so the impact on human-to-human processes is neither explored nor measurable in this report. However the general impression is that automated AI can be highly corrosive on social platforms and this should be taken into account before adopting any AI automation in a non-dormant repository. Future research should explore the social impact of AI automation in open source communities.
+- **IDLE (backlog cleared)**: FSharp.Data, Deedle, SwaggerProvider, AsyncSeq, GenPRES — these factories have processed their backlogs and are input-starved. Maintainers actively engaged with both the comment and PR paths, achieving 69–100% backlog clearance.
+- **FLOWING**: TaskSeq, FSharp.Formatting, TypeProviders.SDK, licensee — pipeline operating normally with work still in progress. Maintainers keeping pace with agent output.
+- **BLOCKED — Inaction**: FSharp.Stats, dowhy — the agent is generating both PRs and investigation comments but the factory is stalled at human action on **both** paths. **The constraint is maintainer engagement, not issue complexity.** Unlocking these repos requires maintainers to review the existing PR queue and act on the agent's triage comments.
+- **BLOCKED — Rejection**: fantomas — maintainers are engaged but the automated PRs don't meet the codebase's exacting standards. The comment path is partially flowing (28/75 closed), suggesting the agent's investigation/triage function adds value even when its code changes are rejected.
+- **BLOCKED — Mixed**: FsAutoComplete — accumulation and some rejection on the PR path, with low action on the comment path (26/89). However, the maintainer reports high satisfaction with merged PR quality and paused the workflow deliberately to manage notification load during reduced bandwidth — a legitimate capacity constraint rather than disengagement (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)).
+- **COMMENT-ONLY**: dotnet/fsharp — deployed in a limited configuration using only the comment/investigation path on old issues, with no PR creation. On a much larger and already-active repository (1,225 open issues at adoption, 8.69 issues closed/week pre-adoption), the agent investigated 87 old issues with a 62% closure rate on investigated issues, contributing to a 1.6× increase in issue closure velocity.
 
 ## Per-Repository Detail
 
@@ -217,8 +188,6 @@ Went from 153 open issues to just 1 — a complete backlog clearance. Issue clos
 *Adopted 2026-02-23 · Pipeline BLOCKED (rejection)*
 
 120 → 74 open issues. Pipeline analysis reveals a **rejection bottleneck** on the PR path: maintainers are actively reviewing Repo Assist PRs but rejecting 64% of them (41 of 64 closed without merge). The WIP queue is low (1 PR), meaning PRs are being processed promptly (0.6d avg merge cycle) — they just don't meet the codebase's exacting standards. On the comment path, 28 of 75 investigated issues were closed, showing moderate engagement with the agent's triage function. The 34% PR throughput ratio reflects the domain complexity of formatting behaviour, but the comment path provides additional value — the dual-path model shows the agent contributing to issue resolution even when its code changes are rejected.
-
-The maintainer's perspective (see [Appendix E](#appendix-e-maintainer-notes--fantomas)) adds important nuance. First, the workflow **did rekindle engagement** — the maintainer reports a "renewed spark" with the project. But the high rejection rate reflects three structural challenges: (1) **formatting requires holistic judgement** — a fix can pass all tests while moving the implementation in an undesirable direction, and it is often easier to close the PR and redo the work manually than to steer corrections; (2) **issue ambiguity** — some open issues represent unresolved design discussions or differing opinions, not actionable engineering tasks, and the agent cannot distinguish between them; (3) **bandwidth mismatch** — as the project is not the maintainer's primary focus, the automation's output eventually exceeded available attention. The maintainer responded by reducing the workflow to a monthly cadence rather than disabling it entirely — a **rate-limiting** strategy rather than rejection of the tool.
 
 ![fantomas Open Issues](graphs/fsprojects-fantomas/open-issues-over-time.png)
 ![fantomas Merge Rate](graphs/fsprojects-fantomas/merge-rate.png)
@@ -318,28 +287,30 @@ Repo Assist workflow runs fall into three categories:
 - **Automated (additional)**: Manual dispatch from the GitHub Actions UI — where a maintainer explicitly dialed up the rate of automation beyond the scheduled cadence.
 - **Human intervention (/repo-assist)**: Event-triggered runs that actually executed — issue comments, PR review comments, issue events, and PR events that passed the workflow's pre-activation check. These represent actual `/repo-assist` invocations where a human triggered the agent to investigate a specific issue.
 
-| Repository | Active Runs | Runs/wk | Automated (scheduled) | Automated (additional) | Human intervention |
-|---|---|---|---|---|---|
-| dotnet/fsharp | 391 | 47.2 | 283 | 12 | 96 |
-| FSharp.Formatting | 338 | 30.3 | 73 | 90 | 175 |
-| TypeProviders.SDK | 209 | 20.3 | 39 | 151 | 19 |
-| FsAutoComplete | 142 | 19.5 | 52 | 50 | 40 |
-| FSharp.Data | 216 | 19.4 | 71 | 95 | 50 |
-| Deedle | 151 | 17.1 | 36 | 44 | 71 |
-| fantomas | 143 | 13.2 | 83 | 2 | 58 |
-| SwaggerProvider | 112 | 12.7 | 63 | 9 | 40 |
-| TaskSeq | 103 | 11.6 | 69 | 16 | 18 |
-| dowhy | 91 | 11.2 | 80 | 5 | 6 |
-| licensee | 106 | 10.8 | 70 | 1 | 35 |
-| AsyncSeq | 95 | 8.8 | 43 | 24 | 28 |
-| GenPRES | 78 | 7.2 | 77 | 1 | 0 |
-| FSharp.Stats | 46 | 6.6 | 31 | 4 | 11 |
+An important subtlety: the workflow's trigger configuration includes `issue_comment`, `pull_request_review_comment`, and `pull_request` events primarily so it can detect `/repo-assist` slash commands in comments. Most of these triggered runs are **immediately skipped** by the workflow's pre-activation check when no `/repo-assist` command is found. Additionally, some runs conclude with `cancelled` or `action_required` status and never actually execute. Across all repos, **63% of all workflow runs (3,810 of 6,031) never executed** and are excluded. The analysis below counts only *active* runs — those that actually proceeded to execute the agent.
+
+| Repository | Total Runs | Active | Runs/wk | Automated (scheduled) | Automated (additional) | Human intervention |
+|---|---|---|---|---|---|---|
+| dotnet/fsharp | 1215 | 391 | 47.2 | 283 | 12 | 96 |
+| FSharp.Formatting | 703 | 338 | 30.3 | 73 | 90 | 175 |
+| TypeProviders.SDK | 274 | 209 | 20.3 | 39 | 151 | 19 |
+| FsAutoComplete | 325 | 142 | 19.5 | 52 | 50 | 40 |
+| FSharp.Data | 372 | 216 | 19.4 | 71 | 95 | 50 |
+| Deedle | 234 | 151 | 17.1 | 36 | 44 | 71 |
+| fantomas | 310 | 143 | 13.2 | 83 | 2 | 58 |
+| SwaggerProvider | 531 | 112 | 12.7 | 63 | 9 | 40 |
+| TaskSeq | 293 | 103 | 11.6 | 69 | 16 | 18 |
+| dowhy | 358 | 91 | 11.2 | 80 | 5 | 6 |
+| licensee | 251 | 106 | 10.8 | 70 | 1 | 35 |
+| AsyncSeq | 117 | 95 | 8.8 | 43 | 24 | 28 |
+| GenPRES | 978 | 78 | 7.2 | 77 | 1 | 0 |
+| FSharp.Stats | 70 | 46 | 6.6 | 31 | 4 | 11 |
 
 ![Invocation Rate by Type](graphs/invocation-rate-by-type.png)
 
-### Human Intervention Rates
+### Human Intervention as a Measure of Engagement
 
-The breakdown of human vs. automated runs is discussed in detail in [Human Engagement and Maintainer Override](#human-engagement-and-maintainer-override) above. The key finding: 29% of active runs are human-directed `/repo-assist` invocations and 23% are additional manual dispatches, with the remaining 48% from scheduled automation.
+Across all repositories, **29% of active workflow runs are human interventions** (647 of 2,221) — direct `/repo-assist` invocations where a maintainer explicitly asked the agent to work on a specific issue. The remaining 71% is automated: 48% from scheduled runs and 23% from additional dispatched runs. The human intervention rate is particularly informative: it represents a maintainer choosing to direct the agent's efforts — a synchronous intervention in the software factory. Repos with high human intervention rates (FSharp.Formatting: 52%, Deedle: 47%, fantomas: 41%) also tend to have the highest pipeline throughput. GenPRES is a notable outlier with 0% human intervention — reflecting its pure work-queue pattern where the maintainer creates issues and lets the scheduled automation handle them.
 
 ![Activity Over Time](graphs/invocation-over-time.png)
 
@@ -353,9 +324,8 @@ The breakdown of human vs. automated runs is discussed in detail in [Human Engag
 - **Limitations**: This analysis measures correlation, not strict causation. The adoption of Repo Assist may have coincided with increased human maintainer activity. However, the consistency of the pattern across all 14 repositories — and the near-zero baseline activity in many repos before adoption — strongly suggests Repo Assist is the primary driver. The non-F# repos (dowhy, licensee) provide cross-ecosystem validation.
 - **Issue quality caveat**: Some closed issues may have been closed as "won't fix" or triaged rather than fixed. The current analysis counts all closures equally. A more nuanced analysis could distinguish closure reasons.
 - **Pipeline bottleneck analysis**: Models the repository as a multi-stage human-agent software factory. Uses Little's Law ($L = \lambda W$) to compute implied cycle times and identify WIP accumulation. Throughput ratio (PRs merged / PRs created) is the primary bottleneck metric. Bottleneck types are classified as: INACTION (high WIP, low review activity), REJECTION (high rejection rate, low WIP), or MIXED (both). Status levels: BLOCKED (score ≥5), FLOWING (0), IDLE (≤5 open issues and ≤2 open PRs with no bottleneck).
-- **Workflow invocation analysis**: Uses the GitHub Actions API to retrieve all runs of the "Repo Assist" workflow. The workflow's trigger configuration includes `issue_comment`, `pull_request_review_comment`, and `pull_request` events primarily so it can detect `/repo-assist` slash commands in comments. Most of these triggered runs are **immediately skipped** by the workflow's pre-activation check when no `/repo-assist` command is found. Additionally, some runs conclude with `cancelled` or `action_required` status and never actually execute. Across all repos, **63% of all workflow runs (3,810 of 6,031) never executed** and are excluded — only *active* runs that actually proceeded to execute the agent are counted. Active runs are classified into three categories: *Automated (scheduled)* (cron-triggered), *Automated (additional)* (manual dispatch from the Actions UI), and *Human intervention (/repo-assist)* (event-triggered runs that passed pre-activation — issue comments, PR comments, issue events, PR events). The human intervention ratio measures direct maintainer engagement with the workflow.
+- **Workflow invocation analysis**: Uses the GitHub Actions API to retrieve all runs of the "Repo Assist" workflow. **Runs with "skipped", "cancelled", or "action_required" conclusions are excluded** — these represent trigger firings that never actually executed the agent (e.g. `issue_comment` events where no `/repo-assist` command was found, or runs awaiting approval). Active runs are classified into three categories: *Automated (scheduled)* (cron-triggered), *Automated (additional)* (manual dispatch from the Actions UI), and *Human intervention (/repo-assist)* (event-triggered runs that passed pre-activation — issue comments, PR comments, issue events, PR events). The human intervention ratio measures direct maintainer engagement with the workflow.
 - **Dual-path model**: Repo Assist produces two types of output per issue: investigation comments (comment path) and draft PRs (PR path). Bot comments are detected via `github-actions[bot]` comments containing "automated response from Repo Assist". PR-path issues are identified by comments mentioning "Pull request created". Issues resolved via the comment path are those with investigation comments where the issue was subsequently closed without a PR being created.
-- **Maintainer override analysis**: Code-level modifications are measured by fetching commit lists for all 877 RA PRs via the GitHub API (`/repos/{owner}/{repo}/pulls/{number}/commits`). Commits authored by `github-actions[bot]`, `web-flow`, or `actions-user` are classified as bot/system commits. Commits by `Copilot` are classified as Copilot agent commits (from assign-to-copilot). All other commits are classified as human pushes. Force pushes are detected via `head_ref_force_pushed` events on RA PR branches by non-bot actors. Copilot assign usage is measured via `copilot_work_started` events. Code review comments are downloaded via the pull review comments API (`/repos/{owner}/{repo}/pulls/comments`); comments by `github-actions[bot]`, `github-advanced-security[bot]`, and `greptile-apps[bot]` are classified as bot comments, `Copilot` as Copilot review comments, and all others as human review comments. Draft-to-ready transitions are measured via `ready_for_review` events by non-bot actors. Issue reopen rate is measured by `reopened` events on RA-investigated issues (post-adoption only, excluding RA PRs from the denominator).
 
 ## Data & Scripts
 
@@ -459,19 +429,3 @@ The following are lightly edited notes from the FsAutoComplete maintainer (Krzys
 > * Keeping it enabled while I didn't had time created a bit of "notification anxiety" thing, that probably many of maintainers know well - you know, you wake up, open GH and see whole bunch of notifications, and you're like "oh no my life sucks"
 
 *Editorial note: The exact numbers confirm the maintainer's observation — 33 Repo Assist PRs were merged in the ~2 month active period (Feb 22 – Apr 15, 2026), compared to 53 total PRs merged across all of 2025. This represents 62% of a full year's output in roughly one-sixth of the time.*
-
-### Appendix E: Maintainer Notes — fantomas
-
-The following are lightly edited notes from the fantomas maintainer (Florian Verdonck / @nojaf), providing qualitative context for the high rejection rate observed in that repository.
-
-> A few observations from using repo-assist on Fantomas:
->
-> 1. **It did rekindle some engagement.** Repo-assist genuinely gave me a renewed spark with Fantomas for a while. That part was real. But over time it became a bit too noisy relative to the amount of attention I want to give that project right now. Fantomas is not my main focus these days, so I reduced the frequency of repo-assist interactions to monthly. Eventually the value wore off more because of that mismatch than because of any one specific failure mode.
->
-> 2. **Fantomas is a difficult target because many fixes need broader judgement.** For a formatter, a change can fix one reported case while moving the implementation in a direction that is not actually desirable overall, or by breaking other cases. Sometimes tests catch that, sometimes they do not, and sometimes you can simply tell the fix is too specific or not in the right spirit even if the tests pass. In those cases, it was often easier to close the PR and redo it myself than to try to steer multiple rounds of correction.
->
-> 3. **Not every open issue is really implementation-ready.** Some Fantomas issues are not straightforward engineering tasks. They are closer to unresolved discussions about behaviour, trade-offs, or differing opinions between me and the reporter. As maintainer, I do not always want to close those immediately, so they can remain open for a while. But that means an open issue is not necessarily a green light for implementation. Repo-assist sometimes treated those limbo issues as actionable, which led to PRs that were unlikely to land from the start.
->
-> I think those three things explain a fair bit of why there were so many closed PRs in that repo.
-
-*Editorial note: The maintainer's feedback highlights three distinct causes of rejection: (1) automation fatigue — the workflow's value diminished as it exceeded the maintainer's available bandwidth, leading to a deliberate rate reduction; (2) domain complexity — formatting correctness requires holistic judgement that cannot be captured by test coverage alone, making it cheaper to redo than to steer; and (3) issue ambiguity — some open issues represent unresolved design discussions rather than actionable tasks, and the agent cannot distinguish between them. The maintainer ultimately reduced the workflow to a monthly cadence rather than disabling it entirely.*

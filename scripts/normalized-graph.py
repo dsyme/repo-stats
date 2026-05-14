@@ -13,11 +13,8 @@ import os
 import sys
 from datetime import datetime, timedelta, timezone
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
-import numpy as np
+import plotly.graph_objects as go
+from chart_theme import make_figure, save_figure, add_adoption_vline_at_zero, COLORS, PALETTE, STATUS_COLORS
 
 
 def parse_dt(s):
@@ -32,19 +29,15 @@ def load_json(path):
         return json.load(f)
 
 
-def is_bot_issue(issue):
-    """Return True if the issue is a bot-created infrastructure artifact that should be excluded."""
-    return issue.get("user", {}).get("login") == "github-actions[bot]"
-
-
-def filter_issues(issues):
-    """Filter out bot-created infrastructure issues."""
-    return [i for i in issues if not is_bot_issue(i)]
+def load_json_safe(path):
+    if os.path.exists(path):
+        return load_json(path)
+    return []
 
 
 def detect_repo_assist_adoption(data_dir):
     pulls = load_json(os.path.join(data_dir, "pulls.json"))
-    issues_raw = load_json(os.path.join(data_dir, "issues-raw.json"))
+    issues_raw = load_json_safe(os.path.join(data_dir, "issues-raw.json"))
     ra_dates = []
     for pr in pulls:
         title = pr.get("title", "")
@@ -66,7 +59,7 @@ def detect_repo_assist_adoption(data_dir):
 def compute_open_issues_timeline(data_dir, day_range=(-90, 90)):
     """Compute daily open issue count relative to adoption date."""
     meta = load_json(os.path.join(data_dir, "metadata.json"))
-    issues = filter_issues(load_json(os.path.join(data_dir, "issues.json")))
+    issues = load_json(os.path.join(data_dir, "issues.json"))
     adoption = detect_repo_assist_adoption(data_dir)
 
     if not adoption:
@@ -124,7 +117,12 @@ def compute_open_issues_timeline(data_dir, day_range=(-90, 90)):
 
 def generate_graph(all_timelines, output_path, bottleneck_data=None):
     """Generate the multi-line normalized graph."""
-    fig, ax = plt.subplots(figsize=(14, 8))
+    fig = make_figure(
+        title="Open Issue Trajectories Normalized to Adoption Date<br>"
+              "<sup>each line = one repository, 100% = open issues at adoption, dashed = blocked pipeline</sup>",
+        width=1200,
+        height=700,
+    )
 
     # Load bottleneck status for coloring if available
     bottleneck_status = {}
@@ -132,57 +130,45 @@ def generate_graph(all_timelines, output_path, bottleneck_data=None):
         for r in bottleneck_data:
             bottleneck_status[r["repo"]] = r.get("bottleneck_status", "FLOWING")
 
-    # Color and style by bottleneck status
-    status_styles = {
-        "BLOCKED": {"linestyle": "--", "alpha": 0.8, "linewidth": 2.0},
-        "CONSTRAINED": {"linestyle": "-", "alpha": 0.8, "linewidth": 2.0},
-        "MINOR": {"linestyle": "-", "alpha": 0.8, "linewidth": 2.0},
-        "FLOWING": {"linestyle": "-", "alpha": 0.8, "linewidth": 2.0},
-    }
-
-    # Use a colormap for distinct lines
-    cmap = plt.cm.tab10
-    colors = [cmap(i / len(all_timelines)) for i in range(len(all_timelines))]
-
     # Sort by final normalized value (most reduction first)
     all_timelines.sort(key=lambda t: t["normalized"][-1])
 
     for i, tl in enumerate(all_timelines):
         repo_short = tl["repo"].split("/")[1] if "/" in tl["repo"] else tl["repo"]
         status = bottleneck_status.get(tl["repo"], "FLOWING")
-        style = status_styles.get(status, status_styles["FLOWING"])
 
         label = f"{repo_short}"
         if status == "BLOCKED":
             label += " ⊘"
 
-        ax.plot(tl["days"], tl["normalized"],
-                label=label,
-                color=colors[i],
-                linewidth=style["linewidth"],
-                linestyle=style["linestyle"],
-                alpha=style["alpha"])
+        color = PALETTE[i % len(PALETTE)]
+        line_dash = "dash" if status == "BLOCKED" else "solid"
 
-    # Adoption line
-    ax.axvline(x=0, color="red", linewidth=1.5, linestyle="-", alpha=0.6, label="Adoption day")
+        fig.add_trace(go.Scatter(
+            x=tl["days"],
+            y=tl["normalized"],
+            mode="lines",
+            name=label,
+            line=dict(color=color, width=2, dash=line_dash),
+            opacity=0.8,
+        ))
 
-    # 100% reference
-    ax.axhline(y=100, color="gray", linewidth=0.5, linestyle=":", alpha=0.5)
+    # Adoption vertical line at x=0
+    add_adoption_vline_at_zero(fig)
 
-    ax.set_xlabel("Days Before / After Repo-Assist Adoption", fontsize=12)
-    ax.set_ylabel("Open Issues (% of count at adoption)", fontsize=12)
-    ax.set_title("Open Issue Trajectories Normalized to Adoption Date\n"
-                 "(each line = one repository, 100% = open issues at adoption, dashed = blocked pipeline)",
-                 fontsize=13)
+    # 100% reference line
+    fig.add_hline(
+        y=100, line_dash="dot", line_color=COLORS["sand"], line_width=1, opacity=0.5,
+    )
 
-    ax.legend(loc="upper right", fontsize=9, ncol=2)
-    ax.grid(True, alpha=0.3)
-    ax.yaxis.set_major_formatter(mticker.PercentFormatter())
+    fig.update_layout(
+        xaxis_title="Days Before / After Repo-Assist Adoption",
+        yaxis_title="Open Issues (% of count at adoption)",
+        yaxis_ticksuffix="%",
+        legend=dict(x=1, xanchor="right", y=1, yanchor="top"),
+    )
 
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=150)
-    plt.close(fig)
-    print(f"Saved: {output_path}")
+    save_figure(fig, output_path)
 
 
 def main():
@@ -193,7 +179,7 @@ def main():
     repo_dirs = []
     for entry in sorted(os.listdir(data_dir)):
         full = os.path.join(data_dir, entry)
-        if os.path.isdir(full) and os.path.exists(os.path.join(full, "issues.json")) and os.path.exists(os.path.join(full, "metadata.json")):
+        if os.path.isdir(full) and os.path.exists(os.path.join(full, "issues.json")):
             repo_dirs.append(full)
 
     # Compute timelines
