@@ -1,0 +1,1370 @@
+[
+  {
+    "author_association": "MEMBER",
+    "body": "nice one :rocket:",
+    "created_at": "2025-08-14T07:14:49Z",
+    "id": 2275694929,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/352",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Adressed in [cbcd5c7](https://github.com/fslaborg/FSharp.Stats/commit/cbcd5c7cfc8ac25d229f8f70011dc8a3f05acbad)",
+    "created_at": "2025-08-14T05:52:18Z",
+    "id": 2275555300,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/352",
+    "user_login": "ZimmerD"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@ZimmerD could you please add a comment which tool was used to determine the true values of the validation data set",
+    "created_at": "2025-08-12T11:32:50Z",
+    "id": 2269553722,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/352",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why is this change necessary? Is it just to align with other tests or is ln(0!) <> 0?",
+    "created_at": "2025-08-04T17:18:30Z",
+    "id": 2252143846,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/348",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yes 👍 ",
+    "created_at": "2024-09-02T16:01:40Z",
+    "id": 1741098242,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "ping",
+    "created_at": "2024-09-02T16:01:18Z",
+    "id": 1741097976,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "ping",
+    "created_at": "2024-09-02T16:01:02Z",
+    "id": 1741097718,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks for the updates!\r\nI'm going to merge this PR if you just could add proper XML docs like seen in:\r\nhttps://github.com/fslaborg/FSharp.Stats/blob/c5444cc52c2e58b92d34f10c0c6de90fc4625433/src/FSharp.Stats/Fitting/LinearRegression.fs#L128-L145\r\n\r\nThe same for line 222 f.",
+    "created_at": "2024-09-02T15:58:38Z",
+    "id": 1741095739,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you please fix these indentations",
+    "created_at": "2024-07-18T15:51:44Z",
+    "id": 1683086754,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You are right, this is supposed to be Pearson. I fixed this.",
+    "created_at": "2024-07-03T14:06:25Z",
+    "id": 1664255261,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "LibraChris"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> I'm not sure if I get whats happening here:\r\n> \r\n> 1. qLengths is a zero-vector that gets filled iteratively for each `i` in line 262\r\n> 2. in line 256 setqOfA is called with the current i. However in l 247 qLength is called at position `i` which always should be 0, because it was initialized with 0. Just after the determination of qLength the value at this specific index is replaced in line 262.\r\n> \r\n> Obviously I miss a step, but is there a possibility to create the qLength by Vector.init (...) rather than keeping it mutable and accessing/mutating it at multiple positions? If not, I'm happy to merge it, but I got confused during my attempt to understand whats happening here..\r\n\r\nThe mutation was done to simplify the function to match the mathematical explanation better. This is one of the things that could be updated when I get to it.",
+    "created_at": "2024-07-03T14:05:59Z",
+    "id": 1664254622,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "LibraChris"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I do not have a direct reference since I had a look at the mathematical explanation for QR via Gram Schmidt and tried implementing it myself. The only real upside using this method instead of the in FSharp.Stats established one is the difference in the output Dimensions in R. An actual reference would be the numpy implantation of the reduced qr https://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html .\r\n\r\nI also think that this implemtation needs to be optimised in the future to perfect the GLM.",
+    "created_at": "2024-07-03T14:04:39Z",
+    "id": 1664252613,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "LibraChris"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "`e` isn't used, is it correct?",
+    "created_at": "2024-06-23T18:26:31Z",
+    "id": 1650158498,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You could use the build in `sign` function",
+    "created_at": "2024-06-23T18:24:37Z",
+    "id": 1650158193,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I assume the `1./2.` and later `-1.-1.` are left on purpose to make the implementation easier to understand :+1:",
+    "created_at": "2024-06-23T18:23:04Z",
+    "id": 1650157989,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm not sure if this is supported by [XML-Documentation](https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/xml-documentation#recommended-tags). In VSCommunity, the styling is not applied. \r\n\r\nI checked if the API-Reference was displayed correctly using `dotnet fsdocs watch --eval` and it didn't work. \r\n\r\nDoes it work on your machine? If not, please use the allowed tags only",
+    "created_at": "2024-06-23T18:19:52Z",
+    "id": 1650157611,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is this field actually called PersonOfZ? I did no research but it seems to me as if standardError and ZScore would be associated to a p-value? ",
+    "created_at": "2024-06-23T18:17:44Z",
+    "id": 1650157267,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you additionally set into <remarks>-brackets a reference to this implementation and a short description what the benefit, drawback is when using this implementation over others.",
+    "created_at": "2024-06-23T17:53:43Z",
+    "id": 1650153302,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm not sure if I get whats happening here:\r\n\r\n1. qLengths is a zero-vector that gets filled iteratively for each `i` in line 262\r\n2. in line 256 setqOfA is called with the current i. However in l 247 qLength is called at position `i` which always should be 0, because it was initialized with 0. Just after the determination of qLength the value at this specific index is replaced in line 262.\r\n\r\nObviously I miss a step, but is there a possibility to create the qLength by Vector.init (...) rather than keeping it mutable and accessing/mutating it at multiple positions? If not, I'm happy to merge it, but I got confused during my attempt to understand whats happening here..\r\n\r\n\r\n\r\n",
+    "created_at": "2024-06-23T17:39:22Z",
+    "id": 1650146774,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I do not understand this test setup. I think you should base the first conditional on the expected value and not on the actual value, e.g. \"If the expected value is infinity then actual should be infinity\", same for the tests below",
+    "created_at": "2024-06-19T10:58:44Z",
+    "id": 1645930041,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Like this?",
+    "created_at": "2024-06-19T09:02:56Z",
+    "id": 1645742527,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "LibraChris"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "In general for XML docs, use the provided tags for annotating things such as input arguments an return values, see more [here](https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/xml-documentation#recommended-tags)",
+    "created_at": "2024-06-19T07:41:21Z",
+    "id": 1645592018,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@kMutagene hey, I changed the code accordingly. Could you have another look if its better now?",
+    "created_at": "2024-06-18T14:24:37Z",
+    "id": 1644561366,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "LibraChris"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You can expose internals to other projects in the repo by adding this attribute in the project file:\r\n\r\n```xml\r\n<ItemGroup> \r\n  <InternalsVisibleTo Include=\"TestProject1\" /> \r\n</ItemGroup>\r\n```",
+    "created_at": "2024-06-13T06:25:12Z",
+    "id": 1637618181,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Doing that would also remove it from the testing I on the stepwise function. You can have a look and tell me if it is ok now.",
+    "created_at": "2024-06-12T15:25:12Z",
+    "id": 1636681072,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "LibraChris"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Allrighty. You can then mark the whole specialized module as internal to avoid leaking any of that stuff in the public API.",
+    "created_at": "2024-06-11T12:40:34Z",
+    "id": 1634813840,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "While some of the functions in QR are highly specialised, some, qrAlternative and solveLinearQR, aren't. The module is needed for future development when I will add a solver based on singular value decomposition, but at the moment it is redundant. \r\n\r\nI will move the the specified functions to LinearAlgebra but keep the rest there if that´s ok.",
+    "created_at": "2024-06-11T11:15:14Z",
+    "id": 1634666993,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "LibraChris"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is this the correct location for a function like this? Are these functions so specialized that nobody ever needs to use them in another context? if not, i'd suggest putting them in the managed LinearAlgebra module, otherwise you can also set the whole QR module here to internal",
+    "created_at": "2024-06-11T09:09:39Z",
+    "id": 1634488789,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/334",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Added XML comments",
+    "created_at": "2023-11-15T08:49:28Z",
+    "id": 1393854546,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "s-weil"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Thanks!\r\ni replaced the seperated params by a tupled sequence.\r\nalso i removed the tupe `LabeledPoint` by just tuples, because it seemed as just overhead ",
+    "created_at": "2023-11-15T08:48:53Z",
+    "id": 1393853771,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "s-weil"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It would be great to have XML comments here :+1:",
+    "created_at": "2023-11-06T08:20:09Z",
+    "id": 1382915981,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I agree with @smoothdeveloper that it would be beneficial if both points and labels are passed as single sequence. This reduces user errors by accidently resorting one of the collections. If you could make this small adjustment, I'll be happy to merge",
+    "created_at": "2023-11-06T08:19:29Z",
+    "id": 1382915290,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I really like the option to have this convenience layer! I think it is okay to have the requiredAccess added to KNN even if one could open KNN.Array. It allows to have `Classifier` protected and prevent confusion",
+    "created_at": "2023-10-30T13:58:57Z",
+    "id": 1376269351,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Again, thanks!\r\n\r\nSo indeed I added the `RequireQualifiedAccess` to prevent misuse of the `Classifier` and  `predict` functions.\r\nMoving the  `RequireQualifiedAccess` to `Array` and `Seq` would leave the `Classifier` 'unprotected' (currently it needs to constructued with `KNN.Classifier`) and I could move it to `Array` too or some new module or simply rename it to `KnnClassifier`. \r\n\r\nThe intention of the `Classifier` versus the `Array.predict` / `Seq.predict` versions was a more Python style version more functional style use. Moreover the `Classifier` provides convencience methods to construct the data in the required format, and to run single and multiple predictions.\r\nUltimately I am not sure of what the best versions are in terms of best 'user experience'.\r\n\r\nHappy for your thoughts and feedback!\r\n",
+    "created_at": "2023-10-29T05:24:02Z",
+    "id": 1375371103,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "s-weil"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Good point, will add it",
+    "created_at": "2023-10-29T05:11:09Z",
+    "id": 1375370042,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "s-weil"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Many thanks for the valuable feedback!\r\nIndeed, I also believe it would be clearer to have a single sequence of tuples, and the array version uses the type 'LabeledPoint' (which is nothing more than a more descriptive tuple).\r\n\r\nThe reason for this outcome, was the motivation by the existing Python versions, see e.g. [here](https://www.analyticsvidhya.com/blog/2021/04/simple-understanding-and-implementation-of-knn-algorithm/) (Step 2)\r\nwhich uses the seperate arguments, as well as the need to construct the tuple seq in case you started with seperate data (ofc. the converse argument also holds).\r\n\r\nThat being said, I am happy to change it as suggested. What do you think?",
+    "created_at": "2023-10-29T05:08:48Z",
+    "id": 1375369811,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "s-weil"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Suggesting adding a comment that explains it will fail if both arrays aren't of same length",
+    "created_at": "2023-10-27T11:00:40Z",
+    "id": 1374408713,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "smoothdeveloper"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Technically, it would be better to put `RequireQualifiedAccess` attribute on the `Array` and `Seq` modules, as it is possible to open KNN.Array/Seq otherwise.\r\n\r\nI'm assuming:\r\n* those members aren't destined for raw usage from client code\r\n* the attribute on KNN is to discourage ambiguous usage of `predict` to surface in client code\r\n* we are encouraging the usage of `Classifier` type\r\n\r\n",
+    "created_at": "2023-10-27T10:59:56Z",
+    "id": 1374407947,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "smoothdeveloper"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Would it be better to pass on the consumer the need to put both points and labels in a single sequence of tuples?\r\n\r\nIt would make the interface more conforming to the array implementation and save two calls to Seq.length.",
+    "created_at": "2023-10-27T10:52:26Z",
+    "id": 1374399485,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/310",
+    "user_login": "smoothdeveloper"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "you can also find this logic in the `cityblock` function versions with the generic inputs.\r\nIf you use an  `abs` here the compiler casts it to a float.\r\n",
+    "created_at": "2023-10-06T04:21:20Z",
+    "id": 1348228138,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/308",
+    "user_login": "s-weil"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Sorry, my previous comment may was unclear. I wondered why instead of using `abs` you defined your own `abs difference` function\r\n\r\n```fsharp\r\nlet diff =\r\n    if v1.[i] > v2.[i] then\r\n        v1.[i] - v2.[i] \r\n    else\r\n        v2.[i] - v1.[i]\r\n```\r\n\r\nThis could be changed to `abs (v1.[i] - v2.[i])`",
+    "created_at": "2023-10-05T11:39:13Z",
+    "id": 1347284028,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/308",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Thanks. This is indeed incorrect in the summary. \r\nCorrected.",
+    "created_at": "2023-10-04T15:22:41Z",
+    "id": 1346066466,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/308",
+    "user_login": "s-weil"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Other functions, such as `cityblockNaN` used `System.Math.Abs`\r\nSo I wanted to keep it aligned, but I am more than happy to change it\r\n\r\nUpdated",
+    "created_at": "2023-10-04T15:19:28Z",
+    "id": 1346061490,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/308",
+    "user_login": "s-weil"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "If I understand this correctly, this function results in (Some nan) if a sequence contains at least one nan. \r\nTherefore I would suggest changing \"ignores nan\" to \"<remark>Returns nan if sequences contain nan</remark>\".",
+    "created_at": "2023-10-04T07:49:42Z",
+    "id": 1345349487,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/308",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is there a reason you didnt use `abs (v1.[i] - v2.[i])` to determine the absolute difference?",
+    "created_at": "2023-10-04T07:44:33Z",
+    "id": 1345342904,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/308",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Nice. Comments like this put everybody on the same boat 😊 ",
+    "created_at": "2023-09-30T12:13:15Z",
+    "id": 1341952450,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/305",
+    "user_login": "valbers"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Sure. Sorry, it seems like I missed this one. But you're right, some of the current comments are not helping 😄 ",
+    "created_at": "2023-09-30T09:58:31Z",
+    "id": 1341939381,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/301",
+    "user_login": "valbers"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Good point. Additionally, it seems that `dof2` is irrelevant for determining the value of `Support`, so this parametert can be removed too.",
+    "created_at": "2023-09-30T09:54:29Z",
+    "id": 1341939001,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/301",
+    "user_login": "valbers"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Because interval is -infinity, the interval should be open. Sorry about the misleading comments above each distribution support. Could you exchange exponential with the appropriate distribution discription for each distribution? If not, no worries I can take care of if, just let me know.",
+    "created_at": "2023-09-30T09:35:26Z",
+    "id": 1341937196,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/301",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I assume the description is an artifact from the exponential distribution (basically it says so in the /// comment) and the interval should be (0,inf). The same may apply to LogNormal\r\n\r\nReference\r\n- https://en.wikipedia.org/wiki/Gamma_distribution",
+    "created_at": "2023-09-30T09:32:24Z",
+    "id": 1341936717,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/301",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It seems like the support of the F distribution is dependent on the degrees of freedom used (dof1). At least [here](https://en.wikipedia.org/wiki/F-distribution) it says that its either [0,inf) or (0,inf) depending on dof1 beeing 1 or not. Do you have some thoughts if its correct to match dof1 beeing 0, or 1 respectively and then return different intervals?\r\n",
+    "created_at": "2023-09-30T09:30:41Z",
+    "id": 1341936474,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/301",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bvenn thanks for digging into those considerations, and clarifying that algorithms can definitely come up with non finite values, even with inputs that are \"sanitized\".\r\n\r\nOverall, the point I was bringing is more a general design concern, not specific to SAM, so I am not suggesting to move to change anything, but yes, your code example 100% grasps the idea that there could be different behaviours that can be useful.\r\n\r\nI'll let this sit for a bit and consider how to bring it as a discussion topic, but you'd probably do a better job at initiating such discussion, especially if you bring actual examples where you'd like to use the same function in different contexts, to handle those non finite values in data exploration, or production.\r\n\r\nI also feel, to address such concern the best, we'd need some F# wizards, I could see for example that computation expression could be leveraged to specify the intent and give the library an \"ambient context\".\r\n\r\nFrom language perspective, it makes me think of C# handling of overflow with the `checked` and `unchecked` keywords https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/checked-and-unchecked",
+    "created_at": "2023-07-10T16:08:26Z",
+    "id": 1258485278,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/272",
+    "user_login": "smoothdeveloper"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "For context: The check for non finite values that this PR tackles is not referring to the initial values. Internally, a statistic is calculated by using both input collections. Even if these contain valid/finite data, the statistic can become non finite. This is absolutely okay, but must be taken care of in subsequent calculations, which is done by this exact filter step.\r\n\r\n\r\nI'm not quite sure if I get your point completely, so let me rephrase your suggestions:\r\n\r\nIf the input data for SAM contains non finite values, currently the result is empty as you showed. This is valid because SAM cannot report significant bioitems if one contains abundances that are non finite. You suggest an optional parameter that defines how to proceed if the input contains non-finite values. In theory this would be a union type that defines different paths to follow for many of the analysis methods within FSharp.Stats:\r\n\r\n```fsharp\r\ntype HandleNonFiniteValues =\r\n    | PropagatesNonFiniteValues\r\n    | DiscardsNonFiniteValues \r\n    | FailsOnNonFiniteValues\r\n    | ...\r\n\r\n\r\nmodule SAM\r\n    let twoClassUnpaired iterations fdr data1 data2 rnd (handleNaN: HandleNonFiniteValues) =\r\n        let data1Filtered,data2Filtered = \r\n            match handleNaN with\r\n                | FailsOnNonFiniteValues -> //if data1 or data2 contains nan|infinity then failwithf\r\n                | PropagatesNonFiniteValues -> data1,data2\r\n                | DiscardsNonFiniteValues ->  \r\n                    Seq.zip data1 data2\r\n                    |> Seq.filter (fun (a,b) -> //filter if a and b contains finite data\r\n                    |> Seq.unzip\r\n                | _ -> ...\r\n        // proceed with SAM\r\n\r\n```\r\n\r\nWhile I like the gained convenience, I see two problems with this procedure:\r\n\r\n1. There are various ways to deal with these cases throughout the library. There are a ton of ways how to deal with this situation and each must be carefully tackled. The data could be filtered, imputed by KNN or random, replaced by 0., or somehow transformed. I'm not entirely sure if the various options to choose from would make the life easier for the user. \r\nA default value would be a way to deal with it, but I don't think there is a sensible default procedure for most of our methods (including SAM).\r\n2. The bigger problem I see is the inability for the user to see problems with the initial data. In data science I try to always have the control over my data and frequently check the current status. You would want to know if there is any data that don't meet the expectations for a methodology. \r\nIf the SAM-result is as you showed, it is clear, that there is something going on with the input data. As analyst you now should check your data and do the filtering yourself before starting new SAM attempt. I personally think of it as advantage to be in full control of the data and don't have the data filtered internally using defaults.\r\n\r\nHowever, I think it is a great idea to provide multiple ways to deal with `nan`s in the inputs! But I think these should be specialised for each workflow with a sensible collection of applicable filters/transformations. Additionally, the parameter should either be mandatory so the user is in full control, or the default should be to **not**  transform or filter the inputs in any way.\r\n\r\n@smoothdeveloper is this what you meant?",
+    "created_at": "2023-07-10T14:54:37Z",
+    "id": 1258392506,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/272",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bvenn I've updated SAM to use `isInf`, thanks for the feedback!",
+    "created_at": "2023-07-10T13:59:33Z",
+    "id": 1258317062,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/272",
+    "user_login": "smoothdeveloper"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bvenn @zieglerSe I tried using the SAM module, it doesn't seem to behave differently by adding the extra check, if a sample contains either `-infinity`, `infinity` or `nan`, the results won't be usable as the fields that contextualizes the sample among the others will be `nan`, and the `*SigBioitem` will be empty.\r\n\r\n<img width=\"565\" alt=\"image\" src=\"https://github.com/fslaborg/FSharp.Stats/assets/87944/f9bc13ae-f2d1-430b-9bee-16de0c108069\">\r\n\r\nI think it would be good to ponder on the semantics that modules want to have, in terms of handling those non finite values, but I'm not a domain expert.\r\n\r\nIn \"ideal world\", I'd want algorithms that compose the statistical functions, to have a \"statically verifiable\" behaviour in terms of what those non finite values do.\r\n\r\n* if all is to be baked statistically, having attributes (say `PropagatesNonFiniteValues` or `DiscardsNonFiniteValues` or `FailsOnNonFiniteValues`), and unit tests that would verify if these hold true\r\n* or if we want this to be a runtime choice (which I think is nice to consider), the algorithms would have a default behaviour advertised in their documentation, and honour a runtime preference, by calling a preprocessing function over the data, or some other solution to this design problem\r\n\r\nI don't have the perspective of what end user wants, and also, in terms of making it tractable for contributors, to consider those aspects when new modules are added.\r\n\r\ncc: @charlesroddie\r\n",
+    "created_at": "2023-07-10T13:56:10Z",
+    "id": 1258311910,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/272",
+    "user_login": "smoothdeveloper"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "As discussed in #273 it can be changed to `isInf` 👍 ",
+    "created_at": "2023-07-06T13:58:54Z",
+    "id": 1254484793,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/272",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@zieglerSe could you check, if negative infinity is a case that should be covered?\r\n\r\n\r\n```fsharp\r\n//example that result in -infinity\r\n(-10. / 0.) // gives -infinity\r\n(10. / -0.) // gives -infinity\r\n```",
+    "created_at": "2023-07-06T06:04:30Z",
+    "id": 1253976177,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/272",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Hi @bvenn thanks for adding this functionality!\r\nI just happened to notice something. Shouldn't `Array` on line 1241 be `Seq` instead?",
+    "created_at": "2023-03-08T13:53:08Z",
+    "id": 1129463341,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/251",
+    "user_login": null
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I started implementing it in the `Array` module because I assume it will be used here most often. After consideration of list, vector and sequences I moved it to `Seq` and refererenced it accordingly. It would definetely cause performance loss but maintaing four copies of the same method would be cumbersome. I'm going to keep it in mind and if efficiency problems arise, specialized functions will be added.",
+    "created_at": "2023-03-07T18:51:58Z",
+    "id": 1128399717,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/251",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I might be naive here and don't know enough about lazy evaluation of sequences, but are we creating a sequence and then iterating it to create a list from it, meaning this results in double the runtime? At least for array i can imagine that there could be a more optimized way of initializing it. However if small, the speed decrease might be worth it to have no code duplication.",
+    "created_at": "2023-03-07T18:24:23Z",
+    "id": 1128357159,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/251",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I would suggest to use actual xml documentation, that way we can benefit from the power of fsdocs api docs generation. In this case i would change the docs to the following:\r\n\r\n```fsharp\r\n/// <summary>\r\n/// Creates an float array from an given interval.\r\n/// </summary>\r\n/// <param name=\"start\">start value (is included)</param>\r\n/// <param name=\"stop\">end value (by default is included )</param>\r\n/// <param name=\"Num\">sets the number of elements in the array. If not set, stepsize = 1.</param>\r\n/// <param name=\"IncludeEndpoint\">If false, array does not contain stop value</param>\r\nstatic member linspace(start:float,stop:float,?Num:int,?IncludeEndpoint:bool) : float [] = \r\n...\r\n```\r\n\r\nI would try to use this documentation style for every new addition, and maybe slowly adding it to old stuff when adequate.\r\n\r\n### Why?\r\n\r\njust take a look at what can be auto generated from that here: https://plotly.net/reference/plotly-net-chart.html\r\n\r\nYou also have the additional benefit of IDEs showing the param hints as tooltips:\r\n![image](https://user-images.githubusercontent.com/21338071/223514002-f9219ebe-66d2-4a62-adc6-06ffba4e36fc.png)\r\n\r\n\r\n",
+    "created_at": "2023-03-07T18:22:08Z",
+    "id": 1128353872,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/251",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "shouldnt it be:\r\n\r\n```fsharp\r\nlet PosSigBioitem = getQvals |> Array.filter (fun x -> x.Statistics >= upperCut)\r\nlet NegSigBioitem = getQvals |> Array.filter (fun x -> x.Statistics <= lowerCut)\r\nlet NonSigBioitem = getQvals |> Array.filter (fun x -> x.Statistics > lowerCut && x.Statistics < upperCut)\r\n```",
+    "created_at": "2022-12-08T14:13:59Z",
+    "id": 1043400587,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think it should be:\r\n```fsharp\r\nlet posExpected = expected.[res.NegSigBioitem.Length + res.NonSigBioitem.Length .. res.NegSigBioitem.Length + res.NonSigBioitem.Length + res.PosSigBioitem.Length-1]\r\nlet nonex = expected.[res.NegSigBioitem.Length .. res.NegSigBioitem.Length + res.NonSigBioitem.Length-1]\r\nlet negex = expected.[0 .. res.NegSigBioitem.Length-1]\r\n```\r\n\r\nPlease doublecheck",
+    "created_at": "2022-12-06T14:46:55Z",
+    "id": 1041070508,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```fsharp\r\nlet nonex = expected.[res.NegSigBioitem.Length-1 ..\r\nlet negex = expected.[0 .. res.NegSigBioitem.Length-1]\r\n```\r\nHere the (res.NegSigBioitem.Length-1)<sup>th</sup> element is assigned to both, nonex and negex. I think an index error occurred.\r\n",
+    "created_at": "2022-12-06T14:43:40Z",
+    "id": 1041066537,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The calculation fails if there is no significant down- or upregulated element within the data! In your test-dataset copy the 2 of the first class columns to also be the second class columns and set the pvalue threshold to 0.0001. It seems somewhere an array is called that is empty. ",
+    "created_at": "2022-11-10T13:13:08Z",
+    "id": 1019100052,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is withTraceInfo within the specified Plotly.NET version? Or is it withTraceName?",
+    "created_at": "2022-11-10T13:05:50Z",
+    "id": 1019090936,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please describe what the median centering does (are rows or cols centered, how is the centering performed?",
+    "created_at": "2022-11-10T13:03:54Z",
+    "id": 1019088219,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Remove this Chart.show",
+    "created_at": "2022-11-10T13:01:43Z",
+    "id": 1019083846,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is an inline comment that should be printed as such. Please remove the second asterisks",
+    "created_at": "2022-11-10T13:01:17Z",
+    "id": 1019083004,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Deedle seems not to be references as nuget package",
+    "created_at": "2022-11-10T12:59:46Z",
+    "id": 1019079807,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "replace with\r\n```fsharp\r\nlet data1 = Array.zip rowheader preData1\r\nlet data2 = Array.zip rowheader preData2\r\n```",
+    "created_at": "2022-11-10T12:59:16Z",
+    "id": 1019078618,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/237",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We should aim to implement the exact distribution for n+m<100 and the approximation for larger values\r\n\r\nsee https://github.com/fslaborg/FSharp.Stats/issues/213#issuecomment-1168748863",
+    "created_at": "2022-06-28T13:47:56Z",
+    "id": 908504267,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> You are right, I missed that one. But anyway, to save resources one test per method and case would be enough I think. No matter what you input in `(chiSquared -1.).CDF x` will fail because of the negative value rather than what x is, so you could just check it once. Or do I miss something?\r\n\r\nYou are right, but what about if someone would put in a whole new algorithm into the method? Pretty sure this will never occur but I treated tests for also tackling sheer impossible evolutions.\r\nI mean, I can delete most of the Expecto tests you exemplarily showed if it's better performance-wise.",
+    "created_at": "2022-06-28T11:12:39Z",
+    "id": 908352654,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/224",
+    "user_login": "omaus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You are right, I missed that one. But anyway, to save resources one test per method and case would be enough I think. No matter what you input in `(chiSquared -1.).CDF x` will fail because of the negative value rather than what x is, so you could just check it once. Or do I miss something?\r\n\r\n```f#\r\nlet testCase = Continuous.chiSquared -1.\r\nExpect.throws (fun () -> testCase.Mean |> ignore) \"Should throw\" //<- messages could be more descriptive \"chiSquared distribution cannot be initialized with negative degrees of freedom\"\r\nExpect.throws (fun () -> testCase.Variance |> ignore) \"Should throw\"\r\nExpect.throws (fun () -> testCase.StandardDeviation |> ignore) \"Should throw\"\r\n//Expect.throws (fun () -> testCase.CDF 0. |> ignore) \"Should throw\"\r\nExpect.throws (fun () -> testCase.CDF 1. |> ignore) \"Should throw\"\r\n//Expect.throws (fun () -> testCase.CDF 10. |> ignore) \"Should throw\"\r\n//Expect.throws (fun () -> testCase.CDF infinity |> ignore) \"Should throw\"\r\n//Expect.throws (fun () -> testCase.CDF -infinity |> ignore) \"Should throw\" \r\n//Expect.throws (fun () -> testCase.CDF -1. |> ignore) \"Should throw\"\r\n...\r\n```",
+    "created_at": "2022-06-28T10:52:04Z",
+    "id": 908335465,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/224",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Correct, sorry for the confusion!",
+    "created_at": "2022-06-28T10:44:45Z",
+    "id": 908329406,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/221",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Do you mean i should remove `hypergeoCheckParam`? Because `hypergeoCheckParam` and `hypergeoCheckParam_k` test different cases. They do not overlap.",
+    "created_at": "2022-06-28T10:42:30Z",
+    "id": 908327545,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/221",
+    "user_login": "Freymaurer"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Since the distribution is discrete, I cannot find any other (continuous) approximation than the one via normal distribution.\r\nhttps://stats.stackexchange.com/a/251734\r\n\r\nSo, what do you suggest? Delete the whole test because of normal approximation might be too inaccurate at low sample sizes?",
+    "created_at": "2022-06-28T10:33:40Z",
+    "id": 908320067,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "omaus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The approximation via the z-Distribution is only valid for large samples. \r\n\r\n- https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test#Normal_approximation_and_tie_correction",
+    "created_at": "2022-06-28T08:06:02Z",
+    "id": 908169551,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Added them for 2 reasons:\r\n1. Because of the possibility that changes _could_ theoretically be done on those methods instead of the functions they call\r\n2. To cover those lines in the codecoverage report",
+    "created_at": "2022-06-27T19:35:28Z",
+    "id": 907732055,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/224",
+    "user_login": "omaus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "All these lines are hitting the checkParam matching right? I don't think it is necessary to check this matching with 56 tests, is it? For real-world examples it makes sense to check various CDFs/PDFs and other properties, but these cases are either edge cases (0. and 1.) or invalid parametrizations of the ChiSquared distribution (nan, infinity, -infinity)",
+    "created_at": "2022-06-27T15:27:24Z",
+    "id": 907515206,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/224",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "see above",
+    "created_at": "2022-06-27T14:49:43Z",
+    "id": 907477477,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/221",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Remove this line to not checking parameters twice.",
+    "created_at": "2022-06-27T14:49:15Z",
+    "id": 907476976,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/221",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you please change the index to 19, since Rank.fsx already has index 18.",
+    "created_at": "2022-06-27T14:02:19Z",
+    "id": 907426977,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/219",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "fixed",
+    "created_at": "2022-05-29T08:51:43Z",
+    "id": 884235589,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/203",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "In L11 you wrote \"The version of the package is always `0.0.0-dev`.\", but here you changed it to 0.0.1-dev. Is that intended?",
+    "created_at": "2022-05-27T17:27:23Z",
+    "id": 883807979,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/203",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "fixed\r\n",
+    "created_at": "2022-05-27T13:50:03Z",
+    "id": 883634988,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/203",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I added tests for both individual formatting and a matrix containing mixed values of all cases.",
+    "created_at": "2022-05-27T13:49:02Z",
+    "id": 883633531,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/203",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes- i thought it would be nice that you can directly see the output when looking at the sample notebook on github",
+    "created_at": "2022-05-27T13:30:43Z",
+    "id": 883617673,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/203",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Are nans and infinities printed properly?",
+    "created_at": "2022-05-27T13:09:35Z",
+    "id": 883599626,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/203",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": ":+1:",
+    "created_at": "2022-05-27T13:06:18Z",
+    "id": 883597030,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/203",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "typo rre-run",
+    "created_at": "2022-05-27T13:02:05Z",
+    "id": 883593831,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/203",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Do you want the cell outputs to be preserved?",
+    "created_at": "2022-05-27T13:01:58Z",
+    "id": 883593739,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/203",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "done",
+    "created_at": "2022-04-08T13:41:34Z",
+    "id": 846124128,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "done",
+    "created_at": "2022-04-08T13:41:25Z",
+    "id": 846123966,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "see above",
+    "created_at": "2022-04-08T13:41:21Z",
+    "id": 846123907,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "this is only the case for midpoint rule definite integrals for observations. i added a hint in the xml docs fr the midpoint rule.",
+    "created_at": "2022-04-08T13:41:14Z",
+    "id": 846123798,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "done",
+    "created_at": "2022-04-08T13:40:38Z",
+    "id": 846123218,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "done",
+    "created_at": "2022-04-08T13:40:27Z",
+    "id": 846123069,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "done",
+    "created_at": "2022-04-08T13:40:23Z",
+    "id": 846122985,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "done",
+    "created_at": "2022-04-08T13:40:18Z",
+    "id": 846122916,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This can be removed. Make sure to replace any other references.",
+    "created_at": "2022-04-07T14:22:48Z",
+    "id": 845199098,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "see comment in Integration.fs\r\nWhile your estimation is correct for x^3 it won't be correct for -x^3+2x^2 in the interval of [1,2]\r\n\r\n![image](https://user-images.githubusercontent.com/28917670/162170800-7e1ca1a7-a5a7-4cf1-92ae-d4fccc654272.png)\r\n",
+    "created_at": "2022-04-07T09:42:56Z",
+    "id": 844934336,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think there is a problem with the midpoint strategy: \r\n- As you can see the performed calculations are equal to the Trapezoidal method. The result would always be the same. \r\n- Since the midpoint rule requires a function to calculate the true value of (a+b)/2 it can **only be applied if a function is given**. For `float*float` inputs this is impossible and therefore should be either removed or midpoint should ask for a `(f: float -> float)` input with interval rather than a `(float*float) []`\r\n\r\n![image](https://user-images.githubusercontent.com/28917670/162166275-5588c931-d0f8-44d5-80a6-ab8373ab95eb.png)\r\n",
+    "created_at": "2022-04-07T09:24:23Z",
+    "id": 844915824,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is a high quality integration documentation :rocket:",
+    "created_at": "2022-04-07T09:03:03Z",
+    "id": 844895870,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is it somehow possible to visualize simpsons rule, or to describe the strategy?",
+    "created_at": "2022-04-07T08:57:12Z",
+    "id": 844890081,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "typo: briefly",
+    "created_at": "2022-04-07T08:52:17Z",
+    "id": 844885101,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "typo: Receiver",
+    "created_at": "2022-04-07T08:50:47Z",
+    "id": 844883555,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you please add one or two sentences what you can see on the ROC plot and how to interpret the result. It is stated above, that it is used to evaluate the validity of the predictor, but at this chapter a short summary is missing (at least for me).\r\n\r\nEdit: Add a sentence that AUC stands for 'area under the curve' and describe if it is a quality parameter that should be maximized.",
+    "created_at": "2022-04-07T08:45:09Z",
+    "id": 844878118,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "typo 'Receiver'",
+    "created_at": "2022-04-07T08:42:32Z",
+    "id": 844875589,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "BinaryConfusionMatrix is now only that - a record of TP/TN/FP/FN, and is used as accumulator directly - not sure how `{x with ...}` compares to increasing mutable variables though.  ",
+    "created_at": "2022-04-01T08:25:18Z",
+    "id": 840352410,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "would it be a possibility to omit the mutable variables by replacing the seq.iter by a fold using an anonymous record holding with tp, tn, fp and fn as fields? ",
+    "created_at": "2022-03-31T09:24:03Z",
+    "id": 839376368,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/188",
+    "user_login": "ZimmerD"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is it necessary that the sequences are sorted? The ranking is order-independent and as I can see there is no need for sorting.",
+    "created_at": "2022-01-29T20:12:14Z",
+    "id": 795089680,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "replace with countBy",
+    "created_at": "2022-01-29T20:01:12Z",
+    "id": 795088943,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "replace with countBy",
+    "created_at": "2022-01-29T20:00:12Z",
+    "id": 795088851,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "temporary results should not be calculated twice",
+    "created_at": "2022-01-29T19:55:50Z",
+    "id": 795088660,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "add duplicates to check ranking procedure",
+    "created_at": "2022-01-29T19:54:30Z",
+    "id": 795088495,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "remove comments",
+    "created_at": "2022-01-29T19:52:13Z",
+    "id": 795088392,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please check if your computations are correct before PR can be merged. Additionally, check your results against established packages in R, SPSS or puplications rather than volatile wikipedia chapters. ",
+    "created_at": "2022-01-29T19:51:07Z",
+    "id": 795088327,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/182",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I did not find any case like this for this test. So I suggest to just exclude them. Same goes for values > 1 and < 0.",
+    "created_at": "2022-01-28T17:09:31Z",
+    "id": 794695994,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/179",
+    "user_login": "omaus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The link is broken. Please provide references to papers, R, SPSS packages or similar sources ",
+    "created_at": "2022-01-28T15:24:54Z",
+    "id": 794601660,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/179",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "- remove this line\r\n- What is the default procedure if pvalues in the input sequence are nan? Are they excluded from determining m? Should there be a special case? I don't know, but i can think of reasons why to exclude nan tests and maybe it is commonly performed.",
+    "created_at": "2022-01-28T15:23:45Z",
+    "id": 794600549,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/179",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Try to not use special characters in fs or fsx files. Describe what this method correct for? (FWER?)",
+    "created_at": "2022-01-28T15:21:32Z",
+    "id": 794598579,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/179",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "remove old comment",
+    "created_at": "2022-01-28T15:20:20Z",
+    "id": 794597626,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/179",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please provide a concise description of the function.\r\n\r\nMost of the code below is already present in the function above. Is it possible for one function to be modified that it can be called by the other? Thereby the module is slimmed down and changes in the future only have to be introduced once.\r\n\r\ne.g.:\r\n\r\n```\r\nlet createWilcoxonTest data1 data2 correction =\r\n\tcreateWilcoxonTestWithDifferences (Seq.map2 (-) data1 data2) correction\r\n```",
+    "created_at": "2021-09-20T08:09:30Z",
+    "id": 711954946,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "`if correction then`",
+    "created_at": "2021-09-20T08:09:00Z",
+    "id": 711954592,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The same applies for line 61",
+    "created_at": "2021-09-20T08:07:34Z",
+    "id": 711953765,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Array.map (fst >> float)",
+    "created_at": "2021-09-17T14:44:33Z",
+    "id": 711119725,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "`Seq.append pos (Seq.map abs neg)`",
+    "created_at": "2021-09-17T13:19:50Z",
+    "id": 711049111,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "can be reduced to `let greaterThanZero  x = x > 0.`\r\n\r\nsame for line 14 and 16",
+    "created_at": "2021-09-17T13:17:17Z",
+    "id": 711047125,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "could be shortened by Seq.map2 (-) data1 data2",
+    "created_at": "2021-09-17T13:12:01Z",
+    "id": 711043271,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "please add concise description for the correction parameter",
+    "created_at": "2021-09-17T13:11:00Z",
+    "id": 711042584,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "[typo] change name to Wilcoxon",
+    "created_at": "2021-09-17T10:40:45Z",
+    "id": 710948243,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "[typo] change name to WilcoxonTestStatistics",
+    "created_at": "2021-09-17T10:40:04Z",
+    "id": 710947853,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/157",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you please change the parameter order, that dataMatrix is the last one. The same applies to sampleIntervalByZscore, populationIntervalByZScore, and mahalanobisDistanceList.",
+    "created_at": "2021-04-12T06:38:43Z",
+    "id": 611362168,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/124",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you please change the parameter order for more convenient piping.",
+    "created_at": "2021-04-12T06:37:49Z",
+    "id": 611361789,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/124",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think this if branch decision is incorrect. If there are no ties, no corretion factor must be calculated. I fixed the issue in commit 6f2cf997f48da6ab1ee594e0ddf3856f77395ca2.",
+    "created_at": "2020-09-26T21:35:28Z",
+    "id": 495497984,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/82",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tried to adress this in ccbc8bf. What do you think?",
+    "created_at": "2020-05-11T15:55:36Z",
+    "id": 423143032,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/71",
+    "user_login": "HLWeil"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes with a little tweak because no array element being smaller is a common case",
+    "created_at": "2020-05-11T15:38:02Z",
+    "id": 423130996,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/71",
+    "user_login": "HLWeil"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, this increases the readability alot. Will use this line and drop the function altogether",
+    "created_at": "2020-05-11T15:06:41Z",
+    "id": 423108616,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/71",
+    "user_login": "HLWeil"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please consider to preserve formula notation. For users looking for the math behind the implementation it is easier to search for formulas seen in e.g. publications.\r\n\r\nThe same applies to lines 99 and 111",
+    "created_at": "2020-05-11T12:40:45Z",
+    "id": 423009925,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/71",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Would this alternative work as welll?\r\nAttention: if no array element is smaller than the given value, the suggested version fails.\r\n\r\n```suggestion\r\n        Array.findIndex (fun e -> e > x) values\r\n```",
+    "created_at": "2020-05-10T17:28:06Z",
+    "id": 422674555,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/71",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Since you add a 0. afterwards (line 79), you even could discard the last line. ",
+    "created_at": "2020-05-10T17:23:01Z",
+    "id": 422673884,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/71",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "For better performance it could be replaced by:\r\n```suggestion\r\n        Array.scan (+) 0. values\r\n        |> Array.tail\r\n```",
+    "created_at": "2020-05-10T17:15:53Z",
+    "id": 422673028,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/71",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Changed variables index_ and length_ to _Row and _Col",
+    "created_at": "2019-10-09T14:41:38Z",
+    "id": 333054188,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/48",
+    "user_login": "caroott"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Changed variable names",
+    "created_at": "2019-10-09T14:39:26Z",
+    "id": 333052929,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/48",
+    "user_login": "caroott"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "please change variable names to more descriptive ones",
+    "created_at": "2019-10-09T13:37:29Z",
+    "id": 333017295,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/48",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "change index1 and index2 to indexCol and indexRow ",
+    "created_at": "2019-10-09T13:27:45Z",
+    "id": 333012102,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/48",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Since in mathematics the number of rows of a vector is reasonable, this second naming of the Vector.length function is more intuitive in some cases.",
+    "created_at": "2019-09-09T13:20:03Z",
+    "id": 322237286,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/50",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please consider commenting the functionalities even further, so that the documentation structure becomes clearer.",
+    "created_at": "2019-09-03T12:34:55Z",
+    "id": 320246754,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/47",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Remember that a hide-command is applied to the rest of the current code section. Separate your snipplets to circumvent unintended hiding.",
+    "created_at": "2019-09-03T12:30:53Z",
+    "id": 320245133,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/47",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Try to use the matrix pretty printer using: fsi.AddPrinter(FSharp.Stats.FSIPrinter.matrix)",
+    "created_at": "2019-09-03T12:26:07Z",
+    "id": 320243202,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/47",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please clean up not used functions",
+    "created_at": "2019-09-03T12:25:06Z",
+    "id": 320242833,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/47",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "replace pseudolink with real link",
+    "created_at": "2019-09-02T12:00:09Z",
+    "id": 319928201,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/46",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "insert line breaks for correct formatting",
+    "created_at": "2019-09-02T11:59:35Z",
+    "id": 319928035,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/46",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "fix typo \"FSharp.Stats a\"",
+    "created_at": "2019-09-02T11:57:16Z",
+    "id": 319927398,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/46",
+    "user_login": "bvenn"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "top kek",
+    "created_at": "2019-05-28T14:39:11Z",
+    "id": 288140136,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/33",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Everything should work now!",
+    "created_at": "2019-03-12T15:51:51Z",
+    "id": 264749463,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "Freymaurer"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Good comment, i completely missed that!",
+    "created_at": "2019-03-12T11:55:20Z",
+    "id": 264640927,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "Freymaurer"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I wanted to have a different name than \"iterUntili\" to minimize the possibility for confusion, as the function is not the exact same as the iterUntili function. \r\nPlease let me know if i should still change the function name.",
+    "created_at": "2019-03-12T11:44:04Z",
+    "id": 264637259,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "Freymaurer"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This way an array will be created at every iteration step, and in the end all arrays will be concatenated. Refactor this code so that each element is created independently and directly stored in the final array. ",
+    "created_at": "2019-03-12T10:20:53Z",
+    "id": 264607088,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "ZimmerD"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Refactor code identation",
+    "created_at": "2019-03-12T10:18:52Z",
+    "id": 264606300,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "ZimmerD"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n        let differentiateOptimalHBy hArr f x =\r\n```",
+    "created_at": "2019-03-12T10:13:25Z",
+    "id": 264604230,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "ZimmerD"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n        let private iterUntili (predicate: int -> 'T -> bool) stepSize startIdx (arr: 'T []) =\r\n```\r\n",
+    "created_at": "2019-03-12T10:08:04Z",
+    "id": 264602086,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "ZimmerD"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n        let private optimalStepSize hArr f x = \r\n```\r\nI do not think this function should be public, i don not see any use of it outside of the context of the differentiation function",
+    "created_at": "2019-03-12T10:06:15Z",
+    "id": 264601349,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "ZimmerD"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Now the only thing i am missing is a description above the module. While you are at it, you can also add one above the differentiation module. Otherwise i have no more to add, the only thing left is @ZimmerD taking a look at the actual code.",
+    "created_at": "2019-02-25T13:39:35Z",
+    "id": 259825926,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks for all your feedback! I changed my code according to your suggestions!\r\n\r\nI am looking forward to your reply 👍 ",
+    "created_at": "2019-02-25T10:15:13Z",
+    "id": 259756277,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "Freymaurer"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks for adding documentation! The only thing i would miss here is a general introduction to numerical differentation, what h is etc.",
+    "created_at": "2019-02-25T07:16:08Z",
+    "id": 259698211,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Again, see my comments for the function descriptions above",
+    "created_at": "2019-02-25T07:14:22Z",
+    "id": 259697743,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Both comments above apply here",
+    "created_at": "2019-02-25T07:13:45Z",
+    "id": 259697591,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "In general, write function descriptions in the style of \"returns X by Y. Calculates Y by finding Z. etc.\"",
+    "created_at": "2019-02-25T07:12:43Z",
+    "id": 259697248,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The description should be standalone. I suggest to copy the original description and adapt it",
+    "created_at": "2019-02-25T07:10:54Z",
+    "id": 259696875,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/FSharp.Stats/pulls/20",
+    "user_login": "kMutagene"
+  }
+]

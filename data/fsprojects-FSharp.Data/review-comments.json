@@ -1,0 +1,2514 @@
+[
+  {
+    "author_association": "MEMBER",
+    "body": "It's ok I think, in balance",
+    "created_at": "2026-02-26T15:04:34Z",
+    "id": 2859552104,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1663",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This way of doing PreferDateOnly needs some work.  Since PreferDateOnly is not the default, we should not be introducing DateOnly only to remove them again \n\nWe should clean this up in main before taking this feature",
+    "created_at": "2026-02-26T14:27:01Z",
+    "id": 2859345709,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1668",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm not a fan of this approach, we should really be plumbing these flags down into inference and making the conversions at the leaves rather than patching things up afterwards ",
+    "created_at": "2026-02-26T14:25:57Z",
+    "id": 2859340440,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1668",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "maybe there are more elegant ways to match the name without resorting to `IsSome`",
+    "created_at": "2026-02-26T11:23:35Z",
+    "id": 2858472919,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1663",
+    "user_login": "giacomociti"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@copilot You;ll need to fix up the code in TypeProviderInstantiation.fs too for Csv since you've added an argument\n\n```\n        match args.[0] with\n        | \"Csv\" ->\n            Csv { Sample = args.[1]\n                  Separators = args.[2]\n                  InferRows = Int32.MaxValue\n                  Schema = args.[3].Replace(';', ',')\n                  HasHeaders = args.[4] |> bool.Parse\n                  IgnoreErrors = false\n                  SkipRows = 0\n                  AssumeMissingValues = args.[5] |> bool.Parse\n                  PreferOptionals = args.[6] |> bool.Parse\n                  Quote = '\"'\n                  MissingValues = args.[7]\n                  Culture = args.[8]\n                  Encoding = args.[9]\n                  CacheRows = false\n                  ResolutionFolder = \"\"\n                  EmbeddedResource = \"\"\n                  PreferDateOnly = false }\n\n```\n\nCheck whole file carefully ",
+    "created_at": "2026-02-22T19:33:08Z",
+    "id": 2838411808,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1621",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@copilot Add a test case for this fix",
+    "created_at": "2026-02-22T19:10:11Z",
+    "id": 2838389807,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1619",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@copilot Update the documentation and samples too",
+    "created_at": "2026-02-22T11:43:06Z",
+    "id": 2837662507,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1609",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "NONE",
+    "body": "1. Is this comment necessary?\n2. Why the JsonProvider is not created in-line like in the other tests?\n",
+    "created_at": "2026-02-22T10:46:29Z",
+    "id": 2837579812,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1608",
+    "user_login": "alex-piccione"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Was wondering if this should also covre URIs and any other types in the JSON schema type",
+    "created_at": "2025-03-11T12:24:08Z",
+    "id": 1989138140,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1523",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think maybe this should not have been commented out?",
+    "created_at": "2025-03-11T12:21:41Z",
+    "id": 1989133813,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1523",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "nice, agreed",
+    "created_at": "2023-07-24T04:14:18Z",
+    "id": 1271712231,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1487",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "![image](https://user-images.githubusercontent.com/6309070/206059914-46e993e6-161e-4ae6-8772-d44506e009ee.png)\r\n",
+    "created_at": "2022-12-07T00:45:35Z",
+    "id": 1041632637,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1467",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thank you!",
+    "created_at": "2022-08-16T13:47:27Z",
+    "id": 946801289,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1457",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@baronfel Thanks, I've done this now",
+    "created_at": "2022-08-16T13:45:36Z",
+    "id": 946799184,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1457",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you just embed symbols instead of the separate package? That's much less hassle for consumers. Separate packages make Sourcelink hard to use.",
+    "created_at": "2022-08-16T11:47:07Z",
+    "id": 946676057,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1457",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "From https://docs.microsoft.com/en-us/nuget/create-packages/symbol-packages-snupkg\r\n\r\n> The legacy format .symbols.nupkg is still supported but only for compatibility reasons like native packages (see [Legacy Symbol Packages](https://docs.microsoft.com/en-us/nuget/create-packages/symbol-packages)). NuGet.org's symbol server only accepts the new symbol package format - .snupkg.",
+    "created_at": "2022-08-16T11:43:01Z",
+    "id": 946672290,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1457",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "So I can't work out why having this in fails the package build when there are two packages.\r\n\r\nWithout it we get `FSharp.Data.Core.symbols.nupkg` and `FSharp.Data.symbols.nupkg` correctly built but the file name extensions are different\r\n\r\nDo you know if it matters either way?\r\n\r\n",
+    "created_at": "2022-08-16T10:07:08Z",
+    "id": 946579476,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1457",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why is this commented out?",
+    "created_at": "2022-08-16T00:15:10Z",
+    "id": 946236270,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1457",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Oh ok! So nothing too fancy going on. Thanks for the demo! 🙏\r\nI should use sharplab more often...\r\n\r\n(I'll update the commit)",
+    "created_at": "2022-06-26T15:27:17Z",
+    "id": 906835156,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1451",
+    "user_login": "mlaily"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It will only get called when the whole function is out of scope, see here: https://sharplab.io/#v2:DYLgZgzgPg9gDgUwHYAIDKBPCAXBBbAWACh5l0tc8A6AFQAsAnBAQwBMBLJAc1uYgGsIxYtgyIUASRoIcACWzY4aBAwBuKlAF5iKXSk50V7bJIAi7CHBgRmAI2AIdeuzgbMAxibz5bGgEJ8CACCrKxMEBAgKK6cXE66LthunijeeL4MKADqMAz8KjR8/FGFAsJEDia2zAxgKAAUAJRa8SgA3ihICADuktJyCkoq6pndxnSteqk+Gth0FlTmltYITS1EU5t6cAyc2GCoAEQYCAjYh5N6aRkocws5eQVFWiil/FQASgCuSPVgPygAPooAC0AD4Go1GpddNdZvMIFQAhBgqFwhAXsdTucUABfVrESooOprbQbPRfFEoOh4PAvaq1SEE8m6HZ7A4oQ7dOjMXAjC4slBspD7I7MJCsW4IgVTYWizniyV3HAwGCHIA",
+    "created_at": "2022-06-26T15:23:44Z",
+    "id": 906834648,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1451",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ok. (actually, the rest of the file uses `... |> should equal ...` so I'm going to do the same)",
+    "created_at": "2022-06-26T15:22:14Z",
+    "id": 906834484,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1451",
+    "user_login": "mlaily"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, please change it so that it's consistent with the rest.",
+    "created_at": "2022-06-26T15:18:01Z",
+    "id": 906833952,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1451",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Not really. I find this syntax more easy to read, that's all (There is less ambiguity which value is the \"expected\" value and which one is the \"actual\" value).  \r\n\r\nI can change it to `Assert.AreEqual` if you feel like consistency with the rest of the tests is more important.",
+    "created_at": "2022-06-26T14:52:48Z",
+    "id": 906830617,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1451",
+    "user_login": "mlaily"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I started with an implementation where the `IDisposable` returned by `startHttpLocalServer()` didn't contain anything useful beside `Dispose()` and I was afraid `Dispose()` would be called too early if the value wasn't otherwise used. (I'm not sure when it goes out of scope in this situation)\r\n\r\nThis is less true now that the `BaseAddress` is used to create the http request.\r\n\r\nDo you want me to change it? (and if you know about when `Dispose()` is called with seemingly unused `use` bindings, I'd be interested to know :))",
+    "created_at": "2022-06-26T14:50:34Z",
+    "id": 906830305,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1451",
+    "user_login": "mlaily"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Any reason why `Assert.AreEqual` can't still be used?",
+    "created_at": "2022-06-26T14:26:54Z",
+    "id": 906826884,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1451",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Any reason not to do this?\r\n\r\n```fsharp\r\nuse localServer = startHttplocalServer()\r\n//...\r\n```",
+    "created_at": "2022-06-26T14:25:42Z",
+    "id": 906826714,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1451",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I've opened https://github.com/fsprojects/fantomas/issues/2288 to discuss this.",
+    "created_at": "2022-06-03T08:15:58Z",
+    "id": 888727362,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1444",
+    "user_login": "nojaf"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "`fsharp_max_array_or_list_number_of_items` does not do anything on its own.\r\nYou need to add `fsharp_array_or_list_multiline_formatter=number_of_items` for this to do anything. And please don't, I regress this setting exists in the first place.",
+    "created_at": "2022-06-03T07:57:08Z",
+    "id": 888709671,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1444",
+    "user_login": "nojaf"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@nojaf It does feel to me that these defaults can be wider for F# code, likewise the other settings here",
+    "created_at": "2022-06-02T19:04:32Z",
+    "id": 888293502,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1444",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is strangely expanded.  Is line width 80?  I think it could be set to 120.",
+    "created_at": "2022-06-02T18:15:36Z",
+    "id": 888256955,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1441",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "These `invokeCode` expand out a fair bit, I will pre-adjust them to be inner function bindings",
+    "created_at": "2022-06-02T17:54:51Z",
+    "id": 888238861,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1441",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please allow maximum list size large enough to allow these to be formatted single line",
+    "created_at": "2022-06-02T17:43:42Z",
+    "id": 888221076,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1441",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I will pre-change all explicit `using` to `use _holder = ...` to prevent this indentation happening.  Then we reformat",
+    "created_at": "2022-06-02T17:09:48Z",
+    "id": 888193243,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1441",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Define these as functions",
+    "created_at": "2022-02-24T13:47:45Z",
+    "id": 813894541,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1430",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "of course",
+    "created_at": "2022-02-19T13:18:53Z",
+    "id": 810490190,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1430",
+    "user_login": "nikoyak"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n          if not ctx.InferDictionariesFromRecords\r\n```\r\n\r\nPipe not necessary",
+    "created_at": "2022-02-18T18:43:08Z",
+    "id": 810255989,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1430",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Cool!. I think this is fine. I had to make a change when building/testing for .NET 5 to run tests in release, since at the time the compiler could stack overflow. That may no longer be the case (there have been a years' worth of compiler improvements since then). This is probably a better way to do it.",
+    "created_at": "2022-01-12T04:38:22Z",
+    "id": 782702945,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1424",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Maybe it's just my workflow, but I rarely build projects in a Release configuration while developing. So I've ran tests in debug mode and was a bit puzzled when all of them failed at once, because of missing Release-build dll . So I've thought synchronizing configurations of test assembly and required assembly would be convenient",
+    "created_at": "2022-01-12T04:11:45Z",
+    "id": 782695880,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1424",
+    "user_login": "gbtb"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why this change?",
+    "created_at": "2022-01-11T18:23:51Z",
+    "id": 782418577,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1424",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "If flipped on this a couple of times. But now rethinking, I reckon a simple `failwith \"One or more of the encompassed streams are not seekable and the length cannot be determined\"`. We can probably do away with the `NotSupportedException` type as the `CombinedStream` is only internal to `FSharp.data`",
+    "created_at": "2021-11-24T05:52:23Z",
+    "id": 755720094,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1415",
+    "user_login": "ordinaryorange"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What do you think about a more descriptive message like in `Stream`? https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.length?view=net-6.0#exceptions",
+    "created_at": "2021-11-24T00:55:18Z",
+    "id": 755616400,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1415",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Hm, I just meant to be consistent, should I update it?",
+    "created_at": "2021-11-23T16:41:36Z",
+    "id": 755319895,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1414",
+    "user_login": "stroborobo"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "as an example if this is `mutable`-able, this could just be\r\n\r\n`x.HasFormattedParent <- x.HasFormattedParent || x.IsFormattedTag`\r\n\r\nThe codebase is fairly old :)",
+    "created_at": "2021-11-23T16:36:09Z",
+    "id": 755315073,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1414",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "An alternative is that this can be a `mutable HasFormattedParent` to avoid the `ref`, but I don't think that's terribly important.",
+    "created_at": "2021-11-23T16:32:15Z",
+    "id": 755311574,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1414",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\nlet ``Renders no self-closing tag for non-void elements``() =\n```\n",
+    "created_at": "2021-11-20T17:51:13Z",
+    "id": 753697760,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1413",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\nlet ``Renders self-closing tag for void elements``() =\n```\n",
+    "created_at": "2021-11-20T17:51:03Z",
+    "id": 753697752,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1413",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Sure, it would test for invalid behavior though since code is an inline element. Should I restore the behavior for code anyways and open another issue for elements nested in pre?\n\n",
+    "created_at": "2021-11-20T01:04:00Z",
+    "id": 753611622,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1414",
+    "user_login": "stroborobo"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This removes the code blocks test - could you add that test back as well?",
+    "created_at": "2021-11-20T00:33:25Z",
+    "id": 753605847,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1414",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "lets do in separate PR",
+    "created_at": "2020-10-04T17:03:34Z",
+    "id": 499267048,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1320",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Maybe change to `https` whilst you're at it?",
+    "created_at": "2020-10-02T13:44:14Z",
+    "id": 498830297,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1320",
+    "user_login": "eugbaranov"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That URL is now retuning a failure, I think it can be removed",
+    "created_at": "2020-06-02T12:14:38Z",
+    "id": 433829422,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1316",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "NONE",
+    "body": "I removed it as `RSS20.xsd` does not exist at url anymore and was causing unit tests to fail.\r\n\r\nI could not find an updated url.\r\nAppologies I should have updated the PR comment.",
+    "created_at": "2020-06-02T10:56:10Z",
+    "id": 433789927,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1316",
+    "user_login": "paulgartner1"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Was this removed by accident?",
+    "created_at": "2020-06-02T10:51:47Z",
+    "id": 433787817,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1316",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you put a `///` comment on each of these?  I know these are missing on the rest but we may as well not make the problem worse :)",
+    "created_at": "2019-10-24T10:22:40Z",
+    "id": 338495913,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1291",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I can revert this change if requested; it was necessary in my dev environment where I use the ionide plugin for VS Code.",
+    "created_at": "2019-08-01T18:20:05Z",
+    "id": 309833684,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1279",
+    "user_login": "markfields"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Hi,\r\nCase-1: white spaces after comments are handled by skipwhitespaces(), that is called after a new line character is found\r\nCase-2: for a single line comment, the terminating condition is new line character, so it skips until it finds that. \r\nIf i=s.length-1 and is still looking for coment terminating chars, then it's anyway wrong JSON format,\r\n\r\nThanks for the comments, I will add test cases for all these suggestions\r\n",
+    "created_at": "2018-11-08T03:09:04Z",
+    "id": 231753414,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1228",
+    "user_login": "MaheshPunna"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Will this not go boom 💥 if `i` gets to `s.Length-1`?",
+    "created_at": "2018-11-07T22:41:42Z",
+    "id": 231706408,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1228",
+    "user_login": "eugbaranov"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I _think_ this is supposed to infer `decimal`, but I could be wrong.",
+    "created_at": "2018-10-23T14:20:50Z",
+    "id": 227415367,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1222",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Never mind, I wasn't looking at your last commit",
+    "created_at": "2018-09-15T15:19:33Z",
+    "id": 217887449,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1186",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Never mind, I wasn't looking at your last commit",
+    "created_at": "2018-09-15T15:19:24Z",
+    "id": 217887442,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1186",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "sorry, i edited the files directly in GitHub, so there are 3 different commits instead of 1.  I've reverted changes in all 3 files.",
+    "created_at": "2018-09-15T15:19:22Z",
+    "id": 217887441,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1186",
+    "user_login": "zakaluka"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "it's already capped at 512 characters.",
+    "created_at": "2018-09-15T15:18:54Z",
+    "id": 217887426,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1186",
+    "user_login": "zakaluka"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I've reverted the removal of that line.  Do you want me to remove the line itself?",
+    "created_at": "2018-09-15T15:18:24Z",
+    "id": 217887416,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1186",
+    "user_login": "zakaluka"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Do the same capping here",
+    "created_at": "2018-09-15T15:17:29Z",
+    "id": 217887399,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1186",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Revert this line",
+    "created_at": "2018-09-15T15:17:03Z",
+    "id": 217887377,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1186",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That would work",
+    "created_at": "2018-09-03T20:29:28Z",
+    "id": 214752931,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1197",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The problem is, even if we emit zeros for the time component, the resulting xml would be invalid.\r\n\r\nMaybe we could use the \"yyyy-MM-dd\" format when the time component is zero and use the \"O\" format otherwise.",
+    "created_at": "2018-09-03T20:28:23Z",
+    "id": 214752844,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1197",
+    "user_login": "giacomociti"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We only want to ignore the time component when xs:date was specified on a XSD, but when a DateTime was inferred from a sample file, there might be a time component, and this code is common to both. I think it would be safer to always output even if it means emitting an 00:00:00 time all the time",
+    "created_at": "2018-09-03T20:23:45Z",
+    "id": 214752448,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1197",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "If we make `System.DateTime` correspond to `xs:date` (and `System.DateTimeOffset` correspond to `xs:dateTime`) when formatting a `xs:date` we have to avoid the time component in order to produce valid xml according to the XML Schema specification. On the other hand, when formatting a `xs:dateTime` it's ok to use the `\"O\"` format that is compliant with the W3C specs for `xs:dateTime`",
+    "created_at": "2018-09-03T20:17:18Z",
+    "id": 214752045,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1197",
+    "user_login": "giacomociti"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why this change?",
+    "created_at": "2018-09-03T20:06:31Z",
+    "id": 214751300,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1197",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Sorry, I'd like to stay in net45 as the min supported version for a while longer, can you revert that part of the change? ",
+    "created_at": "2018-07-08T21:57:56Z",
+    "id": 200855486,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I also prefer 4",
+    "created_at": "2018-06-16T20:56:38Z",
+    "id": 195911894,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "we can also have paket manage the paket-file includes, mapping the particular file into this directory at the specified path (in this case ./ProvidedTypes.fs)",
+    "created_at": "2018-06-16T17:57:57Z",
+    "id": 195908634,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "we can use the `framework: xxxx` syntax to use particular versions of FSharp.Core (or any other package) for a particular framework. Here we use 4.3.4 for netstandard2.0, and 4.0.0.1 for net462.",
+    "created_at": "2018-06-16T17:57:24Z",
+    "id": 195908624,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "because we switched back to paket we can have it manage our file includes as well. see the `paket.references` for details.",
+    "created_at": "2018-06-16T17:56:27Z",
+    "id": 195908608,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "we can manage our clitool dependencies in paket like this now.",
+    "created_at": "2018-06-16T17:55:42Z",
+    "id": 195908587,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We only have three target frameworks and so if we list them here lockfiles and such get a bit more sane.\r\nIn addition, I bumped us up to net462 since I got a lot of errors around referencing System.Object and System.Runtime on net45. This i think is the most contentious change, and I'd be glad to discuss more.",
+    "created_at": "2018-06-16T17:55:28Z",
+    "id": 195908582,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "These files are largely mechanical. The next step here would be to move from the monolithic FAKE dependency to a paket build group with just the few modules we use (which mostly map 1-to-1 with the `open Fake.xxx` statements) and move to the Fake 5 netcore runner.",
+    "created_at": "2018-06-16T17:53:45Z",
+    "id": 195908541,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "There were a few places in the project files where we needed a common mapping from build-time target frameworks to what the TPSDK-conventions are.  So I declared them here, and this file is picked up and included by every project file underneath this directory.",
+    "created_at": "2018-06-16T17:52:43Z",
+    "id": 195908517,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "here's where we'd decide on 2 vs 4. I prefer 4, but I'll go with whatever we settle on.",
+    "created_at": "2018-06-16T17:51:49Z",
+    "id": 195908503,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1172",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Hey @ovatsus Sorry for the delay. Thanks I've changed that and added tests now.",
+    "created_at": "2018-04-19T17:25:10Z",
+    "id": 182824097,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1157",
+    "user_login": "imranazad"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You also need to change CreateList",
+    "created_at": "2018-04-11T15:52:01Z",
+    "id": 180805857,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1157",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "generateType already caches inside, so this extra cache here won't really do anything",
+    "created_at": "2018-04-07T12:27:23Z",
+    "id": 179915667,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/983",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You are absolutely correct. (I just copied the caching pattern that was used other places in this provider.) However, invalidating too early only leads to worst-case-scenario of doing a non-cached call twice. Instead of current huge memory leaks, which makes the whole XMLProvider unusable and Visual Studio busy.",
+    "created_at": "2018-04-07T12:04:08Z",
+    "id": 179915283,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/983",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Isn’t that the desired behaviour thou. Invalidation should trump all shouldn’t it? Otherwise things can/will get out IFB sync leading to weird errors.",
+    "created_at": "2018-04-07T11:59:49Z",
+    "id": 179915218,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/983",
+    "user_login": "colinbull"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This has a problem, if I add value A for key K, then after 5 seconds I set value B for key K, K will still be invalidated",
+    "created_at": "2018-04-07T11:47:24Z",
+    "id": 179915038,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/983",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "done",
+    "created_at": "2018-04-07T11:33:43Z",
+    "id": 179914807,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/983",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@Thorium , do you mind enabling this? https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/ \r\nOr do you prefer I send a PR to your PR branch?",
+    "created_at": "2018-04-07T11:21:22Z",
+    "id": 179914626,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/983",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "There's a potential threading issue here. The if watcher.Remove needed to be done inside the lock. To fix it we have to keep using explicit lock, I'll push the fix to your branch before merging",
+    "created_at": "2018-04-07T11:07:05Z",
+    "id": 179914374,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/983",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "NONE",
+    "body": "typo \"vali\" -> \"valid\"",
+    "created_at": "2018-03-28T16:52:48Z",
+    "id": 177817477,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "knocte"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks for the reminder!",
+    "created_at": "2018-03-25T18:08:57Z",
+    "id": 176948637,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Update help bellow to mention this new target",
+    "created_at": "2018-03-25T18:07:02Z",
+    "id": 176948593,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This doesn't have the same effect. The previous attribute would switch to that culture when running the test and then switch back at the end, the new one just ignores the test unless you're running on that culture, which is not what we want. Output when running the tests on this branch:\r\n\r\n      When running the tests I get this:\r\n      Not Run  Can parse ISO 8601 dates in the correct culture\r\n      Error Message:\r\n       Only supported under culture zh-CN\r\n\r\n      Not Run  Can parse ISO 8601 dates in the specified culture\r\n      Error Message:\r\n       Only supported under culture pt-PT\r\n\r\n      Not Run  Can parse dates in different cultures\r\n      Error Message:\r\n       Only supported under culture pt-PT\r\n\r\n      Not Run  Can parse decimals in different cultures\r\n      Error Message:\r\n       Only supported under culture pt-PT\r\n\r\n      Not Run  Can parse document with iso date in local culture\r\n      Error Message:\r\n       Only supported under culture zh-CN\r\n\r\n      Not Run  Can parse floats in different cultures\r\n      Error Message:\r\n       Only supported under culture pt-PT",
+    "created_at": "2018-03-25T12:48:59Z",
+    "id": 176939134,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "are these copies still needed since we are doing explicit layout of files in the nuspec?  The layout there seems to mirror this quite closely.",
+    "created_at": "2018-03-22T17:58:24Z",
+    "id": 176517118,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I really enjoy the new glob patterns sometimes.",
+    "created_at": "2018-03-22T17:57:23Z",
+    "id": 176516769,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I just went through all these test files and removed the netstandard2_0 if conditions. All tests still run and pass for me locally.",
+    "created_at": "2018-03-22T17:54:34Z",
+    "id": 176515775,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, though I did add it back in using the new clitool and msbuild tasks that @ctaggart helped me get working. It now happens transparently during the build, due to the presence of the `SourceLinkCreate` msbuild property.\r\n\r\nThere's a separate testing step that happens to verify the sourcelinking occurred correctly.",
+    "created_at": "2018-03-16T14:50:39Z",
+    "id": 175113989,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Correct. I added it back in, and it seamlessly happens during the build step.",
+    "created_at": "2018-03-16T14:49:06Z",
+    "id": 175113453,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It was removed separately to this PR, this flushed some more stuff from build.fsx",
+    "created_at": "2018-03-16T14:42:08Z",
+    "id": 175111150,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Great catch, I think that can be removed, trying it now",
+    "created_at": "2018-03-16T14:31:21Z",
+    "id": 175107581,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "See above on .NET Standard NUnit",
+    "created_at": "2018-03-16T14:27:30Z",
+    "id": 175106379,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I couldn't work out what's going on here, it's a really, really odd problem.  My impression is that the test is flakey in some way even on .NET Framework.  I looked again and again and can't see anything that I changed that may affect this - except perhaps moving from .NET Framework 4.5 to 4.6.  I'll try again.",
+    "created_at": "2018-03-16T14:26:09Z",
+    "id": 175105858,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I can't recall the problem I had with this but yes, I concluded it wasn't supported in .net standard .NUnit as yet.  I think it's an omission in the .Net standard NUnit DLL",
+    "created_at": "2018-03-16T14:25:08Z",
+    "id": 175105531,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@ovatsus Yes, that is better 4.2.3 supports `.netstandard1.6` which is compatible with `.netstandard2.0`.  But `4.3.4` adds an explicit empty dependency node which removes transitive dependency on all the micro packages that existed in the world of .NET Standard 1.x\r\n",
+    "created_at": "2018-03-16T14:23:14Z",
+    "id": 175104935,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Since this is an erasing type provider, using this define makes the design-time DLL smaller.  \r\n\r\nBut yes, we could now optionally make this a generative type provider.  That would be separate thing and I think would have to be revealed as a separately named TP, since whether a TP is generative or not is determined before the static parameters are applied:\r\n```fsharp\r\ntype MyXml = XmlProviderGenerative<\"foo.xml\">\r\n```\r\nBesides I believe it would be easy (it may stilll uncover bugs in generative TP support, though that's pretty solid - Swagger has ironed out the issues).",
+    "created_at": "2018-03-16T14:17:16Z",
+    "id": 175103037,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Sorry - it comes from here: https://github.com/fsprojects/FSharp.TypeProviders.SDK/blob/master/src/ProvidedTypesTesting.fs#L681\r\n\r\nI've added that as a comment\r\n```\r\n. The TPSDK testing helpers like these to be placed in package groups\r\n# with these names, see https://github.com/fsprojects/FSharp.TypeProviders.SDK/blob/0c0c9d11135039821a380f60ec21c701354e8cdb/src/ProvidedTypesTesting.fs#L680\r\n```\r\n",
+    "created_at": "2018-03-16T14:07:59Z",
+    "id": 175100146,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fixed, thanks. Also clarified the design-time environments supported",
+    "created_at": "2018-03-16T14:03:10Z",
+    "id": 175098637,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done thanks",
+    "created_at": "2018-03-16T14:02:54Z",
+    "id": 175098567,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": ".NET Standard 2.0 is a big and large common library subset supported supported by .NET Framework 4.6+, Mono (including Xamarin Android/iOS) and .NET Core. It has a normal reflection model and has pretty much everything you actually need to build most libraries, and looks and feels like normal .NET 4.x programming for nearly all purposes.  All of FSharp.Data compiles without any `#if` when targeting .NET Standard 2.0.  It's basically what PCLs should always have been.\r\n\r\n.NET Core App 2.0 (netcoreapp2.0) is the name of the programming model for a typical .NET Core application.  The programming model is basically the same as .NET Standard 2.0 but in theory you could have access to extra stuff that is not supported by .NET Standard (e.g. cross-platform ways of accessing .NET Core specifics about the .NET Core GC or something).\r\n\r\n",
+    "created_at": "2018-03-16T14:02:48Z",
+    "id": 175098543,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Or does it always run now without a separate command?",
+    "created_at": "2018-03-10T17:59:32Z",
+    "id": 173629668,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "No longer true, right?",
+    "created_at": "2018-03-10T17:59:14Z",
+    "id": 173629660,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I see these groups defined here, but I can't see what makes the tests run against all these different F# versions",
+    "created_at": "2018-03-10T17:58:54Z",
+    "id": 173629651,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This seems unrelated to not having local filesystem, should a separate FX_xxx be added?",
+    "created_at": "2018-03-10T17:52:59Z",
+    "id": 173629503,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is this right? Nuget package 4.2.3 doesn't say it supports netstandrd 2.0. Maybe for .net standard we would use 4.3.4 and only support FSharp.Core 4.4.3.0 and not 4.4.1.0 to reduce the test matrix, since it was never supported before anyway?",
+    "created_at": "2018-03-10T17:51:51Z",
+    "id": 173629461,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Actually looking at the packagereferences, for .net standard we support FSharp.Core 4.4.1.0 (fsharp.core 4.2.3 nuget package) and 4.4.3.0, maybe join this section with the supported platform one so we have the breakdown of supported fsharp.core versions per platform?",
+    "created_at": "2018-03-10T17:50:21Z",
+    "id": 173629426,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is this still needed with the latest TPSDK?",
+    "created_at": "2018-03-10T17:44:44Z",
+    "id": 173629229,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is the platform attribute not supported anymore?",
+    "created_at": "2018-03-10T17:31:07Z",
+    "id": 173628765,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Doens't Platform(\"Net\") work anymore?",
+    "created_at": "2018-03-10T17:18:59Z",
+    "id": 173628219,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can we keep it running on .Net Framework?",
+    "created_at": "2018-03-10T17:10:09Z",
+    "id": 173627908,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "it seems to be the only reason we need the #if NETSTANDARD2_0 at all on all these test files",
+    "created_at": "2018-03-10T17:07:13Z",
+    "id": 173627817,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "why id this do() here needed?",
+    "created_at": "2018-03-10T17:05:58Z",
+    "id": 173627776,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Also, if I understood correctly, you need VS2017 15.6 to be able to build FSharp.Data now, so can you update the line in line 13 to say Visual Studio 2017 15.6+ ?",
+    "created_at": "2018-03-10T17:03:43Z",
+    "id": 173627695,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "F# version has got a bit confusing with all the changes, and saying \"F# 4.1 update\" doesn't help that much. Would you mind changing this to something like this:\r\n\r\n- FSharp.Core 4.3.1.0 (F# 3.1 SDK / Visual Studio 2013)\r\n- FSharp.Core 4.4.0.0 (F# 4.0 SDK / Visual Studio 2015)\r\n- FSharp.Core 4.4.1.0 (F# 4.1 SDK / Visual Studio 2017)\r\n- FSharp.Core 4.4.3.0 (F# 10.1 SDK / Visual Studio 2017 15.6)\r\n",
+    "created_at": "2018-03-10T16:59:02Z",
+    "id": 173627577,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm reading a bunch of stuff about this, but still didn't really understand why the design time dll going forward cannot be in the same dir as the runtime dll but has to be on a typeproviders subdirectory\r\n",
+    "created_at": "2018-03-10T16:50:57Z",
+    "id": 173627374,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Forgive my ignorance, but what's the difference between .NET Core App 2.x and .NET Standard 2.0?",
+    "created_at": "2018-03-10T16:47:24Z",
+    "id": 173627284,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "4.0 is not supported, only 4.5 and 4.6, right? So can you change this to 4.5+",
+    "created_at": "2018-03-10T16:46:52Z",
+    "id": 173627272,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "net40 is no longer supported, can you remove this?",
+    "created_at": "2018-03-10T16:42:58Z",
+    "id": 173627151,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@baronfel , didn't you fix SourceLink on the last commit?",
+    "created_at": "2018-03-10T16:38:44Z",
+    "id": 173627042,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Let's just switch to one multi-targeting project file?",
+    "created_at": "2018-02-27T14:01:30Z",
+    "id": 170930164,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1118",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yay multipart coverage, something I should have done originally!",
+    "created_at": "2018-02-18T17:54:23Z",
+    "id": 168959741,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1126",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "note that we write two-bytes for each n here, so that's why the numbers are off from the reported numbers. newlines and such.",
+    "created_at": "2018-02-18T17:54:08Z",
+    "id": 168959733,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1126",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "added this because it's a framework-built in fix that may work better long-term? can go/no-go with it as you please.",
+    "created_at": "2018-02-18T17:53:32Z",
+    "id": 168959721,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1126",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "here was the real problem",
+    "created_at": "2018-02-18T17:53:04Z",
+    "id": 168959707,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1126",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It only forces to download the entire file when you iterate .Rows to to get the first item, so in that sense it's still async. To be truly async you would have to use something like AsyncSeq which would complicate the usage quite a bit for the common case. I'd be welcome to have one variation that uses it though, but it's actually quite complicated to have both (I tried long time ago), and then you add a dependency to another library.\r\nCan you remove the comment in the next iteration? It's using triple slash so it's going to the docs",
+    "created_at": "2018-02-10T12:15:11Z",
+    "id": 167397479,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1124",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You forgot to propagate the encoding parameter here",
+    "created_at": "2018-02-10T12:09:24Z",
+    "id": 167397345,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1124",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "NIT: you introduced a space here",
+    "created_at": "2018-02-10T12:03:45Z",
+    "id": 167397104,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1124",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "this change looks odd, it seems it's shifting arguments?",
+    "created_at": "2018-01-11T20:47:23Z",
+    "id": 161070983,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1097",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "[`WebUtility` is available in `Profile7`](https://stackoverflow.com/a/28974461). It's available when targeting .NET 4.5. What is FSharp.Data targeting? Also, do you use `System.Web.HttpUtility` anwhere? I assume not if you are targeting PCL.",
+    "created_at": "2017-12-07T14:17:19Z",
+    "id": 155531792,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1112",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is WebUtility.UrlEncode available on PCL 7 and PCL 259?",
+    "created_at": "2017-12-06T22:25:40Z",
+    "id": 155380004,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1112",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Yep. serves me right for rushing this between things today.",
+    "created_at": "2017-10-22T01:24:46Z",
+    "id": 146119548,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1092",
+    "user_login": "DanielOliver"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Don't forget to update the test name",
+    "created_at": "2017-10-21T19:58:35Z",
+    "id": 146114258,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1092",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you add test cases that use `/* */` and span multiple lines?",
+    "created_at": "2017-10-21T16:29:41Z",
+    "id": 146109391,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1093",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you add the opposite case, not having the \\n at the end to make sure it fails",
+    "created_at": "2017-10-21T16:29:16Z",
+    "id": 146109388,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1093",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you add a test case with `\"var r =/\\/</g\"`",
+    "created_at": "2017-10-21T16:28:02Z",
+    "id": 146109356,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1093",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Typo: sinle instead of single",
+    "created_at": "2017-10-21T16:25:17Z",
+    "id": 146109278,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1093",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@ovatsus I removed that code, thanks",
+    "created_at": "2017-10-10T18:39:10Z",
+    "id": 143816856,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1085",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you move this to TypeProviderInstantiation.fs so it also works on Test.fsx?",
+    "created_at": "2017-10-10T16:40:20Z",
+    "id": 143785063,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1085",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Shouldn't we keep this one as a let? There is already a use inside decompress, and on the else without unzipping then you would be calling dispose twice. I'll fix it while merging",
+    "created_at": "2017-09-18T15:30:01Z",
+    "id": 139456574,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "@realvictorprm, this is done.",
+    "created_at": "2017-09-15T13:05:14Z",
+    "id": 139143119,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1067",
+    "user_login": "mjgpy3"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Hm, could you please remove the newline afterwards? It's unnecessary here 😕 ",
+    "created_at": "2017-09-14T20:53:44Z",
+    "id": 139008600,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1067",
+    "user_login": "realvictorprm"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Consider adding a `JsonValueType` record which concentrates focus on the type, not the values.",
+    "created_at": "2017-09-14T20:44:28Z",
+    "id": 139006474,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1069",
+    "user_login": "realvictorprm"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What I meant was that printfn is not used anywhere, so why define it for PCLs?",
+    "created_at": "2017-09-10T01:40:51Z",
+    "id": 137938868,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Ok, I figured out the stream closure stuff. `use` statements now only ever happen when a function expects to consume the stream.  this really only happens in a few places: \r\n\r\n* `toHttpResponse` for the string/binary response body types\r\n* `asyncRead`, where we read a stream into memory locally\r\n* `decompressGZip` and `decompressDeflate`, where we consume a stream and deflate it into a new memorystream\r\n\r\nall of these are terminal in some form or another, consuming the stream and replacing it with some other representation.\r\n\r\nnow the `toHttpResponse` used by the stream variant of the response body allows `asyncRead` to close the originating stream as part of its work, so using `asyncRead` is a bit safer now.",
+    "created_at": "2017-09-08T04:31:00Z",
+    "id": 137707390,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I don't think we can, actually.  The FX_NO_LOCAL_FILESYSTEM define is set in `src/DefineConstants.targets` if the target profile is 47, 7, or 259. As long as we support PCLs here I think we should maintain this code.",
+    "created_at": "2017-09-08T03:25:27Z",
+    "id": 137702678,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "good catch, will address the no-extension case with a default of `application/octet-stream`",
+    "created_at": "2017-09-07T22:41:33Z",
+    "id": 137672716,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "that's right. I think in a fit of trying to hack around stream closure I removed those.  diffing the code the `use`s were all on the response-read side, which shouldn't change anything regarding the multipart-content side of thing.  I'll add those back in 👍 ",
+    "created_at": "2017-09-07T22:41:14Z",
+    "id": 137672637,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Agreed",
+    "created_at": "2017-09-07T22:19:04Z",
+    "id": 137669111,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Will do",
+    "created_at": "2017-09-07T22:18:07Z",
+    "id": 137668976,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "How did I not remember those? Thanks for the pointer!",
+    "created_at": "2017-09-07T22:17:49Z",
+    "id": 137668933,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Since it's a boolean maybe just a simple if?\r\n\r\n                if Seq.isEmpty streams then\r\n                    0\r\n                else \r\n",
+    "created_at": "2017-09-07T22:04:08Z",
+    "id": 137666756,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Suggestion (not mandatory) - replace this part with the following\r\n\r\n      let private map = Map.ofArray pairs\r\n      let tryFind ext = let tryFind (ext: string) = map.TryFind(ext.ToLowerInvariant())\r\n\r\nand then you can also remove the import of System.Collections.Generic",
+    "created_at": "2017-09-07T22:02:45Z",
+    "id": 137666550,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This block seems like leftover debug code, can you remove it?",
+    "created_at": "2017-09-07T21:57:37Z",
+    "id": 137665621,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This will crash if filename doesn't have a dot",
+    "created_at": "2017-09-07T21:56:45Z",
+    "id": 137665463,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "There are 3 places where we were using `use`  so that the stream would be closed, and now that's no longer the case. What was the reason for the change?",
+    "created_at": "2017-09-07T21:52:13Z",
+    "id": 137664601,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1056",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you add \"latest\" and even \"nightly\" here too?  Perhaps drop one or two of the others",
+    "created_at": "2017-06-23T08:18:52Z",
+    "id": 123695167,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1057",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I m sorry to bother you, but according to [@forki comment](https://github.com/fsharp/FSharp.Data/pull/1044#issuecomment-293246058), this environment variable is checked only on Windows. There's no sense in setting it on Linux build.",
+    "created_at": "2017-04-24T09:32:52Z",
+    "id": 112902208,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/1045",
+    "user_login": "ForNeVeR"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "To make it more clear:\nExecuting this in 10 threads within 10secs will take gigabyte of memory even when cache is ConcurrentDictionary:\n\n``` fsharp\nmatch cache.TryRetrieve typeName with \n| Some x -> x \n| None -> \n   let x = long_10sec_call_taking_100MB_of_temp_memory()\n   cache <- x\n   x\n```\n\nBecause cache is accessed twice in the code and ConcurrentDictionary doesn't have lock over multiple calls.\nThis is exactly the same functionality, but taking just 100MB even when done in multiple threads:\n\n``` fsharp\ncache.GetOrAdd(typeName, fun typeName -> \n   long_10sec_call_taking_100MB_of_temp_memory())\n```\n\nFor that reason I think current ICache<> is a bad idea.\n",
+    "created_at": "2016-08-18T09:00:26Z",
+    "id": 75271682,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Should it be? Maybe that is one problem of memory consumption that there is similar dictionaries in cache when executed every time separately in nested data structures.\n",
+    "created_at": "2016-08-18T08:51:33Z",
+    "id": 75270399,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What if Visual Studio has been closed? Can it be null (cleaned by VS) and still have the async task in the memory?\n",
+    "created_at": "2016-08-17T16:22:29Z",
+    "id": 75156180,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Because we are using non-UI action we don't have to work in UI thread. We can use TPL.\nSo when the async operation is over, we can use any available thread to clean the dictionary, instead of limiting our choice to wait the only-UI-thread.\n",
+    "created_at": "2016-08-17T15:42:02Z",
+    "id": 75148409,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "@ovatsus If I go to this url with a browser I get:{\"status_message\":\"Invalid API key: You must be granted a valid key.\",\"success\":false,\"status_code\":7} \nNote the addition of success:false in there, which differs from the text in the test. How is this passing in CI?\n",
+    "created_at": "2016-08-15T12:24:05Z",
+    "id": 74753755,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/979",
+    "user_login": "kontomondo"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Feel free to copy or merge just the lines you need. I won't be offended of denying this PR without merge.\n\nFor me, the NuGet-version of XMLProvider was unusable to work with (yes it works in general, but it made Visual Studio so slow that I couldn't do my task, VS consumed over 2GB of memory in 10mins work, and changing the XML-file caused VS to crash every time). I can work with my current version so I'm happy with it and I just wanted to share the modifications. \n\nI'm not currently having time to debug and fix the actual cause of problems but I think it has somethig to do with leaking caches and the fact that TypeProviders are executed in multiple threads in VS and too much code is run just when you call a single constructed-type constructor inside other constructed-type constructors in the code corresponding the XML DOM-tree.\n\nSo if you'll do a new release that is performing better, I'll change to that but before it I will continue using the version in my fork.\n",
+    "created_at": "2016-08-09T22:22:45Z",
+    "id": 74155881,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What is the pont of using ConcurrentDictionary at the first place if you are not taking advantage of using GetOrAdd or AddOrUpdate methods which are guaranteeing the concistency by using the internal locks surrounding the lambda functions? I think that the abstraction level of the ICache interface is wrong.\n\nThe point of AddOrUpdate is to make it clear that on update-case the old value is being overridden by purpose. Of course it would be better to throw the ICache away and just use GetOrAdd.\n",
+    "created_at": "2016-08-09T22:05:05Z",
+    "id": 74153606,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "If res is null, the type guard would never succeed\n",
+    "created_at": "2016-08-09T21:58:38Z",
+    "id": 74152700,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Unlike the watchers and the global caches, this dictionary is not ever accessed from multiple threads, so we don't need the concurrentDictionary here, this is a locally scoped item\n",
+    "created_at": "2016-08-09T21:54:32Z",
+    "id": 74152142,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you please pu the watchers.add and watchers.Remove inside a lock on watchers in the FX_NO_CONCURRENT branch?\n",
+    "created_at": "2016-08-09T21:52:36Z",
+    "id": 74151864,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "watcher can never be null, please remove the null check\n",
+    "created_at": "2016-08-09T21:50:58Z",
+    "id": 74151623,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This async block was missing and will fix a memory leek. Can you do do the same on the other implementation above that doesn't use ConcurrentDictionary?\n",
+    "created_at": "2016-08-09T21:49:50Z",
+    "id": 74151440,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The AddOrUpdate doesn't give us nothing here, as you are ignoring the old value when calculating the new one\n",
+    "created_at": "2016-08-09T21:48:54Z",
+    "id": 74151292,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You don't need the separate lock here as dict is not accessible externally\n",
+    "created_at": "2016-08-09T21:47:32Z",
+    "id": 74151078,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We should lazy for values which are initialized but might not be needed on all the forward the code paths, but I don't think it makes sense to use lazy on the output of functions\n",
+    "created_at": "2016-08-09T21:47:11Z",
+    "id": 74151025,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you explain this change?\n",
+    "created_at": "2016-08-09T21:45:43Z",
+    "id": 74150762,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Given that the new value being added is not dependent on the old value, there is no gain in using the more complex AddOrUpdate overload\n",
+    "created_at": "2016-08-09T21:45:10Z",
+    "id": 74150682,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You are applying the lazy to the output of the function. There's only going to ever be one thread accessing that. Please revert\n",
+    "created_at": "2016-08-09T21:40:53Z",
+    "id": 74150023,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The issue with locking directly an object, is that if that object is accessible outside some external code may lock it as well, causing deadlocks. That's not the case here, as disposeActions is a local value binding, so please revert\n",
+    "created_at": "2016-08-09T21:39:44Z",
+    "id": 74149808,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "So actually pressing the \"(\" key with the inner-most MyXmlNode will cause XMLProvider to execute all the code four times?\n",
+    "created_at": "2016-08-08T21:41:02Z",
+    "id": 73960674,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Correct. Basically I would like to make sure that the same XML-file with name \"mydata.xml\" is not read from the disk and parsed all over again for each type again every time I press a \"(\" in this kind of nested\n\n```\nMyXmlRoot(\n   MyXmlNode(\n      MyXmlNode(\n         MyXmlNode(\n            ...\n```\n\nBut this wasn't correct way to do it so there is a new commit to remove that lazy.\n",
+    "created_at": "2016-08-08T20:58:14Z",
+    "id": 73953159,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That's right it shouldn't be. I was getting ObjectDisposedExceptions while I had debugger attached to FSharp.Data and breaking to every exception. So I assumed that some async method like this does try to handle object that is already disposed. But clearly not this one as the dictionary is static.\n",
+    "created_at": "2016-08-08T20:51:33Z",
+    "id": 73951917,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Lazy also should guarantee that there are no other thread at the same time running the same code with the same parameters. https://msdn.microsoft.com/en-us/library/dd997286(v=vs.110).aspx\n",
+    "created_at": "2016-08-08T20:43:36Z",
+    "id": 73950484,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Book \"CLR via C#\" has described that there is a bug in .NET framework that if the locking object is used directly it may cause deadlock and for that reason you should use separate locking object.\n",
+    "created_at": "2016-08-08T20:41:25Z",
+    "id": 73950084,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "why would it be null?\n",
+    "created_at": "2016-08-08T20:28:08Z",
+    "id": 73947706,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What do you gain with the Lazy here? It's already a function\n",
+    "created_at": "2016-08-08T20:27:44Z",
+    "id": 73947622,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "tryGetResources is called right after this, and only once, what do you gain with the Lazy?\n",
+    "created_at": "2016-08-08T20:21:15Z",
+    "id": 73946497,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What do you gain by locking a separate object instead of the list?\n",
+    "created_at": "2016-08-08T20:20:12Z",
+    "id": 73946342,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/976",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "@smoothdeveloper Thanks for the comment! It already got merged though, but please do change it if you ever touch that file, or I'll change it if I'll have any other PRs.\n",
+    "created_at": "2016-07-31T21:23:45Z",
+    "id": 72911181,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "kontomondo"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Sorry, yes intended to say I'd prefer the not upfront in this specific case.\n\nYes both can be used liberally, when I use it with pipe in simple expressions though it is most often a sign of my own lazyness (and lack of skills with editor) because I can just append it instead of putting paren back.\n\nI like it used in chain of pipes.\n",
+    "created_at": "2016-07-31T20:44:39Z",
+    "id": 72910534,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "smoothdeveloper"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "@smoothdeveloper  there was already a `|> not` there, or are you saying that `not(..)` style is preferred? I've seen both equally used throughout the F# projects,\n",
+    "created_at": "2016-07-31T20:39:20Z",
+    "id": 72910458,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "kontomondo"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "`not (isHexadecimalDigit || c = '\\n' || c = '\\f' || c = '\\r')`\n",
+    "created_at": "2016-07-31T17:14:39Z",
+    "id": 72907392,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "smoothdeveloper"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "@ovatsus It might be a readability issue, is there a better, more idiomatic way to do this? perhaps `not <|` at the beginning or just `not (... )` ?\n",
+    "created_at": "2016-07-31T17:00:25Z",
+    "id": 72907168,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "kontomondo"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "you're right, I missed the not\n",
+    "created_at": "2016-07-31T16:54:08Z",
+    "id": 72907094,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "It will return `true`, there's a `|> not` at the end. \n\nTry running this in FSI:\n\n``` fsharp\nlet isCharacterEscapable (c:char) =\n    (* CSS 2.1: Any character (except a hexadecimal digit, linefeed,\n       carriage return, or form feed) can be escaped with a backslash to\n       remove its special meaning *)\n    let isHexadecimalDigit = Char.IsDigit(c) || (Char.ToLower(c) >= 'a' && Char.ToLower(c) <= 'f')\n    (isHexadecimalDigit || c = '\\n' || c = '\\f' || c = '\\r')\n    |> not\n\nlet isEscapable = isCharacterEscapable '\\''\n```\n",
+    "created_at": "2016-07-31T16:20:42Z",
+    "id": 72906795,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "kontomondo"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "but `isCharacterEscapable` will return false for `'`, right?\n",
+    "created_at": "2016-07-31T16:15:21Z",
+    "id": 72906722,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Doesn't the new code supersede it? It would escape the `'` character that followed `\\` either in quotes or not in quotes all the same, as the code would escape any character `\\x` where `x` is not a hexadecimal digit nor `LF`, `RF`, `FF`\n",
+    "created_at": "2016-07-31T13:54:47Z",
+    "id": 72904553,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "kontomondo"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Don't you need to also keep this rule?\n",
+    "created_at": "2016-07-31T09:49:15Z",
+    "id": 72901492,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "= or .Equals is equivalent in this case\n",
+    "created_at": "2016-07-31T09:44:26Z",
+    "id": 72901429,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I see  `.Equals` being used below instead , is there an advantage in doing that? If I do have to change it to `.Equals` what about the hexadecimal digit comparison above where I need the ascii code ?\n",
+    "created_at": "2016-07-30T13:29:01Z",
+    "id": 72887372,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/969",
+    "user_login": "kontomondo"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The \"default\" default is 100s, but you're right in that we can override it with `Timeout.Infinite` at the time the request is created. For some reason I thought these functions should work with any provided `HttpWebRequest`, but it doesn't seem to be the case and we're creating it internally.\n\nI'll take a look at doing these changes at some point next week. \n",
+    "created_at": "2016-05-01T21:09:55Z",
+    "id": 61693132,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/920",
+    "user_login": "scrwtp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I see. I do like the idea of having optional `timeout` parameter - that sounds like something that would be quite useful for many people anyway!\n\nThat said, if the value is the default, then it probably should be `Timeout.Infinite`, so we could just check for that and use async only when it is not infinite - that should work too.\n\nI'm happy with either of the options.\n",
+    "created_at": "2016-05-01T19:57:35Z",
+    "id": 61691993,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/920",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I don't think detecting `req.Timeout` is an option here - it's a has a meaningful default value when not set, so you can't really differentiate based on that. And the thing with \"normal synchronous way\" here is that it's really the \"async way\" being run synchronously. This is different to plain old `HttpWebRequest.GetResponse` in that it doesn't take timeout into account, default or not. \n\nWhat I can do instead is scrap the idea of using `HttpWebRequest.Timeout` and instead have an optional timeout argument to the `Http` static members at the end of the file. I suppose making the timeout explicit would help more people than it would confuse.\n",
+    "created_at": "2016-05-01T17:56:29Z",
+    "id": 61690346,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/920",
+    "user_login": "scrwtp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Also, would it be possible to somehow detect whether `req.Timeout` has been set and do the custom logic only when it is set? (And call the operation in a normal synchronous way otherwise.) I guess it could have some small overhead associated - not a big deal if this is hard to do though.\n",
+    "created_at": "2016-04-27T10:44:56Z",
+    "id": 61237336,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/920",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you please split this into two `let` bindings? I know people who prefer piping into lambda functions, but I find it confusing :-). I means something like:\n\n```\nlet op = Async.FromBeginEnd(...)\nlet! child = Async.StartChild(...)\n```\n",
+    "created_at": "2016-04-27T10:43:42Z",
+    "id": 61237188,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/920",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Yeah, pushed another commit.\n",
+    "created_at": "2015-12-26T19:06:32Z",
+    "id": 48449098,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/902",
+    "user_login": "taylorwood"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Maybe we should do the same for https?\n",
+    "created_at": "2015-12-26T18:51:53Z",
+    "id": 48449026,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/902",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You could pass  `level`  in recursion, and use it as an argument to `getTargets` and other functions.\nThis would make th intent of level simpller and probably remove the need for a class.\n",
+    "created_at": "2015-10-21T07:38:54Z",
+    "id": 42591767,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/886",
+    "user_login": "thinkbeforecoding"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Good job! This is the future in order to replace htmltable and a more\nflexible way to parse Html!\nOn Oct 21, 2015 9:29 AM, \"Jérémie Chassaing\" notifications@github.com\nwrote:\n\n> In src/Html/HtmlCssSelectors.fs\n> https://github.com/fsharp/FSharp.Data/pull/886#discussion_r42591118:\n> \n> > -                    tokenize' (Hidden(getOffset t + 1) :: acc) t\n> > -                | StartsWith \":radio\" t ->\n> > -                    tokenize' (Radio(getOffset t + 1) :: acc) t\n> > -                | StartsWith \":password\" t ->\n> > -                    tokenize' (Password(getOffset t + 1) :: acc) t\n> > -                | StartsWith \":empty\" t ->\n> > -                    tokenize' (EmptyNode(getOffset t + 1) :: acc) t\n> > -                | TokenStr \":disabled\" t ->\n> > -                    let _, t' = readString \"\" t\n> > -                    tokenize' (Disabled(getOffset t + 1) :: acc) t'\n> > -                | StartsWith \":enabled\" t ->\n> > -                    tokenize' (Enabled(getOffset t + 1) :: acc) t\n> > -                | StartsWith \":file\" t ->\n> > -                    tokenize' (File(getOffset t + 1) :: acc) t\n> > -                | '>' :: t ->\n> > -                    let seqtoken = acc |> List.toSeq |> Seq.skip(1) |> Seq.toList\n> \n> You can use acc |> List.tail directly here\n> \n> —\n> Reply to this email directly or view it on GitHub\n> https://github.com/fsharp/FSharp.Data/pull/886/files#r42591118.\n",
+    "created_at": "2015-10-21T07:32:27Z",
+    "id": 42591333,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/886",
+    "user_login": "cboudereau"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You can use acc |> LIst.tail here\n",
+    "created_at": "2015-10-21T07:29:48Z",
+    "id": 42591166,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/886",
+    "user_login": "thinkbeforecoding"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You can use acc |> List.tail directly here\n",
+    "created_at": "2015-10-21T07:29:15Z",
+    "id": 42591118,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/886",
+    "user_login": "thinkbeforecoding"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "For parsing speed, I tend to use a struct like\n\n```\n[<Struct>]\ntype State(source: string, pos: string) =\n    member __.Source = source\n    member __.Pos = pos\n```\n\nand a module with some inline functions, like next etc.. And an inline active record to match current char and tail..\nYou don't get the :: syntax so it leads to more parenthesis nesting.. but it works quite well.\n\nSince css selector are usually short, I  don't know if it'll make much difference anyway..\n",
+    "created_at": "2015-10-21T07:26:42Z",
+    "id": 42590945,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/886",
+    "user_login": "thinkbeforecoding"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Would it make sense to convert this from a class into a function? (And possibly extract the nested functions that are not accessing `nodes` and `tokens` and does not need to be nested?)\n\n(I do not mind too much - just wondering if a class is needed here - even if function would work, I'm quite happy to keep this as it is - it looks fine to me!)\n",
+    "created_at": "2015-10-20T19:26:46Z",
+    "id": 42541609,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/886",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is this a part of the public interface? If so, it would be good to document it using `///`.\n\nBut as far as I can see, this is only internals that we don't need to expose. Could you mark it as `module internal HtmlCssSelectors = ...` ?\n",
+    "created_at": "2015-10-20T19:25:02Z",
+    "id": 42541433,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/886",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you change this so that the spacing looks as follows: \n\n```\nlet links = \n  doc.CssSelect \"div#search ...\"\n  |> List.map (fun n ->\n      match n.InnerText() with\n      | ... )\n```\n\nThis makes the code sample a bit less wide and it will look better in the generated HTML page.\n",
+    "created_at": "2015-10-20T19:23:51Z",
+    "id": 42541314,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/886",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "No it's not. TBH, I didn't understand very well what that bit is doing\n",
+    "created_at": "2015-10-12T09:55:46Z",
+    "id": 41740574,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/883",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This looks fine, Although I'm surprised, this wasn't handled by this https://github.com/fsharp/FSharp.Data/blob/master/src/Html/HtmlRuntime.fs#L152. Am I missing something?  \n",
+    "created_at": "2015-10-12T08:33:29Z",
+    "id": 41734195,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/883",
+    "user_login": "colinbull"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I would prefer to leave the table structure intact and just do this at the TP level, but it was getting quite complicated, so I left it like this. @colinbull any better suggestion?\n",
+    "created_at": "2015-10-11T19:03:15Z",
+    "id": 41714142,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/883",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Maybe check if the type File is defined?\n",
+    "created_at": "2015-09-27T19:40:33Z",
+    "id": 40508588,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "One is unit, one is void (nb. essentially the same as the printing code that was already there).\n",
+    "created_at": "2015-09-27T19:39:39Z",
+    "id": 40508571,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Humm, could it happen that FSharp.Core 4.3.0.0 is referenced because that's what FSharp.Data is dependent on and FSharp.Core 4.3.1.0 or 4.4.0.0 is also referenced because that's the version currently loaded in the TP host inside the compiler? I think I've seen something like that before\n",
+    "created_at": "2015-09-27T19:38:36Z",
+    "id": 40508558,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes.  AFAICS the version info is only used for determining if a local file system is supported by the target runtime, I wonder if we can replace it with something more robust\n",
+    "created_at": "2015-09-27T19:38:02Z",
+    "id": 40508548,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Nothing, old comment, now removed\n",
+    "created_at": "2015-09-27T19:36:49Z",
+    "id": 40508529,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The current problem here is multiple references to the same assembly, which result in multiple (logically identical) type bindings.  In theory we don't get multiple references to the same assembly, but I was wondering if we should just tolerate them and take the first binding.\n",
+    "created_at": "2015-09-27T19:36:17Z",
+    "id": 40508521,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Ah, right, we're no longer calling Assembly.Load, so it won't be locked\n",
+    "created_at": "2015-09-27T19:34:53Z",
+    "id": 40508494,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I remember fighting with this bit of code, so it was used before. Maybe it was part of Apiary...\n",
+    "created_at": "2015-09-27T19:33:49Z",
+    "id": 40508475,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "If we're reading resources via AssemblyReader, then that is using an in-memory snapshot of the bytes of the target assembly, and so there should be no file locking.\n\n(Mind you, that's also chewing through a non-trivial amount of memory, which needs to be solved, I'm trying to work out what we can do about that - if anything)\n",
+    "created_at": "2015-09-27T19:33:33Z",
+    "id": 40508472,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It turned out this case was never used in FSharp.Data, I simplified it to match. \n",
+    "created_at": "2015-09-27T19:31:26Z",
+    "id": 40508409,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "noted, thanks\n",
+    "created_at": "2015-09-27T19:30:12Z",
+    "id": 40508389,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Aren't these two cases the same?\n",
+    "created_at": "2015-09-27T19:14:41Z",
+    "id": 40508146,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could this assumption break in the future and we get a portable profile with major version 4?\n",
+    "created_at": "2015-09-27T19:07:03Z",
+    "id": 40508016,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What is missing here?\n",
+    "created_at": "2015-09-27T19:03:17Z",
+    "id": 40507968,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Did you meant to remove this commented out section or is it work in progress?\n",
+    "created_at": "2015-09-27T18:53:08Z",
+    "id": 40507825,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This AppDomain marshalling was needed to not lock the files, otherwise it was very hard to build FSharp.Data.Toolbox.Twitter. Has something else changed that makes this not needed any more?\n",
+    "created_at": "2015-09-27T18:49:30Z",
+    "id": 40507777,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why is eraseType no longer needed? IIRC it was needed when tyargs contained units of measure\n",
+    "created_at": "2015-09-27T18:45:02Z",
+    "id": 40507746,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why isn't this needed anymore?\n",
+    "created_at": "2015-09-27T18:44:20Z",
+    "id": 40507734,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Maybe use `for asm in` instead? :)\n",
+    "created_at": "2015-09-27T18:38:19Z",
+    "id": 40507652,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/875",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Filed an issue for this: https://github.com/fsharp/FSharp.Data/issues/877\n",
+    "created_at": "2015-09-27T18:26:32Z",
+    "id": 40507496,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/876",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You left a repeated attribute\n",
+    "created_at": "2015-09-27T18:21:05Z",
+    "id": 40507429,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/876",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Did you meant to call normalize twice?\n",
+    "created_at": "2015-09-27T18:15:03Z",
+    "id": 40507366,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/876",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "@ovatsus You can decide to disable source indexing on any files. This disables it for any `paket-files`.\n",
+    "created_at": "2015-06-30T19:22:03Z",
+    "id": 33612739,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/852",
+    "user_login": "ctaggart"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Other direction, this if for writing to a string (Saving). stringArrayToRow is indeed dropped.\n",
+    "created_at": "2015-01-08T07:46:13Z",
+    "id": 22638795,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/769",
+    "user_login": "nwolverson"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think we don't need rowToStringArray here, as we're not parsing but specifying the rows directly\n",
+    "created_at": "2015-01-08T00:10:33Z",
+    "id": 22627226,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/769",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Humm, I would prefer not to touch this. I think you need to specify the constructor paramters with the UoM, but then use the Tuple creation without the UoM, as it's done for the parsing case.\nOr maybe if we keep this change (which we'll need to propagate to the source), we can simplify that logic for the parsing case\n",
+    "created_at": "2015-01-08T00:09:08Z",
+    "id": 22627161,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/769",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thinking a bit more about it, I think it's preferable to use a constructor instead of a static method New, for better parity with the other providers\n",
+    "created_at": "2015-01-08T00:08:17Z",
+    "id": 22627130,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/769",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You should adjust casing of constructor parameter here to camelCase. I think we do that in JsonProvider also\n",
+    "created_at": "2015-01-08T00:06:46Z",
+    "id": 22627075,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/769",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This should be `typ` instead of `typWithoutMeasure`\n",
+    "created_at": "2015-01-04T15:12:40Z",
+    "id": 22439894,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/769",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You can omit `, optionalValue = None` as it's the default\n",
+    "created_at": "2015-01-04T15:11:25Z",
+    "id": 22439883,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/769",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The null to \"\" conversion needs to be done on the row constructor instead, to maintain the invariant of not having null as a string value on CsvProvider anywhere\n",
+    "created_at": "2015-01-04T15:10:55Z",
+    "id": 22439879,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/769",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It's reverted now\n",
+    "created_at": "2014-11-15T20:13:10Z",
+    "id": 20404670,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/741",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Interesting, how did this change with your fix?\n",
+    "created_at": "2014-11-15T15:51:12Z",
+    "id": 20403078,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/749",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You're right, I'll revert this. Do you have any suggestion of an alternative to handle this? https://github.com/fsharp/FSharp.Data/pull/741/files#diff-660e1771edf79b30cbbce21dfb11ad70R239\n",
+    "created_at": "2014-11-10T23:32:21Z",
+    "id": 20122176,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/741",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm not sure this is necessarily true. I think everything should be treated as data unless the line is prefixed with one of the specified comment delimiters. I know it isn't the CSV spec, but I see a-lot of files with headers where the missing values are implied. \n\n```\n Column 1, Column 2, Column 3, Column 4\n      1.0,\n      3.0,      4.0,      5.0,      6.0\n```\n\nwith this method I guess the first row would be ignored. This could lead to hard to track down bugs.\n",
+    "created_at": "2014-11-10T14:29:11Z",
+    "id": 20084083,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/741",
+    "user_login": "colinbull"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You can remove `inferTypesFromValues &&` from here\n",
+    "created_at": "2014-11-08T11:52:16Z",
+    "id": 20051390,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/743",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This new pattern clause fixes #703\n",
+    "created_at": "2014-10-11T17:28:13Z",
+    "id": 18742953,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/704",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This was broken by my change to HtmlParser to skip spurious closing tags that was needed to make the national rail mobile website parse correctly :(\n",
+    "created_at": "2014-10-11T17:27:26Z",
+    "id": 18742950,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/704",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "NONE",
+    "body": "This change has been made.  The record now has a secondLine field that is used for this test and the newReader is no longer necessary.\n",
+    "created_at": "2014-09-30T21:36:22Z",
+    "id": 18249111,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/690",
+    "user_login": "mjsottile"
+  },
+  {
+    "author_association": "NONE",
+    "body": "The update to separators is no longer necessary and was removed.\n",
+    "created_at": "2014-09-30T21:35:47Z",
+    "id": 18249069,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/690",
+    "user_login": "mjsottile"
+  },
+  {
+    "author_association": "NONE",
+    "body": "This change has been made.\n",
+    "created_at": "2014-09-30T21:35:20Z",
+    "id": 18249047,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/690",
+    "user_login": "mjsottile"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This will always cause to get a newReader even for the case where there isn't a trailing comma/tab. Can you instead change ParsedCsvLines to also have a SecondLine so you would only need to update Headers and ColumnCount and not call parseIntoLines again?\n",
+    "created_at": "2014-09-26T11:07:24Z",
+    "id": 18083860,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/690",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It's best to move this to just after probablyTabSeparated so we don't take the risk of forgetting it in the future\n",
+    "created_at": "2014-09-26T10:53:53Z",
+    "id": 18083529,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/690",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Probably is best to use String.IsNullOrWhiteSpace in case it has a space after the comma\n",
+    "created_at": "2014-09-26T10:52:20Z",
+    "id": 18083481,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/690",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yes. versions are only specified in the paket.dependencies file.\nThis makes things much easier\n",
+    "created_at": "2014-09-20T10:02:34Z",
+    "id": 17818988,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/679",
+    "user_login": "forki"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "No version?\n",
+    "created_at": "2014-09-20T09:58:25Z",
+    "id": 17818981,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/679",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It's not as common as parsing, but the JsonTP also uses it behind the scenes when you use the write API to post stuff to REST endpoints, so I would prefer to have that test\n",
+    "created_at": "2014-08-29T12:14:35Z",
+    "id": 16894380,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/671",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Probably yes, but is this a common use case to create JsonValue by hand, not by parsing a json string? Anyway I can bring this test back if you like.\n",
+    "created_at": "2014-08-29T12:00:23Z",
+    "id": 16894002,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/671",
+    "user_login": "theimowski"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What if it's possible to create a JsonValue that can never be parsed from a string? This test would catch it\n",
+    "created_at": "2014-08-29T11:55:58Z",
+    "id": 16893898,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/671",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think it's redundant - if the latter one passes, then it means that both parsing and stringifing work well.\n",
+    "created_at": "2014-08-29T11:52:34Z",
+    "id": 16893818,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/671",
+    "user_login": "theimowski"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why did you remove this test? It's testing a different scenario than the other one\n",
+    "created_at": "2014-08-29T11:46:21Z",
+    "id": 16893637,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/671",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, it should also trigger on arrays, but in that case you would want to expose an array, and that wasn't implemented yet, so it needs a bit more work. You can submit a separate PR to fix that if you want\n",
+    "created_at": "2014-08-20T15:22:55Z",
+    "id": 16482790,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I can do that but a reflection regarding json inference. Should it infer json from arrays as well?\n\nCurrently `value.TrimStart().StartsWith \"{\"` will not trigger on JSON arrays.\n",
+    "created_at": "2014-08-20T05:37:24Z",
+    "id": 16459511,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please add the json case that is also affected by the flag\n",
+    "created_at": "2014-08-19T20:46:43Z",
+    "id": 16442464,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Also mention that it will infer json\n",
+    "created_at": "2014-08-19T20:44:09Z",
+    "id": 16442333,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ok, due to a failing http test (I think this is due to timezone issue in mock server) this masked the signature test. I have disabled the test temporarily (as I haven't figured out why I see it) and now get the signatures.\n",
+    "created_at": "2014-08-19T19:17:40Z",
+    "id": 16436754,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Unless something is wrong with the tests, they should fail, as there is no expected file for the entry you added. To regenerate you can either run the FSharp.Data.DesignTime as a console app (by renaming Test.fsx to Test.fs), or you can evaluate `generateAllExpected()` in the REPL (https://github.com/fsharp/FSharp.Data/blob/master/tests/FSharp.Data.DesignTime.Tests/SignatureTests.fs#L35)\n",
+    "created_at": "2014-08-18T21:37:25Z",
+    "id": 16383814,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I have executed `build all` but is unsure how I can prove the signature test has happened. \n\nI can certainly add the parameter. Will take a look at the commit.\n\nI suspect it will happen this weekend.\n",
+    "created_at": "2014-08-18T19:01:59Z",
+    "id": 16374775,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You need to add the expected files and the new param. Are you sure you run all the tests on the two test assemblies? You have to execute `build RunTests` or `build All`. Take a look at this commit as an example of changing both the .config and TypeProviderInstantiation.fs: https://github.com/fsharp/FSharp.Data/commit/a4ddf46fb3df7db892f933c6386c0621b189ebf4\n",
+    "created_at": "2014-08-17T22:06:06Z",
+    "id": 16332482,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "As per comment I added files here but I am unsure how they exactly are used. I've built with build.cmd all and the json/xml tests passed.\n",
+    "created_at": "2014-08-17T20:34:29Z",
+    "id": 16331894,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I was considered that as well but I kept noTypeInference to increase searchability. I don't mind implementing your suggestion though.\n",
+    "created_at": "2014-08-16T11:12:53Z",
+    "id": 16324334,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": " I would change noTypeInference to useTypeInference or something similar to avoid double negatives everywhere. The ProviderParameter can stay with the same name, but at least you would only have the negation once\n",
+    "created_at": "2014-08-16T10:36:25Z",
+    "id": 16324119,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "False is the right choice.\n",
+    "created_at": "2014-08-16T10:36:05Z",
+    "id": 16324118,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Very basic testing currently.\n",
+    "created_at": "2014-08-08T19:07:04Z",
+    "id": 16010721,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I was planning just to modify the JsonProvider in this PR but because the XmlProvider has a dependency on the JsonProvider I added noTypeInference flag to Xml TP as well.\n",
+    "created_at": "2014-08-08T19:06:43Z",
+    "id": 16010702,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I am a bit uncertain if optional should be true or false here. I ended up picking false because other cases does as as well.\n",
+    "created_at": "2014-08-08T19:05:46Z",
+    "id": 16010666,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/658",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Added test case using the offending characters from TwitterStream.json\n",
+    "created_at": "2014-05-07T22:03:08Z",
+    "id": 12405652,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/624",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Instead of going via UnicodeEncoding.Unicode.GetChars which potentially have ending issues create the character directly\n",
+    "created_at": "2014-05-07T22:02:09Z",
+    "id": 12405610,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/624",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Issue 3 in #563 \n",
+    "created_at": "2014-04-27T18:43:13Z",
+    "id": 12030582,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/594",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I am thinking about adding pseudo-randomly generated test cases as well. Random test cases can be used to generate \"nasty\" documents that can catch corner cases.\n",
+    "created_at": "2014-04-27T18:42:35Z",
+    "id": 12030578,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/594",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Root values should only be objects and arrays\n",
+    "created_at": "2014-04-27T18:38:12Z",
+    "id": 12030553,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/594",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Addresses 1 in #563 \n",
+    "created_at": "2014-04-27T18:37:10Z",
+    "id": 12030544,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/594",
+    "user_login": "mrange"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Strugling to make ends meet or at least the travis build work. I simply\ncan't recreate the issues that the tranvis build reports. Currently it\nfails with the Parse method and ParseItems not existing (which would be an\nerror in the XsdProvider implementation) but they work locally. I've no\nuncommitted files according to Git and it should be able to compile if that\nwas the case. What am I missing here?\n\n2014-04-07 12:30 GMT+02:00 rune funch funchsoltoft@gmail.com:\n\n> Turns out that Freebase actually does return something else than what the\n> unit test expected. I've updated the expectations of the unit test (Jack\n> Abramoffa instead of Jack Abramoff) as far as I can see that was the right\n> thing to do. Travis is no green for the pull request\n> \n> 2014-04-04 18:19 GMT+02:00 rune funch funchsoltoft@gmail.com:\n> \n> Fixed that visere travis still reports an error but with very little\n> \n> > information, so I'll try and reproduce locally and then fix whatever the\n> > error is\n> > \n> > Mvh\n> > Rune\n> > \n> > Den 03/04/2014 kl. 22.34 skrev Gustavo Guerra notifications@github.com:\n> > \n> > In src/FSharp.Data.DesignTime.fsproj:\n> > \n> > > @@ -103,12 +104,18 @@\n> > >      <MinimumVisualStudioVersion Condition=\"'$(MinimumVisualStudioVersion)' == ''\">11</MinimumVisualStudioVersion>\n> > >    </PropertyGroup>\n> > >    <Import Project=\"DefineConstants.targets\" />\n> > > -  <PropertyGroup Condition=\"Exists('$(MSBuildExtensionsPath32)\\..\\Microsoft SDKs\\F#\\3.0\\Framework\\v4.0\\Microsoft.FSharp.Targets')\">\n> > > -    <FSharpTargetsPath>$(MSBuildExtensionsPath32)..\\Microsoft SDKs\\F#\\3.0\\Framework\\v4.0\\Microsoft.FSharp.Targets</FSharpTargetsPath>\n> > > -  </PropertyGroup>\n> > > -  <PropertyGroup Condition=\"Exists('$(MSBuildExtensionsPath32)\\..\\Microsoft SDKs\\F#\\3.1\\Framework\\v4.0\\Microsoft.FSharp.Targets')\">\n> > > -    <FSharpTargetsPath>$(MSBuildExtensionsPath32)..\\Microsoft SDKs\\F#\\3.1\\Framework\\v4.0\\Microsoft.FSharp.Targets</FSharpTargetsPath>\n> > > -  </PropertyGroup>\n> > > -  <Choose>\n> > \n> > You reverted this by accident, which will cause mono to not work\n> > \n> > —\n> > Reply to this email directly or view it on GitHubhttps://github.com/fsharp/FSharp.Data/pull/558/files#r11271204\n> > .\n",
+    "created_at": "2014-04-15T17:26:35Z",
+    "id": 11646196,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/558",
+    "user_login": "runefs"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Turns out that Freebase actually does return something else than what the\nunit test expected. I've updated the expectations of the unit test (Jack\nAbramoffa instead of Jack Abramoff) as far as I can see that was the right\nthing to do. Travis is no green for the pull request\n\n2014-04-04 18:19 GMT+02:00 rune funch funchsoltoft@gmail.com:\n\n> Fixed that visere travis still reports an error but with very little\n> information, so I'll try and reproduce locally and then fix whatever the\n> error is\n> \n> Mvh\n> Rune\n> \n> Den 03/04/2014 kl. 22.34 skrev Gustavo Guerra notifications@github.com:\n> \n> In src/FSharp.Data.DesignTime.fsproj:\n> \n> > @@ -103,12 +104,18 @@\n> >      <MinimumVisualStudioVersion Condition=\"'$(MinimumVisualStudioVersion)' == ''\">11</MinimumVisualStudioVersion>\n> >    </PropertyGroup>\n> >    <Import Project=\"DefineConstants.targets\" />\n> > -  <PropertyGroup Condition=\"Exists('$(MSBuildExtensionsPath32)\\..\\Microsoft SDKs\\F#\\3.0\\Framework\\v4.0\\Microsoft.FSharp.Targets')\">\n> > -    <FSharpTargetsPath>$(MSBuildExtensionsPath32)..\\Microsoft SDKs\\F#\\3.0\\Framework\\v4.0\\Microsoft.FSharp.Targets</FSharpTargetsPath>\n> > -  </PropertyGroup>\n> > -  <PropertyGroup Condition=\"Exists('$(MSBuildExtensionsPath32)\\..\\Microsoft SDKs\\F#\\3.1\\Framework\\v4.0\\Microsoft.FSharp.Targets')\">\n> > -    <FSharpTargetsPath>$(MSBuildExtensionsPath32)..\\Microsoft SDKs\\F#\\3.1\\Framework\\v4.0\\Microsoft.FSharp.Targets</FSharpTargetsPath>\n> > -  </PropertyGroup>\n> > -  <Choose>\n> \n> You reverted this by accident, which will cause mono to not work\n> \n> ## \n> \n> Reply to this email directly or view it on GitHubhttps://github.com/fsharp/FSharp.Data/pull/558/files#r11271204\n> .\n",
+    "created_at": "2014-04-07T10:31:07Z",
+    "id": 11338032,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/558",
+    "user_login": "runefs"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Because alot of the time they aren't well formed tables and it causes alot of complexity in managing parsing that for only what im assuming is a small set of scenarios.\n\n-----Original Message-----\nFrom: \"Gustavo Guerra\" notifications@github.com\nSent: ‎04/‎04/‎2014 18:25\nTo: \"fsharp/FSharp.Data\" FSharp.Data@noreply.github.com\nCc: \"Colin\" colinbul@googlemail.com\nSubject: Re: [FSharp.Data] Html type provider (#559)\n\nIn src/Html/HtmlProvider.fs:\n\n> @@ -65,6 +69,7 @@ type public HtmlProvider(cfg:TypeProviderConfig) as this =\n>          \"\"\"<summary>\n> \n> Typed representation of an HTML file</summary>\n> \n> \n>             <param name='Sample'>Location of an HTML sample file or a string containing a sample HTML document</param>\n>             <param name='PreferOptionals'>When set to true, inference will prefer to use the option type instead of nullable types, double.NaN or \"\" for missing values. Defaults to false</param>\n> -           <param name='IncludeLayoutTables'>Includes tables that are potentially layout tables (with cellpadding=0 and cellspacing=0 attributes)</param>\n>   Why don't we just always include them instead of adding an option?\n>   —\n>   Reply to this email directly or view it on GitHub.\n",
+    "created_at": "2014-04-04T19:32:08Z",
+    "id": 11310093,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/559",
+    "user_login": "colinbull"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why don't we just always include them instead of adding an option?\n",
+    "created_at": "2014-04-04T17:25:57Z",
+    "id": 11304326,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/559",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Fixed that visere travis still reports an error but with very little\ninformation, so I'll try and reproduce locally and then fix whatever the\nerror is\n\nMvh\nRune\n\nDen 03/04/2014 kl. 22.34 skrev Gustavo Guerra notifications@github.com:\n\nIn src/FSharp.Data.DesignTime.fsproj:\n\n> @@ -103,12 +104,18 @@\n>      <MinimumVisualStudioVersion Condition=\"'$(MinimumVisualStudioVersion)' == ''\">11</MinimumVisualStudioVersion>\n>    </PropertyGroup>\n>    <Import Project=\"DefineConstants.targets\" />\n> -  <PropertyGroup Condition=\"Exists('$(MSBuildExtensionsPath32)\\..\\Microsoft SDKs\\F#\\3.0\\Framework\\v4.0\\Microsoft.FSharp.Targets')\">\n> -    <FSharpTargetsPath>$(MSBuildExtensionsPath32)..\\Microsoft SDKs\\F#\\3.0\\Framework\\v4.0\\Microsoft.FSharp.Targets</FSharpTargetsPath>\n> -  </PropertyGroup>\n> -  <PropertyGroup Condition=\"Exists('$(MSBuildExtensionsPath32)\\..\\Microsoft SDKs\\F#\\3.1\\Framework\\v4.0\\Microsoft.FSharp.Targets')\">\n> -    <FSharpTargetsPath>$(MSBuildExtensionsPath32)..\\Microsoft SDKs\\F#\\3.1\\Framework\\v4.0\\Microsoft.FSharp.Targets</FSharpTargetsPath>\n> -  </PropertyGroup>\n> -  <Choose>\n\nYou reverted this by accident, which will cause mono to not work\n\n## \n\nReply to this email directly or view it on\nGitHubhttps://github.com/fsharp/FSharp.Data/pull/558/files#r11271204\n.\n",
+    "created_at": "2014-04-04T16:19:41Z",
+    "id": 11301705,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/558",
+    "user_login": "runefs"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You reverted this by accident, which will cause mono to not work\n",
+    "created_at": "2014-04-03T20:34:05Z",
+    "id": 11271204,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/558",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is a bug fix, if you are using an Implicit constructor then this throws an exception in the sequence expression below.\n",
+    "created_at": "2014-03-31T15:07:39Z",
+    "id": 11119623,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/555",
+    "user_login": "7sharp9"
+  },
+  {
+    "author_association": "NONE",
+    "body": "You are correct there. Fixed now. I'm off to sleep (it's midnight here already) now, but I'll be hanging around towards the end of the week for sure, probably earlier too.\n",
+    "created_at": "2014-02-24T21:24:05Z",
+    "id": 10011181,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/451",
+    "user_login": "veikkoeeva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Shouldn't this be `if sampleOrSampleUri <> \"\" && (runtimeVersion.SupportsLocalFileSystem || not sampleIsUri || sampleIsWebUri) && not (hasAuthorizationPart sampleOrSampleUri) then`?\n",
+    "created_at": "2014-02-24T21:04:41Z",
+    "id": 10010212,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/451",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Makes sense!\n",
+    "created_at": "2013-10-17T15:38:59Z",
+    "id": 7036187,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/223",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, I though about that, but was waiting for your input regarding CSV, as I'll probably still change it. This pr still needs some work, I just did the bare minimum because I needed the AsyncLoad in XmlProvider for one of my projects, but wanted to submit now anyway to get your early feedback\n",
+    "created_at": "2013-10-16T21:12:32Z",
+    "id": 7016156,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/223",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I know the names for most of the functions here are quite self-descriptive, but I generally find it nice if there is at least a brief `///` comment for every function that's used from another module or file (i.e. what are the typical parameters, what does `isHosted` below mean etc.)\n\nI believe it makes it easier for others to contribute to the project... \n",
+    "created_at": "2013-10-16T21:09:17Z",
+    "id": 7016068,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/223",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It's great that this is now extracted into reusable function, but I'm a bit scared by the super complicated function signature.\n\nCould you perhaps define a record to store some of the arguments? (Those where it logically makes sense to group them into a separate data structure?) \n\nAnd also adding some `///` comments to the function (and to the record and its members) would be great :-)\n",
+    "created_at": "2013-10-16T21:02:29Z",
+    "id": 7015857,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/223",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The packages only used in the tutorials are still fectched during the sln build. I changed this recently, by manually adding the FSharpCharting nuget dependency to packages.config [here](https://github.com/fsharp/FSharp.Data/blob/9c3dc48f32d42bba752b91b9bf6c5550d8c5a9b2/tests/FSharp.Data.Tests.Documentation/packages.config#L3), and then I removed the package restore from build.fsx [here](https://github.com/fsharp/FSharp.Data/commit/67737ee76c6c187b4a41b2bda4e9228a83b8ba15)\n\nI would like that when someone downloads or clones the source code to be able to get by just by opening the .sln and building inside VS and trying out the samples, not having to do any `./configure`, or `build.fsx` before. In my view, fake scripts should only be used to extra stuff like generating documentation and automating the releases. \n@forki Maybe you just built the main solution and open the samples directly instead of from the tests .sln? In that case maybe we should move the FSharp.Charting nuget reference to the packages.config of FSharp.Data.fsproj instead. Unfortunately, because of the type providers lock problem, we can't have the sample in the main solution, which would be ideal\n",
+    "created_at": "2013-10-09T10:11:31Z",
+    "id": 6851719,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/216",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "But perhaps it could be done as a target? Like here: https://github.com/BlueMountainCapital/FSharp.DataFrame/blob/master/build.fsx#L75 (looks like I actually forgot to include the `samples/packages.config` which contains the reference to F# Charrting)\n",
+    "created_at": "2013-10-09T05:27:00Z",
+    "id": 6847778,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/216",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think this might be useful when there are some packages that are not referenced in any `fsproj` but are still used somewhere (and you can just get all of them by running the build). I certainly needed this for F# DataFrame (where I'm using F# Charting in the samples, but it is not referenced anywhere else).\n",
+    "created_at": "2013-10-09T05:24:17Z",
+    "id": 6847749,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/216",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why do we need this? The package restore is already part of the build throught the .fsproj's\n",
+    "created_at": "2013-10-08T14:30:24Z",
+    "id": 6827036,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/216",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Here is the test for quoted strings\n",
+    "created_at": "2013-03-15T16:21:28Z",
+    "id": 3394041,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Data/pulls/85",
+    "user_login": "colinbull"
+  }
+]

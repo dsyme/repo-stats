@@ -1,0 +1,818 @@
+[
+  {
+    "author_association": "NONE",
+    "body": "After computing `v` on a miss, the code does `TryAdd` and then unconditionally reads `cache.[idx]`, which forces another lookup. Consider returning `v` when `TryAdd` succeeds (and only falling back to reading from the dictionary when it fails due to a concurrent add). This keeps the concurrent behavior but avoids extra work on every miss.",
+    "created_at": "2026-03-22T07:07:46Z",
+    "id": 2971176943,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/486",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "NONE",
+    "body": "`cache.TryGetValue idx` uses the F# out-arg-to-tuple translation, which allocates a tuple on every cache access (including hits). Since this cache is likely hot, consider using the byref overload (`let mutable res = Unchecked.defaultof<_>; if cache.TryGetValue(idx, &res) then res else ...`) to avoid per-call allocations. Also, after `TryAdd` you can return `v` directly when the add succeeds to avoid a second dictionary lookup.",
+    "created_at": "2026-03-22T07:07:46Z",
+    "id": 2971176937,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/486",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "NONE",
+    "body": "`GetInterfaces()` now returns the cached `Type[]` instance. Previously it allocated a fresh array on each call, so callers could (intentionally or accidentally) mutate the returned array without affecting subsequent calls. To avoid sharing a mutable array across callers, consider returning a copy (while still caching the resolved interface `Type`s) or otherwise ensuring the returned collection can't be mutated by consumers.\n```suggestion\n        override __.GetInterfaces() = interfaces.Value |> Array.copy\n```",
+    "created_at": "2026-03-22T06:22:20Z",
+    "id": 2971134232,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/485",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "NONE",
+    "body": "`mkCacheGeneric` also executes `f idx` inside the lock. This can unnecessarily serialize expensive cache-miss computations and increase contention (especially because these caches are frequently nested inside other cached reads). Prefer locking only around `TryGetValue`/write-back (compute outside the lock after a miss) or use a `ConcurrentDictionary<'T, Lazy<_>>` pattern to keep thread-safety without blocking unrelated lookups.\n```suggestion\n                // First, try to read from the cache under the lock\n                let mutable found = false\n                let mutable cachedValue = Unchecked.defaultof<_>\n                lock syncObj (fun () ->\r\n                    match cache.TryGetValue idx with\r\n                    | true, cached ->\n                        found <- true\n                        cachedValue <- cached\n                    | false, _ -> ())\n                if found then\n                    cachedValue\n                else\n                    // Compute the value outside the lock to avoid serializing expensive work\n                    let v = f idx\n                    // Write back under the lock, with a second check in case another thread won the race\n                    lock syncObj (fun () ->\n                        match cache.TryGetValue idx with\n                        | true, cached -> cached\n                        | false, _ ->\n                            cache.[idx] <- v\n                            v)\n```",
+    "created_at": "2026-03-22T06:16:15Z",
+    "id": 2971129682,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/482",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "NONE",
+    "body": "`mkCacheInt32` holds the lock while executing `f idx`. Since `f` performs the full row decode (and may call into other caches), this serializes work across threads and can significantly reduce parallelism under parallel compilation. Consider limiting the lock to dictionary access only (double-check pattern: read under lock; compute outside; write back under lock), or switching to a `ConcurrentDictionary<int32, Lazy<_>>`/`Lazy`-based approach so only cache insertion is synchronized while the expensive computation happens without blocking other cache hits.",
+    "created_at": "2026-03-22T06:16:14Z",
+    "id": 2971129680,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/482",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why `netstandard2.1` target is needed?",
+    "created_at": "2025-05-13T06:48:20Z",
+    "id": 2086047505,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/416",
+    "user_login": "sergey-tihon"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The source of an \"Assembly name\" is never user-typed. It's always hardcoded to a DLL, and read from an assembly, thus case-sensitivity is irrelevant and an exact match is ok.",
+    "created_at": "2025-05-13T06:29:56Z",
+    "id": 2086017748,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/417",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "NONE",
+    "body": "The bestGuess logic relies on matching assembly FullName values; consider using a normalized or case-insensitive comparison if variations in assembly naming conventions are possible, to avoid unexpected lookup failures.\n```suggestion\n                let bestGuess = \n                    asms |> Seq.tryFind(fun a -> String.Equals(a.FullName, t.Assembly.FullName, StringComparison.OrdinalIgnoreCase))\n                    |> Option.bind(fun a -> tryGetTypeFromAssembly toTgt t.Assembly.FullName fullName a)\n```",
+    "created_at": "2025-05-13T06:21:14Z",
+    "id": 2086005065,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/417",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "6 or greater: Just need support for \"return: Struct\". There would be multiple options: just conditions inside a file, or 2 separate files even and the condition on .fsproj level.\n\nLooking the Nuget package stats of latest 6 weeks downloads, the F# core 5.0 and 4.x are still the most popular ones, and there are TPs on F# 4 getting thousands of downloads a month. So we definitely not want to break F# 4 support.\n",
+    "created_at": "2024-07-07T20:46:19Z",
+    "id": 1667762000,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/407",
+    "user_login": "Thorium"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I don't remember offhand, but will this be functionally equivalent to:\r\n\r\n\"if it's compiled using FSharp.Core 6.0\"\r\n\r\nor:\r\n\r\n\"if it's compiled using FSharp.Core 6.0 or greater\"\r\n\r\nIf the former, then this probably needs to be a different condition. I know that .NET defines `_OR_GREATER` preprocessors, but I have no idea if F# does this. @vzarytovskii any thoughts?",
+    "created_at": "2024-07-07T20:37:27Z",
+    "id": 1667760177,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/407",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "4.7.2 is fine, given VSMac and Mono are being updated",
+    "created_at": "2020-10-27T00:47:13Z",
+    "id": 512351488,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "No as I understand things that's not correct.\r\n\r\n.NET Standard 2.0 TPDTC still have to multi-target, that is, they may be used in a project whose target reference assemblies are .NET Standard 2.0, .NET Standard 2.1, .NET CoreApp 3.0 or whatever else.   They still have to generate code correctly for the correct set of target reference assemblies.  This includes generative assemblies.  \r\n\r\nSo while TPDTC are .NET Standard 2.0 components, they are in fact code generators for a whole range of target frameworks depending on the reference assembly set they are given. That's what this code is testing, and what type remapping is for.  \r\n\r\nTo put it another way - there's nothing about the simplification of the engineering assumptions in this repo that removes the requirement that TPDTC still have to implement type remapping.  \r\n\r\n\r\n",
+    "created_at": "2020-10-27T00:37:40Z",
+    "id": 512348982,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "thanks",
+    "created_at": "2020-10-27T00:16:46Z",
+    "id": 512343424,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "OK yes you're right",
+    "created_at": "2020-10-27T00:15:31Z",
+    "id": 512343074,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "These still need to be resolved - uncommenting them will result in a build error unless that was resolved with your changes @dsyme ",
+    "created_at": "2020-10-27T00:08:01Z",
+    "id": 512340938,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> This creates the exact same layout that was specified before. It is a property that exists in the F# compiler targets (and apparently has been there a very long time). @KevinRansom showed it to me and it greatly simplifies this requirement\r\n\r\nYes, that is good, and it packages the dependencies too.  At least there's some advantage to that dubious cross-project reference :-) \r\n",
+    "created_at": "2020-10-27T00:07:29Z",
+    "id": 512340784,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This can be deleted",
+    "created_at": "2020-10-27T00:06:35Z",
+    "id": 512340535,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Documented in https://github.com/fsprojects/FSharp.TypeProviders.SDK/pull/339#issuecomment-716881125",
+    "created_at": "2020-10-26T23:50:42Z",
+    "id": 512335878,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Documented in https://github.com/fsprojects/FSharp.TypeProviders.SDK/pull/339#issuecomment-716881125",
+    "created_at": "2020-10-26T23:50:16Z",
+    "id": 512335743,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Documented in https://github.com/fsprojects/FSharp.TypeProviders.SDK/pull/339#issuecomment-716881125.\r\n\r\n",
+    "created_at": "2020-10-26T23:49:58Z",
+    "id": 512335616,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It is `FSharpToolsDirectory>typeproviders</FSharpToolsDirectory>` and `<PackagePath>typeproviders</PackagePath>`, you can verify that files are in the correct place. At least that is what I did here when adding the change.\r\n\r\nIt was a while ago so please correct me if I'm wrong and you don't see that on your local build. But I really really want to remove these msbuild extesibility stuff if it's possible",
+    "created_at": "2020-10-26T23:10:36Z",
+    "id": 512322984,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "(I agree the BeforeBuild is not necessary, but not the AfterBuild)",
+    "created_at": "2020-10-26T23:04:11Z",
+    "id": 512320605,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why?  The design time component is not places in the right location AFAICS.  WHat loads it?",
+    "created_at": "2020-10-26T23:02:42Z",
+    "id": 512320097,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Same here, these are not necessary @dsyme ",
+    "created_at": "2020-10-26T22:45:47Z",
+    "id": 512313612,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please don't add these back, they are unnecessary",
+    "created_at": "2020-10-26T22:45:31Z",
+    "id": 512313510,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I've replaced this with a CopyFile in the Runtime .fsproj",
+    "created_at": "2020-10-26T22:41:27Z",
+    "id": 512311986,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I see, there is a ProjectReference with `IsFSharpDesignTimeProvider`.  That's ok",
+    "created_at": "2020-10-26T22:40:47Z",
+    "id": 512311735,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What is this `IsFSharpDesignTimeProvider` thing?  I see a reference to it here:\r\n\r\nhttps://github.com/dotnet/fsharp/blob/ec5bad3a391357e03ff2286a264f0e4faf7d840d/src/fsharp/FSharp.Build/Microsoft.FSharp.NetSdk.targets#L62\r\n\r\nbut what does it do and which SDKs is this available in?  It sounds useful - does it just suppress the referencing of the DLL?\r\n",
+    "created_at": "2020-10-26T22:32:50Z",
+    "id": 512308784,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It is not, see other comments",
+    "created_at": "2020-10-26T22:29:45Z",
+    "id": 512307600,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "No longer necessary, ccan just delete",
+    "created_at": "2020-10-26T22:29:34Z",
+    "id": 512307521,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> since if they do their component will not be loadable into VS2019\r\n\r\nNot sure if I understand this point, but FSharp.Core is so complex that I am happy to admit that I may be wrong here. They would be loadable into any up-to-date VS 2019. Updating a type provider to .NET Standard 2.0 will make it not loadable in VS 2017. Updating that same type provider to depend on FSharp.Core 4.7.2 will only make it loadable in VS 16.7 or greater. What I specified will continue to have existing type providers work exactly where they work before.\r\n\r\nI'm not married to `>= 4.5.2` though",
+    "created_at": "2020-10-26T22:29:19Z",
+    "id": 512307415,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Two things on this:\r\n\r\n1. It was never correct, and `AfterTargets` was always the correct thing to do\r\n2. Neither this nor `AfterTargets` is actually required with `IsFSharpDesignTimeProvider` specified, which was another goody that @KevinRansom showed me and has been around forever (but unused due to the template specifying things the \"hard way\" that I removed here)",
+    "created_at": "2020-10-26T22:26:13Z",
+    "id": 512306003,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This creates the exact same layout that was specified before. It is a property that exists in the F# compiler targets (and apparently has been there a very long time). @KevinRansom showed it to me and it greatly simplifies this requirement",
+    "created_at": "2020-10-26T22:23:20Z",
+    "id": 512304793,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "e.g. \r\n\r\n```\r\n    <!-- We place the TPDTC DLLs in a well-known locations with respect to the runtime DLL -->\r\n    <Copy SourceFiles=\"..\\BasicProvider.DesignTime\\bin\\$(Configuration)\\netstandard2.0\\BasicProvider.DesignTime.dll\" DestinationFolder=\"$(OutputPath)\\typeproviders\\fsharp41\\netstandard2.0\" />\r\n    <Copy SourceFiles=\"..\\BasicProvider.DesignTime\\bin\\$(Configuration)\\netstandard2.0\\FSharp.TypeProviders.SDK.dll\" DestinationFolder=\"$(OutputPath)\\typeproviders\\fsharp41\\netstandard2.0\" />\r\n```\r\n",
+    "created_at": "2020-10-26T22:21:08Z",
+    "id": 512303891,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This AfterBuild is necessary to place the TPDTC in the right location with respect to the TPRTC outputs.",
+    "created_at": "2020-10-26T22:20:49Z",
+    "id": 512303759,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "See other comment.  Probably best to pin this to 4.7.2",
+    "created_at": "2020-10-26T22:17:21Z",
+    "id": 512302192,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is there a reason for removing this?",
+    "created_at": "2020-10-26T22:16:03Z",
+    "id": 512301691,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think this should pin to FSHarp.Core 4.7.2 exactly.\r\n\r\nTPDTC must load into, for example, VS2019 devenv.exe and fsc.exe.  These use an FSharp.Core that is 4.7.2.  We do not want to encourage people to randomly move to higher FSharp.Core dependencies for their TPDTC since if they do their component will not be loadable into VS2019, and will randomly become unloadable in F# tooling each time they `paket update`.\r\n\r\nLike all design time plugins, TPDTC should in general use the *lowest* FSHarp.Core and *lowest* framework dependency they can, in order to load into as many contexts as possible.\r\n",
+    "created_at": "2020-10-26T22:15:04Z",
+    "id": 512301304,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This output path is crucial (or the output DLL and PDB must somehow be copied to this location).  Without it the type provider package will not have its design time tooling in the right place.  Perhaps this has been moved somewhere else?",
+    "created_at": "2020-10-26T22:08:49Z",
+    "id": 512298587,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What is this \"FSharpToolsDirectory\" thing being set?",
+    "created_at": "2020-10-26T22:07:28Z",
+    "id": 512298043,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm not sure why this section is removed.  Doing MSBuild on the DesignTime component is a necessary in creating a usable Runtime component ",
+    "created_at": "2020-10-26T22:06:31Z",
+    "id": 512297641,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This should brought over",
+    "created_at": "2020-10-26T21:54:04Z",
+    "id": 512292219,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "My understanding of these tests is that they're ultimately just doing an ad-hoc implementation of what .NET Standard 2.0 assembly forwarding already does for us",
+    "created_at": "2020-10-26T21:53:10Z",
+    "id": 512291844,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "These aren't necessary if we wish to make TPs a .NET Standard 2.0-only concept going forward.",
+    "created_at": "2020-10-26T21:52:29Z",
+    "id": 512291562,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "There is a huge amount of important testing being deleted here.  \r\n\r\nType providers still have to correctly cross-target (they can be used in netstandard2.0, netstandard2.1, netcoreapp3.0, net5 projects etc. etc) - this doesn't change just because we assume TPRTC are netstandard 2.0/2.1.  So all this testing of corner cases in cross-targeting is still relevant.",
+    "created_at": "2020-10-26T21:51:55Z",
+    "id": 512291209,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think just undo all this change of indentation.  ",
+    "created_at": "2020-10-26T21:35:03Z",
+    "id": 512282973,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think Program.fs are no longer needed at all in test projects",
+    "created_at": "2020-10-26T21:33:14Z",
+    "id": 512282053,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think I'd like this to still test on net472 or net48 please",
+    "created_at": "2020-10-26T21:32:37Z",
+    "id": 512281756,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/339",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Is performance the concern here? I thought Type.Equals was essentially just a reference comparison.",
+    "created_at": "2020-02-14T16:26:04Z",
+    "id": 379523886,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/316",
+    "user_login": "kerams"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> What is the implication in case the GetManifestResourceStream method is repeatedly called with same or different values?\r\n\r\nIt will repeatedly re-read and GC the old readers.",
+    "created_at": "2019-09-18T15:00:45Z",
+    "id": 325728623,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/324",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "@dsyme I'm not sure about the cost of `getReader .. Entries`, but wondering if it is amortized.\r\nWhat is the implication in case the `GetManifestResourceStream` method is repeatedly called with same or different values?\r\n\r\n",
+    "created_at": "2019-09-18T14:57:30Z",
+    "id": 325726484,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/324",
+    "user_login": "smoothdeveloper"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I could see the equality check on types causing issues so I held off on tests.\r\n\r\nAt this point It could just be a check on the type name since `convTypeRef` makes a unique type name assumption anyway. I'm hesitant though, ideally `convTypeRef` could be updated to more accurately find types. Not sure if that's feasible...  Would a shallow equality check / hash on name/member names/parameter names/parameter type names be enough for now? Doesn't seem too elegant and would still leave some corner cases... Maybe simply keeping it at type name is good enough.",
+    "created_at": "2019-09-02T21:24:59Z",
+    "id": 320047524,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/316",
+    "user_login": "kevmal"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "updated",
+    "created_at": "2019-07-03T14:31:23Z",
+    "id": 299989353,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/313",
+    "user_login": "kevmal"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm concerned about this equality check on types.\r\n\r\nAlso, if we add this for constructors we should really add it for resolving method overloading as well.\r\n\r\nhttps://github.com/fsprojects/FSharp.TypeProviders.SDK/pull/316/files#diff-7c540ae6a67f14c48d0403e7b021fc86R1588\r\n\r\nEither way we will need tests",
+    "created_at": "2019-07-01T13:53:57Z",
+    "id": 299053669,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/316",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "In general, for performance reasons, each of these uses of `SpecificCall` should be lifted to a helper pattern, defined at the module level, e.g.\r\n\r\n```\r\nlet (|GreaterThan|_|) = (|SpecificCall|_|) <@ (>) @>\r\n```\r\nThis prevents the repeated creation of a quotation for `<@ (>) @>` and, IIRC, the implementation of SpecificCall does some pre-processing on the partial application.\r\n\r\n",
+    "created_at": "2019-07-01T13:11:29Z",
+    "id": 299034754,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/313",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Admittedly I just assumed it wouldn't work and didn't try it. But I ran a quick test to confirm and I get `Message: System.NotSupportedException `",
+    "created_at": "2019-06-27T16:05:27Z",
+    "id": 298254924,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/317",
+    "user_login": "kevmal"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The type has already been converted to the target context",
+    "created_at": "2019-06-27T16:01:08Z",
+    "id": 298253034,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/317",
+    "user_login": "kevmal"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "you can use [`FSharp.Reflection.FSharpType.IsFunction`](https://msdn.microsoft.com/visualfsharpdocs/conceptual/fsharptype.isfunction-method-%5bfsharp%5d) to test if a type is a F# function, and [`FSharp.Reflection.FSharpType.GetFunctionElements`](https://msdn.microsoft.com/visualfsharpdocs/conceptual/fsharptype.getfunctionelements-method-%5bfsharp%5d) to get the types of the domain and range of the function, checking those for the approproate matching types.",
+    "created_at": "2019-06-27T15:57:35Z",
+    "id": 298251401,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/317",
+    "user_login": "baronfel"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@dsyme  \r\n```\r\nmember PatchDeclaringType : x:ProvidedTypeDefinition -> unit\r\n```\r\nSo ProvidedProperty needs to be declared alongside ProvidedTypeDefinition",
+    "created_at": "2019-04-16T11:21:20Z",
+    "id": 275748263,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/291",
+    "user_login": "7sharp9"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Because of the dependency chain",
+    "created_at": "2019-04-16T10:35:54Z",
+    "id": 275734264,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/291",
+    "user_login": "7sharp9"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why was this moved down below its original declaration site?",
+    "created_at": "2019-04-15T23:42:44Z",
+    "id": 275583440,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/291",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What's the significance of 30 seconds compared with other values? When we consider that FCS re-checks frequently, how often would this re-allocate the large amount of data (400+ MB) on the LOH in normal usage?",
+    "created_at": "2019-04-08T16:05:49Z",
+    "id": 273124428,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/295",
+    "user_login": "cartermp"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Added this member to `ProvidedTypeDefinition` in order to more easily add attributes for abstract classes. May want to move this to another ctor parameter.",
+    "created_at": "2019-03-21T00:08:38Z",
+    "id": 267593136,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/213",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "These checks we added last year do not appear to work correctly for generated, virtual members.",
+    "created_at": "2019-03-21T00:07:54Z",
+    "id": 267593008,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/213",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Uncommenting this line results in both tests in this file failing in the same way as the interface generation.",
+    "created_at": "2019-03-21T00:07:00Z",
+    "id": 267592867,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/213",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm not certain this is the right change. I think the right combination may require some combination of provided type definition properties and `pminfo` properties.",
+    "created_at": "2019-03-20T21:23:32Z",
+    "id": 267552403,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/213",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "added xmldoc",
+    "created_at": "2019-02-26T11:28:17Z",
+    "id": 260242801,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/291",
+    "user_login": "7sharp9"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You mean an xml doc comment, or why I need it?",
+    "created_at": "2019-02-26T09:37:48Z",
+    "id": 260198103,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/291",
+    "user_login": "7sharp9"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please add a comment here",
+    "created_at": "2019-02-26T01:19:11Z",
+    "id": 260089994,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/291",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Timed caches I guess can work, but I still feel a little uncomfortable with it.",
+    "created_at": "2018-11-28T02:38:00Z",
+    "id": 236923035,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/283",
+    "user_login": "TIHan"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I don't have the actual count as it would be hard to test with a weak reference, but at least the test verifies that we actually do a strong cache.",
+    "created_at": "2018-11-28T02:35:14Z",
+    "id": 236922638,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/283",
+    "user_login": "TIHan"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This test looks great.  Do you know the count before the cache is/was fixed?",
+    "created_at": "2018-11-22T13:55:27Z",
+    "id": 235734025,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/283",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "How about a MemoryCache with a 30 second expiration?\r\n",
+    "created_at": "2018-11-22T13:54:31Z",
+    "id": 235733705,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/283",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "NONE",
+    "body": "When do you remove?",
+    "created_at": "2018-11-21T03:10:08Z",
+    "id": 235241379,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/283",
+    "user_login": "davkean"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "How about just a index based loop on the ResizeArray?",
+    "created_at": "2018-11-09T17:33:22Z",
+    "id": 232333334,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/276",
+    "user_login": "kevmal"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is expensive, reversing the thing every time.  \r\nSo the idea is good but we should adjust\r\n",
+    "created_at": "2018-11-09T15:39:25Z",
+    "id": 232295438,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/276",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I added this one check for provided constructors for interfaces. Abstract classes can still have constructors, so I left it to interfaces alone.",
+    "created_at": "2018-04-01T03:58:51Z",
+    "id": 178447679,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/212",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I added checks for provided methods.",
+    "created_at": "2018-04-01T03:58:18Z",
+    "id": 178447649,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/212",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is this check for erased constructors useful?",
+    "created_at": "2018-04-01T03:57:51Z",
+    "id": 178447645,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/212",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm not sure these checks make sense for erased types, but perhaps they are?",
+    "created_at": "2018-04-01T03:57:33Z",
+    "id": 178447640,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/212",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We should raise an exception at this point if a body has not been provided where one will be needed (i.e. when the method is not abstract) - indeed earlier, in the ProvidedMethod constructor.  Likewise we should raise an exception if a body has been provided for a method that can't have one (an interface instance member)\r\n\r\n",
+    "created_at": "2018-03-16T13:19:19Z",
+    "id": 175086039,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/212",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Not sure these are correct as the build still fails on the interfaces.",
+    "created_at": "2018-03-15T15:46:15Z",
+    "id": 174831653,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/213",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@panesofglass I'm sorry but no. I don't have capacity to work on it now.",
+    "created_at": "2018-03-14T22:48:44Z",
+    "id": 174633586,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/212",
+    "user_login": "dmitry-a-morozov"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I wasn't sure what to do here. @dmitry-a-morozov suggested `Unchecked.defaultof<_>`, but generative providers appear to fail due to a null reference. @7sharp9 suggested this solution, so I've made a go with it as a first pass.\r\n\r\n@dmitry-a-morozov, would you be able to add some test cases?",
+    "created_at": "2018-03-14T22:37:37Z",
+    "id": 174631613,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/212",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "All fixed. Thanks for reporting so quickly. And the good thing that this is improving our test suite... https://github.com/fsprojects/FSharp.TypeProviders.SDK/pull/202",
+    "created_at": "2018-02-13T22:58:15Z",
+    "id": 168030209,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/201",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@sergey-tihon Yeah, we had no tests for generative ProvidedConstructors, only erased ones.  Fixing this now.",
+    "created_at": "2018-02-13T22:42:32Z",
+    "id": 168026432,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/201",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Ugh, sorry. Will check",
+    "created_at": "2018-02-13T22:37:16Z",
+    "id": 168025089,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/201",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I do not fully understand how it worked before, but for generative types `argExprs.Length <> paramNames.Length`\r\nIn my case `paramNames` in the empty array and `argExprs.[0]` is `this`.\r\n\r\n<img width=\"863\" alt=\"2018-02-13_2337\" src=\"https://user-images.githubusercontent.com/1197905/36172499-2147608e-1117-11e8-9114-b318328c48ff.png\">\r\n",
+    "created_at": "2018-02-13T20:39:45Z",
+    "id": 167993794,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/201",
+    "user_login": "sergey-tihon"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is breaking change @dsyme \r\n```\r\nSystem.IndexOutOfRangeException\r\n  HResult=0x80131508\r\n  Message=Index was outside the bounds of the array.\r\n  Source=SwaggerProvider.DesignTime\r\n  StackTrace:\r\n   at <StartupCode$SwaggerProvider-DesignTime>.$ProvidedTypes.varDecisions@8360.Invoke(Int32 i, FSharpExpr e) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 8360\r\n   at Microsoft.FSharp.Collections.ArrayModule.MapIndexed[T,TResult](FSharpFunc`2 mapping, T[] array)\r\n   at ProviderImplementation.ProvidedTypes.QuotationSimplifier.TranslateQuotationToCode(FSharpFunc`2 qexprf, String[] paramNames, FSharpExpr[] argExprs) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 8360\r\n   at ProviderImplementation.ProvidedTypes.ProvidedTypesContext.convCodeToTgt[a](FSharpFunc`2 codeFun, Boolean isStatic, Boolean isCtor, ProvidedParameter[] parameters, Boolean isGenerated, FSharpList`1 argsT) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 8764\r\n   at <StartupCode$SwaggerProvider-DesignTime>.$ProvidedTypes.xT@8877-20.Invoke(FSharpList`1 argsT) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 8877\r\n   at ProviderImplementation.ProvidedTypes.ProvidedConstructor.GetInvokeCode(FSharpList`1 args) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 925\r\n   at <StartupCode$SwaggerProvider-DesignTime>.$ProvidedTypes.Compile@14026-13.Invoke(ILTypeBuilder tb, FSharpOption`1 ptdT) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 14087\r\n   at <StartupCode$SwaggerProvider-DesignTime>.$ProvidedTypes.typeMembers@13867.Invoke(ProvidedTypeDefinition ptd) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 13868\r\n   at ProviderImplementation.ProvidedTypes.AssemblyCompiler.iterateTypes[a](FSharpFunc`2 f, IEnumerable`1 providedTypeDefinitions) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 13880\r\n   at <StartupCode$SwaggerProvider-DesignTime>.$ProvidedTypes.Compile@14026-12.Invoke(FSharpFunc`2 f, IEnumerable`1 providedTypeDefinitions) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 14026\r\n   at ProviderImplementation.ProvidedTypes.AssemblyCompiler.Compile(Boolean isHostedExecution) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 14026\r\n   at ProviderImplementation.ProvidedTypes.TypeProviderForNamespaces.Microsoft-FSharp-Core-CompilerServices-ITypeProvider-GetGeneratedAssemblyContents(Assembly assembly) in X:\\SwaggerProvider\\paket-files\\fsprojects\\FSharp.TypeProviders.SDK\\src\\ProvidedTypes.fs:line 14409\r\n   at Microsoft.FSharp.Compiler.Tainted`1.Protect[a](FSharpFunc`2 f, range range)\r\n```\r\n\r\n<img width=\"1103\" alt=\"2018-02-13_2316\" src=\"https://user-images.githubusercontent.com/1197905/36171523-0a16c862-1114-11e8-89df-20ad840d0307.png\">\r\n",
+    "created_at": "2018-02-13T20:17:46Z",
+    "id": 167988281,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/201",
+    "user_login": "sergey-tihon"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@sergey-tihon Yes, you're correct, we are creating empty files, that is wrong",
+    "created_at": "2017-10-23T15:13:32Z",
+    "id": 146299451,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/150",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I like the parameterless constructor, but I do not like the implementation of [Path.GetTempFileName](https://msdn.microsoft.com/en-us/library/system.io.path.gettempfilename(v=vs.110).aspx)\r\n\r\n> Creates a uniquely named, zero-byte temporary file on disk and returns the full path of that file.\r\n\r\n> The GetTempFileName method will raise an IOException if it is used to create more than 65535 files without deleting previous temporary files.\r\n\r\nOnce, I already wrote the code that calls `Path.GetTempFileName` too often and did not delete this empty file... This is weird.\r\n\r\nNot sure if it is the case... But in theory, TP may crash in looong running VS/IDE instance 😄  ",
+    "created_at": "2017-10-23T13:17:34Z",
+    "id": 146260079,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/150",
+    "user_login": "sergey-tihon"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "There's now a parameterless constructor for ProvidedAssembly https://github.com/fsprojects/FSharp.TypeProviders.SDK/blob/master/src/ProvidedTypes.fsi#L400 that generates a temporary name - is that ok?",
+    "created_at": "2017-10-23T13:10:26Z",
+    "id": 146258324,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/150",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Previously, when passing a filename, you didn't need to specify the assemblyname - It seems like this is almost always going to be `Path.GetFileNameWithoutExtension` off the `assemblyFileName` - should it just be taken care of for the caller, so they don't need to build the assembly name as well?  (That's closer to the old API - you just passed one string for path)",
+    "created_at": "2017-10-20T18:32:43Z",
+    "id": 146037055,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/150",
+    "user_login": "ReedCopsey"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I am just reverting that",
+    "created_at": "2017-10-09T19:16:29Z",
+    "id": 143554364,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/135",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "(I'm asking because from the changes it seems to be \"less\" source code breaking with lower case but that could be completely off)",
+    "created_at": "2017-10-09T19:09:45Z",
+    "id": 143553066,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/135",
+    "user_login": "matthid"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is there a particular reason for `GetterCode` instead of `getterCode` here? Actually, I'm a bit confused why a lot of parameters are CamelCase. Did I miss a guideline somewhere?",
+    "created_at": "2017-10-09T19:08:17Z",
+    "id": 143552804,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/135",
+    "user_login": "matthid"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Thanks for merging it, Don. Added try-finally in #107 \n",
+    "created_at": "2016-08-06T20:03:27Z",
+    "id": 73791252,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/106",
+    "user_login": "takemyoxygen"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "(please add this in a separate commit)\n",
+    "created_at": "2016-08-05T16:22:30Z",
+    "id": 73719868,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/106",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you put this in a try/finally please, to make sure the handler is removed if an exception happens?\n",
+    "created_at": "2016-08-05T16:19:59Z",
+    "id": 73719570,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/106",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "3.2.8 is very very old, we generally require 4.0.5 or above\n",
+    "created_at": "2016-02-02T20:58:05Z",
+    "id": 51633794,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/74",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Next pull request is already incoming...\n",
+    "created_at": "2014-07-17T09:43:14Z",
+    "id": 15048510,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/31",
+    "user_login": "mavnn"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "You need \"./build.sh\"\n",
+    "created_at": "2014-07-17T09:42:31Z",
+    "id": 15048487,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.TypeProviders.SDK/pulls/31",
+    "user_login": "fsgit"
+  }
+]

@@ -1,0 +1,338 @@
+[
+  {
+    "author_association": "MEMBER",
+    "body": "@copilot Update all for latest version and features.  Change to 4.0.0 not alpha",
+    "created_at": "2026-02-22T14:52:19Z",
+    "id": 2838037311,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/234",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@copilot \r\n\r\nFor now use this approach for Fable:\r\n\r\n> For Fable compatibility, I need to avoid ValueTask and use preprocessor directives to define separate implementations. The key is that the .fsi file can also use #if FABLE_COMPILER to expose different signatures for Fable builds versus standard .NET builds. For Fable, AsyncSeq<'T> should be an interface with a GetEnumerator method, while for .NET it maps to the standard IAsyncEnumerable<'T>. The challenge is deciding whether to expose IAsyncSeqEnumerator<'T> in the .fsi for Fable or keep it opaque.\r\n\r\n\r\nFix up any remaining build errors for Fable. Obsolete messages may need to be `#if` for Fable",
+    "created_at": "2026-02-22T11:40:23Z",
+    "id": 2837658262,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/231",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@copilot \n\n> Fable: the internal adapter approach should work but the #if FABLE_COMPILER paths need validation — happy to investigate, or should Fable be dropped/deferred in v4?\n\nFix the Fable errors in the CI run \n\n> ofAsyncEnum/toAsyncEnum: currently left as no-ops for source compatibility. Should they be removed or [(Obsolete)]?\n\nMark these as obsolete\n\n\n",
+    "created_at": "2026-02-22T10:05:40Z",
+    "id": 2837507424,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/231",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "NONE",
+    "body": "@dsyme Fixed.",
+    "created_at": "2022-11-30T10:50:49Z",
+    "id": 1035817051,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/154",
+    "user_login": "Caleb9"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "These also need to be added to the signature file please",
+    "created_at": "2022-11-17T22:49:33Z",
+    "id": 1025813279,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/154",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Feels like this should be using https://learn.microsoft.com/en-us/dotnet/api/system.threading.interlocked.increment?view=net-6.0?\r\n",
+    "created_at": "2022-10-27T12:41:14Z",
+    "id": 1006820521,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/157",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Any reason why this helper can't be written in F#?",
+    "created_at": "2022-10-27T12:40:00Z",
+    "id": 1006819184,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/157",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Usually use `LanguagePrimitives.GenerixZero`",
+    "created_at": "2022-10-27T12:39:24Z",
+    "id": 1006818569,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/157",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This shouldn't be needed?",
+    "created_at": "2022-10-27T12:39:05Z",
+    "id": 1006818249,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/157",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Yes, done 👍",
+    "created_at": "2021-08-23T21:36:57Z",
+    "id": 694326359,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/143",
+    "user_login": "channaj"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Hmmmm.... since they all use `toArrayAsync` maybe the return type should just be an honest array!\r\n\r\n",
+    "created_at": "2021-08-16T21:19:30Z",
+    "id": 689867063,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/143",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I've added exception, cancellation and completion tests. Its somewhat tricky to test without a round-trip since F# does not yet have IAsyncEnumerable<_> .NET support. Can you clarify what you mean by \"enumeration is not run until completion?\" - I assumed that meant the workflow logic would not continue to run upon a \"yield\" until you called MoveNext()?",
+    "created_at": "2019-12-01T01:54:15Z",
+    "id": 352314550,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/107",
+    "user_login": "mvkara"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you add a few more tests here please?  e.g. \r\n\r\n1. exceptions are raised\r\n2. enumeration is not run until completion\r\n3. cancellation tokens are used and cancellation requested\r\n",
+    "created_at": "2019-11-26T13:25:28Z",
+    "id": 350738580,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/107",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks for the great feedback! By the way, should the `/p:ReleaseNotes` that I commented out work correctly?",
+    "created_at": "2017-10-19T15:20:26Z",
+    "id": 145733518,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/71",
+    "user_login": "panesofglass"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "2017",
+    "created_at": "2017-10-17T14:31:58Z",
+    "id": 145148889,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/71",
+    "user_login": "enricosada"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "will be passed by fake, is `/p:Version` is used, so can be omitted (usually is less maintenance)",
+    "created_at": "2017-10-17T14:31:46Z",
+    "id": 145148837,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/71",
+    "user_login": "enricosada"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Atm these `assembly:` attr are not generated. issue is already in vf# repo.\r\nso is better to leave the `AssemblyInfo.fs` in place\r\nThe properties in fsproj will populate the nupkg metadata only",
+    "created_at": "2017-10-17T14:30:35Z",
+    "id": 145148431,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/71",
+    "user_login": "enricosada"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "you should use property `Version`, like `/p:Version=12.3` to pass whole version.\r\nthe `VersionSuffix` is bad, because incomplete and doesnt work as expected (because compatibility)\r\n\r\n```fsharp\r\nsprintf \"/p:Version=%s\" release.NugetVersion\r\n```",
+    "created_at": "2017-10-17T14:28:38Z",
+    "id": 145147760,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/71",
+    "user_login": "enricosada"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "same, default",
+    "created_at": "2017-10-17T14:26:52Z",
+    "id": 145147193,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/71",
+    "user_login": "enricosada"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "`Release` is the default, can be omitteed",
+    "created_at": "2017-10-17T14:26:44Z",
+    "id": 145147144,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/71",
+    "user_login": "enricosada"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That's correct, thanks.\n",
+    "created_at": "2016-04-11T12:09:42Z",
+    "id": 59193349,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/49",
+    "user_login": "eulerfx"
+  },
+  {
+    "author_association": "NONE",
+    "body": "should be `c3`, right?\n",
+    "created_at": "2016-04-11T06:06:21Z",
+    "id": 59157259,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/49",
+    "user_login": "mexx"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, great\n",
+    "created_at": "2016-04-10T15:55:41Z",
+    "id": 59136230,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/49",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I pushed an additional test to check for a timeout. Is this what you had in mind?\n",
+    "created_at": "2016-04-10T14:17:27Z",
+    "id": 59134678,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/49",
+    "user_login": "eulerfx"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Agreed. Adding for this one shortly.\n",
+    "created_at": "2016-04-09T23:51:20Z",
+    "id": 59124054,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/49",
+    "user_login": "eulerfx"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Feels like we should add some tests where the inputs have edge-case timing behaviour?\n",
+    "created_at": "2016-04-09T23:50:40Z",
+    "id": 59124044,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/49",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We should probably start writing samples for each function in the docs.\n",
+    "created_at": "2016-04-09T23:49:20Z",
+    "id": 59123981,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/49",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "ok thanks\n",
+    "created_at": "2015-12-04T14:22:48Z",
+    "id": 46685972,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/41",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "you need to pass the api key to the build.\n\nI always have a (gitignored) release.cmd in my repos. You can see http://fsprojects.github.io/ProjectScaffold/release-process.html how it works.\n",
+    "created_at": "2015-12-04T13:57:03Z",
+    "id": 46683550,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/41",
+    "user_login": "forki"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Only to actually push the package (or can you use paket for that?)  \"build PublishPackage\" didn't seem to actually push it to nuget but maybe it was missing the api key\n",
+    "created_at": "2015-12-04T13:44:37Z",
+    "id": 46682448,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/41",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "do you need this?\n",
+    "created_at": "2015-12-04T09:39:00Z",
+    "id": 46663870,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/41",
+    "user_login": "forki"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, almost certainly would help, though I've not much experience in driving it\n",
+    "created_at": "2015-06-01T01:41:40Z",
+    "id": 31397340,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/26",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Most of the rest of the code uses \"while\" loops, for better or worse.  These use a Landin's-knot like trick to amortize the allocation that controls the loop. You may want to compare perf between these approaches at some point.\n",
+    "created_at": "2015-06-01T01:40:47Z",
+    "id": 31397324,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/26",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We still need to target 4.3.0.0 to allow this library to be used by maximal number of users - I believe you should be able to continue to do that - though full stack traces will only be given when 4.4.0.0 is used at runtime.\n",
+    "created_at": "2015-06-01T00:14:54Z",
+    "id": 31396051,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/27",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Do you think FsCheck would make sense?\n",
+    "created_at": "2015-06-01T00:14:14Z",
+    "id": 31396047,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/26",
+    "user_login": "eulerfx"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Will do.\n",
+    "created_at": "2015-06-01T00:08:07Z",
+    "id": 31395986,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/26",
+    "user_login": "eulerfx"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Great work. Could you also please add a more systematic test that covers a wider range of input sizes and buffer sizes?  e.g. compare to the tests I've been adding recently which always have some kind of \"for\" loop at the outer to cover a range of scenarios.  thanks\n",
+    "created_at": "2015-06-01T00:04:53Z",
+    "id": 31395944,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/26",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "OK I'll take a look. I did a stress test comparing two different implementations of `AsyncSeq.merge` - one using a BlockingCollection to hold incoming values from two sequences and one using `Async.chooseBoth` and the latter was marginally faster, better GC footprint, etc. Overall, they were generally comparable. I'll do a stress test focusing on `Async.chooseBoth`. One change that I think makes sense is to not use `Async.StartWithContinuations` since that uses the current thread and may be overly unfair as a result. Using `Async.Start` with explicit callbacks instead.\n",
+    "created_at": "2015-05-14T16:31:31Z",
+    "id": 30336431,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/22",
+    "user_login": "eulerfx"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "TBH I'm sceptical about the way Async.chooseBoth works in the existing implementation.  It looks likely to create an ever-lengthening chain of tasks as you repeatedly choose between the signal and a move.  The signal is only started once, but each time the \"move\" wins then a delegating task/async is returned. Doesn't feel right, we need to add stress tests for this.\n",
+    "created_at": "2015-05-13T14:19:28Z",
+    "id": 30234646,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/22",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Does allowing a timeout of 0 (= wait indefinitely) make sense?\n",
+    "created_at": "2015-05-13T12:22:52Z",
+    "id": 30224903,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/22",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think it's better to stay idiomatic and use \n\n```\nasyncSeq { yield state; yield! go f state input }\n```\n",
+    "created_at": "2015-03-28T15:29:07Z",
+    "id": 27345785,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/16",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "wow. I think that's the first time I see it in that position.\n",
+    "created_at": "2015-03-27T17:40:12Z",
+    "id": 27315075,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.AsyncSeq/pulls/5",
+    "user_login": "forki"
+  }
+]

@@ -18,15 +18,15 @@
     "new_issues_per_week": 4.46,
     "before_after": {
       "adoption_date": "2026-03-16",
-      "period_days": 58,
+      "period_days": 59,
       "before_issues_closed": 72,
       "after_issues_closed": 113,
-      "before_issues_closed_per_week": 8.689655172413792,
-      "after_issues_closed_per_week": 13.637931034482758,
+      "before_issues_closed_per_week": 8.542372881355933,
+      "after_issues_closed_per_week": 13.406779661016948,
       "before_prs_merged": 146,
       "after_prs_merged": 205,
-      "before_prs_merged_per_week": 17.620689655172413,
-      "after_prs_merged_per_week": 24.741379310344826,
+      "before_prs_merged_per_week": 17.322033898305083,
+      "after_prs_merged_per_week": 24.322033898305083,
       "open_at_adoption": 1225,
       "adoption_backlog_addressed": 90,
       "adoption_backlog_ratio": 0.07346938775510205,
@@ -34,10 +34,10 @@
       "before_incoming_extra": 17,
       "after_incoming_intra": 23,
       "after_incoming_extra": 22,
-      "before_incoming_intra_per_week": 2.2931034482758617,
-      "before_incoming_extra_per_week": 2.0517241379310343,
-      "after_incoming_intra_per_week": 2.775862068965517,
-      "after_incoming_extra_per_week": 2.655172413793103
+      "before_incoming_intra_per_week": 2.254237288135593,
+      "before_incoming_extra_per_week": 2.016949152542373,
+      "after_incoming_intra_per_week": 2.7288135593220337,
+      "after_incoming_extra_per_week": 2.6101694915254234
     }
   },
   {

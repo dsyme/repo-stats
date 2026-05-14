@@ -1,0 +1,3511 @@
+[
+  {
+    "number": 1,
+    "title": "Updates App to use MUI 5",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2023-02-10T15:04:30Z",
+    "merged_at": null,
+    "closed_at": "2023-02-16T13:55:52Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/1"
+  },
+  {
+    "number": 2,
+    "title": "Updated app to use Material UI 5",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2023-02-16T13:58:46Z",
+    "merged_at": "2023-02-16T18:51:32Z",
+    "closed_at": "2023-02-16T18:51:32Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/2"
+  },
+  {
+    "number": 5,
+    "title": "Dependency update/removal",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2023-02-17T11:08:16Z",
+    "merged_at": "2023-02-17T18:41:55Z",
+    "closed_at": "2023-02-17T18:41:55Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/5"
+  },
+  {
+    "number": 6,
+    "title": "Add sort component",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2023-02-17T16:56:15Z",
+    "merged_at": "2023-02-17T18:41:41Z",
+    "closed_at": "2023-02-17T18:41:41Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/6"
+  },
+  {
+    "number": 24,
+    "title": "Add filter",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2023-02-27T14:03:57Z",
+    "merged_at": null,
+    "closed_at": "2023-02-27T16:12:13Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/24"
+  },
+  {
+    "number": 25,
+    "title": "Added Filter Component",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2023-02-27T16:12:30Z",
+    "merged_at": null,
+    "closed_at": "2023-03-04T10:58:42Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/25"
+  },
+  {
+    "number": 26,
+    "title": "Add debouncer",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2023-02-28T16:44:23Z",
+    "merged_at": null,
+    "closed_at": "2023-03-05T11:27:32Z",
+    "draft": true,
+    "html_url": "https://github.com/informedica/GenPRES/pull/26"
+  },
+  {
+    "number": 43,
+    "title": "fix(sln): paths for solution items",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-09-03T21:45:59Z",
+    "merged_at": "2025-09-04T12:30:56Z",
+    "closed_at": "2025-09-04T12:30:56Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/43"
+  },
+  {
+    "number": 56,
+    "title": "chore: fix typo in test",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-09-15T23:13:37Z",
+    "merged_at": "2025-09-16T07:38:26Z",
+    "closed_at": "2025-09-16T07:38:26Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/56"
+  },
+  {
+    "number": 57,
+    "title": "docs: add direnv link",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-09-15T23:54:56Z",
+    "merged_at": "2025-09-16T07:37:52Z",
+    "closed_at": "2025-09-16T07:37:52Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/57"
+  },
+  {
+    "number": 58,
+    "title": "docs: make localhost links in README.md clickable",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-09-22T22:29:17Z",
+    "merged_at": "2025-09-25T10:26:05Z",
+    "closed_at": "2025-09-25T10:26:05Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/58"
+  },
+  {
+    "number": 59,
+    "title": "Update the import zindex files notebook",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-10-30T13:46:40Z",
+    "merged_at": "2025-10-30T14:25:29Z",
+    "closed_at": "2025-10-30T14:25:29Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/59"
+  },
+  {
+    "number": 60,
+    "title": "feat(client): show right border on selection and keep striped row col\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-10-31T09:40:26Z",
+    "merged_at": "2025-10-31T11:58:55Z",
+    "closed_at": "2025-10-31T11:58:55Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/60"
+  },
+  {
+    "number": 61,
+    "title": "UI alert coloring and small domain model doc update",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-01T12:05:16Z",
+    "merged_at": "2025-11-01T12:07:10Z",
+    "closed_at": "2025-11-01T12:07:10Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/61"
+  },
+  {
+    "number": 62,
+    "title": "Improved order handling and feedback",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-02T09:08:47Z",
+    "merged_at": "2025-11-02T09:11:41Z",
+    "closed_at": "2025-11-02T09:11:41Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/62"
+  },
+  {
+    "number": 63,
+    "title": "Various small improvements in logging, medication creation and order processing setting the ground for TPN management",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-03T09:54:11Z",
+    "merged_at": "2025-11-03T09:56:54Z",
+    "closed_at": "2025-11-03T09:56:54Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/63"
+  },
+  {
+    "number": 64,
+    "title": "Bug fix for missing unit in addition equation and additions to enable TPN complex prescriptions",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-04T10:50:24Z",
+    "merged_at": "2025-11-04T10:52:31Z",
+    "closed_at": "2025-11-04T10:52:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/64"
+  },
+  {
+    "number": 65,
+    "title": "Update URLs to use new repo address",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-04T11:33:45Z",
+    "merged_at": "2025-11-04T11:36:12Z",
+    "closed_at": "2025-11-04T11:36:12Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/65"
+  },
+  {
+    "number": 66,
+    "title": "UI enhancements start impl nutrition table view",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-04T20:10:16Z",
+    "merged_at": "2025-11-04T20:12:27Z",
+    "closed_at": "2025-11-04T20:12:27Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/66"
+  },
+  {
+    "number": 67,
+    "title": "Fantomas config",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-05T11:18:01Z",
+    "merged_at": "2025-11-05T15:49:13Z",
+    "closed_at": "2025-11-05T15:49:13Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/67"
+  },
+  {
+    "number": 68,
+    "title": "Some small bugfixes and improve units handling",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-05T16:03:14Z",
+    "merged_at": "2025-11-05T16:05:20Z",
+    "closed_at": "2025-11-05T16:05:20Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/68"
+  },
+  {
+    "number": 69,
+    "title": "New contribution process documentation",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-05T17:35:17Z",
+    "merged_at": "2025-11-05T17:43:17Z",
+    "closed_at": "2025-11-05T17:43:17Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/69"
+  },
+  {
+    "number": 71,
+    "title": "Git hooks",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-06T13:09:30Z",
+    "merged_at": "2025-11-06T14:22:39Z",
+    "closed_at": "2025-11-06T14:22:39Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/71"
+  },
+  {
+    "number": 72,
+    "title": "docs: increase threshold for involved PR process",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-06T14:30:12Z",
+    "merged_at": "2025-11-06T14:42:05Z",
+    "closed_at": "2025-11-06T14:42:06Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/72"
+  },
+  {
+    "number": 73,
+    "title": "chore(github): reorder implementation PR template",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-06T14:47:26Z",
+    "merged_at": "2025-11-06T14:55:35Z",
+    "closed_at": "2025-11-06T14:55:35Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/73"
+  },
+  {
+    "number": 74,
+    "title": "Add format check to CI",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-06T16:12:17Z",
+    "merged_at": "2025-11-06T16:44:30Z",
+    "closed_at": "2025-11-06T16:44:30Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/74"
+  },
+  {
+    "number": 75,
+    "title": "chore: remove duplicate dotnet tool restore",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-06T16:30:21Z",
+    "merged_at": "2025-11-06T16:47:35Z",
+    "closed_at": "2025-11-06T16:47:35Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/75"
+  },
+  {
+    "number": 76,
+    "title": "docs: update Git workflow instructions for forking and feature branch\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-06T17:22:18Z",
+    "merged_at": "2025-11-06T17:32:20Z",
+    "closed_at": "2025-11-06T17:32:20Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/76"
+  },
+  {
+    "number": 78,
+    "title": "chore(deps-dev): bump js-yaml from 4.1.0 to 4.1.1 in /src/Client",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "javascript"
+      }
+    ],
+    "created_at": "2025-11-15T10:43:38Z",
+    "merged_at": "2025-11-15T11:42:21Z",
+    "closed_at": "2025-11-15T11:42:21Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/78"
+  },
+  {
+    "number": 79,
+    "title": "chore(deps-dev): bump glob from 10.4.5 to 10.5.0 in /src/Client",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "javascript"
+      }
+    ],
+    "created_at": "2025-11-19T02:24:57Z",
+    "merged_at": "2025-11-19T08:45:04Z",
+    "closed_at": "2025-11-19T08:45:04Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/79"
+  },
+  {
+    "number": 80,
+    "title": "Parallel processing and Husky Docker fix",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-21T13:21:00Z",
+    "merged_at": "2025-11-21T13:25:05Z",
+    "closed_at": "2025-11-21T13:25:05Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/80"
+  },
+  {
+    "number": 81,
+    "title": "Dotnet10",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-23T12:40:33Z",
+    "merged_at": null,
+    "closed_at": "2025-11-23T12:45:44Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/81"
+  },
+  {
+    "number": 82,
+    "title": "Moving everything to new dotnet10 and fable aplha 5",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-23T12:51:34Z",
+    "merged_at": "2025-11-23T12:56:05Z",
+    "closed_at": "2025-11-23T12:56:05Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/82"
+  },
+  {
+    "number": 83,
+    "title": "perf: improved parallel chunksize",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-24T08:46:18Z",
+    "merged_at": "2025-11-24T09:11:52Z",
+    "closed_at": "2025-11-24T09:11:52Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/83"
+  },
+  {
+    "number": 84,
+    "title": "fix: only allow parallel calculations on continous orders (for now). \u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-24T18:14:38Z",
+    "merged_at": "2025-11-25T09:01:13Z",
+    "closed_at": "2025-11-25T09:01:13Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/84"
+  },
+  {
+    "number": 85,
+    "title": "fix: only allow parallel calculations on continous orders (for now). \u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-25T08:49:37Z",
+    "merged_at": "2025-11-25T09:01:12Z",
+    "closed_at": "2025-11-25T09:01:12Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/85"
+  },
+  {
+    "number": 86,
+    "title": "perf(gensolver): using cyclic parallel distribution to solve equations",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-29T08:38:06Z",
+    "merged_at": "2025-11-29T08:40:44Z",
+    "closed_at": "2025-11-29T08:40:44Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/86"
+  },
+  {
+    "number": 87,
+    "title": "fix: updated DoseRule parallel processing using a grouped prior to ch\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-11-30T12:52:03Z",
+    "merged_at": "2025-11-30T12:54:34Z",
+    "closed_at": "2025-11-30T12:54:34Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/87"
+  },
+  {
+    "number": 88,
+    "title": "chore(deps): bump mdast-util-to-hast from 13.2.0 to 13.2.1 in /src/Client",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "javascript"
+      }
+    ],
+    "created_at": "2025-12-02T03:43:35Z",
+    "merged_at": "2025-12-08T14:56:19Z",
+    "closed_at": "2025-12-08T14:56:19Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/88"
+  },
+  {
+    "number": 89,
+    "title": "Docs added core domain and cleaned up",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-04T19:53:08Z",
+    "merged_at": "2025-12-04T19:55:50Z",
+    "closed_at": "2025-12-04T19:55:50Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/89"
+  },
+  {
+    "number": 90,
+    "title": "New project structure",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-08T14:51:27Z",
+    "merged_at": null,
+    "closed_at": "2025-12-08T15:03:45Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/90"
+  },
+  {
+    "number": 91,
+    "title": "Implemented new project structure",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-08T15:08:54Z",
+    "merged_at": "2025-12-08T15:11:47Z",
+    "closed_at": "2025-12-08T15:11:47Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/91"
+  },
+  {
+    "number": 92,
+    "title": "Additional documentation cleaning",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-09T10:51:09Z",
+    "merged_at": "2025-12-09T10:53:41Z",
+    "closed_at": "2025-12-09T10:53:41Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/92"
+  },
+  {
+    "number": 93,
+    "title": "Additional doc improvements",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-09T18:02:42Z",
+    "merged_at": "2025-12-09T18:17:18Z",
+    "closed_at": "2025-12-09T18:17:18Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/93"
+  },
+  {
+    "number": 94,
+    "title": "docs: add references to mdr and fix commit msg instructions for warp",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-09T18:36:37Z",
+    "merged_at": "2025-12-09T18:39:20Z",
+    "closed_at": "2025-12-09T18:39:20Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/94"
+  },
+  {
+    "number": 95,
+    "title": "Fix notebooks in gensolver useParallel flag and small readme update",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-10T08:59:08Z",
+    "merged_at": "2025-12-10T09:05:30Z",
+    "closed_at": "2025-12-10T09:05:30Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/95"
+  },
+  {
+    "number": 96,
+    "title": "Parallel testing",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-14T09:39:41Z",
+    "merged_at": "2025-12-14T09:43:20Z",
+    "closed_at": "2025-12-14T09:43:20Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/96"
+  },
+  {
+    "number": 97,
+    "title": "chore: updated all references to Shape changing to Form i.e. pharmace\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-21T12:15:34Z",
+    "merged_at": "2025-12-21T12:18:19Z",
+    "closed_at": "2025-12-21T12:18:19Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/97"
+  },
+  {
+    "number": 98,
+    "title": "chore: updated and tightened access vs location definitions, now gene\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-22T11:13:19Z",
+    "merged_at": "2025-12-22T11:24:06Z",
+    "closed_at": "2025-12-22T11:24:06Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/98"
+  },
+  {
+    "number": 99,
+    "title": "chore: resolved discrepancy issues with location and shared filter ge\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-22T15:51:09Z",
+    "merged_at": "2025-12-22T15:53:19Z",
+    "closed_at": "2025-12-22T15:53:19Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/99"
+  },
+  {
+    "number": 100,
+    "title": "chore: explained order context payload and renamed filter medications\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-23T11:16:59Z",
+    "merged_at": "2025-12-23T11:25:31Z",
+    "closed_at": "2025-12-23T11:25:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/100"
+  },
+  {
+    "number": 101,
+    "title": "Implementing property navigation",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-28T11:15:40Z",
+    "merged_at": "2025-12-28T11:19:54Z",
+    "closed_at": "2025-12-28T11:19:54Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/101"
+  },
+  {
+    "number": 102,
+    "title": "feat(ui): implemented additional property changing of orderable and c\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2025-12-29T19:59:21Z",
+    "merged_at": "2025-12-29T20:01:54Z",
+    "closed_at": "2025-12-29T20:01:54Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/102"
+  },
+  {
+    "number": 103,
+    "title": "additional change to facilitate TPN (multiple components) calculations",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-04T20:44:23Z",
+    "merged_at": "2026-01-04T20:48:43Z",
+    "closed_at": "2026-01-04T20:48:43Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/103"
+  },
+  {
+    "number": 104,
+    "title": "Additional improvements for property change management",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-07T09:02:37Z",
+    "merged_at": "2026-01-07T11:16:47Z",
+    "closed_at": "2026-01-07T11:16:47Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/104"
+  },
+  {
+    "number": 105,
+    "title": "Implementing a better logging, and component change handling",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-09T08:42:09Z",
+    "merged_at": "2026-01-09T08:44:33Z",
+    "closed_at": "2026-01-09T08:44:33Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/105"
+  },
+  {
+    "number": 106,
+    "title": "Additional order processing improvements and order layout",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-11T10:03:51Z",
+    "merged_at": "2026-01-11T14:54:37Z",
+    "closed_at": "2026-01-11T14:54:37Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/106"
+  },
+  {
+    "number": 109,
+    "title": "Tpv",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-13T10:06:37Z",
+    "merged_at": "2026-01-13T13:50:02Z",
+    "closed_at": "2026-01-13T13:50:02Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/109"
+  },
+  {
+    "number": 110,
+    "title": "Improve logging with levels",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-15T08:47:24Z",
+    "merged_at": null,
+    "closed_at": "2026-01-15T09:14:22Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/110"
+  },
+  {
+    "number": 111,
+    "title": "Logging improvements",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-15T09:15:33Z",
+    "merged_at": null,
+    "closed_at": "2026-01-15T12:07:47Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/111"
+  },
+  {
+    "number": 112,
+    "title": "Logging improvements",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-15T12:24:57Z",
+    "merged_at": "2026-01-15T12:59:34Z",
+    "closed_at": "2026-01-15T12:59:34Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/112"
+  },
+  {
+    "number": 113,
+    "title": "Created a comprehensive test and refactoring allowing medication from text parsing",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-22T17:53:56Z",
+    "merged_at": "2026-01-22T18:15:46Z",
+    "closed_at": "2026-01-22T18:15:46Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/113"
+  },
+  {
+    "number": 114,
+    "title": "Additional medication to and from string improvements",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-01-25T10:24:59Z",
+    "merged_at": "2026-01-25T10:30:58Z",
+    "closed_at": "2026-01-25T10:30:58Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/114"
+  },
+  {
+    "number": 115,
+    "title": "Scenarios, improve reconstitution handling and UI",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-01T09:19:25Z",
+    "merged_at": "2026-02-01T11:46:01Z",
+    "closed_at": "2026-02-01T11:46:01Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/115"
+  },
+  {
+    "number": 116,
+    "title": "Improve use of already calculated constraints",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-04T07:49:08Z",
+    "merged_at": "2026-02-04T07:55:35Z",
+    "closed_at": "2026-02-04T07:55:35Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/116"
+  },
+  {
+    "number": 117,
+    "title": "Fixes for order processing and logic, fix  for BSA printing error",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-11T08:34:41Z",
+    "merged_at": "2026-02-11T08:41:48Z",
+    "closed_at": "2026-02-11T08:41:48Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/117"
+  },
+  {
+    "number": 118,
+    "title": "Constraint navigation",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-23T14:13:24Z",
+    "merged_at": "2026-02-23T15:50:27Z",
+    "closed_at": "2026-02-23T15:50:27Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/118"
+  },
+  {
+    "number": 119,
+    "title": "fix: additional quantitative navigation improvements. resetting to co\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-23T16:28:51Z",
+    "merged_at": "2026-02-23T16:33:02Z",
+    "closed_at": "2026-02-23T16:33:02Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/119"
+  },
+  {
+    "number": 120,
+    "title": "Constraint navigation improvements",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-24T15:52:08Z",
+    "merged_at": "2026-02-24T16:02:59Z",
+    "closed_at": "2026-02-24T16:02:59Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/120"
+  },
+  {
+    "number": 121,
+    "title": "feat(ui): improve order layout and fix warning coloring for concentra\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-24T21:54:07Z",
+    "merged_at": "2026-02-24T21:57:29Z",
+    "closed_at": "2026-02-24T21:57:29Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/121"
+  },
+  {
+    "number": 122,
+    "title": "build(deps): bump rollup from 4.55.2 to 4.59.0 in /src/Informedica.GenPRES.Client",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "javascript"
+      }
+    ],
+    "created_at": "2026-02-26T08:01:00Z",
+    "merged_at": "2026-02-26T08:07:22Z",
+    "closed_at": "2026-02-26T08:07:22Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/122"
+  },
+  {
+    "number": 123,
+    "title": "Add repo-assist, fix dose rule validation and value unit parsing issues",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-26T08:14:46Z",
+    "merged_at": "2026-02-26T08:18:36Z",
+    "closed_at": "2026-02-26T08:18:36Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/123"
+  },
+  {
+    "number": 125,
+    "title": "chore(ui): fix npm warnings",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-26T09:30:57Z",
+    "merged_at": "2026-02-26T10:22:42Z",
+    "closed_at": "2026-02-26T10:22:42Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/125"
+  },
+  {
+    "number": 127,
+    "title": "Update dependencies",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-26T11:25:04Z",
+    "merged_at": "2026-02-26T11:34:49Z",
+    "closed_at": "2026-02-26T11:34:49Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/127"
+  },
+  {
+    "number": 128,
+    "title": "Scripts cleanup outdated script files",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-26T12:10:17Z",
+    "merged_at": "2026-02-26T12:13:31Z",
+    "closed_at": "2026-02-26T12:13:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/128"
+  },
+  {
+    "number": 129,
+    "title": "docs: update nlp notebook to use latest models. add dose rule unique \u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-27T08:15:02Z",
+    "merged_at": "2026-02-27T08:19:04Z",
+    "closed_at": "2026-02-27T08:19:04Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/129"
+  },
+  {
+    "number": 130,
+    "title": "Docs improvement for consistent use of Dose Rules",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-27T17:49:35Z",
+    "merged_at": "2026-02-27T17:53:52Z",
+    "closed_at": "2026-02-27T17:53:52Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/130"
+  },
+  {
+    "number": 131,
+    "title": "Improve printing of component quantity and fix printing of dose per time",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-27T19:43:53Z",
+    "merged_at": "2026-02-27T19:49:59Z",
+    "closed_at": "2026-02-27T19:49:59Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/131"
+  },
+  {
+    "number": 133,
+    "title": "Docs improve and refine documentation for use with AI",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-28T14:31:41Z",
+    "merged_at": "2026-02-28T14:39:15Z",
+    "closed_at": "2026-02-28T14:39:15Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/133"
+  },
+  {
+    "number": 134,
+    "title": "docs: fix broken links",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-02-28T15:15:42Z",
+    "merged_at": "2026-02-28T15:19:55Z",
+    "closed_at": "2026-02-28T15:19:56Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/134"
+  },
+  {
+    "number": 135,
+    "title": "[Repo Assist] docs(github): add PR template for documentation and non-code changes",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-02-28T20:41:09Z",
+    "merged_at": "2026-03-01T09:07:04Z",
+    "closed_at": "2026-03-01T09:07:04Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/135"
+  },
+  {
+    "number": 136,
+    "title": "Docs add rules for use of AI",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-01T11:29:30Z",
+    "merged_at": "2026-03-01T11:34:05Z",
+    "closed_at": "2026-03-01T11:34:05Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/136"
+  },
+  {
+    "number": 137,
+    "title": "Chore centralize nuget dependencies for script files",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-01T13:03:40Z",
+    "merged_at": "2026-03-01T13:34:29Z",
+    "closed_at": "2026-03-01T13:34:29Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/137"
+  },
+  {
+    "number": 138,
+    "title": "Improve environmental variable setup",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-01T18:23:44Z",
+    "merged_at": "2026-03-01T18:32:07Z",
+    "closed_at": "2026-03-01T18:32:07Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/138"
+  },
+  {
+    "number": 140,
+    "title": "[Repo Assist] feat(utils): prototype improved Google Sheets error messages (issue #52)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-02T20:59:02Z",
+    "merged_at": "2026-03-03T09:03:56Z",
+    "closed_at": "2026-03-03T09:03:56Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/140"
+  },
+  {
+    "number": 141,
+    "title": "Improvements in fsi-mcp use, google sheets handling, configuration and documentation",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-03T10:07:52Z",
+    "merged_at": "2026-03-03T11:35:59Z",
+    "closed_at": "2026-03-03T11:35:59Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/141"
+  },
+  {
+    "number": 142,
+    "title": "Tpn",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-03T16:16:44Z",
+    "merged_at": "2026-03-03T16:32:26Z",
+    "closed_at": "2026-03-03T16:32:26Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/142"
+  },
+  {
+    "number": 143,
+    "title": "chore: new formulary product type to be implemented",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-03T16:54:56Z",
+    "merged_at": "2026-03-03T16:57:02Z",
+    "closed_at": "2026-03-03T16:57:02Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/143"
+  },
+  {
+    "number": 145,
+    "title": "chore: bump immutable from 5.1.4 to 5.1.5 in /src/Informedica.GenPRES.Client",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "javascript"
+      }
+    ],
+    "created_at": "2026-03-05T00:07:17Z",
+    "merged_at": "2026-03-05T10:24:49Z",
+    "closed_at": "2026-03-05T10:24:49Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/145"
+  },
+  {
+    "number": 148,
+    "title": "Adding managing doserule sets like TPN and improve UI",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-08T15:06:19Z",
+    "merged_at": "2026-03-08T15:57:36Z",
+    "closed_at": "2026-03-08T15:57:36Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/148"
+  },
+  {
+    "number": 150,
+    "title": "Some small infra changes",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-08T18:24:15Z",
+    "merged_at": "2026-03-08T18:29:34Z",
+    "closed_at": "2026-03-08T18:29:34Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/150"
+  },
+  {
+    "number": 151,
+    "title": "[Repo Assist] feat(genunits): TypesSplit.fsx \u2014 prototype for issue #55 (remove redundant `and`, types-module split)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-03-09T20:57:47Z",
+    "merged_at": "2026-03-10T12:13:06Z",
+    "closed_at": "2026-03-10T12:13:06Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/151"
+  },
+  {
+    "number": 152,
+    "title": "[Repo Assist] release: prepare v0.1.0-alpha changelog",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-11T20:55:03Z",
+    "merged_at": "2026-03-12T19:15:57Z",
+    "closed_at": "2026-03-12T19:15:57Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/152"
+  },
+  {
+    "number": 153,
+    "title": "First really working nutrition impl and many UI improvements",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-12T19:22:31Z",
+    "merged_at": "2026-03-12T19:46:16Z",
+    "closed_at": "2026-03-12T19:46:17Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/153"
+  },
+  {
+    "number": 154,
+    "title": "fix: prevent equation runtime crash, fix autocomplete input rendering\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-12T20:08:21Z",
+    "merged_at": "2026-03-12T20:16:29Z",
+    "closed_at": "2026-03-12T20:16:29Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/154"
+  },
+  {
+    "number": 155,
+    "title": "feat(genorder): FSI test script documenting special medication scenarios",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T07:27:11Z",
+    "merged_at": "2026-03-13T08:17:17Z",
+    "closed_at": "2026-03-13T08:17:17Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/155"
+  },
+  {
+    "number": 156,
+    "title": "feat(utils): synchronize utility functions across List, Array, and Seq modules",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T07:28:24Z",
+    "merged_at": "2026-03-13T08:20:46Z",
+    "closed_at": "2026-03-13T08:20:46Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/156"
+  },
+  {
+    "number": 157,
+    "title": "docs: add build system architecture and IDE integration to DEVELOPMENT.md",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T07:32:13Z",
+    "merged_at": "2026-03-13T08:24:47Z",
+    "closed_at": "2026-03-13T08:24:47Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/157"
+  },
+  {
+    "number": 158,
+    "title": "docs: create user guide for basic application usage and testing",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T07:35:26Z",
+    "merged_at": "2026-03-13T08:27:23Z",
+    "closed_at": "2026-03-13T08:27:23Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/158"
+  },
+  {
+    "number": 159,
+    "title": "ci: add markdownlint as non-blocking pre-commit hook and FAKE build target",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T07:39:33Z",
+    "merged_at": "2026-03-13T08:43:54Z",
+    "closed_at": "2026-03-13T08:43:54Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/159"
+  },
+  {
+    "number": 160,
+    "title": "feat(zindex): add synthetic Z-Index fixture dataset and ZIndexFixture.fsx test script",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T07:41:49Z",
+    "merged_at": "2026-03-13T09:24:58Z",
+    "closed_at": "2026-03-13T09:24:58Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/160"
+  },
+  {
+    "number": 161,
+    "title": "docs: create multilingual user guide (EN + NL)",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T07:43:07Z",
+    "merged_at": "2026-03-13T09:42:59Z",
+    "closed_at": "2026-03-13T09:42:59Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/161"
+  },
+  {
+    "number": 162,
+    "title": "feat(genform): prototype message accumulation for resource loading diagnostics",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T07:49:48Z",
+    "merged_at": "2026-03-13T09:47:07Z",
+    "closed_at": "2026-03-13T09:47:07Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/162"
+  },
+  {
+    "number": 163,
+    "title": "Port the Zindex test script to the test suite",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T10:12:59Z",
+    "merged_at": "2026-03-13T10:34:33Z",
+    "closed_at": "2026-03-13T10:34:33Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/163"
+  },
+  {
+    "number": 164,
+    "title": "Update the user guide docs",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-13T11:15:33Z",
+    "merged_at": "2026-03-13T11:24:13Z",
+    "closed_at": "2026-03-13T11:24:13Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/164"
+  },
+  {
+    "number": 165,
+    "title": "[Repo Assist] feat(genform): LocalProducts.fsx prototype for type-safe local product support",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-14T20:49:47Z",
+    "merged_at": "2026-03-16T11:15:44Z",
+    "closed_at": "2026-03-16T11:15:44Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/165"
+  },
+  {
+    "number": 166,
+    "title": "[Repo Assist] perf(gensolver): add baseline benchmark script for solver performance",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-03-15T20:51:24Z",
+    "merged_at": "2026-03-16T11:18:40Z",
+    "closed_at": "2026-03-16T11:18:40Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/166"
+  },
+  {
+    "number": 167,
+    "title": "Add scripts for profiling and test coverage. Fix resource loading problems, and add tests. Fix zindex tests.",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-16T11:22:46Z",
+    "merged_at": "2026-03-16T11:51:46Z",
+    "closed_at": "2026-03-16T11:51:46Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/167"
+  },
+  {
+    "number": 168,
+    "title": "Improve loading and settings for the UI",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-16T15:32:11Z",
+    "merged_at": "2026-03-16T15:40:27Z",
+    "closed_at": "2026-03-16T15:40:27Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/168"
+  },
+  {
+    "number": 169,
+    "title": "[Repo Assist] chore(release): prepare v0.1.1-alpha changelog and Memo.fsx prototype",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-16T21:04:34Z",
+    "merged_at": "2026-03-17T07:14:10Z",
+    "closed_at": "2026-03-17T07:14:10Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/169"
+  },
+  {
+    "number": 170,
+    "title": "[Repo Assist] perf(gensolver): add canonical variable-name memoization prototype (MemoCanon.fsx)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-03-17T21:08:15Z",
+    "merged_at": "2026-03-17T21:18:17Z",
+    "closed_at": "2026-03-17T21:18:17Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/170"
+  },
+  {
+    "number": 171,
+    "title": "Nutrition implement enteral feeding and improve recalculation rendering",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T21:11:25Z",
+    "merged_at": "2026-03-17T21:21:20Z",
+    "closed_at": "2026-03-17T21:21:20Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/171"
+  },
+  {
+    "number": 172,
+    "title": "fix(ui): fix issues with hardcoded credential (was a dummy), HasNotSt\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T21:42:37Z",
+    "merged_at": "2026-03-17T21:55:33Z",
+    "closed_at": "2026-03-17T21:55:33Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/172"
+  },
+  {
+    "number": 173,
+    "title": "refactor(ui): just multiple refactorings",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-17T22:57:56Z",
+    "merged_at": "2026-03-17T23:17:42Z",
+    "closed_at": "2026-03-17T23:17:42Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/173"
+  },
+  {
+    "number": 175,
+    "title": "NLP: Add dose rule extraction and validation scripts",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T08:14:05Z",
+    "merged_at": "2026-03-18T14:16:59Z",
+    "closed_at": "2026-03-18T14:16:59Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/175"
+  },
+  {
+    "number": 177,
+    "title": "docs(agents): agent architecture design \u2014 Command/Response pattern for domain libraries",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T10:08:57Z",
+    "merged_at": "2026-03-18T14:24:42Z",
+    "closed_at": "2026-03-18T14:24:42Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/177"
+  },
+  {
+    "number": 179,
+    "title": "fix(client): derive TreatmentPlan modal visibility from Elmish state; fix Nutrition module typo",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T10:16:26Z",
+    "merged_at": "2026-03-18T14:34:46Z",
+    "closed_at": "2026-03-18T14:34:46Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/179"
+  },
+  {
+    "number": 181,
+    "title": "feat(shared): improve localization \u2014 typed map, header-based CSV parsing, static fallback",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T10:21:43Z",
+    "merged_at": "2026-03-18T14:42:37Z",
+    "closed_at": "2026-03-18T14:42:37Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/181"
+  },
+  {
+    "number": 182,
+    "title": "refactor(ui): extract common code for control creation. fix layout of\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T16:18:26Z",
+    "merged_at": "2026-03-18T16:32:16Z",
+    "closed_at": "2026-03-18T16:32:16Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/182"
+  },
+  {
+    "number": 183,
+    "title": "feat(ui): improve layout of enteral feeding",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-18T20:40:51Z",
+    "merged_at": "2026-03-19T07:00:28Z",
+    "closed_at": "2026-03-19T07:00:28Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/183"
+  },
+  {
+    "number": 184,
+    "title": "fix(ui): fix interpolated string error for generic filter, always sho\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-19T07:12:05Z",
+    "merged_at": "2026-03-19T08:08:33Z",
+    "closed_at": "2026-03-19T08:08:34Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/184"
+  },
+  {
+    "number": 185,
+    "title": "Adding scripts with implementation suggestions for outstanding issues",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-19T08:14:02Z",
+    "merged_at": "2026-03-19T08:25:15Z",
+    "closed_at": "2026-03-19T08:25:15Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/185"
+  },
+  {
+    "number": 186,
+    "title": "feat(ui): improve nutrition view",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-19T13:09:31Z",
+    "merged_at": "2026-03-19T13:25:52Z",
+    "closed_at": "2026-03-19T13:25:52Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/186"
+  },
+  {
+    "number": 187,
+    "title": "Add print out TPN and fix loading issues",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-19T18:58:15Z",
+    "merged_at": "2026-03-19T19:14:30Z",
+    "closed_at": "2026-03-19T19:14:30Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/187"
+  },
+  {
+    "number": 188,
+    "title": "[Repo Assist] docs(agents): fix 3 code-snippet bugs in agent-architecture.md",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-19T21:01:54Z",
+    "merged_at": "2026-03-20T10:46:23Z",
+    "closed_at": "2026-03-20T10:46:23Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/188"
+  },
+  {
+    "number": 189,
+    "title": "fix(genorder): fix incompatible substance concentrations, and fix Age\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-20T10:47:20Z",
+    "merged_at": "2026-03-20T11:29:47Z",
+    "closed_at": "2026-03-20T11:29:47Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/189"
+  },
+  {
+    "number": 190,
+    "title": "[Repo Assist] scripts(zform): add ZFormCITests.fsx \u2014 11 pure tests for W3 CI migration",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-20T21:00:38Z",
+    "merged_at": "2026-03-21T07:49:53Z",
+    "closed_at": "2026-03-21T07:49:53Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/190"
+  },
+  {
+    "number": 191,
+    "title": "test(zform): add tests from test script. improve running tests consol\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-21T11:06:41Z",
+    "merged_at": "2026-03-21T11:38:31Z",
+    "closed_at": "2026-03-21T11:38:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/191"
+  },
+  {
+    "number": 192,
+    "title": "[Repo Assist] scripts(nkf): add NKFCITests.fsx \u2014 19 pure tests for W3 CI migration",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-21T20:47:30Z",
+    "merged_at": "2026-03-22T08:30:44Z",
+    "closed_at": "2026-03-22T08:30:44Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/192"
+  },
+  {
+    "number": 193,
+    "title": "Add printing dialogs",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-22T08:31:32Z",
+    "merged_at": "2026-03-22T08:44:52Z",
+    "closed_at": "2026-03-22T08:44:52Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/193"
+  },
+  {
+    "number": 195,
+    "title": "Investigate Safe Clean Architecture / Tagless Final for GenPRES",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-22T14:09:58Z",
+    "merged_at": "2026-03-22T15:01:11Z",
+    "closed_at": "2026-03-22T15:01:11Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/195"
+  },
+  {
+    "number": 196,
+    "title": "refactor(server): first step in implementing clean safe architecture,\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-22T15:44:11Z",
+    "merged_at": "2026-03-22T17:35:22Z",
+    "closed_at": "2026-03-22T17:35:22Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/196"
+  },
+  {
+    "number": 198,
+    "title": "refactor(server): introduce app env ports and composition root",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-22T18:15:58Z",
+    "merged_at": "2026-03-22T18:42:09Z",
+    "closed_at": "2026-03-22T18:42:09Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/198"
+  },
+  {
+    "number": 199,
+    "title": "feat(server): put agent adaptors behind ports",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-22T18:50:07Z",
+    "merged_at": "2026-03-22T19:11:05Z",
+    "closed_at": "2026-03-22T19:11:05Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/199"
+  },
+  {
+    "number": 200,
+    "title": "[Repo Assist] test(agents): convert Agents.Lib tests to Expecto.Flip style",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "created_at": "2026-03-22T20:53:50Z",
+    "merged_at": "2026-03-23T08:44:12Z",
+    "closed_at": "2026-03-23T08:44:13Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/200"
+  },
+  {
+    "number": 201,
+    "title": "add  additional F# documentation",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T08:32:48Z",
+    "merged_at": "2026-03-23T08:40:23Z",
+    "closed_at": "2026-03-23T08:40:23Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/201"
+  },
+  {
+    "number": 202,
+    "title": "Change log updates and scripts for testing and implementation proposals",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T09:01:21Z",
+    "merged_at": "2026-03-23T09:14:11Z",
+    "closed_at": "2026-03-23T09:14:11Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/202"
+  },
+  {
+    "number": 203,
+    "title": "Fix errors in test scaffolding script",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T09:22:08Z",
+    "merged_at": "2026-03-23T09:32:21Z",
+    "closed_at": "2026-03-23T09:32:21Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/203"
+  },
+  {
+    "number": 204,
+    "title": "Safe and clean architecture: add modular agent bounded contexts",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T11:13:53Z",
+    "merged_at": "2026-03-23T11:41:14Z",
+    "closed_at": "2026-03-23T11:41:15Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/204"
+  },
+  {
+    "number": 205,
+    "title": "Update fable",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T12:57:34Z",
+    "merged_at": "2026-03-23T13:04:41Z",
+    "closed_at": "2026-03-23T13:04:41Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/205"
+  },
+  {
+    "number": 206,
+    "title": "test: add tests for genform, genorder and nkf",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T16:17:05Z",
+    "merged_at": "2026-03-23T16:56:03Z",
+    "closed_at": "2026-03-23T16:56:03Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/206"
+  },
+  {
+    "number": 207,
+    "title": "feat: enable gracefull shutdown, fix error in tests",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T17:08:26Z",
+    "merged_at": "2026-03-23T17:11:30Z",
+    "closed_at": "2026-03-23T17:11:30Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/207"
+  },
+  {
+    "number": 208,
+    "title": "Enable fantomas",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T18:20:42Z",
+    "merged_at": "2026-03-23T19:16:31Z",
+    "closed_at": "2026-03-23T19:16:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/208"
+  },
+  {
+    "number": 209,
+    "title": "chore(ui): apply fantomas formatting to client ui code",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T19:50:10Z",
+    "merged_at": "2026-03-23T19:52:25Z",
+    "closed_at": "2026-03-23T19:52:25Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/209"
+  },
+  {
+    "number": 210,
+    "title": "[Repo Assist] chore(release): prepare v0.1.2-alpha changelog",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-23T20:59:23Z",
+    "merged_at": "2026-03-23T21:37:29Z",
+    "closed_at": "2026-03-23T21:37:29Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/210"
+  },
+  {
+    "number": 211,
+    "title": "Add interactions",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T21:39:09Z",
+    "merged_at": "2026-03-23T21:59:04Z",
+    "closed_at": "2026-03-23T21:59:04Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/211"
+  },
+  {
+    "number": 212,
+    "title": "fix: fix the docker setup to include interactions and related data",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T22:29:33Z",
+    "merged_at": "2026-03-23T22:36:26Z",
+    "closed_at": "2026-03-23T22:36:26Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/212"
+  },
+  {
+    "number": 213,
+    "title": "update change log",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-23T22:46:44Z",
+    "merged_at": "2026-03-23T22:57:39Z",
+    "closed_at": "2026-03-23T22:57:39Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/213"
+  },
+  {
+    "number": 215,
+    "title": "feat(fhir): add FHIR medication interface implementation plan script",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-24T10:54:38Z",
+    "merged_at": "2026-03-24T17:43:23Z",
+    "closed_at": "2026-03-24T17:43:23Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/215"
+  },
+  {
+    "number": 216,
+    "title": "feat(ui): improve interactions feature",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-24T16:06:23Z",
+    "merged_at": "2026-03-24T16:29:41Z",
+    "closed_at": "2026-03-24T16:29:41Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/216"
+  },
+  {
+    "number": 217,
+    "title": "fix(ui): fix select all for treatment plan",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-24T16:44:57Z",
+    "merged_at": "2026-03-24T17:04:50Z",
+    "closed_at": "2026-03-24T17:04:50Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/217"
+  },
+  {
+    "number": 218,
+    "title": "chore: exclude scripts from fantomas formatting",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-24T17:18:19Z",
+    "merged_at": "2026-03-24T17:19:44Z",
+    "closed_at": "2026-03-24T17:19:44Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/218"
+  },
+  {
+    "number": 219,
+    "title": "fix: wrong fantomas glob pattern",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-24T17:36:12Z",
+    "merged_at": "2026-03-24T17:38:33Z",
+    "closed_at": "2026-03-24T17:38:33Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/219"
+  },
+  {
+    "number": 220,
+    "title": "[Repo Assist] perf(gensolver): add session-level LRU cache prototype (LRUCache.fsx)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-24T21:08:21Z",
+    "merged_at": "2026-03-24T22:12:27Z",
+    "closed_at": "2026-03-24T22:12:27Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/220"
+  },
+  {
+    "number": 221,
+    "title": "[WIP] Add session-level LRU cache prototype",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-24T22:07:19Z",
+    "merged_at": "2026-03-24T22:08:07Z",
+    "closed_at": "2026-03-24T22:08:07Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/221"
+  },
+  {
+    "number": 222,
+    "title": "Fix fhir script",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-24T22:23:57Z",
+    "merged_at": "2026-03-24T22:27:01Z",
+    "closed_at": "2026-03-24T22:27:01Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/222"
+  },
+  {
+    "number": 223,
+    "title": "refactor: update client to use AppEnv for environment variables",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-25T14:24:40Z",
+    "merged_at": "2026-03-25T15:29:09Z",
+    "closed_at": "2026-03-25T15:29:10Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/223"
+  },
+  {
+    "number": 224,
+    "title": "feat(ui): better interactions management and improve layout of the ui\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-25T20:12:14Z",
+    "merged_at": "2026-03-25T20:54:31Z",
+    "closed_at": "2026-03-25T20:54:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/224"
+  },
+  {
+    "number": 225,
+    "title": "build(deps): bump yaml from 1.10.2 to 1.10.3 in /src/Informedica.GenPRES.Client",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "javascript"
+      }
+    ],
+    "created_at": "2026-03-25T20:25:09Z",
+    "merged_at": "2026-03-25T21:00:51Z",
+    "closed_at": "2026-03-25T21:00:51Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/225"
+  },
+  {
+    "number": 227,
+    "title": "docs: update clean-safe-architecture.md to reflect implemented state and add vertical slice guidance",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-25T20:43:44Z",
+    "merged_at": "2026-03-26T14:03:26Z",
+    "closed_at": "2026-03-26T14:03:26Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/227"
+  },
+  {
+    "number": 229,
+    "title": "docs: improve universal-layout-overflow-plan with code-verified details",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-25T20:56:58Z",
+    "merged_at": "2026-03-26T14:51:39Z",
+    "closed_at": "2026-03-26T14:51:39Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/229"
+  },
+  {
+    "number": 230,
+    "title": "[Repo Assist] perf(gensolver): LRUCacheProps.fsx \u2014 8 FsCheck property-based tests for LRU cache",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-25T21:06:43Z",
+    "merged_at": "2026-03-26T14:46:31Z",
+    "closed_at": "2026-03-26T14:46:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/230"
+  },
+  {
+    "number": 231,
+    "title": "build(deps): bump picomatch from 4.0.3 to 4.0.4 in /src/Informedica.GenPRES.Client",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "javascript"
+      }
+    ],
+    "created_at": "2026-03-26T06:50:09Z",
+    "merged_at": null,
+    "closed_at": "2026-03-26T15:04:58Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/231"
+  },
+  {
+    "number": 232,
+    "title": "build(deps): bump picomatch from 4.0.3 to 4.0.4 in /src/Informedica.G\u2026",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-26T17:32:53Z",
+    "merged_at": "2026-03-26T17:35:07Z",
+    "closed_at": "2026-03-26T17:35:07Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/232"
+  },
+  {
+    "number": 233,
+    "title": "[Repo Assist] scripts(gensolver): CanonKeyInvariant.fsx \u2014 8 unit + 6 FsCheck property tests for CanonKey",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "created_at": "2026-03-26T21:01:09Z",
+    "merged_at": "2026-03-27T07:37:58Z",
+    "closed_at": "2026-03-27T07:37:58Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/233"
+  },
+  {
+    "number": 235,
+    "title": "feat(ui): improve overall layout and update layout design doc",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-27T18:29:47Z",
+    "merged_at": "2026-03-27T19:10:00Z",
+    "closed_at": "2026-03-27T19:10:00Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/235"
+  },
+  {
+    "number": 237,
+    "title": "[Repo Assist] fix(ui) + scripts(gensolver): remove hardcoded year & LRUSolverIntegration.fsx",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-27T21:08:30Z",
+    "merged_at": "2026-03-28T08:49:34Z",
+    "closed_at": "2026-03-28T08:49:34Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/237"
+  },
+  {
+    "number": 238,
+    "title": "[Repo Assist] fix(ui) + scripts(gensolver): remove hardcoded year & LRUSolverIntegration.fsx",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-27T21:08:37Z",
+    "merged_at": "2026-03-28T08:53:07Z",
+    "closed_at": "2026-03-28T08:53:07Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/238"
+  },
+  {
+    "number": 239,
+    "title": "feat(ui): localize hardcoded UI strings and add language flag indicator",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-28T10:21:07Z",
+    "merged_at": "2026-03-28T10:50:37Z",
+    "closed_at": "2026-03-28T10:50:37Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/239"
+  },
+  {
+    "number": 241,
+    "title": "docs(mcp): ADR and prototype scripts for MCP server architecture",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-28T14:05:56Z",
+    "merged_at": "2026-03-29T07:02:49Z",
+    "closed_at": "2026-03-29T07:02:49Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/241"
+  },
+  {
+    "number": 242,
+    "title": "[Repo Assist] docs(changelog): update Unreleased section for 27-28 March 2026 changes",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-28T20:53:17Z",
+    "merged_at": "2026-03-29T07:10:09Z",
+    "closed_at": "2026-03-29T07:10:09Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/242"
+  },
+  {
+    "number": 243,
+    "title": "Add Emergeny list templates",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-29T09:17:30Z",
+    "merged_at": "2026-03-29T10:26:23Z",
+    "closed_at": "2026-03-29T10:26:24Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/243"
+  },
+  {
+    "number": 245,
+    "title": "docs: restructure design-history as numbered ADRs with consistent naming",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-29T10:09:44Z",
+    "merged_at": "2026-03-29T10:38:51Z",
+    "closed_at": "2026-03-29T10:38:51Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/245"
+  },
+  {
+    "number": 247,
+    "title": "\u2728 Set up Copilot instructions",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-29T10:29:24Z",
+    "merged_at": "2026-03-29T10:50:31Z",
+    "closed_at": "2026-03-29T10:50:32Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/247"
+  },
+  {
+    "number": 249,
+    "title": "[Repo Assist] scripts(gensolver): LoopDetect.fsx \u2014 state-fingerprint cycle and stall detection",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-29T21:02:51Z",
+    "merged_at": "2026-03-30T07:20:14Z",
+    "closed_at": "2026-03-30T07:20:14Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/249"
+  },
+  {
+    "number": 250,
+    "title": "feat: add an mcp server to allow genform/genorder tooling",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-30T07:21:23Z",
+    "merged_at": "2026-03-30T07:56:08Z",
+    "closed_at": "2026-03-30T07:56:08Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/250"
+  },
+  {
+    "number": 251,
+    "title": "feat(ui): add remember filter functionality",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-30T08:23:09Z",
+    "merged_at": "2026-03-30T08:55:34Z",
+    "closed_at": "2026-03-30T08:55:34Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/251"
+  },
+  {
+    "number": 252,
+    "title": "Docs updates an implementation script proposals",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-30T09:44:43Z",
+    "merged_at": "2026-03-30T09:57:45Z",
+    "closed_at": "2026-03-30T09:57:45Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/252"
+  },
+  {
+    "number": 253,
+    "title": "feat(genform): add component dose limit",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-30T10:46:21Z",
+    "merged_at": "2026-03-30T11:21:43Z",
+    "closed_at": "2026-03-30T11:21:43Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/253"
+  },
+  {
+    "number": 254,
+    "title": "Improve readme gif",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-30T11:52:37Z",
+    "merged_at": "2026-03-30T12:01:54Z",
+    "closed_at": "2026-03-30T12:01:54Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/254"
+  },
+  {
+    "number": 255,
+    "title": "fix: dose rule and medication fix avoding empty value units",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-30T17:46:06Z",
+    "merged_at": "2026-03-30T17:50:12Z",
+    "closed_at": "2026-03-30T17:50:12Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/255"
+  },
+  {
+    "number": 256,
+    "title": "[Repo Assist] docs(changelog): update Unreleased section for 29-30 March 2026 changes",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-30T21:06:05Z",
+    "merged_at": "2026-03-31T15:19:46Z",
+    "closed_at": "2026-03-31T15:19:46Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/256"
+  },
+  {
+    "number": 257,
+    "title": "Fix solver error",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-31T05:58:17Z",
+    "merged_at": "2026-03-31T06:51:09Z",
+    "closed_at": "2026-03-31T06:51:09Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/257"
+  },
+  {
+    "number": 258,
+    "title": "fix: valueset prune error and add tests",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-31T08:19:26Z",
+    "merged_at": "2026-03-31T08:41:04Z",
+    "closed_at": "2026-03-31T08:41:04Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/258"
+  },
+  {
+    "number": 259,
+    "title": "Chore need to resolve merge conflicts",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-31T08:48:31Z",
+    "merged_at": "2026-03-31T08:52:15Z",
+    "closed_at": "2026-03-31T08:52:15Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/259"
+  },
+  {
+    "number": 260,
+    "title": "fix(genorder): add missing ordervar for minincrmax to values",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-31T12:52:45Z",
+    "merged_at": "2026-03-31T12:58:07Z",
+    "closed_at": "2026-03-31T12:58:07Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/260"
+  },
+  {
+    "number": 261,
+    "title": "Clean up UI add aria labels remove trailing logging messages",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-31T17:45:02Z",
+    "merged_at": "2026-03-31T17:54:10Z",
+    "closed_at": "2026-03-31T17:54:10Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/261"
+  },
+  {
+    "number": 263,
+    "title": "fix: address no order scenarios",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-03-31T18:44:07Z",
+    "merged_at": "2026-03-31T19:23:40Z",
+    "closed_at": "2026-03-31T19:23:40Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/263"
+  },
+  {
+    "number": 265,
+    "title": "[Repo Assist] docs(mdr): clean up ADR numbering",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-03-31T21:08:59Z",
+    "merged_at": "2026-04-01T08:33:53Z",
+    "closed_at": "2026-04-01T08:33:53Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/265"
+  },
+  {
+    "number": 266,
+    "title": "[Repo Assist] scripts(agents): AgentLifecycle.fsx \u2014 named agents, graceful shutdown, modular registry",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-01T21:09:27Z",
+    "merged_at": "2026-04-02T08:59:58Z",
+    "closed_at": "2026-04-02T08:59:58Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/266"
+  },
+  {
+    "number": 268,
+    "title": "feat: improve managed agents script",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-02T09:17:27Z",
+    "merged_at": "2026-04-02T09:19:24Z",
+    "closed_at": "2026-04-02T09:19:24Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/268"
+  },
+  {
+    "number": 269,
+    "title": "chore(ui): remove npm vulnerabilities",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-02T09:25:50Z",
+    "merged_at": "2026-04-02T09:29:20Z",
+    "closed_at": "2026-04-02T09:29:20Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/269"
+  },
+  {
+    "number": 272,
+    "title": "[Repo Assist] docs(mdr): update state-of-affairs and UI wireframes ADRs",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-02T20:58:16Z",
+    "merged_at": "2026-04-02T22:00:48Z",
+    "closed_at": "2026-04-02T22:00:49Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/272"
+  },
+  {
+    "number": 274,
+    "title": "Fix genericname casing",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-03T13:07:27Z",
+    "merged_at": "2026-04-03T13:12:16Z",
+    "closed_at": "2026-04-03T13:12:16Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/274"
+  },
+  {
+    "number": 275,
+    "title": "fix(ui): race condition with item selection",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-03T18:55:12Z",
+    "merged_at": "2026-04-03T19:07:55Z",
+    "closed_at": "2026-04-03T19:07:55Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/275"
+  },
+  {
+    "number": 276,
+    "title": "[Repo Assist] scripts(shared): BSA calculation prototype for Shared library",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-04T20:56:01Z",
+    "merged_at": "2026-04-07T11:00:09Z",
+    "closed_at": "2026-04-07T11:00:09Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/276"
+  },
+  {
+    "number": 277,
+    "title": "[Repo Assist] scripts(shared): EmergencyCalcTests.fsx \u2014 clinical validation for emergency calculations",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-05T21:04:37Z",
+    "merged_at": "2026-04-07T11:06:54Z",
+    "closed_at": "2026-04-07T11:06:54Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/277"
+  },
+  {
+    "number": 278,
+    "title": "[Repo Assist] scripts(shared): AgeCalculations.fsx \u2014 Fable-compatible age calculations prototype",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-06T21:04:13Z",
+    "merged_at": "2026-04-07T11:10:51Z",
+    "closed_at": "2026-04-07T11:10:51Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/278"
+  },
+  {
+    "number": 279,
+    "title": "chore(deps-dev): bump vite from 7.3.1 to 7.3.2 in /src/Informedica.GenPRES.Client",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "dependencies"
+      },
+      {
+        "name": "javascript"
+      }
+    ],
+    "created_at": "2026-04-06T22:34:38Z",
+    "merged_at": "2026-04-07T11:15:24Z",
+    "closed_at": "2026-04-07T11:15:24Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/279"
+  },
+  {
+    "number": 280,
+    "title": "Improve docker setup",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-07T10:35:38Z",
+    "merged_at": "2026-04-07T10:51:24Z",
+    "closed_at": "2026-04-07T10:51:24Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/280"
+  },
+  {
+    "number": 281,
+    "title": "Examine run loopdetect script",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-07T10:54:13Z",
+    "merged_at": "2026-04-07T10:56:55Z",
+    "closed_at": "2026-04-07T10:56:55Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/281"
+  },
+  {
+    "number": 282,
+    "title": "fix(genorder): order print alignment with emty administration column",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-07T19:24:37Z",
+    "merged_at": "2026-04-07T19:30:10Z",
+    "closed_at": "2026-04-07T19:30:10Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/282"
+  },
+  {
+    "number": 283,
+    "title": "Staged value expansion orders",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-07T21:07:56Z",
+    "merged_at": "2026-04-07T21:39:38Z",
+    "closed_at": "2026-04-07T21:39:38Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/283"
+  },
+  {
+    "number": 284,
+    "title": "[Repo Assist] scripts(shared): RenalCalculations.fsx \u2014 Fable-compatible eGFR prototype",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-07T21:15:29Z",
+    "merged_at": "2026-04-09T14:59:44Z",
+    "closed_at": "2026-04-09T14:59:44Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/284"
+  },
+  {
+    "number": 285,
+    "title": "feat(gensolver): prevent value explosion by setting cap on valueset calc",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-08T10:03:47Z",
+    "merged_at": "2026-04-08T10:29:31Z",
+    "closed_at": "2026-04-08T10:29:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/285"
+  },
+  {
+    "number": 286,
+    "title": "feat(genorder): fully implement staged value expansion",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-08T10:46:20Z",
+    "merged_at": "2026-04-08T13:31:14Z",
+    "closed_at": "2026-04-08T13:31:14Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/286"
+  },
+  {
+    "number": 287,
+    "title": "feat: add analyzing log files",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-08T20:48:39Z",
+    "merged_at": null,
+    "closed_at": "2026-04-09T13:50:30Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/287"
+  },
+  {
+    "number": 288,
+    "title": "Analyze log files",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-09T14:09:25Z",
+    "merged_at": "2026-04-09T14:54:11Z",
+    "closed_at": "2026-04-09T14:54:11Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/288"
+  },
+  {
+    "number": 289,
+    "title": "chore(ui): migrate from mui v7 to v9",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-09T15:33:09Z",
+    "merged_at": "2026-04-09T15:49:35Z",
+    "closed_at": "2026-04-09T15:49:35Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/289"
+  },
+  {
+    "number": 290,
+    "title": "Extract jsx inline records",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-09T16:41:50Z",
+    "merged_at": "2026-04-09T16:46:13Z",
+    "closed_at": "2026-04-09T16:46:13Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/290"
+  },
+  {
+    "number": 291,
+    "title": "[Repo Assist] docs(changelog): document PRs #283\u2013#290 in unreleased section",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-09T21:14:20Z",
+    "merged_at": "2026-04-10T08:09:13Z",
+    "closed_at": "2026-04-10T08:09:13Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/291"
+  },
+  {
+    "number": 292,
+    "title": "Add login icon",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-10T07:58:58Z",
+    "merged_at": "2026-04-10T08:02:59Z",
+    "closed_at": "2026-04-10T08:02:59Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/292"
+  },
+  {
+    "number": 293,
+    "title": "refactor(ui): extract inlined lambdas",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-10T08:24:00Z",
+    "merged_at": "2026-04-10T08:29:33Z",
+    "closed_at": "2026-04-10T08:29:33Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/293"
+  },
+  {
+    "number": 294,
+    "title": "Perform security analysis",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-10T13:35:32Z",
+    "merged_at": "2026-04-10T17:16:55Z",
+    "closed_at": "2026-04-10T17:16:55Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/294"
+  },
+  {
+    "number": 295,
+    "title": "chore: updated headings for local scripts",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-10T17:47:35Z",
+    "merged_at": "2026-04-10T17:51:39Z",
+    "closed_at": "2026-04-10T17:51:39Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/295"
+  },
+  {
+    "number": 296,
+    "title": "docs: updated sections on use of shell scripts",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-10T17:58:31Z",
+    "merged_at": "2026-04-10T18:53:22Z",
+    "closed_at": "2026-04-10T18:53:22Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/296"
+  },
+  {
+    "number": 297,
+    "title": "[Repo Assist] docs(changelog): document PRs #292, #293, #295\u2013#296 in unreleased section",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-10T21:02:58Z",
+    "merged_at": "2026-04-11T09:19:19Z",
+    "closed_at": "2026-04-11T09:19:19Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/297"
+  },
+  {
+    "number": 298,
+    "title": "Improve security",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-11T08:29:09Z",
+    "merged_at": "2026-04-11T09:07:42Z",
+    "closed_at": "2026-04-11T09:07:42Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/298"
+  },
+  {
+    "number": 299,
+    "title": "Improve security docs",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-11T10:09:27Z",
+    "merged_at": "2026-04-11T10:15:57Z",
+    "closed_at": "2026-04-11T10:15:57Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/299"
+  },
+  {
+    "number": 300,
+    "title": "[Repo Assist] docs(changelog): document PRs #298\u2013#299 in unreleased section",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-11T20:57:20Z",
+    "merged_at": "2026-04-12T13:39:56Z",
+    "closed_at": "2026-04-12T13:39:56Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/300"
+  },
+  {
+    "number": 301,
+    "title": "chore: implement shared calculations",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-12T12:36:16Z",
+    "merged_at": "2026-04-12T13:04:47Z",
+    "closed_at": "2026-04-12T13:04:47Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/301"
+  },
+  {
+    "number": 302,
+    "title": "docs: fix inconsistencies in changelog",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-12T13:43:06Z",
+    "merged_at": "2026-04-12T13:46:10Z",
+    "closed_at": "2026-04-12T13:46:10Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/302"
+  },
+  {
+    "number": 303,
+    "title": "docs: add gensolver stability analysis documentation",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-12T19:47:08Z",
+    "merged_at": "2026-04-12T20:00:24Z",
+    "closed_at": "2026-04-12T20:00:24Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/303"
+  },
+  {
+    "number": 304,
+    "title": "[Repo Assist] docs(changelog): document PRs #301 and #303 in unreleased section",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-12T20:59:28Z",
+    "merged_at": "2026-04-12T21:22:55Z",
+    "closed_at": "2026-04-12T21:22:55Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/304"
+  },
+  {
+    "number": 305,
+    "title": "chore: clean up general code issues, remove redundant scripts",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-12T21:25:55Z",
+    "merged_at": "2026-04-12T21:36:48Z",
+    "closed_at": "2026-04-12T21:36:48Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/305"
+  },
+  {
+    "number": 306,
+    "title": "chore: bumb fstoolkit version",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-13T06:07:09Z",
+    "merged_at": "2026-04-13T06:09:57Z",
+    "closed_at": "2026-04-13T06:09:57Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/306"
+  },
+  {
+    "number": 308,
+    "title": "[Repo Assist] docs(changelog): document PRs #305 and #306 in unreleased section",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-13T21:18:12Z",
+    "merged_at": "2026-04-14T12:38:17Z",
+    "closed_at": "2026-04-14T12:38:17Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/308"
+  },
+  {
+    "number": 309,
+    "title": "feat(ui): show color coding for g-stand dose rule check",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-14T16:15:36Z",
+    "merged_at": "2026-04-14T18:35:51Z",
+    "closed_at": "2026-04-14T18:35:51Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/309"
+  },
+  {
+    "number": 310,
+    "title": "[Repo Assist] feat(genform): add GStandDoseRules.fsx prototype script",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-14T21:18:25Z",
+    "merged_at": "2026-04-18T07:05:09Z",
+    "closed_at": "2026-04-18T07:05:09Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/310"
+  },
+  {
+    "number": 311,
+    "title": "[Repo Assist] docs(changelog): document PR #309 in unreleased section",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-15T21:11:06Z",
+    "merged_at": "2026-04-18T07:14:31Z",
+    "closed_at": "2026-04-18T07:14:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/311"
+  },
+  {
+    "number": 312,
+    "title": "[Repo Assist] build(deps): bump NJsonSchema 11.5.1\u219211.6.0 and HtmlAgilityPack 1.12.3\u21921.12.4",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-16T21:13:23Z",
+    "merged_at": "2026-04-18T07:22:01Z",
+    "closed_at": "2026-04-18T07:22:02Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/312"
+  },
+  {
+    "number": 313,
+    "title": "[Repo Assist] docs(mdr): add ADR-0016 G-Standard dose rule fallback",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-17T21:07:58Z",
+    "merged_at": "2026-04-18T07:25:22Z",
+    "closed_at": "2026-04-18T07:25:22Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/313"
+  },
+  {
+    "number": 314,
+    "title": "chore(server): update to new fable.remoting.giraffe",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-18T07:55:16Z",
+    "merged_at": "2026-04-18T10:40:14Z",
+    "closed_at": "2026-04-18T10:40:14Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/314"
+  },
+  {
+    "number": 315,
+    "title": "[Repo Assist] docs(changelog): document PRs #310, #313 and server mid-stream fix",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-18T20:57:51Z",
+    "merged_at": "2026-04-19T10:01:11Z",
+    "closed_at": "2026-04-19T10:01:11Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/315"
+  },
+  {
+    "number": 316,
+    "title": "docs: fix linting errors",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-19T09:21:23Z",
+    "merged_at": "2026-04-19T09:25:14Z",
+    "closed_at": "2026-04-19T09:25:15Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/316"
+  },
+  {
+    "number": 317,
+    "title": "Improve doserule extract prompt",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-19T09:26:43Z",
+    "merged_at": "2026-04-19T09:53:27Z",
+    "closed_at": "2026-04-19T09:53:27Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/317"
+  },
+  {
+    "number": 318,
+    "title": "[Repo Assist] docs(changelog): document PR #317 NLP dose-rule extraction overhaul",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-19T20:57:45Z",
+    "merged_at": "2026-04-21T08:37:11Z",
+    "closed_at": "2026-04-21T08:37:11Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/318"
+  },
+  {
+    "number": 319,
+    "title": "feat(genform): check dose rule per dose type",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-20T19:45:20Z",
+    "merged_at": "2026-04-20T20:19:54Z",
+    "closed_at": "2026-04-20T20:19:54Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/319"
+  },
+  {
+    "number": 320,
+    "title": "[Repo Assist] docs(changelog): document PRs #317 and #319",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-20T21:07:46Z",
+    "merged_at": "2026-04-21T08:50:11Z",
+    "closed_at": "2026-04-21T08:50:11Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/320"
+  },
+  {
+    "number": 321,
+    "title": "Improve doserule extract prompt",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-21T08:01:02Z",
+    "merged_at": "2026-04-21T08:09:58Z",
+    "closed_at": "2026-04-21T08:09:58Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/321"
+  },
+  {
+    "number": 322,
+    "title": "[Repo Assist] docs(changelog): document PR #321 dose-rule extraction prompt improvement",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-21T21:08:42Z",
+    "merged_at": "2026-04-22T08:08:11Z",
+    "closed_at": "2026-04-22T08:08:11Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/322"
+  },
+  {
+    "number": 323,
+    "title": "Upgrade fable5",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-22T07:49:59Z",
+    "merged_at": "2026-04-22T07:55:31Z",
+    "closed_at": "2026-04-22T07:55:31Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/323"
+  },
+  {
+    "number": 324,
+    "title": "Update client packages",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-22T08:17:43Z",
+    "merged_at": "2026-04-22T08:51:45Z",
+    "closed_at": "2026-04-22T08:51:45Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/324"
+  },
+  {
+    "number": 325,
+    "title": "fix(genform): improve printing solution rules",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-04-22T13:10:01Z",
+    "merged_at": "2026-04-22T15:35:56Z",
+    "closed_at": "2026-04-22T15:35:56Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/325"
+  },
+  {
+    "number": 326,
+    "title": "[Repo Assist] docs(changelog): document PRs #323\u2013#325 Fable 5 upgrade, client deps, and parenteralia print fix",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-22T21:14:15Z",
+    "merged_at": "2026-04-23T12:35:38Z",
+    "closed_at": "2026-04-23T12:35:38Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/326"
+  },
+  {
+    "number": 327,
+    "title": "[Repo Assist] docs(roadmap): update current status and W1 completion markers",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-24T21:10:21Z",
+    "merged_at": "2026-04-29T08:02:02Z",
+    "closed_at": "2026-04-29T08:02:02Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/327"
+  },
+  {
+    "number": 328,
+    "title": "[Repo Assist] docs(mdr): add ADR-0017 session-level LRU solver memoisation",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-25T21:03:53Z",
+    "merged_at": "2026-04-29T08:22:58Z",
+    "closed_at": "2026-04-29T08:22:58Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/328"
+  },
+  {
+    "number": 329,
+    "title": "[Repo Assist] docs(mdr): add ADR-0018 LLM-based dose-rule extraction pipeline",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-26T21:04:27Z",
+    "merged_at": "2026-04-29T08:44:33Z",
+    "closed_at": "2026-04-29T08:44:33Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/329"
+  },
+  {
+    "number": 330,
+    "title": "[Repo Assist] docs(mdr): add ADR-0019 Shared library clinical calculations",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-27T21:25:32Z",
+    "merged_at": "2026-04-29T08:53:42Z",
+    "closed_at": "2026-04-29T08:53:42Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/330"
+  },
+  {
+    "number": 331,
+    "title": "[Repo Assist] docs(changelog): document ADR-0017/0018/0019 and roadmap update (PRs #327\u2013330)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-29T21:26:27Z",
+    "merged_at": "2026-04-30T08:05:16Z",
+    "closed_at": "2026-04-30T08:05:16Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/331"
+  },
+  {
+    "number": 332,
+    "title": "[Repo Assist] docs(mdr): add ADR-0020 FHIR R4 EHR integration design",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-04-30T21:23:25Z",
+    "merged_at": "2026-05-01T07:48:43Z",
+    "closed_at": "2026-05-01T07:48:43Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/332"
+  },
+  {
+    "number": 333,
+    "title": "[Repo Assist] docs(changelog): document ADR-0020 FHIR R4 EHR integration (PR #332)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-01T21:11:28Z",
+    "merged_at": "2026-05-02T13:34:05Z",
+    "closed_at": "2026-05-02T13:34:05Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/333"
+  },
+  {
+    "number": 335,
+    "title": "[Repo Assist] docs(mdr): replace validation placeholder docs with substantive content",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-02T21:06:58Z",
+    "merged_at": "2026-05-03T06:17:28Z",
+    "closed_at": "2026-05-03T06:17:28Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/335"
+  },
+  {
+    "number": 337,
+    "title": "[Repo Assist] docs(mdr): fix document inaccuracies from PR #326\u2013#335 reviews",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-03T21:07:34Z",
+    "merged_at": "2026-05-04T07:08:53Z",
+    "closed_at": "2026-05-04T07:08:53Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/337"
+  },
+  {
+    "number": 338,
+    "title": "[Repo Assist] docs(changelog): document MDR doc fixes from PR #337",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-04T21:24:38Z",
+    "merged_at": "2026-05-05T06:04:02Z",
+    "closed_at": "2026-05-05T06:04:02Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/338"
+  },
+  {
+    "number": 339,
+    "title": "[Repo Assist] docs(roadmap): update ADR count to 0000\u20130020 and note W7 FHIR design",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-05T21:24:43Z",
+    "merged_at": "2026-05-06T06:42:19Z",
+    "closed_at": "2026-05-06T06:42:19Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/339"
+  },
+  {
+    "number": 340,
+    "title": "[Repo Assist] docs(changelog): document ROADMAP update from PR #339",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-06T21:27:40Z",
+    "merged_at": "2026-05-07T15:54:21Z",
+    "closed_at": "2026-05-07T15:54:21Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/340"
+  },
+  {
+    "number": 342,
+    "title": "[Repo Assist] docs(mdr): replace placeholder validation docs with substantive content",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-08T21:25:26Z",
+    "merged_at": "2026-05-09T06:10:16Z",
+    "closed_at": "2026-05-09T06:10:16Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/342"
+  },
+  {
+    "number": 343,
+    "title": "[Repo Assist] docs(mdr): update software-requirements.md to v1.1 (May 2026)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-09T21:07:42Z",
+    "merged_at": "2026-05-10T05:35:34Z",
+    "closed_at": "2026-05-10T05:35:34Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/343"
+  },
+  {
+    "number": 345,
+    "title": "docs: update data extraction plan and flowchart",
+    "state": "closed",
+    "labels": [],
+    "created_at": "2026-05-10T12:58:20Z",
+    "merged_at": "2026-05-10T13:19:11Z",
+    "closed_at": "2026-05-10T13:19:11Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/345"
+  },
+  {
+    "number": 346,
+    "title": "[Repo Assist] docs(mdr): address Greptile P2 issues in software-requirements.md (follow-up to #343)",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-10T21:07:24Z",
+    "merged_at": "2026-05-12T08:14:44Z",
+    "closed_at": "2026-05-12T08:14:44Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/346"
+  },
+  {
+    "number": 347,
+    "title": "[Repo Assist] docs(changelog): document data extraction plan and FSharp.Data update from PR #345",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-11T21:34:41Z",
+    "merged_at": "2026-05-12T08:52:34Z",
+    "closed_at": "2026-05-12T08:52:34Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/347"
+  },
+  {
+    "number": 348,
+    "title": "[Repo Assist] docs(changelog): document Greptile P2 fixes in software-requirements.md from PR #346",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-12T21:33:54Z",
+    "merged_at": "2026-05-13T09:43:31Z",
+    "closed_at": "2026-05-13T09:43:32Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/348"
+  },
+  {
+    "number": 349,
+    "title": "[Repo Assist] docs(domain): update gensolver doc with LRU memoisation and cycle detection",
+    "state": "closed",
+    "labels": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "created_at": "2026-05-13T21:52:14Z",
+    "merged_at": "2026-05-14T06:54:38Z",
+    "closed_at": "2026-05-14T06:54:38Z",
+    "draft": false,
+    "html_url": "https://github.com/informedica/GenPRES/pull/349"
+  }
+]

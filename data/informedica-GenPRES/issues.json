@@ -1,0 +1,1366 @@
+[
+  {
+    "number": 3,
+    "title": "Npm install very slow and stalls",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-16T23:46:27Z",
+    "closed_at": "2023-02-17T20:17:15Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 4,
+    "title": "Merge with libsupdate branch",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-16T23:57:22Z",
+    "closed_at": "2023-02-18T13:20:49Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 7,
+    "title": "Server build will fail for a net7 update ",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-17T20:14:18Z",
+    "closed_at": "2023-02-17T20:14:24Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 8,
+    "title": "Use Artemy MUI 5?",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-18T13:27:39Z",
+    "closed_at": "2023-03-04T10:35:38Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 9,
+    "title": "Need to adjust GenPRES page for screen size.",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-18T15:31:11Z",
+    "closed_at": "2023-03-05T11:22:42Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 10,
+    "title": "Event triggering for numbers not right",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-20T17:03:47Z",
+    "closed_at": "2024-03-20T09:00:03Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 11,
+    "title": "Getting rid of \"component is changing an uncontrolled input to be controlled\" warnings",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-20T17:05:54Z",
+    "closed_at": "2023-03-05T11:22:24Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 12,
+    "title": "Needs to reload medication when patient changes",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-21T11:55:58Z",
+    "closed_at": "2023-02-21T12:22:08Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 13,
+    "title": "Have to add a checkbox for patient whether or not a CVL",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-21T13:02:44Z",
+    "closed_at": "2024-03-20T09:00:14Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 14,
+    "title": "Need to programmatically clear the google sheets cache",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-02-21T13:46:05Z",
+    "closed_at": "2025-11-06T14:53:22Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 15,
+    "title": "GenPres doesn't use url parsing anymore?",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-02-21T14:33:09Z",
+    "closed_at": "2023-03-18T11:29:32Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 16,
+    "title": "Need to check correct mapping of generics and shapes in doserules",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-22T09:21:14Z",
+    "closed_at": "2024-03-20T09:01:27Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 17,
+    "title": "Case when component quantity is zero",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-22T10:48:09Z",
+    "closed_at": "2023-02-22T21:05:40Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 18,
+    "title": "Have to find a solution for 9 million product numbers",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-02-22T13:02:08Z",
+    "closed_at": "2026-05-03T06:18:24Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 19,
+    "title": "Let markdown have numbers stand out from text for better readability",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-02-22T21:04:26Z",
+    "closed_at": "2023-03-17T10:18:53Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 20,
+    "title": "ValueUnit should not simplify concentrations",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-23T04:27:53Z",
+    "closed_at": "2024-03-20T09:01:48Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 21,
+    "title": "Option of valuenit to print unit next to value in an array",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-23T04:35:49Z",
+    "closed_at": "2024-03-20T09:02:00Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 22,
+    "title": "Document special cases",
+    "labels": [
+      {
+        "name": "documentation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-02-24T09:05:51Z",
+    "closed_at": "2026-03-13T08:17:19Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 23,
+    "title": "Refactor ValueUnit string handling and move Dto to namespace",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-02-24T10:26:53Z",
+    "closed_at": "2023-03-15T14:42:21Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 27,
+    "title": "Need to move test projects over from libs",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-03-04T10:55:59Z",
+    "closed_at": "2023-03-05T11:21:43Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 28,
+    "title": "Getting Warning: Each child in a list should have a unique \"key\" prop.",
+    "labels": [
+      {
+        "name": "help wanted"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-03-05T11:26:40Z",
+    "closed_at": "2023-03-18T11:28:55Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 29,
+    "title": "Use headername for responsive table",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-03-05T13:06:24Z",
+    "closed_at": "2023-03-06T19:13:16Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 30,
+    "title": "Images are sent as text/plain when using kestrel server ",
+    "labels": [
+      {
+        "name": "help wanted"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-03-06T13:22:59Z",
+    "closed_at": "2026-03-04T08:32:51Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 31,
+    "title": "Add posoconazol to formulary",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-03-07T10:34:32Z",
+    "closed_at": "2023-03-09T11:16:38Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 32,
+    "title": "Synchronize utils lib lists, seqs and arrays",
+    "labels": [
+      {
+        "name": "good first issue"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-03-07T10:51:07Z",
+    "closed_at": "2026-03-13T08:20:48Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 33,
+    "title": "When age change clear weight and height",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-03-09T11:15:57Z",
+    "closed_at": "2023-03-10T11:21:57Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 34,
+    "title": "Patient month and week selects are inadvertently coupled",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-03-18T20:01:22Z",
+    "closed_at": "2023-03-19T11:51:27Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 35,
+    "title": "Need to improve the build system",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2023-03-21T09:48:37Z",
+    "closed_at": "2024-03-20T09:03:19Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 36,
+    "title": "Split rules according to dose type.",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2023-04-13T12:27:43Z",
+    "closed_at": "2024-03-20T09:03:33Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 37,
+    "title": "Need to clean up fable libs that are not required for the solution",
+    "labels": [
+      {
+        "name": "help wanted"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2024-03-20T09:05:25Z",
+    "closed_at": "2025-09-11T21:33:39Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 38,
+    "title": "Find a way to display multi drug component prescription in a nice way",
+    "labels": [
+      {
+        "name": "help wanted"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2024-03-20T09:10:41Z",
+    "closed_at": "2024-07-05T17:49:37Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 39,
+    "title": "Need to be able to set lower limit to exclusive zero for GA",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2024-03-21T07:44:55Z",
+    "closed_at": "2026-03-13T07:30:11Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 40,
+    "title": "Calculate multiple scenarios in parallel",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2024-03-21T07:57:24Z",
+    "closed_at": "2024-03-21T18:13:52Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 41,
+    "title": "Error when get formulary cefazoline with renal rule",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2024-06-27T18:34:57Z",
+    "closed_at": "2024-07-05T17:49:20Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 42,
+    "title": "Performance improvements",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2024-10-14T23:57:13Z",
+    "closed_at": "2026-03-03T12:32:14Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 44,
+    "title": "Environment variable setup documentation",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "onboarding"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:01:06Z",
+    "closed_at": "2025-11-06T16:56:46Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 45,
+    "title": "Build system documentation and IDE integration",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "onboarding"
+      },
+      {
+        "name": "build"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:01:24Z",
+    "closed_at": "2026-03-13T08:24:49Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 46,
+    "title": "Missing MinDoseQtyKg column causing resource loading failure",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "critical"
+      },
+      {
+        "name": "data-loading"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:01:39Z",
+    "closed_at": "2025-11-06T14:49:08Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 47,
+    "title": "Create user guide for basic application usage and testing",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "onboarding"
+      },
+      {
+        "name": "user-guide"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:01:49Z",
+    "closed_at": "2026-03-13T08:27:25Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 48,
+    "title": "Investigate ZIndex.Tests warning and document test execution",
+    "labels": [
+      {
+        "name": "onboarding"
+      },
+      {
+        "name": "testing"
+      },
+      {
+        "name": "investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:02:04Z",
+    "closed_at": "2026-03-13T07:37:39Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 49,
+    "title": "Document localization system and resource storage",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "investigation"
+      },
+      {
+        "name": "i18n"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:02:16Z",
+    "closed_at": "2026-05-03T06:18:33Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 50,
+    "title": "Document doctor to pharmacist conversion logic and tests",
+    "labels": [
+      {
+        "name": "question"
+      },
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "investigation"
+      },
+      {
+        "name": "business-logic"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:02:26Z",
+    "closed_at": "2026-05-03T06:18:15Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 51,
+    "title": "Add Markdown linting for documentation consistency",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "tooling"
+      },
+      {
+        "name": "discussion"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:02:38Z",
+    "closed_at": "2026-03-13T08:43:55Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 52,
+    "title": "Improve error message to make it more clear when google resource sheets are not loaded correctly",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:09:41Z",
+    "closed_at": "2026-03-03T09:03:58Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 53,
+    "title": "Need a test set for the Z-index (Dutch drug repository) to be able to run the Z-index tests",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "help wanted"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:19:34Z",
+    "closed_at": "2026-03-13T09:25:00Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 54,
+    "title": "Create a multilingual user guide",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-10T16:26:19Z",
+    "closed_at": "2026-03-13T09:43:01Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 55,
+    "title": "Clarify 'and' usage in ValueUnit.Unit",
+    "labels": [
+      {
+        "name": "question"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-09-15T22:07:58Z",
+    "closed_at": "2026-03-26T14:29:02Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "draptik"
+    }
+  },
+  {
+    "number": 70,
+    "title": "Make conventional commit instructions consistent",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2025-11-05T17:44:59Z",
+    "closed_at": "2025-11-06T14:43:54Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "mattgallagher92"
+    }
+  },
+  {
+    "number": 77,
+    "title": "Add a pull request template for non-code changes",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2025-11-06T17:28:39Z",
+    "closed_at": "2026-03-01T09:07:05Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 107,
+    "title": "Snap to Concept",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-01-11T14:44:10Z",
+    "closed_at": "2026-02-28T10:58:30Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 124,
+    "title": "[agentics] Repo Assist failed",
+    "labels": [
+      {
+        "name": "agentic-workflows"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-02-26T09:16:10Z",
+    "closed_at": "2026-02-28T09:31:17Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 126,
+    "title": "Cannot update Feliz without Feliz.Markdown",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-02-26T11:17:49Z",
+    "closed_at": "2026-03-23T13:06:46Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 132,
+    "title": "[Repo Assist] Monthly Activity 2026-02",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-02-28T09:29:19Z",
+    "closed_at": "2026-03-01T20:43:36Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 139,
+    "title": "[Repo Assist] Monthly Activity 2026-03",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-01T20:43:37Z",
+    "closed_at": "2026-04-01T21:09:31Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 144,
+    "title": "Need to refactor use of the Result type",
+    "labels": [
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-04T10:34:34Z",
+    "closed_at": "2026-03-07T13:04:03Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 146,
+    "title": "Operations that change non-concurrent collections must have exclusive access.",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-05T09:46:55Z",
+    "closed_at": "2026-03-07T13:04:52Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 147,
+    "title": "Dose Quantity Adjust not correctly checked",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "needs investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-06T11:15:37Z",
+    "closed_at": "2026-03-07T13:03:05Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 149,
+    "title": "Resource Error msgs not handles yet",
+    "labels": [
+      {
+        "name": "bug"
+      },
+      {
+        "name": "needs triage"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-08T15:50:51Z",
+    "closed_at": "2026-03-13T09:47:09Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 174,
+    "title": "NLP free text to structured dose rules extraction",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-18T08:10:26Z",
+    "closed_at": "2026-03-18T14:17:01Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 176,
+    "title": "Agent architecture",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "needs investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-18T10:08:11Z",
+    "closed_at": "2026-03-22T15:02:05Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 178,
+    "title": "UI Code review",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-18T10:16:20Z",
+    "closed_at": "2026-03-22T14:06:18Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 180,
+    "title": "Localization",
+    "labels": [
+      {
+        "name": "investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-18T10:21:38Z",
+    "closed_at": "2026-03-18T14:42:39Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 194,
+    "title": "Safe Clean Architecture",
+    "labels": [
+      {
+        "name": "investigation"
+      },
+      {
+        "name": "business-logic"
+      },
+      {
+        "name": "refactor"
+      },
+      {
+        "name": "needs investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-22T14:09:38Z",
+    "closed_at": "2026-03-22T15:01:12Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 197,
+    "title": "Agent tests",
+    "labels": [
+      {
+        "name": "good first issue"
+      },
+      {
+        "name": "refactor"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-22T16:05:19Z",
+    "closed_at": "2026-03-23T08:44:14Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 214,
+    "title": "First implementation plan for a FHIR based medication interface",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-03-24T10:54:20Z",
+    "closed_at": "2026-03-24T17:43:25Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 226,
+    "title": "Safe Clean Architecture",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-03-25T20:43:39Z",
+    "closed_at": "2026-03-26T14:03:28Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 228,
+    "title": "Better layout and more general layout",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-03-25T20:56:50Z",
+    "closed_at": "2026-03-26T14:51:40Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 234,
+    "title": "Improve build system",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-03-27T17:36:27Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 236,
+    "title": "UI Observations \u2013 Naming & Dose Type Navigation",
+    "labels": [
+      {
+        "name": "bug"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-27T18:40:48Z",
+    "closed_at": "2026-03-28T08:49:35Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 240,
+    "title": "Adding MCP servers",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-28T14:05:15Z",
+    "closed_at": "2026-03-29T07:02:50Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 244,
+    "title": "Update the docs/mdr/design-history",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-03-29T10:09:39Z",
+    "closed_at": "2026-03-29T10:38:52Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 246,
+    "title": "\u2728 Set up Copilot instructions",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-03-29T10:29:20Z",
+    "closed_at": "2026-03-29T10:50:32Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 248,
+    "title": "Be able for GenSOLVER to detect calculation loops and terminate them effectively",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "needs investigation"
+      },
+      {
+        "name": "performance"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-29T10:35:18Z",
+    "closed_at": "2026-03-30T07:20:16Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 262,
+    "title": "Clean up ADR",
+    "labels": [
+      {
+        "name": "documentation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-31T17:56:29Z",
+    "closed_at": "2026-04-01T08:33:54Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 264,
+    "title": "Better use of agents",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "needs investigation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-03-31T20:02:50Z",
+    "closed_at": "2026-04-02T09:00:00Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 267,
+    "title": "[Repo Assist] Monthly Activity 2026-04",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-01T21:09:30Z",
+    "closed_at": "2026-05-01T21:11:25Z",
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 270,
+    "title": "Update UI wireframes ADR",
+    "labels": [
+      {
+        "name": "enhancement"
+      },
+      {
+        "name": "documentation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-02T10:47:21Z",
+    "closed_at": "2026-04-02T22:00:50Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 271,
+    "title": "Update the ADR State of Affairs",
+    "labels": [
+      {
+        "name": "documentation"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-02T10:49:35Z",
+    "closed_at": "2026-04-02T22:00:50Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 273,
+    "title": "Use units of measure",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-03T13:02:54Z",
+    "closed_at": "2026-04-13T06:25:08Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 307,
+    "title": "Add G-Standard dose rules",
+    "labels": [
+      {
+        "name": "enhancement"
+      }
+    ],
+    "state": "closed",
+    "created_at": "2026-04-13T06:44:59Z",
+    "closed_at": "2026-04-18T07:05:11Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 334,
+    "title": "[Repo Assist] Monthly Activity 2026-05",
+    "labels": [
+      {
+        "name": "documentation"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "repo-assist"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-01T21:11:30Z",
+    "closed_at": null,
+    "author_association": "CONTRIBUTOR",
+    "user": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "number": 336,
+    "title": "Address lingering PR issues on closed PRs",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-05-03T06:59:51Z",
+    "closed_at": "2026-05-04T07:08:54Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 341,
+    "title": "Investigate use of agent framework",
+    "labels": [],
+    "state": "closed",
+    "created_at": "2026-05-07T08:43:48Z",
+    "closed_at": "2026-05-08T06:23:52Z",
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  },
+  {
+    "number": 344,
+    "title": "Address PR comments from Greptile",
+    "labels": [
+      {
+        "name": "documentation"
+      }
+    ],
+    "state": "open",
+    "created_at": "2026-05-10T05:37:25Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "user": {
+      "login": "halcwb"
+    }
+  }
+]

@@ -1,0 +1,2626 @@
+[
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Typo in comment: “compatibalize” should be corrected (e.g., “compatibilize” / “provide backwards compatibility”) to avoid propagating misspellings in inline documentation.\n",
+    "created_at": "2026-05-11T02:50:58Z",
+    "id": 3216107035,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/1004",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This example’s assertion is too weak to validate the intended behavior. `include('subsidiaries')` would still pass even if the leading copyright line wasn’t stripped (since the original content also contains “Subsidiaries”). Consider asserting both that the continuation remains and that the copyright notice line is removed (e.g., expectation that normalized content does not contain “copyright”/the first-line text).\n```suggestion\n        expect(normalized_content).to include('subsidiaries')\n        expect(normalized_content).not_to include('copyright (c) 2020 by corporation name and')\n```",
+    "created_at": "2026-04-20T22:18:56Z",
+    "id": 3113987020,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/987",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The paragraph-stripping guard doesn’t currently require a copyright notice to be present. Because `copyright_regex` is a union that includes `REGEXES[:all_rights_reserved]`, `p =~ copyright_regex` will be true for paragraphs that only contain “All rights reserved”, so the opening paragraph could be stripped even when no copyright notice exists. To match the PR’s stated intent, check for `Matchers::Copyright::REGEX` (or another explicit copyright-notice regex) separately from the “all rights reserved” marker, rather than using the union for both checks.\n```suggestion\n        copyright_notice_regex = Matchers::Copyright::REGEX\n        all_rights_reserved_regex = ContentHelper::REGEXES[:all_rights_reserved]\n        copyright_regex = Regexp.union(copyright_notice_regex, all_rights_reserved_regex)\n        # Strip opening paragraph only when both a copyright notice and\n        # \"All rights reserved.\" are present — confirms attribution, not license text.\n        strip(/\\A.*?(?=\\n\\n)/m) if (p = _content[/\\A.*?(?=\\n\\n)/m]) &&\n                                   p =~ copyright_notice_regex &&\n                                   all_rights_reserved_regex.match?(p)\n```",
+    "created_at": "2026-04-20T22:18:56Z",
+    "id": 3113986986,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/987",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Comment uses British spelling \"normalised\" but the rest of this file/codebase consistently uses \"normalized\"/\"normalization\". For consistency, consider changing the comment text to \"normalized\".\n```suggestion\n        # (e.g. \"copyright\\nowner\") is still normalized correctly.\n```",
+    "created_at": "2026-04-12T02:00:30Z",
+    "id": 3068846347,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/984",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'd like in addition to have a version of this test without the `All rights reserved` line.\n\nIn that case per my feedback on https://github.com/licensee/licensee/issues/951#issuecomment-4148640350 the `its Subsidiaries (see AUTHORS).` line should not be stripped as there's no way to discern that it isn't the beginning of license text.",
+    "created_at": "2026-04-10T23:54:04Z",
+    "id": 3067177076,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/983",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Memoizing `words` means every caller of `wordset` will now retain the full scanned word sequence (including duplicates) for the lifetime of the object. In the matching pipeline, `Matchers::Dice#potential_matches` calls `license.wordset` for many licenses that may never need `bigrams`, so this can materially increase memory usage vs. scanning transiently.\n\nConsider either (a) only caching `@words` when `bigrams` is actually requested, or (b) deduplicating the scanned strings when caching (e.g., converting each scanned token to an fstring) so repeated words don’t keep many duplicate String objects alive.",
+    "created_at": "2026-04-08T00:27:10Z",
+    "id": 3048565318,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/981",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "In the docstring for `bigram_similarity`, the sentence “Unlike wordset similarity this is sensitive …” is missing a comma after “similarity”, which makes it read awkwardly. Please adjust the punctuation (and optionally reflow the sentence) for clarity.\n```suggestion\n      # over bigrams (consecutive word pairs).  Unlike wordset similarity, this\n```",
+    "created_at": "2026-04-06T23:39:11Z",
+    "id": 3042190665,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/979",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "PR description says the rate-limit guidance is added as a subsection under “Using Licensee with Docker”, but the new “Providing an access token” section is placed before the Docker section and the Docker portion doesn’t explicitly call out rate limits. Either adjust the doc structure/heading to match the intended Docker-focused guidance or update the PR description to reflect the current placement.",
+    "created_at": "2026-04-06T23:34:12Z",
+    "id": 3042179792,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/980",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "In the Docker example, `docker run -e OCTOKIT_ACCESS_TOKEN ...` relies on the variable already being set in the host environment (it passes through by name). Consider using an explicit assignment form (or referencing the host value) to make the copy/paste behavior and intent clearer for readers.\n```suggestion\ndocker run -e OCTOKIT_ACCESS_TOKEN=\"$OCTOKIT_ACCESS_TOKEN\" licensee detect rails/rails --remote\n```",
+    "created_at": "2026-04-06T23:28:33Z",
+    "id": 3042167168,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/980",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The access token example uses `export OCTOKIT_ACCESS_TOKEN=...`, which leaves the token in the shell environment for subsequent commands. Elsewhere in the docs the pattern is to set the variable for a single command invocation (see `docs/usage.md` “Providing an access token”). Consider switching this snippet to the one-command form for consistency and to avoid persisting the token longer than needed.",
+    "created_at": "2026-04-06T23:28:33Z",
+    "id": 3042167150,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/980",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "PR description says the token docs are added as a subsection under the Docker section, but this change also introduces a standalone \"Providing an access token\" section before the Docker heading. If the intent is Docker-only guidance, consider moving this content under \"Using Licensee with Docker\"; otherwise, update the PR description to match the broader CLI docs change.",
+    "created_at": "2026-04-06T23:19:07Z",
+    "id": 3042143916,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/980",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The examples embed the token literal in the command (`OCTOKIT_ACCESS_TOKEN=your_token_here` / `docker run -e OCTOKIT_ACCESS_TOKEN=your_token_here`), which is easy to copy/paste but can leak secrets into shell history/process listings. Consider showing a safer pattern (e.g., exporting the env var first, using `docker run -e OCTOKIT_ACCESS_TOKEN` to forward from the host environment, or using an `--env-file`).",
+    "created_at": "2026-04-06T23:19:07Z",
+    "id": 3042143901,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/980",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "There are two consecutive blank lines between the access-token example and the next section header. Consider reducing this to a single blank line to keep Markdown spacing consistent.\n```suggestion\n\n```",
+    "created_at": "2026-04-06T23:19:07Z",
+    "id": 3042143892,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/980",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Line has trailing whitespace in the header (`### Providing an access token `). This creates noisy diffs and can trip whitespace-sensitive linters/editors; please remove the trailing space.\n```suggestion\n### Providing an access token\n```",
+    "created_at": "2026-04-06T23:19:07Z",
+    "id": 3042143873,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/980",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Done in f04714e. The wording now says \"SPDX-style identifier format\" with concrete examples and explicitly notes that Licensee checks the format only and does not validate against the official SPDX license list. Also replaced \"text-ish\" with \"commonly used text extension\".",
+    "created_at": "2026-04-03T23:58:54Z",
+    "id": 3034787892,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/973",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@copilot apply changes based on [this feedback](https://github.com/licensee/licensee/pull/973#discussion_r3034784906)",
+    "created_at": "2026-04-03T23:57:34Z",
+    "id": 3034786151,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/973",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The phrase “standard text-ish extension” is a bit informal for user-facing documentation. Consider using a more precise term like “text-based extension” or “commonly used text extensions” for clarity.",
+    "created_at": "2026-04-03T23:56:55Z",
+    "id": 3034784932,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/973",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This text says the LICENSES/ filename must match a *valid* SPDX license identifier, but the implementation only enforces an SPDX-style pattern (letters/numbers with dashes/dots) and does not validate against the official SPDX license list. Consider rewording to avoid implying strict SPDX-list validation (e.g., “SPDX identifier format / SPDX-style identifier”, and optionally link to the SPDX identifier syntax).",
+    "created_at": "2026-04-03T23:56:54Z",
+    "id": 3034784906,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/973",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Removing `baz` from `HashHelperSpecFixture` makes the later example `it 'does not expose other methods'` (which asserts `hash` has no `:baz` key) effectively vacuous, since the fixture no longer defines any non-`HASH_METHODS` instance method to potentially leak into `to_h`. To keep this spec meaningfully validating that `HashHelper#to_h` only includes methods listed in `HASH_METHODS`, add a non-listed method back (could be renamed) or update the spec to assert the intended behavior in another way.\n```suggestion\n  end\n\n  # Method not listed in HASH_METHODS; used to ensure HashHelper#to_h\n  # does not expose arbitrary instance methods.\n  def baz\n    'not included'\n  end\n```",
+    "created_at": "2026-03-30T19:04:57Z",
+    "id": 3011658037,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/970",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Seems this was added in f5c4c7ff4ee43ea190bd7171b48695da44c1403b and never used.",
+    "created_at": "2026-03-29T20:53:47Z",
+    "id": 3006758809,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/967",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The PR title/description says the fix is to change the gemspec’s version loading (replace `require` with `File.read` + regex), but this PR only changes the release workflow by splitting `gem bump --release` into separate `gem bump` and `gem release` commands. Please either update the PR metadata to match the actual change, or include the gemspec change if that’s the intended fix (current `licensee.gemspec` still `require`s `lib/licensee/version`).",
+    "created_at": "2026-03-23T23:53:12Z",
+    "id": 2978247764,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/957",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can't be certain such a line isn't the beginning of license text, so sticking with this limited fix for now.",
+    "created_at": "2026-03-23T21:48:46Z",
+    "id": 2977786414,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/950",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "`CONTINUATION_LINE_REGEX` currently only matches indented continuation lines that begin with a 4-digit year (`\\d{4}`), but the PR description/intent is to strip any indented continuation line following a copyright line (e.g., lines that begin with a name/company and omit the year). This narrower pattern may still miss real-world multi-holder blocks where subsequent lines don’t start with a year. Consider changing the continuation pattern to require indentation plus a non-whitespace char (e.g. `\\n[ \\t]+\\S[^\\n]*`) and adding a spec case that covers a non-year continuation line.\n```suggestion\n      CONTINUATION_LINE_REGEX = /\\n[ \\t]+\\S[^\\n]*/\n```",
+    "created_at": "2026-03-23T21:46:11Z",
+    "id": 2977776783,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/950",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The new `html_comment` fixture only exercises a single-line HTML comment, so it doesn't actually verify the `/m` (dot matches newlines) behavior that the regex change is intended to add. Consider making the fixture include a newline inside the comment (and/or adding a second fixture) so the spec will fail if multiline comments aren't stripped correctly.\n",
+    "created_at": "2026-03-19T04:49:11Z",
+    "id": 2957837940,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/952",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The wording \"for Ruby projects\" reads like generic guidance, but the commands that follow (e.g., `script/bootstrap`) are repository-specific. Consider rephrasing to clearly scope this to this repository (e.g., \"For this repo (Ruby)...\") or otherwise indicate these are example commands, to avoid confusion if this workflow guidance is reused elsewhere.\n",
+    "created_at": "2026-03-19T04:38:59Z",
+    "id": 2957814532,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/953",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Line 153 is indented one space less than the other sub-steps (a–c/e–g). In Markdown this can break the nested list formatting and make step (d) render incorrectly. Align the indentation with the surrounding items (same leading spaces as lines 150–152 and 154–156).\n",
+    "created_at": "2026-03-19T04:38:59Z",
+    "id": 2957814513,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/953",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@copilot open a new pull request to apply changes based on [this feedback](https://github.com/licensee/licensee/pull/944#discussion_r2898362760)",
+    "created_at": "2026-03-06T23:32:20Z",
+    "id": 2898369157,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/944",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "`match` calls `license_property` multiple times (including inside `find` and again in `match_by_spdx_base_key`), so subclasses may re-run their regex parsing several times per `match` call. Consider storing `license_property` in a local variable (and reusing the same `licenses` collection) and passing the value into the helper so parsing happens once.",
+    "created_at": "2026-03-06T23:29:02Z",
+    "id": 2898362760,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/944",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The error message could be more readable with improved punctuation. Consider changing line 63 to add a period after the URL:\n\n\"Unsupported remote URL: #{path}. \" \\\n\nThis would make the message read more naturally as two separate sentences.\n```suggestion\n      \"Unsupported remote URL: #{path}. \" \\\n```",
+    "created_at": "2026-01-29T05:52:14Z",
+    "id": 2740073562,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/933",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The test description \"Returns a one exit code\" is grammatically awkward. Consider using \"Returns exit code 1\" or \"Returns an exit code of 1\" instead. Note: This pattern exists elsewhere in the file (line 140), so this comment applies to maintaining consistency - if changed here, consider updating the other instance as well.",
+    "created_at": "2026-01-29T05:52:14Z",
+    "id": 2740073549,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/933",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The new empty-directory coverage exercises the default (YAML-ish) output, but the reported bug (#576) is for `licensee detect --json <empty dir>` returning exit status 1. Add a spec case for `--json` with an empty directory asserting exit status 0 and the expected JSON structure (e.g., empty `licenses`/`matched_files`) so the regression is covered.",
+    "created_at": "2026-01-29T05:07:52Z",
+    "id": 2739968971,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/932",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The comment documenting the file hash keys has a typo: \"the the following keys\" should be \"the following keys\" (duplicate \"the\").\n```suggestion\n      # Hashes will have the following keys:\n```",
+    "created_at": "2026-01-29T01:32:22Z",
+    "id": 2739365055,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/926",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The comment documenting the file hash keys has a typo: \"the the following keys\" should be \"the following keys\" (duplicate \"the\").\n```suggestion\n      # Hashes will have the following keys:\n```",
+    "created_at": "2026-01-29T01:32:22Z",
+    "id": 2739365040,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/926",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "A blank line was removed between lines 143 and 144. While this is a minor formatting change, it appears to be an unrelated whitespace cleanup that doesn't contribute to the PR's main objective of supporting LICENSES/ directories. Consider whether this formatting change is necessary for this PR.\n```suggestion\n    handle_json_output if options[:json]\n```",
+    "created_at": "2026-01-29T01:32:22Z",
+    "id": 2739365023,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/926",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The test description says \"returns both licenses\" but the expectation is for only 1 license. This should be \"returns the license\" to accurately reflect what is being tested.\n```suggestion\n    it 'returns the license', :aggregate_failures do\n```",
+    "created_at": "2026-01-29T01:32:21Z",
+    "id": 2739365006,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/926",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The use of `and` operator instead of `&&` can be problematic due to its lower precedence. In this context, the expression `e[:type] == :tree and e[:name] == 'LICENSES'` works correctly, but Ruby style guides generally recommend using `&&` for boolean operations to avoid precedence issues. Consider changing to `e[:type] == :tree && e[:name] == 'LICENSES'`.\n```suggestion\n        licenses_dir = commit.tree.find { |e| e[:type] == :tree && e[:name] == 'LICENSES' }\n```",
+    "created_at": "2026-01-29T01:32:21Z",
+    "id": 2739364995,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/926",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Several fixtures were added to fixtures.yml but lack corresponding test coverage:\n- licenses-dir-with-license-ref: Should verify that LicenseRef-* filenames are accepted in LICENSES/ directories\n- licenses-dir-with-multiple-license-files: Should verify behavior when LICENSES/ contains multiple license files\n- licenses-dir-with-top-level-license: Should verify precedence between top-level LICENSE and LICENSES/ directory files\n\nThese fixtures should have tests in spec/licensee/project_spec.rb similar to how 'licenses-dir' is tested for GitProject (lines 78-101), or in dedicated test contexts for FSProject and GitHubProject.",
+    "created_at": "2026-01-29T01:32:21Z",
+    "id": 2739364980,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/926",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The LICENSES_FILENAME_REGEX lacks comprehensive test coverage for edge cases. While basic tests exist for valid SPDX names and invalid names with spaces, there should be additional tests for:\n- LicenseRef-* patterns (e.g., \"LicenseRef-MIT.txt\", \"LicenseRef-Custom-1.0.md\")\n- Edge cases like filenames starting with a digit (e.g., \"0BSD.txt\")\n- Filenames with dots in the SPDX identifier (e.g., \"GPL-2.0.txt\")\n- Invalid patterns like filenames starting with a dash or dot before the extension",
+    "created_at": "2026-01-29T01:32:21Z",
+    "id": 2739364975,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/926",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The signature of `LicenseFile.name_score` has changed from `name_score(filename)` to `name_score(dir, filename)`. This is a breaking API change that could affect external callers. While the internal usage has been updated throughout the codebase, any external code calling this method directly will break. Consider documenting this breaking change in the PR description or release notes, or providing a deprecation path by making the dir parameter optional with a default value.",
+    "created_at": "2026-01-29T01:32:20Z",
+    "id": 2739364956,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/926",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The LICENSES_FILENAME_REGEX allows filenames like \"LicenseRef-.txt\" or \"LicenseRef-..txt\" because the pattern `LicenseRef-[A-Za-z0-9.-]+` permits any combination of letters, numbers, dots, and dashes after \"LicenseRef-\", including starting immediately with a dot or dash. According to the REUSE specification, a LicenseRef should have a meaningful identifier. Consider using `LicenseRef-[A-Za-z0-9][-A-Za-z0-9.]*` to ensure the identifier starts with an alphanumeric character, or at minimum `LicenseRef-[A-Za-z0-9.-]*[A-Za-z0-9]` to prevent starting/ending with special characters.\n```suggestion\n      LICENSES_FILENAME_REGEX = /\\A(?:LicenseRef-[A-Za-z0-9](?:[-A-Za-z0-9.]*[A-Za-z0-9])?|[A-Za-z0-9][A-Za-z0-9.-]*)#{PREFERRED_EXT_REGEX}\\z/i\n```",
+    "created_at": "2026-01-29T01:32:20Z",
+    "id": 2739364925,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/926",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Documented in comment on this PR.",
+    "created_at": "2026-01-25T18:57:32Z",
+    "id": 2725825400,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/929",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This debug step appears to be temporary debugging code that should not be committed to the repository. Debug steps are typically used during troubleshooting and should be removed before merging. If git identity configuration is a persistent issue, consider either fixing the root cause in the workflow configuration or documenting the issue in a comment if this debug output is genuinely needed long-term.\n\nThis issue also appears in the following locations of the same file:\n- line 44\n```suggestion\n\n```",
+    "created_at": "2026-01-25T18:36:17Z",
+    "id": 2725810606,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/929",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\nCopyright (c) Ben Balter and Licensee contributors\r\n```",
+    "created_at": "2026-01-21T18:41:22Z",
+    "id": 2713876768,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/927",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'd prefer to delete the years as updates are useless noise, as I recently did in https://github.com/github/choosealicense.com/pull/1182#issuecomment-3721301053\n\nHowever will leave it up to @benbalter as it's their copyright line 😄 ",
+    "created_at": "2026-01-21T18:39:53Z",
+    "id": 2713871406,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/927",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Rejecting this suggestion, the licensee build related files are effectively tested in the non-Docker tests, no need to trigger the Docker test every time one of those files changes.",
+    "created_at": "2025-12-30T23:07:31Z",
+    "id": 2654242225,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/925",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Rejecting this suggestion, the licensee build related files are effectively tested in the non-Docker tests, no need to trigger the Docker test every time one of those files changes.",
+    "created_at": "2025-12-30T23:07:17Z",
+    "id": 2654240821,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/925",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The path filters are incomplete. The Dockerfile copies several files that should trigger this workflow when changed:\n- Gemfile (line 8 of Dockerfile)\n- licensee.gemspec (line 8 of Dockerfile)\n\nChanges to these dependency files would affect the Docker build and should trigger the workflow. Consider adding these paths to the filter list.\n```suggestion\n      - Dockerfile\n      - Gemfile\n      - licensee.gemspec\n      - .github/workflows/docker.yml\n  pull_request:\n    branches: [main]\n    paths:\n      - Dockerfile\n      - Gemfile\n      - licensee.gemspec\n```",
+    "created_at": "2025-12-30T23:05:15Z",
+    "id": 2654231294,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/925",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The path filters are incomplete. The Dockerfile copies several files that should trigger this workflow when changed:\n- Gemfile (line 8 of Dockerfile)\n- licensee.gemspec (line 8 of Dockerfile)\n\nChanges to these dependency files would affect the Docker build and should trigger the workflow. Consider adding these paths to the filter list.\n```suggestion\n      - .github/workflows/docker.yml\n      - Gemfile\n      - licensee.gemspec\n  pull_request:\n    branches: [main]\n    paths:\n      - Dockerfile\n      - .github/workflows/docker.yml\n      - Gemfile\n      - licensee.gemspec\n```",
+    "created_at": "2025-12-30T23:05:15Z",
+    "id": 2654231262,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/925",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Intentional see [082936c](https://github.com/licensee/licensee/pull/920/commits/082936c529c8102e186869f868db757e760f43a6)",
+    "created_at": "2025-12-18T03:48:47Z",
+    "id": 2629437769,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Changing from `sub('*', 'u')` to `tr('*', 'u')` changes the behavior. The `sub` method replaces the first occurrence of the pattern with the replacement string, while `tr` translates characters. For example, if `license.name` is \"MIT*\", `sub('*', 'u')` would produce \"MITu\", while `tr('*', 'u')` would also produce \"MITu\". However, if the name contains multiple asterisks, `tr` would replace all of them, not just the first one. The original code used `sub`, which should be preserved to maintain the same behavior.",
+    "created_at": "2025-12-18T03:27:37Z",
+    "id": 2629405531,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The word \"euqal\" is misspelled. It should be \"equal\".",
+    "created_at": "2025-12-18T03:27:37Z",
+    "id": 2629405526,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The word \"psudo\" is misspelled. It should be \"pseudo\".",
+    "created_at": "2025-12-18T03:27:36Z",
+    "id": 2629405514,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The word \"doesn'tincludes\" should be \"doesn't include\" (with a space between \"doesn't\" and \"include\").",
+    "created_at": "2025-12-18T03:27:36Z",
+    "id": 2629405511,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Same issue as above - `tr('*', 'u')` should be `sub('*', 'u')` to match the original behavior.\n```suggestion\n          license_variation = license.title.sub('*', 'u')\n```",
+    "created_at": "2025-12-18T03:27:36Z",
+    "id": 2629405508,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Same issue as above - `tr('*', 'u')` should be `sub('*', 'u')` to match the original behavior.",
+    "created_at": "2025-12-18T03:27:36Z",
+    "id": 2629405505,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Same issue as above - `tr('*', 'u')` should be `sub('*', 'u')` to match the original behavior.",
+    "created_at": "2025-12-18T03:27:35Z",
+    "id": 2629405500,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Same issue as above - `tr('*', 'u')` should be `sub('*', 'u')` to match the original behavior of replacing only the first asterisk.\n```suggestion\n          license_variation = license.public_send(variation).sub('*', 'u')\n```",
+    "created_at": "2025-12-18T03:27:35Z",
+    "id": 2629405493,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Changing from `sub('*', 'u')` to `tr('*', 'u')` alters the behavior. The `sub` method replaces only the first occurrence of '*' with 'u', while `tr` translates all occurrences of '*' to 'u'. If a license name contains multiple asterisks, this change will produce different results than the original code. The original `sub` method should be preserved.",
+    "created_at": "2025-12-18T03:27:35Z",
+    "id": 2629405489,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The word \"psudo\" is misspelled. It should be \"pseudo\".",
+    "created_at": "2025-12-18T03:27:35Z",
+    "id": 2629405482,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The word \"doesn'tincludes\" should be \"doesn't include\" (with a space between \"doesn't\" and \"include\").",
+    "created_at": "2025-12-18T03:27:34Z",
+    "id": 2629405477,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Same issue as above - `tr('*', 'u')` should be `sub('*', 'u')` to match the original behavior.",
+    "created_at": "2025-12-18T03:27:34Z",
+    "id": 2629405476,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Incomplete string escaping or encoding\n\nThis replaces only the first occurrence of \"*\".\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/36)",
+    "created_at": "2025-12-18T02:56:53Z",
+    "id": 2629319470,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Incomplete string escaping or encoding\n\nThis replaces only the first occurrence of \"*\".\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/35)",
+    "created_at": "2025-12-18T02:56:53Z",
+    "id": 2629319469,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Incomplete string escaping or encoding\n\nThis replaces only the first occurrence of \"*\".\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/34)",
+    "created_at": "2025-12-18T02:56:53Z",
+    "id": 2629319464,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Incomplete string escaping or encoding\n\nThis replaces only the first occurrence of \"*\".\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/33)",
+    "created_at": "2025-12-18T02:56:53Z",
+    "id": 2629319458,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Incomplete string escaping or encoding\n\nThis replaces only the first occurrence of \"*\".\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/32)",
+    "created_at": "2025-12-18T02:56:53Z",
+    "id": 2629319453,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Incomplete string escaping or encoding\n\nThis replaces only the first occurrence of \"*\".\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/31)",
+    "created_at": "2025-12-18T02:56:53Z",
+    "id": 2629319448,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Incomplete string escaping or encoding\n\nThis replaces only the first occurrence of \"*\".\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/30)",
+    "created_at": "2025-12-18T02:56:53Z",
+    "id": 2629319443,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/920",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The parenthetical information \"(Thor)\" in the comment is redundant since Thor is an implementation detail. The comment should focus on what the command does rather than the framework used. Consider simplifying to just describe the command's purpose.\n```suggestion\n# Implementation of the `licensee detect` command.\n```",
+    "created_at": "2025-12-17T23:19:39Z",
+    "id": 2628948767,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/919",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The parenthetical information \"(Thor)\" in the comment is redundant since Thor is an implementation detail. The comment should focus on what the command does rather than the framework used. Consider simplifying to just describe the command's purpose.\n```suggestion\n# Implementation of the `licensee diff` command.\n```",
+    "created_at": "2025-12-17T23:19:39Z",
+    "id": 2628948759,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/919",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The parenthetical information \"(Thor)\" in the comment is redundant since Thor is an implementation detail. The comment should focus on what the command does rather than the framework used. Consider simplifying to just describe the command's purpose.\n```suggestion\n# `licensee license-path` command implementation.\n```",
+    "created_at": "2025-12-17T23:19:39Z",
+    "id": 2628948750,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/919",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The parenthetical information \"(Thor)\" in the comment is redundant since Thor is an implementation detail. The comment should focus on what the command does rather than the framework used. Consider simplifying to just describe the command's purpose.\n```suggestion\n# `licensee version` command implementation.\n```",
+    "created_at": "2025-12-17T23:19:38Z",
+    "id": 2628948744,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/919",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The documentation comment is incomplete. It should clarify what \"identical normalized wordsets\" means - that it matches when the license file's normalized wordset exactly matches a known license's wordset.\n```suggestion\n    # Exact matcher that succeeds when the license file's normalized wordset\n    # exactly matches a known license's normalized wordset.\n```",
+    "created_at": "2025-12-17T23:19:38Z",
+    "id": 2628948740,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/919",
+    "user_login": "Copilot"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Polynomial regular expression used on uncontrolled data\n\nThis [regular expression](1) that depends on a [library input](2) may run slow on strings with many repetitions of '9'.\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/27)",
+    "created_at": "2025-12-17T21:52:31Z",
+    "id": 2628778327,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/918",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Incomplete string escaping or encoding\n\nThis replaces only the first occurrence of \"*\".\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/29)",
+    "created_at": "2025-12-17T21:52:31Z",
+    "id": 2628778325,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/918",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "NONE",
+    "body": "## Incomplete string escaping or encoding\n\nThis replaces only the first occurrence of \"*\".\n\n[Show more details](https://github.com/licensee/licensee/security/code-scanning/28)",
+    "created_at": "2025-12-17T21:52:31Z",
+    "id": 2628778322,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/918",
+    "user_login": "github-advanced-security[bot]"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Annoying style complaint causing CI to fail here:\r\n\r\nspec/fixture_spec.rb:14:26: C: [Correctable] Style/BlockDelimiters: Avoid using {...} for multi-line blocks.",
+    "created_at": "2025-03-10T06:28:18Z",
+    "id": 1986678536,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/822",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Which change are you referring to? If it is that we're including `:dir` in the hash, as far as I could tell all 3 backends already included `:dir`, it just wasn't documented.\r\n\r\nIf it's that I changed `files` to also include the `LICENSES/` files, yes this does change things. Would you prefer I could instead add a new API to fetch files from a subdirectory?",
+    "created_at": "2025-02-24T18:27:03Z",
+    "id": 1968200988,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "erickt"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I think so, I added this to the `spec/fixtures/fixtures.yml`, which I believe is tested by `spec/fixture_spec.rb`. It's a fairly basic test though. Is there another test that lists out all the found licenses, or should I extend `spec/fixture_spec.rb` to support it?",
+    "created_at": "2025-02-24T18:21:08Z",
+    "id": 1968192903,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "erickt"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ah ok, I get you now. I'll instead inline these json files into `git_hub_project_spec.rb` in my next revision.",
+    "created_at": "2025-02-24T18:16:44Z",
+    "id": 1968187377,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "erickt"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I was thinking we'd not have any webmock tests for this feature.",
+    "created_at": "2025-02-24T17:50:47Z",
+    "id": 1968132380,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Are there corresponding tests for these fixtues/",
+    "created_at": "2025-02-24T17:49:51Z",
+    "id": 1968131037,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This looks like a potentially significant API change. Is it necessary?",
+    "created_at": "2025-02-24T17:48:46Z",
+    "id": 1968129580,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I suspect this would fail to match some LicenseRef-[idstring] files because idstring need not start with a number https://reuse.software/spec-3.3/#license-files",
+    "created_at": "2025-02-24T17:46:55Z",
+    "id": 1968127100,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Removed in the latest version, but I can restore if you want this to be an option.",
+    "created_at": "2025-02-22T00:07:09Z",
+    "id": 1966337853,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "erickt"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Done in the latest version.",
+    "created_at": "2025-02-22T00:06:52Z",
+    "id": 1966337759,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "erickt"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Should this be an optional feature, or always on?",
+    "created_at": "2025-02-21T16:52:21Z",
+    "id": 1965872030,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "erickt"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I should document here and elsewhere that we're also including `:dir` in the hash.",
+    "created_at": "2025-02-21T16:51:28Z",
+    "id": 1965870955,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "erickt"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I'm not sure how this is used, so this may be a breaking change.",
+    "created_at": "2025-02-21T16:50:48Z",
+    "id": 1965870031,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/820",
+    "user_login": "erickt"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The reason I chose `PATH` is because it's referring to the `licensee detect [PATH]` in the same doc message. That said, I'm happy to commit one of these, I'd prefer the first. ",
+    "created_at": "2024-03-12T18:47:28Z",
+    "id": 1521970360,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/722",
+    "user_login": "jarrydlee"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Alternately, \r\n```suggestion\r\n  option :ref, type: :string, desc: 'The name of the commit/branch/tag to search (github.com refs only)'\r\n```",
+    "created_at": "2024-03-12T16:46:43Z",
+    "id": 1521808654,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/722",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "`PATHs` is somewhat confusing terminology, wonder if this should just be:\r\n```suggestion\r\n  option :ref, type: :string, desc: 'The name of the commit/branch/tag to search (github.com only)'\r\n```\r\n\r\nI might be missing something but a chatbot seems to agree 🙃 \r\n\r\n> Certainly! Let's dive into the world of Git and GitHub paths.\r\n> \r\n> 1. **Git Reference (Git Ref)**:\r\n>     - A **Git reference** (often called a **git ref**) is a file that contains a **Git commit SHA-1 hash**.\r\n>     - When referring to a specific Git commit, you can use the **Git reference** as an easy-to-remember name instead of dealing with the raw hash.\r\n>     - Git references can be rewritten to point to new commits. For example:\r\n>         - A **branch** is a Git reference that stores the latest Git commit hash for that branch.\r\n>         - A **tag** is another type of Git reference that points to a specific commit (usually used for releases).\r\n>     - Instead of saying \"commit `a3b7f9c2e`,\" you can say \"the `main` branch\" or \"the `v1.0` tag.\"\r\n> \r\n> 2. **GitHub PATH**:\r\n>     - The term \"GitHub PATH\" might be a bit confusing because it's not a standard Git concept.\r\n>     - However, I suspect you might be referring to **GitHub REST API endpoints** related to Git references.\r\n>     - These endpoints allow you to interact with references (branches, tags, etc.) in your Git database on GitHub.\r\n>     - For example, you can use the GitHub API to:\r\n>         - List matching references based on a name (e.g., branches or tags).\r\n>         - Retrieve information about a specific reference (e.g., commit SHA-1 hash).\r\n>         - Create or update references.\r\n>     - The **GitHub PATH** here refers to the URL path you use to access these API endpoints.\r\n> \r\n> 3. **Example API Endpoint**:\r\n>     - To list matching references (branches or tags) in a GitHub repository, you can use the following API endpoint:\r\n>         - `GET /repos/{owner}/{repo}/git/matching-refs/{ref}`\r\n>     - Here:\r\n>         - `{owner}` is the account owner (case-insensitive).\r\n>         - `{repo}` is the repository name (without the `.git` extension).\r\n>         - `{ref}` can be a commit SHA, branch name (e.g., `heads/main`), or tag name (e.g., `tags/v1.0`).\r\n>     - The response will include information about the matching references.\r\n> \r\n> 4. **Example Usage**:\r\n>     - Suppose you want to list matching references for the `main` branch in a repository owned by `octocat`. You'd make a request like this:\r\n>         - `GET /repos/octocat/my-repo/git/matching-refs/heads/main`\r\n> \r\n> Remember, Git references and GitHub API endpoints play a crucial role in managing version control and collaboration within repositories! [🌟](https://docs.github.com/en/rest/git/refs)¹²³..\r\n> \r\n> Source: Conversation with Bing, 3/[1](https://docs.github.com/en/rest/git/refs)[2](https://git-scm.com/book/en/v2/Git-Internals-The-Refspec)/2024\r\n> (1) REST API endpoints for Git references - GitHub Docs. https://docs.github.com/en/rest/git/refs.\r\n> (2) Git - The Refspec. https://git-scm.com/book/en/v2/Git-Internals-The-Refspec.\r\n> ([3](https://superuser.com/questions/614978/how-to-reference-a-git-repository)) path - How to reference a git repository? - Super User. https://superuser.com/questions/614978/how-to-reference-a-git-repository.\r\n> (4) Git - git-show-ref Documentation. https://git-scm.com/docs/git-show-ref.\r\n> (5) undefined. https://api.github.com/repos/OWNER/REPO/git/matching-refs/REF.\r\n> (6) undefined. https://github.com/schacon/simplegit-progit.\r\n\r\n(First response related to file and executable paths, which I guess will be what most people associate path with.)",
+    "created_at": "2024-03-12T16:43:53Z",
+    "id": 1521804669,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/722",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ah yeah, I'd just pulled the default `help detect` output. I added a note that ref only works for github PATHs.",
+    "created_at": "2024-03-12T15:57:25Z",
+    "id": 1521732332,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/722",
+    "user_login": "jarrydlee"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Should this and the detect.rb option specify github.com since it'll only work with repos there with this implementation? IIUC the option will silently not have any effect if executed against a local repo, for instance, right?",
+    "created_at": "2024-03-12T15:32:56Z",
+    "id": 1521687985,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/722",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I thought about the helpfulness of writing that test since most of the test will be mocked behavior of github APIs. \r\nAlthough I think it would be helpful to add the test to assert the request we're stubbing correctly contains the query params. I'll add this in along with the cli doc changes 👍 ",
+    "created_at": "2024-03-11T20:40:28Z",
+    "id": 1520405026,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/722",
+    "user_login": "jarrydlee"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Do the tests below test that licensee can successfully detect a license on the ref provided, and not eg a different license on the default branch? Not certain needed, just seems an obvious question.",
+    "created_at": "2024-03-11T20:30:55Z",
+    "id": 1520395238,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/722",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Ah, it does match per https://github.com/licensee/licensee/issues/638#issuecomment-1444212997 so closing this PR.",
+    "created_at": "2023-02-24T19:08:52Z",
+    "id": 1117507711,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/639",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "These specific extensions should be in a test rather than added here.\r\n\r\nI'm not sure why eg LICENSE.AVPLv3 isn't being matched by line 45 below but would suggest LICENSE.* should be matched barring a few known non-license texts (spdx, header, xml, etc below).",
+    "created_at": "2023-02-24T19:03:43Z",
+    "id": 1117501490,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/639",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes the same `.tap` call again. This isn't required anywhere else so duplication strikes me as better than a helper method elsewhere. Happy to be wrong!",
+    "created_at": "2022-11-27T01:54:30Z",
+    "id": 1032854377,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/606",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I found a better implementation that didn't require the comment. In short, Ruby's `Dir.glob` command ignores Unix-style hidden files (e.g., `.licensee.yml`), which you need to instruct it to include, via the `File::FNM_DOTMATCH` flag).",
+    "created_at": "2022-03-28T21:18:15Z",
+    "id": 836859356,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/545",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I don't think I understand what \"Hidden files are excluded by default\" means. Not recalling concept of a hidden file being used in licensee.",
+    "created_at": "2022-03-26T19:11:08Z",
+    "id": 835799266,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/545",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "To answer my own question looking at this, I guess this is needed for backwards compatibility because OTHER_EXT_REGEX is public thus part of the API.",
+    "created_at": "2022-03-26T19:05:44Z",
+    "id": 835798568,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/545",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Should *.gemspec also be in this list? It's [excluded[ in OTHER_EXT_REGEX.\r\n\r\nI see licensee has its own .licensee-ignore file, and licensee is probably why gemspec was excluded, so I guess it depends just how absolutely backwards compatible you might want to be (there are a variety of other gems with license in their names that could conceivably be affected, if one ran licensee on them).",
+    "created_at": "2022-03-26T19:03:52Z",
+    "id": 835798422,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/545",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Makes sense to me!",
+    "created_at": "2022-02-15T20:22:01Z",
+    "id": 807283008,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/532",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "So if one matcher returns `NOASSERTION` and another one returns a valid license, it will report all of them, but the final conclusion will be `NOASSERTION` as the sources don't agree. That makes sense indeed, sorry for the trouble explaining everything.\r\n\r\nPerhaps I can update the docs at [what-we-look-at.md](https://github.com/licensee/licensee/blob/master/docs/what-we-look-at.md):\r\n\r\n> If the project has multiple license matches (e.g. a package file match, a file named license or similar that matches the regular expressions) that don't only match one well known license (see below), Licensee won't return a license for the project, but all matches are returned in the licenses array.\r\n\r\nAnd add a note with a link to https://github.com/licensee/licensee/blob/master/docs/usage.md#license-ruby-api for people who just open usage and don't read further. :)\r\n",
+    "created_at": "2022-02-15T12:59:27Z",
+    "id": 806804595,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/532",
+    "user_login": "villelahdenvuo"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "No, it isn't ignored, it's [reported](https://github.com/licensee/licensee/issues/531#issuecomment-1032942197). However for the top level conclusion about the repo's license, all sources must agree (happy to reflect this in the documentation somehow). If licensee found a LICENSE file it does recognize, but `license: foo` in the package file, its overall conclusion would be other/NOASSERTION, same as when the LICENSE file isn't recognized but the package assertion is.",
+    "created_at": "2022-02-15T12:01:52Z",
+    "id": 806757405,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/532",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "@mlinksva However, if there is a LICENSE and a package file and the LICENSE file match is between 90-98% and the package file matches it's 90%, then licensee says there is no match. So it seems that package file is ignored completely if a LICENSE file exists.\r\n\r\nI understand the reasoning, that the LICENSE file should be the main source of truth, so perhaps I can add a note to the docs saying that if a LICENSE file is found the package file match is ignored?",
+    "created_at": "2022-02-15T08:49:34Z",
+    "id": 806587173,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/532",
+    "user_login": "villelahdenvuo"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> if I enable that setting and don't get any matches even if the license is specified in the package/readme file\r\n\r\nVerified that is not the case:\r\n\r\n```\r\n% bundle exec licensee detect --packages https://github.com/mlinksva/pkg-license-only\r\nLicense:        MIT\r\nMatched files:  package.json\r\npackage.json:\r\n  Confidence:  90.00%\r\n  Matcher:     Licensee::Matchers::NpmBower\r\n  License:     MIT\r\n```\r\nI think the right thing to do might be to remove the `Confidence: 90.00%` output in the case of a seeing a license indicated in a package file. We're confident that the package file has indicated the license in question. The confidence threshold in licensee currently only pertains to license text matching, not the overall license conclusion.",
+    "created_at": "2022-02-14T19:44:27Z",
+    "id": 806182512,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/532",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I can change the wording, but I think it's misleading as-is if I enable that setting and don't get any matches even if the license is specified in the package/readme file. Perhaps:\r\n\r\n> Note: The package manager metadata matchers have a confidence of 90% so you might have to lower the confidence_threshold from the default to get matches.\r\n\r\nThoughts?",
+    "created_at": "2022-02-10T19:56:04Z",
+    "id": 804056669,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/532",
+    "user_login": "villelahdenvuo"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm not sure the second part is true. If there is no license file and a package license id is found and package detection is turned on, I think licensee will return a conclusion of the license found in the license id. I believe the threshold currently is only pertinent to license texts. The hardcoded 90% is simply a signal to users of the command line tool. Need to test and look at the code to verify though.",
+    "created_at": "2022-02-08T19:41:48Z",
+    "id": 801996523,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/532",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "NONE",
+    "body": "1",
+    "created_at": "2021-11-11T08:50:05Z",
+    "id": 747309828,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/505",
+    "user_login": "marvellous11"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks. I don't want to expose anything yet but I moved the (private) method, you're right it doesn't make sense to have it shared.",
+    "created_at": "2021-01-25T17:46:58Z",
+    "id": 563919994,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/477",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks! IIUC, the preceding line is now superfluous.",
+    "created_at": "2021-01-25T17:26:48Z",
+    "id": 563904770,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/477",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "```suggestion\r\n        ::File.expand_path '../../vendor/license-list-XML/src', __dir__\r\n```",
+    "created_at": "2021-01-25T15:40:54Z",
+    "id": 563821966,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/477",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "To make things a bit more object-oriented, I'd expect to expose a `xml`-type method on the license itself, which content helper can call, rather than putting the logical to pull the license's XML representation into a helper shared between models.",
+    "created_at": "2021-01-25T15:40:16Z",
+    "id": 563821518,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/477",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I benefit though is that `-diff` output will be less noisy now for some licenses.",
+    "created_at": "2021-01-14T01:31:54Z",
+    "id": 556986619,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/475",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "One character fix, but it does change the hashes of many licenses.",
+    "created_at": "2021-01-14T01:29:16Z",
+    "id": 556985850,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/475",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The increased punishment for length delta exposed imperfect markdown normalization. I'm fairly certain that's what the reason is, but I'll try to confirm and fix when I have some time to dig in.",
+    "created_at": "2021-01-13T22:07:02Z",
+    "id": 556887357,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/475",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Curious why the matcher when from exact to dice with theoretically better normalization?",
+    "created_at": "2021-01-13T21:46:50Z",
+    "id": 556864718,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/475",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I was not able to get adding `universal_newline: true` to the encoding options and always running line 41 to work. Tests involving non-UTF-8-encoded license obtain `ArgumentError: invalid byte sequence in UTF-8`. I'm not sure why, but it seems the operations conflict with each other somehow.\r\n\r\nI didn't include in the content normalizer because I'd read (but did not test) that string.encode is much faster than a regex, and it seemed fair to consider a pre-normalization step, having to do with the file type rather than the content.\r\n\r\nHowever if you'd prefer it live in the content normalizer for consistency purposes, happy to move it there.",
+    "created_at": "2020-08-31T17:18:38Z",
+    "id": 480272736,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/455",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Would it make sense to add `universal_newline: true` to the encoding options hash above and always run line 41 instead? Alternatively, I could see this living in content normalizer, replacing `\\r\\n?` with `\\n`",
+    "created_at": "2020-08-31T16:03:39Z",
+    "id": 480230700,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/455",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Added matching for `licenseUrl` to recognize licenses.nuget.org, opensource.org, spdx.org, and apache.org well-known licenses. Added relevant tests.",
+    "created_at": "2020-05-11T09:15:36Z",
+    "id": 422899610,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "zarenner"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Going to leave it unless someone feels strongly.",
+    "created_at": "2020-05-11T09:02:48Z",
+    "id": 422892035,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "zarenner"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Cool, I'll move that logic into `licensee` then and update this PR.",
+    "created_at": "2020-05-08T19:40:45Z",
+    "id": 422335838,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "zarenner"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "> Fetching the content specified by licenseUrl would be out of scope for licensee IMO, but extracting license identification from well known URLs seems within scope for licensee.\r\n\r\nI'm decidedly unopinionated on what logic should exist here vs licensed and am happy to follow whatever ya'll decide, but this generally makes sense to me 👍 \r\n\r\n> Licensed may wish to do a bit of duplicate work to avoid downloading well known license texts unnecessarily.\r\n\r\n👍 licensed already autogenerates text when a definitive classification is made but no license text is available from a known source.  It shouldn't be too hard to extend that to a scenario where there is 100% confidence in the license classification and a costly operation to get license text would match autogenerated text",
+    "created_at": "2020-05-08T18:55:02Z",
+    "id": 422313841,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "jonabc"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fetching the content specified by `licenseUrl` would be out of scope for licensee IMO, but extracting license identification from well known URLs seems within scope for licensee.\r\n\r\nLicensed _may_ wish to do a bit of duplicate work to avoid downloading well known license texts unnecessarily.",
+    "created_at": "2020-05-08T18:02:47Z",
+    "id": 422287744,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I see, it looks like rubocop wants spec naming to be derived from the tested class name in a specific way and it's possible to override, see https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/FilePath but maybe not worth overriding.",
+    "created_at": "2020-05-08T17:47:42Z",
+    "id": 422280250,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I think it would be useful for opensource.org, and perhaps others like https://www.apache.org/licenses/LICENSE-2.0.txt that I've noticed a fair number of packages use. I agree with your assessment that licenses.nuget.org isn't especially useful - most of the time it's used, there's a `<license>` expression anyways since those features were added to nuget around the same time.\r\n\r\nBut there's arguably a question of ownership between `licensee/licensee` and `github/licensed` (where I'm contributing https://github.com/github/licensed/pull/261) when it comes to `licenseUrl`. My understanding is that fetching and matching the content of the URL (when it isn't well-known) might not meet the goals of `licensee` - I don't think any other project type in `licensee` currently downloads license content from the internet, whereas `licensed` already does that for some package types.\r\n\r\nIt seemed difficult to split it between the two, since `licensed` would presumably want to know if the match for `package_file` was due to a `license` or `licenseUrl`, so it could avoid downloading the license if it was well-known, but still download it in the case where `licensee` found a `license` but `licenseUrl` was a non-well-known URL and potentially a different license. package.rb doesn't currently have a mechanism to expose something like that.",
+    "created_at": "2020-05-08T17:26:20Z",
+    "id": 422269766,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "zarenner"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Yes, that's the issue:\r\n```\r\nspec/licensee/matchers/nuget_matcher_spec.rb:3:1: C: RSpec/FilePath: Spec path should end with licensee/matchers/nu_get*_spec.rb.\r\n```\r\n I don't know my way around rubocop to suppress that.",
+    "created_at": "2020-05-08T17:09:39Z",
+    "id": 422261473,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "zarenner"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Would it be worth also matching licenseUrl where the URL likely contains a SPDX ID in the path which can be extracted?\r\n\r\nopensource.org/licenses/{id} seems [pretty common](https://github.com/search?q=filename%3A.nuspec+licenseurl+opensource.org&type=Code). spdx.org/licenses and licenses.nuget.org values exist but are surprisingly uncommon.\r\n\r\nNot essential, just a thought.\r\n",
+    "created_at": "2020-05-08T16:55:11Z",
+    "id": 422254168,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Does it complain about `nuget`? That would seem preferable to `nu_get`, and matches the library file name.",
+    "created_at": "2020-05-08T16:35:37Z",
+    "id": 422243948,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The name of this file is funny due to rubocop wanting \"NuGet\" -> \"nu_get\" - if there's a way to suppress that, I'm happy to change it. Also fine as is, your call.",
+    "created_at": "2020-05-08T09:03:13Z",
+    "id": 422032187,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/432",
+    "user_login": "zarenner"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Per https://www.ruby-lang.org/en/downloads/branches/ 2.4 is EOL. I can open a pull request to remove them to potentially speed up builds.",
+    "created_at": "2020-04-28T18:51:36Z",
+    "id": 416845984,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/422",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think so, at least the tests pass under 2.3 😄 \r\n\r\nAnyway changing supported versions could be discussed in another issue or PR if needed. For now I was just curious about how densely versions should be tested.",
+    "created_at": "2020-04-06T21:19:48Z",
+    "id": 404395012,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/422",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Testing the versions you support seems like a good idea. There are different things that will fail on 2.6 then on 2.7 in some cases. Do we support ruby 2.3? it is possible we could move to just testing the last 3 versions if that is what we plan to support.",
+    "created_at": "2020-04-06T21:00:36Z",
+    "id": 404385189,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/422",
+    "user_login": "HParker"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Naive question: is there value in testing every version from minimum supported in CI? Alternative would be minimum supported, current release ie 2.3 and 2.7 for now.\r\n\r\n90% idle question asked out of curiosity, 10% because CI can be a drag to wait for. 😄 ",
+    "created_at": "2020-04-06T20:42:54Z",
+    "id": 404375635,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/422",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks!",
+    "created_at": "2020-04-03T01:32:33Z",
+    "id": 402688209,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/420",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "After some digging, I can clarify the difference. This may be more detail than you wanted.\r\n- [`GitProject#load_file`](url) uses `Rugged::Blob.to_buffer` which calls down to a [C Binding](https://github.com/libgit2/rugged/blob/master/ext/rugged/rugged_blob.c#L496). \r\n- The [`rb_str_new`](https://github.com/libgit2/rugged/blob/master/ext/rugged/rugged_blob.c#L529) call in that method is a Ruby C method which converts a `char*` to a Ruby String with a default encoding of `ASCII-8BIT`. https://silverhammermba.github.io/emberb/c/#string. (Can't find official docs.)\r\n\r\nThe `FSProject#load_file` is using `File.read` which automatically assumes a default encoding of `UTF-8`.\r\n\r\nSo the same byte that's an invalid `UTF-8` character isn't an invalid `ASCII-8BIT` character and the `GitProject` tests actually don't fail.\r\n\r\n```ruby\r\n# UTF-8\r\nf = File.read('spec/fixtures/readme-invalid-encoding/README.md')\r\n=> \"# Readme fixture\\n\\n ... \\n\\^P\\xFF\\xFF\"\r\nf.encoding\r\n=> #<Encoding:UTF-8>\r\nf.valid_encoding?\r\n=> false\r\n\r\n# ASCII-8BIT\r\n# Use invocation that specifies a length and forces ASCII-8BIT, emulating rb_str_new behavior\r\n# https://ruby-doc.org/core-2.5.0/IO.html#method-i-read\r\nf_ascii = File.read('spec/fixtures/readme-invalid-encoding/README.md', 1087)\r\n=> \"# Readme fixture\\n\\n ... \\n\\^P\\xFF\\xFF\"\r\nf_ascii.encoding\r\n=> #<Encoding:ASCII-8BIT>\r\nf_ascii.valid_encoding?\r\n=> true\r\n```\r\n\r\n",
+    "created_at": "2020-04-03T01:15:25Z",
+    "id": 402683704,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/420",
+    "user_login": "jvonkluck"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I did manually add it here and my editor settings clipped the trailing spaces. I'll use the script to regenerate this instead.",
+    "created_at": "2020-04-02T19:44:19Z",
+    "id": 402567780,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/420",
+    "user_login": "jvonkluck"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Any idea why this is only needed in `fs_project` and not `git_project`? That makes me a bit suspicious (without having dug deeper). With the added fixture and without this change, does only the filesystem test fail (every fixture is tested twice, once in a fs project, once in a git project, IIRC).",
+    "created_at": "2020-04-01T20:39:52Z",
+    "id": 401895489,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/420",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Was this file manually edited? Though it's not bad to get rid of superfluous spaces in general, it is if the next update with `bundle exec script/dump-detect-json-fixture` just adds them back in. 😄 ",
+    "created_at": "2020-04-01T20:37:28Z",
+    "id": 401894222,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/420",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Anything up to a new paragraph. I'm not particularly concerned about it being over inclusive. The whole optional paragraph is long, but if you'd prefer I could certainly change to look for a match agains the whole (normalized) paragraph:\r\n\r\n> CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS INFORMATION ON AN \"AS-IS\" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER.",
+    "created_at": "2019-11-19T21:08:54Z",
+    "id": 348168710,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/253",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Any concern that this might be over inclusive? Anything after any text that reads `CREATIVE COMMONS CORPORATION` would be stripped, if I'm reading correctly? Wondering if we can't match the exact normalized text?",
+    "created_at": "2019-11-19T20:50:23Z",
+    "id": 348159175,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/253",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Using `Regexp.escape` as the first step should be a bit more robust and consistent with the title treatment above.",
+    "created_at": "2019-11-19T16:52:29Z",
+    "id": 348045184,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We already have that bug in the reference matcher, see https://github.com/licensee/licensee/issues/392#issuecomment-515782793 ... that's in the current (0.9.11) release, but I suspect has been there for as long as the reference matcher has existed.\r\n\r\nI agree that's a bug, but it probably needs to be fixed in the reference matcher.\r\n\r\nIn the case of MIT, this PR has zero behavior change, since the title and key each end up generating the same regex.",
+    "created_at": "2019-07-30T01:47:29Z",
+    "id": 308503468,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I don't think so. Above is actually stripping `the` from the license name; `the` isn't part of the regex created at all. `strip_title` doesn't care about beginning of line, only that line contains a match, so `the` is irrelevant. Possibly it should be made more strict, but I don't know of any bug reports triggered by this logic.",
+    "created_at": "2019-07-30T01:42:03Z",
+    "id": 308502591,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I might be missing something, but that seems more complicated to me, as some of the escaping Regexp.escape does has to be undone whether it is done before or after the line currently above.",
+    "created_at": "2019-07-30T01:22:00Z",
+    "id": 308499328,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Good point, hadn't occurred to me. I think the begin block makes the code a bit more readable, but always happy to delete lines and indentation! 😄 ",
+    "created_at": "2019-07-30T01:03:55Z",
+    "id": 308496454,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "#342 removed several other constants that look to be to be the same as/peer to `ALT_TITLE_REGEX`. I thought it must be just an oversight that it wasn't removed as well.  Am I missing something obvious?",
+    "created_at": "2019-07-30T00:49:54Z",
+    "id": 308493973,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "🤔 are we worried that optimistically matching the key might lead to false positives? In the case of the reference matcher, if I have `# License\\n I will sMITe anyone who uses this code`, wouldn't it now match as MIT? Perhaps word boundaries could help?",
+    "created_at": "2019-07-29T14:40:41Z",
+    "id": 308268441,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Do we want an optional `the` prefix like above?",
+    "created_at": "2019-07-29T14:39:26Z",
+    "id": 308267775,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Could potentially use `Regexp.escape` here instead.",
+    "created_at": "2019-07-29T14:38:44Z",
+    "id": 308267387,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": ":heart:",
+    "created_at": "2019-07-29T14:35:25Z",
+    "id": 308265489,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Just calling out that we'll need to note the new hashes in the changelog entry.",
+    "created_at": "2019-07-17T20:35:34Z",
+    "id": 304629445,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "If we're not using the `||=` operator, we could potentially drop the begin block. ",
+    "created_at": "2019-07-17T20:35:14Z",
+    "id": 304629333,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Should these methods be private?",
+    "created_at": "2019-07-17T19:22:21Z",
+    "id": 304601607,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This was here, IIRC, to avoid a breaking change, as I believe constants are public.",
+    "created_at": "2019-07-17T19:21:50Z",
+    "id": 304601433,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/391",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "You would think that, but it was adding the param to the URL without a value and causing problems! :/ I had it as you described previously.",
+    "created_at": "2019-05-27T15:14:26Z",
+    "id": 287825806,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/380",
+    "user_login": "benwiley4000"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Wasn't my instinct, but Rubocop made me do it! Haha",
+    "created_at": "2019-05-27T15:12:18Z",
+    "id": 287825264,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/380",
+    "user_login": "benwiley4000"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Both of these look the same, I _think_ if `@revision` is nil, and is passed as a `ref` argument, the behavior should be the same?",
+    "created_at": "2019-05-24T09:07:25Z",
+    "id": 287276606,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/380",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Similar to the above comment, wondering if it makes sense to add `revision` as a named arg on the parent class and raise in the file system project if it's passed?",
+    "created_at": "2019-05-24T09:06:15Z",
+    "id": 287276220,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/380",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "TIL'd `until` :smile:",
+    "created_at": "2019-05-24T09:05:07Z",
+    "id": 287275849,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/380",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Rather than silently ignoring the argument if it's passed, would it make more sense to raise an ArgumentError here to inform the user?",
+    "created_at": "2019-05-24T09:04:34Z",
+    "id": 287275640,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/380",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ooops, you are right :ok_hand:. Removing them and `LGPL-2.1` which is already in standard SPDX format. ",
+    "created_at": "2019-01-13T00:41:50Z",
+    "id": 247330410,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/357",
+    "user_login": "flbulgarelli"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I don't think the last 4 are needed as they are no-ops.",
+    "created_at": "2019-01-12T23:40:54Z",
+    "id": 247329414,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/357",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Missed a few. Fixed. Good catch,",
+    "created_at": "2018-11-02T18:58:57Z",
+    "id": 230476517,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/342",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Just curious, why do this and the next two remain outside the hash?",
+    "created_at": "2018-10-25T15:53:25Z",
+    "id": 228232813,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/342",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "NONE",
+    "body": "✨ ",
+    "created_at": "2018-10-09T18:27:50Z",
+    "id": 223813574,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/336",
+    "user_login": "LindseyB"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "whoops, that's not used, must be leftover from experiment with different approach. will rm.",
+    "created_at": "2018-08-20T17:54:22Z",
+    "id": 211352656,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/322",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Should this return something if it's not null?",
+    "created_at": "2018-08-20T17:49:18Z",
+    "id": 211350882,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/322",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "NONE",
+    "body": "@wking @mlinksva I just ran across this thread.  I think there is general support for XML in the next major release of the license list, but it is likely 8 to 12 months away.  I don't know of anyone who disagrees supporting the XML format.  This could be accelerated there is a strong demand.  Suggest this be raised with the SPDX legal team and/or SPDX tech team if you would like to accelerate the standardization of the XML format.",
+    "created_at": "2018-07-10T16:54:20Z",
+    "id": 201418105,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/254",
+    "user_login": "goneall"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The content is downcased before this is called:\r\n\r\nhttps://github.com/mlinksva/licensee/blob/72b51e54e52e772213428af74e113555691dcae5/lib/licensee/content_helper.rb#L76-L85\r\n\r\nHappy to add case insensitivity though if you prefer that for any reason - maybe explicitness, maintainability, style?",
+    "created_at": "2018-04-19T19:31:04Z",
+    "id": 182860197,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/293",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I believe you'll want a `/i` flag on this to make it case insensitive.",
+    "created_at": "2018-04-19T18:43:16Z",
+    "id": 182846912,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/293",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We could. Seems more complicated than just repeating, but could be used to handle other optional sections as well. Probably a good idea. I'll try adding in a bit.\r\n\r\nAdded: added in https://github.com/benbalter/licensee/pull/253/commits/d003ad0399b4aec1342f394a5f799674ad21ef4b",
+    "created_at": "2018-01-31T20:54:04Z",
+    "id": 165183343,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/253",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It's really not. Titles are used by the reference matcher (for README files) and `CREATIVE COMMONS LEGAL CODE` doesn't make any sense there. It's some cruft added to the license text by the license steward, for better or worse, that is optional/often isn't deployed in the wild, but often is.",
+    "created_at": "2018-01-31T20:40:10Z",
+    "id": 165179914,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/253",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Can we dynamically pull this from the license text, e.g., via regex rather than hard coding it twice in the project?",
+    "created_at": "2018-01-31T15:27:05Z",
+    "id": 165087074,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/253",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "If this is an alternate title, I believe if you add a reference in https://github.com/benbalter/licensee/blob/1553efdd953953818272a60b3ac2185c8aa0e4c4/lib/licensee/license.rb#L88-L92, it should be stripped by existing normalizers.\r\n\r\nFor context, here's the existing cc0 title regex:\r\n\r\n```\r\n/(?i-mx:creative\\ commons\\ zero\\,?\\ (?:version\\ |v)?1\\.0\\ universal)|cc0\\-1\\.0/\r\n```\r\n\r\n",
+    "created_at": "2018-01-31T15:22:59Z",
+    "id": 165085533,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/253",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "> I'd love to see guidance from SPDX that the XML is what third parties should consume if they want to leverage SPDX's careful semantic markup.\r\n\r\nSPDX is currently warning folks away from the XML toward the old-style templates, e.g. [here][1].\r\n\r\n> Is there any hint that is even a goal?\r\n\r\n*I* would like the XML to be the preferred interface, since it avoids the under-specification I mention above.  The XML has its own under-specification issues (spdx/license-list-XML#495), but they're at the “what does this mean” level.  That's better than the old-style template's “there's no way to write optional text that contains semcolons” issues.\r\n\r\nI'm not aware of folks with SPDX commit access who share my view.  My impression is that the XML will eventually become the recommended format, but it will take a bit for some schema changes (e.g. spdx/license-list-XML#452) to settle.  At the current pace, I'd estimate a year before the XML format stabilizes and then maybe another six months before folks are willing to commit a formal recommendation to consume the XML.\r\n\r\nI don't expect the schema changes to be particularly troublesome to keep up with for consumers that pin their license-list-XML dependencies to released versions, so if it was me, I'd make the switch now.  But sticking with the old format and assuming the escaping issues don't come up will *probably* work.  And it will save you a bit of dev time while the XML format settles down.\r\n\r\n[1]: https://github.com/spdx/license-list-XML/tree/48a9dda95d6baccaa4eb646557cdc4a7cb45e748#this-repository-is-unstable",
+    "created_at": "2018-01-09T00:51:26Z",
+    "id": 160295799,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/254",
+    "user_login": "wking"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@wking I tend to agree; the templates make me want to run away screaming, but I'm not entirely sure that's a rational response. :smile: I'd love to see guidance from SPDX that the XML is what third parties should consume if they want to leverage SPDX's careful semantic markup. Is there any hint that is even a goal?",
+    "created_at": "2018-01-09T00:35:33Z",
+    "id": 160293918,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/254",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "> You may also want to allow internal parens…\r\n\r\nI've filed support for this in #261, although Licensee will still return `other` for those cases.",
+    "created_at": "2018-01-09T00:29:31Z",
+    "id": 160293272,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/257",
+    "user_login": "wking"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "You may also want to allow internal parens.  They are not yet supported by crates.io (withoutboats/license-exprs#3, and I'm documenting that limitation in rust-lang/cargo#4898), but hopefully they'll be supported at some point.  And I don't see a problem with allowing them in this regex now.",
+    "created_at": "2018-01-04T19:34:54Z",
+    "id": 159736856,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/257",
+    "user_login": "wking"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "You seem to already have these stubbed out, but these forms are [very weakly specified][1].  For example, the spec does not cover how to escape a semicolon occurring in the original text.  For a much saner upstream format, you can use license-list-XML (e.g. [`ISC.xml`][2]), which leans on XML for all the hard parts.  The downside is that the XML format is [currently unstable][3], but if you vendor the XML for the licenses you need that shouldn't be a problem.\r\n\r\nIf you stick with your regexp approach and the license-list-data content, I'd recommend using `[^;]*` in your regexps instead of `.+?`.  Although I don't really understand `.+?`, so maybe it's fine.\r\n\r\n[1]: https://spdx.org/spdx-specification-21-web-version#h.2mjng0vqrghe\r\n[2]: https://github.com/spdx/license-list-XML/blob/cdb5b301a99c35d2aa83daa47c6ac4eba3a810df/src/ISC.xml\r\n[3]: https://github.com/spdx/license-list-XML/tree/cdb5b301a99c35d2aa83daa47c6ac4eba3a810df#this-repository-is-unstable",
+    "created_at": "2017-12-29T05:19:50Z",
+    "id": 159026118,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/254",
+    "user_login": "wking"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "You may want to label this `CC0_DISCLAIMER` or some such.  The other CC licenses have similar disclaimers, but the CC0 has additional wording for “information”.  For example, compare the [CC-BY-3.0][1] disclaimer.  The [CC-BY-4.0][2] disclaimer is even more different, dropping caps, adding `(\"Creative Commons\")`, etc.\r\n\r\n[1]: https://creativecommons.org/licenses/by/3.0/legalcode.txt\r\n[2]: https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+    "created_at": "2017-12-28T18:51:28Z",
+    "id": 158984490,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/253",
+    "user_login": "wking"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Good call. 7bd1aa6.",
+    "created_at": "2017-12-28T16:47:57Z",
+    "id": 158969930,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/249",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "You're absolutely right (and that was my original thinking). I checked the SPDX license matching spec, and it says formatting should be ignored, but punctuation should not. Updated with a blacklist of Markdown markup characters via 08f3779.",
+    "created_at": "2017-12-28T16:47:02Z",
+    "id": 158969819,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/249",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "One idea to make this a tighter integration tests with the other project types would be to move one of the fixtures to a submodule and point the test directly to that repo when exercising this project type (or locally for the other two).",
+    "created_at": "2017-12-27T23:32:25Z",
+    "id": 158879911,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Would never have thought to do it this way. For other projects, I've used VCR, which stubs the HTTP API response, rather than the library method, in case the library changes its behavior. Out of scope for this PR, and glad to implement as a follow up.",
+    "created_at": "2017-12-27T23:28:19Z",
+    "id": 158879707,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I don't know if/why we'd change this, but to make the test a bit less susceptible to external change (e.g., if we move the project to `licensee/licensee`, I'd suggest making the references to `benbalter/licensee` point to a single `#{repo}` (from the let statement), wherever possible (e.g., it won't be possible in the before block).",
+    "created_at": "2017-12-27T23:26:55Z",
+    "id": 158879632,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Very minor, but I believe you can put this in the top-level RSpec block, rather than in each context/describe.",
+    "created_at": "2017-12-27T23:25:08Z",
+    "id": 158879546,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Just making a note, I know GitLab uses Licensee, if they/anyone would like more flexibility here, glad to add it, as long as we can do so safely. :smile:",
+    "created_at": "2017-12-27T23:23:48Z",
+    "id": 158879441,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Is there any reason we'd need to memoize/cache this method? I don't think so (and if so, could be a good future improvement).",
+    "created_at": "2017-12-27T16:36:02Z",
+    "id": 158838926,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Does `repo` make more sense than `repo_name`? Whatever we call it, I think we can use `attr_accessor` to mirror the other project classes's style. ",
+    "created_at": "2017-12-27T16:33:37Z",
+    "id": 158838620,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I believe we can use `Octokit.contents @repo_name, path: file[:name]` here to rely on Octokit internals a bit more (and save us from needing to store the `contents_url` in the hash).",
+    "created_at": "2017-12-27T16:31:51Z",
+    "id": 158838233,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Had no idea you could do this. Nice.",
+    "created_at": "2017-12-27T16:27:19Z",
+    "id": 158837432,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Given that FSProject is FSProject and not FsProject, I'm wondering if this should be GitHubProject for consistency?",
+    "created_at": "2017-12-27T16:26:35Z",
+    "id": 158837336,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "> If you wish to scan private Github repositories\r\n\r\nI'd add something along the lines of \"or are hitting API rate limits\"",
+    "created_at": "2017-12-27T16:25:07Z",
+    "id": 158837087,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "It may also be worth noting, that for command-line invocations, you can pass it as an environmental variable, e.g.:\r\n\r\n```\r\nOCTOKIT_ACCESS_TOKEN=abc123 licensee foo/bar\r\n```",
+    "created_at": "2017-12-27T16:23:57Z",
+    "id": 158836959,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Git**H**ub :smile:",
+    "created_at": "2017-12-27T16:20:24Z",
+    "id": 158836386,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/251",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is the `'` there because it can make a word possessive, but not `\"` because it can't change meaning?\r\n\r\nIf a comma is considered meaningful, shouldn't a semicolon also be? What about parens?\r\n",
+    "created_at": "2017-12-20T20:34:22Z",
+    "id": 158128964,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/249",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I wonder if it's worth catching markdown bold/italics here as well as header.",
+    "created_at": "2017-12-20T20:29:32Z",
+    "id": 158128012,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/249",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I avoided adding any new fields at a broad scope because I wasn't sure how they would be used.  It definitely seems worth thinking about for the future.",
+    "created_at": "2017-12-13T16:17:25Z",
+    "id": 156706306,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/246",
+    "user_login": "jonabc"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ideally, we'd abstract things such that a project file could have multiple licenses, but for now, I agree with @mlinksva that \"other\" would be the consistent response here (but I'd leave the other logic intact to allow for that). Perhaps expose a `matches` method for now (in addition to `match`)? ",
+    "created_at": "2017-12-13T14:16:34Z",
+    "id": 156670138,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/246",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Adding a comment here (and a few others), but in short we're finding the most similar license to the one we're looking at (we're going to see if it is in the set of similar licenses, not cut off from comparison due to max delta), but not if confidence is set to less than 50 in which case all bets are off, and who would want to set confidence so low anyway (in fact only one pair fails without this).",
+    "created_at": "2017-11-29T03:07:33Z",
+    "id": 153684331,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Added.",
+    "created_at": "2017-11-29T03:05:15Z",
+    "id": 153684115,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes.",
+    "created_at": "2017-11-29T03:05:07Z",
+    "id": 153684104,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, GPL and AGPL are long licenses, so they are getting hit hard by dissimilarity scaling with size mentioned at https://github.com/benbalter/licensee/pull/242#discussion_r153684000",
+    "created_at": "2017-11-29T03:04:50Z",
+    "id": 153684079,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Power operator. Base similarity to power of (log10 of wordset size). That's how dissimilarity is  scaled in this proposal.\r\n\r\nI'm going to change total to wordset.size as the argument to log10 though, since there's no need for the scaling to be sensitive to the size of the candidate text, and it makes the scaling slightly less aggressive.",
+    "created_at": "2017-11-29T03:03:55Z",
+    "id": 153684000,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "To make it easier to monkeypatch to get the uncached version in a test that varies confidence level (which max_delta needs to respond to). I'll just remove the cache; this is not a heavy calculation.",
+    "created_at": "2017-11-29T03:01:08Z",
+    "id": 153683731,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks for mentioning this. I think it makes sense to punt until there's a clear opinion. I subscribed to the issue.",
+    "created_at": "2017-11-27T19:52:13Z",
+    "id": 153304104,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/241",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@wking this and `name_score` below are only used to prioritize which files to look at, see https://github.com/benbalter/licensee/blob/389c22e7e16378ed57c47b7b89e22e95281f8dab/lib/licensee/projects/project.rb#L84 they are not the confidence assigned to a license statement found in a package manager file. That's at https://github.com/benbalter/licensee/blob/389c22e7e16378ed57c47b7b89e22e95281f8dab/lib/licensee/matchers/package.rb#L14 (which specifies 90)",
+    "created_at": "2017-11-27T19:49:53Z",
+    "id": 153303460,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/241",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This will work in single-line cases, which are the most likely.  But the current tag/value format used in `.spdx` is not very clear about values wrapping over multiple lines (spdx/spdx-spec#44).  You may want a balanced-paren parser (reading to the end of the line or until any parens opened in that line are closed).  Or you can punt until the SPDX spec expresses a clearer opinion on this.",
+    "created_at": "2017-11-27T18:19:56Z",
+    "id": 153279917,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/241",
+    "user_login": "wking"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Should we add a test to ensure a short license has the expected max delta?",
+    "created_at": "2017-11-27T16:18:45Z",
+    "id": 153244520,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "What are you trying to test here? That potential licenses include licenses above the set confidence threshold?",
+    "created_at": "2017-11-27T16:18:11Z",
+    "id": 153244345,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "What's going on here? I think this logic could use a comment.",
+    "created_at": "2017-11-27T16:17:06Z",
+    "id": 153243988,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Do we know why this is changing?",
+    "created_at": "2017-11-27T16:14:39Z",
+    "id": 153243182,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "What does `**` do?",
+    "created_at": "2017-11-27T16:13:51Z",
+    "id": 153242923,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Curious why you broke this out into a new method? If rubocop was complaining about line length, you can wrap it in a `begin`/`end` block and put it on its own line.",
+    "created_at": "2017-11-27T16:12:25Z",
+    "id": 153242559,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/242",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "It will take some reworking of the logic in the Project class, but in a subsequent iteration, it'd be cool to be able to parse the expression and return multiple licenses, where we can match the SPDX ID.",
+    "created_at": "2017-11-27T16:10:14Z",
+    "id": 153241956,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/240",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "👍 ",
+    "created_at": "2017-11-27T16:09:02Z",
+    "id": 153241607,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/240",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Nice.",
+    "created_at": "2017-11-27T16:06:43Z",
+    "id": 153240910,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/241",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Maybe this test should go in `npm_bower_matcher_spec.rb` instead, skipping the fixture? Is suspect that's the case, but I'll leave here for now pending review.",
+    "created_at": "2017-11-22T23:01:07Z",
+    "id": 152697092,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/240",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is this because the source URL listed for WTFPL doesn't include the license text?\r\n\r\nSeems that should be fixed in choosealicense.com, probably http://www.wtfpl.net/txt/copying/ per https://spdx.org/licenses/WTFPL.html",
+    "created_at": "2017-11-13T22:41:53Z",
+    "id": 150688220,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/238",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Does GitHub.com link to a preferred license file even if `other` is detected? I can't think of where.",
+    "created_at": "2017-11-07T16:52:04Z",
+    "id": 149434350,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/232",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Likewise, I think we can make these `[\\-_]`.",
+    "created_at": "2017-11-07T15:55:54Z",
+    "id": 149414512,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/232",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Also to note, I believe the regexes in lines 33 and 34 should be preceded by a `\\A` to ensure it starts the file name.",
+    "created_at": "2017-11-07T15:55:07Z",
+    "id": 149414092,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/232",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "What if instead, we changed the `-` on lines 33 and 34 to `[\\-_] and just made the existing regex slightly more flexible?",
+    "created_at": "2017-11-07T15:54:36Z",
+    "id": 149413746,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/232",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Very true. We still use it within GitHub.com. Even if the license is ultimately deemed `other`, we still link to the preferred license file. This could potentially be a breaking change we queue up for the next major version.",
+    "created_at": "2017-11-07T15:51:48Z",
+    "id": 149412158,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/232",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "> I can do that here very easily with this refactor. We can make GNU optional in all cases.\r\n\r\nImplemented via 25e7388.",
+    "created_at": "2017-11-03T22:54:37Z",
+    "id": 148909235,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/233",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": ">  or also in the case of \"clear bsd\", an alternate name, right?\r\n\r\nExactly. This allows `clear BSD` to match `bsd-3-clause-clear` since there is no ambiguity and some license templates had the alternate wording (for whatever reason).\r\n\r\n> If so does it make sense to also add entries for the A/L/GPL licenses matching titles without the \"GNU \" prefix?\r\n\r\nYes. I can do that here very easily with this refactor. We can make `GNU` optional in all cases.",
+    "created_at": "2017-11-03T22:43:22Z",
+    "id": 148908000,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/233",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Not related to the purpose of this PR (this regex definition is just moved), but just asking while noticing -- the purpose of this is to catch title matches that don't include bits that aren't needed to disambiguate, or also in the case of \"clear bsd\", an alternate name, right?\r\n\r\nIf so does it make sense to also add entries for the A/L/GPL licenses matching titles without the \"GNU \" prefix?",
+    "created_at": "2017-11-03T22:33:08Z",
+    "id": 148906588,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/233",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "norm**a**lization",
+    "created_at": "2017-11-03T22:25:41Z",
+    "id": 148905674,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/233",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The integration test and corresponding fixture aren't really necessary because this PR really just changes license file matching, which is tested for in `license_file_spec.rb`, but it doesn't hurt either.",
+    "created_at": "2017-10-28T20:58:18Z",
+    "id": 147564401,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/232",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Another approach would be to just accept _ wherever - is. I don't think filename scoring is important now that we support multiple license files (but I could be missing something), so a new score for a new pattern isn't important.\r\n\r\nAnother approach would be to add a match for LICENSE_1_0.txt ie exactly the filename mentioned in #221.",
+    "created_at": "2017-10-28T20:56:56Z",
+    "id": 147564379,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/232",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I see how you've accomplished this by building a regex matching any of the fields specified in choosealicense.com's field metadata, in `license_field.rb`. 🎉 ",
+    "created_at": "2017-10-26T00:12:47Z",
+    "id": 147019810,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/231",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Not a huge fan of having to search for file existence across multiple directories. Is there an alternate way we could do this?",
+    "created_at": "2017-08-01T16:21:54Z",
+    "id": 130655366,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/216",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This doesn't properly memoize the method because the `Dir.glob` logic will always run.  How about\r\n\r\n```ruby\r\n@license_files ||= license_dirs.map { |d| Dir.glob(\"#{d/*.txt\") }.flatten\r\n```",
+    "created_at": "2017-08-01T16:20:23Z",
+    "id": 130654949,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/216",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "For backwards compatibility, we'll want a class method \r\n\r\n```ruby\r\ndef license_dir\r\n  license_dirs.first\r\nend\r\n```\r\n\r\nThat way, it remains accurate even if overwritten.",
+    "created_at": "2017-08-01T16:17:32Z",
+    "id": 130654272,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/216",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I believe this can be `attr_writer :license_dirs`",
+    "created_at": "2017-08-01T16:16:52Z",
+    "id": 130654132,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/216",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Why not make this:\r\n\r\n```ruby\r\ndef license_dirs\r\n  @license_dirs ||= File.expand_path '../../vendor/choosealicense.com/_licenses', File.dirname(__FILE__)\r\nend\r\n```",
+    "created_at": "2017-08-01T16:16:41Z",
+    "id": 130654087,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/216",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "If we rely on Pathname, could this be simplified to:\r\n\r\n```ruby\r\nroot = Pathname.new(@root)\r\nPathname.new(dir).relative_path_from(root).each\r\n...\r\n```\r\n?",
+    "created_at": "2017-07-05T17:01:30Z",
+    "id": 125701055,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/209",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Could [`Pathname#fnmatch?`](https://ruby-doc.org/stdlib-2.2.0/libdoc/pathname/rdoc/Pathname.html#method-i-fnmatch) help here? e.g., \r\n\r\n```ruby\r\nPathname.new(dir).fnmatches? File.join(root, \"**\")\r\n```",
+    "created_at": "2017-07-05T16:28:17Z",
+    "id": 125693422,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/209",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Could this just be `attr_accessor` (or just use `@dir` directly)?",
+    "created_at": "2017-07-05T16:19:19Z",
+    "id": 125691129,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/209",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "You should be able to use `def_delegator` here, to simply delegate `[]` to the `@file` hash.",
+    "created_at": "2017-07-05T16:18:24Z",
+    "id": 125690931,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/209",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Would it make sense to call this `@data` instead of `@file` since this is File object?",
+    "created_at": "2017-07-05T16:16:57Z",
+    "id": 125690581,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/209",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "We'll want to document that `file` can be a string or a hash, and if a hash, what keys the class expects/accepts.",
+    "created_at": "2017-07-05T16:16:32Z",
+    "id": 125690486,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/209",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "For other project types, `files` would return an array of files within the project. Obviously that's not possible here. What if we just made `@files` an `attr_acessor` and then a user would just do `files.push(name: \"LICENSE\")` with any files they knew to exist, and LICENSE can support multiple license files, multiple matching strategies, etc.\r\n\r\nAlternatively, we could have a hard-coded list of the most common paths, call them in order, and only go to the next one if the previous doesn't exist (e.g., `LICENSE`, `LICENSE.txt`, `LICENSE.md`, etc.).",
+    "created_at": "2017-06-26T15:59:41Z",
+    "id": 124049389,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/201",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "For every other project-type, `load_file` take a hash with key `name`, which is relative to the project root. Perhaps to mirror that behavior, `load_file` should expect the same hash, but URI.join the relative path to the root URI?",
+    "created_at": "2017-06-26T15:53:45Z",
+    "id": 124047902,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/201",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "We may need to rescue from an invalid URI error here, in the event that I pass \"http://foo\"",
+    "created_at": "2017-06-26T15:51:56Z",
+    "id": 124047419,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/201",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I think we'll want to raise an `UnsuportedProeject` error here if `allow_remote` is false, rather than raising when `load_file` is first called. This matches the behavior of FSProject, and will allow us to add an additional project type in the last after URIProject if we want down the line. This will also allow us to get ride of the `@allow_remote` guards on each method.",
+    "created_at": "2017-06-26T15:50:23Z",
+    "id": 124047013,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/201",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Thanks, I'm pretty unfamiliar with Ruby, I deleted my ```Gemfile.lock``` and reinstalled the dependencies and yes that made those lint errors go away, I've reverted those changes.",
+    "created_at": "2017-06-08T18:10:17Z",
+    "id": 120959768,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/201",
+    "user_login": "iamwillbar"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You're probably using a recent but not current version of rubocop. This was fixed/changed back in https://github.com/bbatsov/rubocop/pull/4231",
+    "created_at": "2017-06-08T17:51:38Z",
+    "id": 120955030,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/201",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Fantastic. Let's merge!",
+    "created_at": "2017-06-07T18:12:08Z",
+    "id": 120703370,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/200",
+    "user_login": "vmg"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> `:replace:` will remove all the invalid characters altogether from the License\r\n\r\nYes, that's exactly what was causing #79.\r\n\r\nTrying force_encoding first, and only running encode (which does above) if that doesn't produce a valid encoding should avoid the latter in many cases. (I didn't realize you could check for a valid encoding, that was the hint I needed.)",
+    "created_at": "2017-06-07T17:36:59Z",
+    "id": 120694336,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/200",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "NONE",
+    "body": "This is pretty good. Do note that encoding an UTF8-tagged script into UTF-8 with `:replace` will remove all the invalid characters altogether from the License -- as opposed to Charlock's approach that actually figures out the encoding of those characters and transcodes them into valid UTF8...\r\n\r\nSo we're gonna be losing data here, and hence reducing accuracy. But I think this is an acceptable tradeoff, particularly since the text of all our supported licenses is usually ASCII English and this approach will only strip away things like author names.",
+    "created_at": "2017-06-07T17:32:21Z",
+    "id": 120693282,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/200",
+    "user_login": "vmg"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That was the hint I needed to avoid Charlock entirely. Thanks! Alternative in #200 ",
+    "created_at": "2017-06-07T16:37:55Z",
+    "id": 120678697,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/199",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "NONE",
+    "body": "I think we need to do better here. Charlock is not free (particularly not the transcoding step). The logic needs to be more like:\r\n\r\n```ruby\r\n@content.force_encoding(Encoding::UTF_8)\r\nif !@content.valid_encoding?\r\n  # do the transcoding\r\nend\r\n```",
+    "created_at": "2017-06-07T15:40:44Z",
+    "id": 120663117,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/199",
+    "user_login": "vmg"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Actually no, the two options are [`GPL-2`](https://github.com/cran/ttutils/blob/bd83bbd6b0b7408502a1060da0274255343b9819/DESCRIPTION#L8), or [`GPL (>=2)`](https://github.com/cran/richards/blob/32f323299ab88c879f96d0906747adf98cdbca34/DESCRIPTION#L11)",
+    "created_at": "2017-05-01T13:14:33Z",
+    "id": 114123806,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/160",
+    "user_login": "jimhester"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Sure",
+    "created_at": "2017-05-01T13:02:06Z",
+    "id": 114122949,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/160",
+    "user_login": "jimhester"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Sure",
+    "created_at": "2017-05-01T13:02:01Z",
+    "id": 114122942,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/160",
+    "user_login": "jimhester"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The line has to start with package, but it doesn't have to be the first line.",
+    "created_at": "2017-05-01T13:00:50Z",
+    "id": 114122865,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/160",
+    "user_login": "jimhester"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I tried to adjust the regexes. Not sure it does what you want... ",
+    "created_at": "2017-04-11T15:44:57Z",
+    "id": 110938915,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/186",
+    "user_login": "n7s"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "To match the other standards, I believe we'll want `/OFL(#{PREFERRED_EXT_REGEX}` and `/OFL#{ANY_EXT_REGEX}/` as their own entries. It should also be scored lower than `COPYING-*`. when both exist.",
+    "created_at": "2017-04-10T20:11:53Z",
+    "id": 110751566,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/186",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Yep. Trying to follow http://semver.org/ strictly since https://github.com/benbalter/licensee/pull/100.\r\n\r\nThis way, if you call `Rule#find_by_tag('foo')` it still works without needing to maintain two different methods.",
+    "created_at": "2017-03-20T21:26:07Z",
+    "id": 107021103,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/176",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Just curious, are the alias and default nil value for group above for backwards compatibility?",
+    "created_at": "2017-03-20T21:17:33Z",
+    "id": 107019147,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/176",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Clarified via 3579d6f. I was wrong. In Licensee, the existence of a LicenseFile shows that there is a license. If no matcher returns a match (e.g., DiceMatcher returns nil for match), that means the license hasn't been detected (but that there is a license file). In the GitHub API, we go a step further and collapse that into `other`, nil, or the detected license.",
+    "created_at": "2017-02-21T21:26:53Z",
+    "id": 102322043,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/168",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Are they? The tests are still expecting nil.",
+    "created_at": "2017-02-21T21:16:55Z",
+    "id": 102319812,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/168",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Can these two be combined as `/^GPL(-|>=)(\\d)/`?",
+    "created_at": "2017-02-21T17:32:02Z",
+    "id": 102268182,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/160",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Can this be `match[1].gsub(/+ file LICENSE$/,'')`?",
+    "created_at": "2017-02-21T17:30:54Z",
+    "id": 102267937,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/160",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Does the line have to begin `Package?` (or can it be in the middle of a line, even if not the first)?",
+    "created_at": "2017-02-21T17:28:48Z",
+    "id": 102267453,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/160",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "`dist.ini` should be preferred over `DESCRIPTION`. I'm going to change it!",
+    "created_at": "2017-01-22T19:16:17Z",
+    "id": 97230737,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "pablrod"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ok! I like it!",
+    "created_at": "2017-01-22T19:16:13Z",
+    "id": 97230732,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "pablrod"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Should `dist.ini` be preferred over `DESCRIPTION` when both are present?",
+    "created_at": "2017-01-22T18:27:12Z",
+    "id": 97229632,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "To make it slightly more future proof, it sounds like the map could be simplified to:\r\n\r\n1. Swap the first `_` for a `-`\r\n2. Swap the second `_` for a `.`\r\n3. Replace `Mozilla` with `MPL`\r\n4. Add a `.0` to any GPL'd license\r\n\r\nSomething like\r\n\r\n```ruby\r\nperl_name.sub('_', '-').sub('_', '.').sub('Mozilla', 'MPL').sub(/^GPL-(\\d)$/, 'GPL-\\1.0')\r\n```\r\n\r\nShould theoretically alleviate the need to maintain a map.",
+    "created_at": "2017-01-22T18:26:32Z",
+    "id": 97229618,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I wasn't sure how to rank this. Thank you!",
+    "created_at": "2017-01-21T19:04:26Z",
+    "id": 97204232,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "pablrod"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "done!\r\n",
+    "created_at": "2017-01-21T19:03:51Z",
+    "id": 97204220,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "pablrod"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "done!",
+    "created_at": "2017-01-21T19:03:43Z",
+    "id": 97204216,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "pablrod"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Per CRAN policy MIT is what they call a 'license template' (https://www.r-project.org/Licenses/MIT), which states a structured format for `LICENSE` you need to follow to comply and be accepted into CRAN. Deviations from this form will be rejected. So while in principle what you say is accurate, in practice these packages are using the basic MIT license.",
+    "created_at": "2017-01-20T15:54:40Z",
+    "id": 97099108,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/160",
+    "user_login": "jimhester"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I'd downrank this to `8`.",
+    "created_at": "2017-01-19T18:16:09Z",
+    "id": 96922005,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The `@` isn't necessary with the `attr_accessor` above,.",
+    "created_at": "2017-01-19T18:15:28Z",
+    "id": 96921876,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I believe this can be simplified to a single line. `/^license\\s*=\\s*([a-z\\-0-9\\.]+)/i`.",
+    "created_at": "2017-01-19T18:14:34Z",
+    "id": 96921686,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/157",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "If the author is saying this is licensed under the MIT license + whatever arbitrary terms I put in the license file, why is it accurate to say the project is licensed under the MIT license? (e.g., if the license file says \"and you must give me 100 puppies if you use this software\")",
+    "created_at": "2017-01-19T18:04:08Z",
+    "id": 96919666,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/160",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Good point! Sorry I missed the ` \\i` flag.\r\nThank you!",
+    "created_at": "2016-12-31T02:32:56Z",
+    "id": 94267809,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/150",
+    "user_login": "pablrod"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Since the regex has the `/i` flag, I don't believe the `[Cc]` is necessary.",
+    "created_at": "2016-12-27T14:23:55Z",
+    "id": 93935535,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/150",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Great suggestion.\n",
+    "created_at": "2016-09-23T13:35:14Z",
+    "id": 80244991,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/125",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This is a great argument (I still remember reading [the blog post](http://ben.balter.com/2015/06/03/copyright-notices-for-websites-and-open-source-projects/) where you first (AFAIK) described it), but I'd refrain on the \"silly\". Even \"Because that doesn't make sense ...\" would be friendlier.\n\nI'd also replace the \"it's a lot of work\" (which may sound like laziness) with something like \"it's very hard to do right\" (which matches the rest of the sentence).\n",
+    "created_at": "2016-09-22T17:32:58Z",
+    "id": 80093816,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "\"BSD (ISC)\" may be confusing. Could this be written in another way?\n",
+    "created_at": "2016-09-22T17:29:53Z",
+    "id": 80093162,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "\"README\" has been consistently capitalized elsewhere, so perhaps it should be uppercased here too.\n",
+    "created_at": "2016-09-22T17:28:50Z",
+    "id": 80092930,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I foresee a future FAQ entry about using SPDX identifiers instead in package manager metadata files ;)\n",
+    "created_at": "2016-09-22T17:28:00Z",
+    "id": 80092762,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This is not really helpful. Consider removing.\n",
+    "created_at": "2016-09-22T17:26:28Z",
+    "id": 80092463,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Line numbers in relative version references? :) Ideally we should use a tag here (or ultimately, a commit hash).\n",
+    "created_at": "2016-09-22T17:25:10Z",
+    "id": 80092166,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Suggestion: \"the contents\" --> \"its contents\"\n",
+    "created_at": "2016-09-22T17:23:31Z",
+    "id": 80091856,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Why is \"Open Source License\" capitalized?\n",
+    "created_at": "2016-09-22T17:22:55Z",
+    "id": 80091732,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Why are \"Git\" and \"Filesystem\" capitalized?\n",
+    "created_at": "2016-09-22T17:22:32Z",
+    "id": 80091654,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Same here about the \"what-we-look-at\" anchor\n",
+    "created_at": "2016-09-22T17:21:12Z",
+    "id": 80091379,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Shouldn't the \"what-we-look-at\" anchor point to docs/what-we-look-at.md?\n",
+    "created_at": "2016-09-22T17:20:56Z",
+    "id": 80091318,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This sentence would be easier to read if reordered in SVO: \"Matching license references in project READMEs\"\n",
+    "created_at": "2016-09-22T17:13:43Z",
+    "id": 80089848,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This paragraph is a little hard to understand, and it doesn't follow the same pattern as the previous one (if x, then y).\n",
+    "created_at": "2016-09-22T17:03:35Z",
+    "id": 80087892,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The comma after \"projects\" introduces a run-on sentence. I'd suggest a period, like the line above, or a semicolon\n",
+    "created_at": "2016-09-22T16:57:47Z",
+    "id": 80086759,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/124",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ok, I see that it's not just about the format of the file, but actual preferences for it. In that case, I would perhaps use `PREFERRED_EXTENSION_REGEX`, to match `ANY_EXTENSION_REGEX`.\n",
+    "created_at": "2016-09-22T15:51:00Z",
+    "id": 80073236,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/125",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I'd rename `EXTENSONS_REGEX` to `FORMAT_EXTENSION_REGEX` or `TEXT_EXTENSION_REGEX`, to make the composition below clearer and more consistent.\n",
+    "created_at": "2016-09-22T15:47:28Z",
+    "id": 80072438,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/125",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fair enough. I'll remove the \"or LICENSE.lesser\" from http://choosealicense.com/licenses/lgpl-3.0/ which seems to have been there from the beginning of the site https://github.com/github/choosealicense.com/commit/39198c0b320d97abffcdbf912bcd348a15de6577#diff-c84257b1f58e7d12bce47aed7f0746b0R208\n",
+    "created_at": "2016-09-14T21:35:59Z",
+    "id": 78846987,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/113",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Valid point. Although I'm not personally a fan of their implementation, I'm fine supporting LGPL's recommended means of manifesting your intent to license under LGPL. I'm less keen to support non-standard implementations, for the same reason we don't support `MIT.txt` or `LEGAL-RIGHTS.dog`. We can use proper detection as a carrot to motivate standardization (and in this case, \"proper\" LICENSE implementation).\n",
+    "created_at": "2016-09-14T21:14:48Z",
+    "id": 78842748,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/113",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "& copying.lesser.txt 2248 results ~~(already handled of course)~~\n",
+    "created_at": "2016-09-14T21:08:10Z",
+    "id": 78841395,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/113",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "FWIW https://github.com/search?utf8=%E2%9C%93&q=filename%3Alicense.lesser finds 1519 results. 10x less than copying.lesser, but _maybe_ enough to handle. licence.lesser only 44.\n",
+    "created_at": "2016-09-14T21:06:38Z",
+    "id": 78841087,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/113",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Fixed via 3a40440.\n",
+    "created_at": "2016-09-14T21:03:33Z",
+    "id": 78840401,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/113",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "> If you are releasing your program under the LGPL, you should also include the text version of the LGPL, usually in a file called COPYING.LESSER.\n\nEek. You're correct. Will update the logic and test.\n",
+    "created_at": "2016-09-14T21:00:55Z",
+    "id": 78839850,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/113",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Will this miss COPYING.LESSER? I suspect that's common, given tradition adhered to by many _GPL'd projects of using COPYING rather than LICENSE.\n",
+    "created_at": "2016-09-14T21:00:16Z",
+    "id": 78839683,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/113",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Sure, I'll make that change.\n",
+    "created_at": "2016-09-13T15:10:46Z",
+    "id": 78579708,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/110",
+    "user_login": "waldyrious"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I think `LICENSE.md` should still take precedence over `COPYING` when both our present (but agree `COPYING` should take precedence over `LICENSE.image`)\n",
+    "created_at": "2016-09-13T14:49:31Z",
+    "id": 78575070,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/110",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Think this may have been my original wrong doing, but we should be passing 2-3 arguments (ruby, bin, license), rather than one concatenated string, to allow Open3 to handle escaping and other command-line concerns (although less of a concern since these are tests).\n",
+    "created_at": "2016-05-03T14:56:03Z",
+    "id": 61895360,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/94",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Oops, fixed.\n",
+    "created_at": "2016-03-19T17:20:02Z",
+    "id": 56751920,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/87",
+    "user_login": "mlinksva"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Looks like there's some stray debug comments in there\n",
+    "created_at": "2016-03-19T16:03:11Z",
+    "id": 56750800,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/87",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Oh, because it's the text, not the key. Carry on.\n",
+    "created_at": "2016-01-04T16:23:50Z",
+    "id": 48748174,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/68",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Readme before package file? What's your reasoning here?\n",
+    "created_at": "2016-01-04T16:22:52Z",
+    "id": 48748052,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/68",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Are these still used anywhere? If not used internally, I'd say safe to :skull: \n",
+    "created_at": "2015-09-25T14:20:08Z",
+    "id": 40434121,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/61",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ah, thanks\n",
+    "created_at": "2015-09-04T15:36:05Z",
+    "id": 38763820,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/55",
+    "user_login": "bkeepers"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Specifically `attr_writer :confidence_threshold, :package_manager_files`\n",
+    "created_at": "2015-09-04T14:58:36Z",
+    "id": 38759842,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/55",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Package manager files is set via `Licensee.package_manager_files = true`. If the instance variable is true, it returns the instance variable. If the instance variable is `false`, it'd fall through the `||=` (as I learned yesterday) and would be `false` either way.\n",
+    "created_at": "2015-09-04T14:58:13Z",
+    "id": 38759802,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/55",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Does `@package_manager_files` ever get set?\n",
+    "created_at": "2015-09-04T14:56:21Z",
+    "id": 38759618,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/55",
+    "user_login": "bkeepers"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Fixed via 36654dd.\n",
+    "created_at": "2015-07-20T23:11:59Z",
+    "id": 35055089,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/38",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Ugh. Yes. Good catch.\n",
+    "created_at": "2015-07-20T23:07:02Z",
+    "id": 35054743,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/38",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Should this be `safe_load`?\n",
+    "created_at": "2015-07-20T22:34:48Z",
+    "id": 35052296,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/38",
+    "user_login": "ptoomey3"
+  },
+  {
+    "author_association": "NONE",
+    "body": "Just because you're paranoid doesn't mean they aren't after you.\n",
+    "created_at": "2015-07-20T21:22:53Z",
+    "id": 35045814,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/37",
+    "user_login": "ptoomey3"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "You're 100% right. Opened https://github.com/benbalter/licensee/pull/36 with a failing test.\n",
+    "created_at": "2015-07-20T19:30:57Z",
+    "id": 35033775,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/35",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "You did and we talked about it, but I believe we reached a conclusion that it doesn't matter how regexes are read, because files are tested one by one in sequence. \"COPYING\" will match the regex and get assigned a score of \"1\", then LICENSE will match and also get assigned a score of \"1\", and so on.\n",
+    "created_at": "2015-07-20T19:28:19Z",
+    "id": 35033475,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/35",
+    "user_login": "mislav"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "This is the question I asked in chat... if regex was read left to right. If so, then I believe LICENSE should win over COPYING which should win over COPYRIGHT.\n",
+    "created_at": "2015-07-20T19:20:59Z",
+    "id": 35032719,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/35",
+    "user_login": "benbalter"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The backwards-incompatible consequence of this change is that the license filenames are not picked by the order of preference anymore. Now, the \"COPYING\" file will win over a \"LICENSE\" file in the same repo, when previously the opposite was the case.\n",
+    "created_at": "2015-07-20T19:14:59Z",
+    "id": 35032125,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/35",
+    "user_login": "mislav"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Should the match score be higher if the filename matches a file closer to the beginning of LICENSE_FILENAMES array? It seems that the names in that array are sorted by preference.\n",
+    "created_at": "2015-07-20T19:13:55Z",
+    "id": 35032032,
+    "pull_request_url": "https://api.github.com/repos/licensee/licensee/pulls/35",
+    "user_login": "mislav"
+  }
+]

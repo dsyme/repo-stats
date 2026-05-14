@@ -1,0 +1,3258 @@
+[
+  {
+    "author_association": "MEMBER",
+    "body": "Why this is safe section in https://github.com/fsprojects/FSharp.Control.TaskSeq/issues/294 has some related verbiage",
+    "created_at": "2026-03-19T12:12:14Z",
+    "id": 2959639750,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/295",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@dsyme Wondering if @abelbraaksma had a reason for the variable delay; perhaps a comment explaining why it's not relevant? (and/or reinstate with an intention revealing name)",
+    "created_at": "2026-03-19T11:52:50Z",
+    "id": 2959550892,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/295",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please add a test that shows the use of `TaskBuilderBaseBuilder`.",
+    "created_at": "2025-02-20T21:16:11Z",
+    "id": 1964349318,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/260",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Forgot about this discussion point. These should be `invalidArg`. We throw `ArgumentOutOfRange` if we find that, while iterating, we end up past the last index, for instance. Here, it is clearly an argument error, as there's never an index that's negative.\r\n\r\n(this is my interpretation from MS's logic in the same/similar cases for Array/Seq/List)",
+    "created_at": "2024-05-24T00:01:41Z",
+    "id": 1612490246,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/254",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I actually started the refactoring to limit some allocations in an upcoming PR (and more generally, to improve the code).",
+    "created_at": "2024-05-03T17:25:10Z",
+    "id": 1589508115,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/254",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'll double-check, but the errors raised should be the same as for similar functions in `Seq.xxx`. I vaguely remember being surprised about this previously. It may be because the argument check is immediate, and the range check happens while iterating the sequence (which, in turn, may have a dynamic length).",
+    "created_at": "2024-05-03T17:24:15Z",
+    "id": 1589506857,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/254",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "argumentoufofrange? I guess you're refactoring, which answers that...",
+    "created_at": "2024-05-02T08:13:51Z",
+    "id": 1587238922,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/254",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Good catch; I simply dropped the ball; should be fixed now (and I rebased 2m ago)",
+    "created_at": "2024-04-13T13:17:37Z",
+    "id": 1564023644,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> Went with\r\n>> Starts the Async<'T> computation, returning the associated Task<'T>\r\n\r\n@bartelink Note that you didn't commit your changes yet, I still see the old wording ;). (temporarily unresolved this thread)",
+    "created_at": "2024-04-13T13:10:13Z",
+    "id": 1564018031,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'll check it. For now let's leave it in as you wrote it.",
+    "created_at": "2024-04-13T13:07:59Z",
+    "id": 1564016295,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Excellent, thanks!\r\n\r\nI'm not immune to your points, but I prefer orthogonality where possible. If there's a `Async.ofTask`, then there's an `Async.toTask` as well. Besides, anybody understanding tasks knows they're hot-started (just like `let! x = async { ... }` starts the async if used inside a task). It's also similar to seq in that `Seq.toArray` consumes the seq, just like `Async.toTask` \"consumes\" the async.\r\n\r\n",
+    "created_at": "2024-04-13T12:58:37Z",
+    "id": 1564009489,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> in 90% of cases it kicks off work and is not just converting something in some very boring mechanical manner like the typical of/to` pairs\r\n\r\nIndeed. To be fair, if you convert something to a `task` (as in, the F# version of a hot task), it implies that you immediately start it. I don't think there is a way to convert it to a `task` that is not hot-started, and keep the same F#-task semantics. \r\n\r\nIn fact, it was the whole point of `task {...}` to begin with: a hot-started computation expression for async stuff.\r\n\r\n>  Mark this Resolved if you can live with the wording and/or can't thnk of a better one right now\r\n\r\n👍 totally good! I like it.",
+    "created_at": "2024-04-13T12:47:38Z",
+    "id": 1564003476,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bartelink Looks good, I think your simplification of my original comments are an improvement. Besides, in general, I want the doc xml comments to be in the FSI files. All good!",
+    "created_at": "2024-04-13T12:43:33Z",
+    "id": 1564001327,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": ">     /// Creates a Task<'U> that's completed successfully with the specified result.\r\n\r\nAs CompletedTask has the same wording as the FW docs, I followed suit and grabbed this from https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.fromresult?view=net-8.0",
+    "created_at": "2024-04-06T20:25:38Z",
+    "id": 1554671951,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Went with \r\n\r\n> Starts the `Async<'T>` computation, returning the associated `Task<'T>`\r\n\r\nfor both. I wanted a 'starts' or a 'running' or 'instance' in the wording to convey that in 90% of cases it kicks off work and is not just converting something in some very boring mechanical manner like the typical `of`/to` pairs\r\n\r\nAnd I definitely agree that mentioning or lying about using StartImmediateAsTask is not going to help people regardless of whether they even know that that even is?\r\n\r\nThere's still. the sister comment thread open; Mark this Resolved if you can live with the wording and/or can't thnk of a better one right now",
+    "created_at": "2024-04-06T20:21:01Z",
+    "id": 1554664547,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "leaving this here as the discussion thread... I have pushed a commit that moves this on, and have noted it in another comment thread",
+    "created_at": "2024-04-06T20:17:32Z",
+    "id": 1554664194,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I note you have some `<returns>A <see cref=\"unit\" /> <see cref=\"task\" />.</returns>` usage in other places - I think it's clear and accurate there (even if I think I'd just say `Task<unit>` and be done with it had I not seen that way of writing it) e.g. https://github.com/fsprojects/FSharp.Control.TaskSeq/blob/e76f9212934f8a5dd367e3fa42fb31ebb44b4bb6/src/FSharp.Control.TaskSeq/TaskSeq.fsi#L521\r\n\r\nI'll let you Resolve this or pull rank",
+    "created_at": "2024-04-06T20:09:38Z",
+    "id": 1554663142,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think the non-generic task terminology edges it for me\r\n- its explicit and unambiguous - saying what it does and when you need it\r\n- does not lean on FP terms\r\n- side effecting and/or the distinction between a `Task<unit>` or something with the same intent that happens to return `Task` for techical reasons are a not the point\r\n- even if this was about a `Task<unit>` that had been upcasted to `Task` (or someone was ignoring the result intentionally by that mechanism), the original was a unit task\r\nSo I'll make it consistently 'non-generic' for now, but won't object/when if/when you flip all the cases to something else consistent",
+    "created_at": "2024-04-06T20:03:19Z",
+    "id": 1554662471,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "https://github.com/fsprojects/FSharp.Control.TaskSeq/pull/249/commits/b88153a26cb81f4ba97cdeb659e1004b801dcaee\r\n\r\nThanks for the details - I think I confused myself, but the verbosity of the existing comments didnt help, and I shifted the contextual comments to the fsi and the impl detail to the fs\r\n\r\n(But let me know if it's an overreach or Resolve this as you see fit)",
+    "created_at": "2024-04-06T19:58:34Z",
+    "id": 1554661900,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "and then it did ;)\r\nThat's all fine when we are taking a running async.startchild and wanting to await it as a task. but the to/of for me is comfy and intuitive/expected with List vs Array. it gets more interesting with Array vs Seq where conversion is not even always possible. But starting a running task in the thread pool is just not the land of `of`/`to` IMO (whereas Async.ofTask and Task.toAsync is not as problematic as it's always about something that's already hot.\r\nIIRC this all started from me wanting to get rid of a distracting `async'`, so we're probably fine to just leave it.\r\nAlso the real answer here is of course #141 / #139, but I don't have the bandwidth to really awake that bear right now\r\nDefinitely not pushing for startimmediateastask - anything starting in the new world can stick to task expr stuff",
+    "created_at": "2024-04-06T19:41:53Z",
+    "id": 1554659972,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, that sounds good",
+    "created_at": "2024-04-06T19:33:21Z",
+    "id": 1554658979,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "(edit: I thought GH would place this underneath your comments. It didn't. Sorry for the confusion, but it applies to this https://github.com/fsprojects/FSharp.Control.TaskSeq/pull/249#discussion_r1553941027)\r\n\r\nBack to `StartImmediateAsTask`: I've done a deep dive into the difference of `task { return! myAsync }` and `Async.StartImmediateAsTask myAsync`, and these methods are quite different.\r\n\r\nThe second entirely uses FSharp.Core and a bunch of extra allocations, while the first is more efficient and calls into the .NET library of task functions almost immediately. On the surface it seems that `return!` is more efficient.\r\n\r\nWhich means that we (probably) shouldn't use `StartImmediateAsTask` in the description, as it's not (entirely) correct.\r\n\r\nAs to `runAsync` etc, the idea here is to have conversion functions to/from Async as people are accustomed to conversion between like types in F#. But I'll keep it in mind as they do convey the \"action\" better.",
+    "created_at": "2024-04-06T19:14:39Z",
+    "id": 1554656840,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Your suggestions got me thinking. Perhaps we should say here:\r\n\r\n> Create a completed task from a value",
+    "created_at": "2024-04-06T18:41:45Z",
+    "id": 1554653035,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "(I forgot to submit this; it was written before all the other things, but I am sending it after all your responses - You can respond if you like, but I will try to make everything self-consistent for a second round first)\r\n\r\ndetailed response under Async.toTask.\r\nProbably best for this to be a symmetric with what ends up there.\r\n\r\nCurrent proposal over there:\r\n\r\n>/// Runs the Async<'T>computation via StartImmediateAsTask, returning the associated Task<'T>\r\n\r\nI think it works here too\r\n\r\nMy thoughts turn to naming it something that conveys the potential starting of work aspect directly though. How about `Task.runAsync` and/or `Async.runAsTask`",
+    "created_at": "2024-04-05T16:02:59Z",
+    "id": 1553941027,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Ah, yes that does make sense (your objection to \"starts a running\" et). I will try to distil all of the above down to a change and then we go again...",
+    "created_at": "2024-04-05T16:00:45Z",
+    "id": 1553935391,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Cool - will just add a comment noting that and it's raison d'",
+    "created_at": "2024-04-05T15:57:51Z",
+    "id": 1553931298,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Btw, under the hood, it appears to call `System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start`, which may or may not be the same as `StartImmediateAsTask`...",
+    "created_at": "2024-04-05T13:26:42Z",
+    "id": 1553637177,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> that might have not have the hot vs cold thing sorted out\r\n\r\nYes, and I like that. I mean, I like it that you try to improve on that message here. \r\n\r\n``` \r\n/// Runs the `Async<'T>` computation via `StartImmediateAsTask`, returning the associated `Task<'T>`\r\n```\r\n\r\nseems fair.",
+    "created_at": "2024-04-05T13:19:30Z",
+    "id": 1553622673,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> that this in the general case will start work\r\n\r\nWhat I meant was \"it starts a running car\". It is a double entendre. You either \"start a car (and make it run)\" or \"continue running (if it already ran, but didn't stop yet)\".\r\n\r\nSame with asyncs, right? The typical `Async<'T>` instance is not running, until you call `StartAsTask` or something.\r\n\r\nEither, you make it run, or you start it. But \"start a running async\" (start a running instance of an async) seems a bit odd to me... That's all ;)",
+    "created_at": "2024-04-05T13:15:49Z",
+    "id": 1553617363,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Your choice ;)",
+    "created_at": "2024-04-05T13:13:39Z",
+    "id": 1553613877,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I forgot what lib it was, but I know I didn't invent the term. I did a quick search, but searching for `unit`  and ` task` in F# repos (and GH not allowing string search) is like a needle in a haystack.\r\n\r\nI'm fine either way. Though there's something to say that both `Task`  and `Task<unit>` could be consisered unit-tasks (or side-effect tasks or whatevs).",
+    "created_at": "2024-04-05T13:10:56Z",
+    "id": 1553609252,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "No no, it must stay as an extension member on the type. Comments are fine, but leave it otherwise as-is.",
+    "created_at": "2024-04-05T13:08:03Z",
+    "id": 1553604927,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": ">The Async does not have to be running\r\n\r\nIf you're referring to things like an Async wrapping a Task or a StartChild, I'm more thinking about the fact that this in the general case will start work\r\n\r\n> <suggestion>\r\n\r\nProbably. I think of Async as a Builder, and any of the StartX things as doing a Create (or a Task.Run).\r\nI'm trying to convey unambiguously to people that might have not have the hot vs cold thing sorted out and/or are not paying attention that this kicks off a new thing, an that continuations will be in the threadpool\r\nThe fact that the input is an Async<'T> is immaterial\r\n\r\nTrying to cover both angles, starting from:\r\n\r\n> `/// Immediately starts an Async<'T> and returns it as a Task<'T>`\r\n\r\nI would say (if wanted to convey that it kicks off new work, and that the new work is a Task\r\n\r\n`/// Starts the computation associated with the `Async<'T>` inline, returning the associated `Task<'T>`\r\n\r\nBut I don't like that; Maybe:\r\n\r\n`/// Runs the `Async<'T>` computation via `StartImmediateAsTask`, returning the associated `Task<'T>`\r\n\r\n**The main thing I'm trying to convey to someone sprikling `Async.toTask` around is that in the general case new parallel work is kicking off in the threadpool when you do this, even if technically we could be mapping a wrapped handle from a StartChild or AwaitTask**",
+    "created_at": "2024-04-04T16:17:19Z",
+    "id": 1552025004,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "what are these libraries?\r\nI personally intuitively got what it meant and liked it when I first saw it.\r\nBut happy to flip all the 'non-generic X` to `unit-X` in this PR; my main desire is consistency...",
+    "created_at": "2024-04-04T16:03:04Z",
+    "id": 1552005050,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "and that would not work if it was in the `module` (even if the naming would be inconsistent) ?\r\nI will put a comment beside it as to this purpose\r\nlet me know if you want me to move it to the `module` (but given I'm not sure it'll work that way I'm definitely not forcing it)",
+    "created_at": "2024-04-04T16:01:10Z",
+    "id": 1552002078,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Not entirely true (I think), as the `async` does not have to be running already. It will start the instance of the async, but it does not (quite) start a _running_ instance (as then it would already be running, right?).\r\n\r\nMaybe this?\r\n```suggestion\r\n    /// Starts an instance of an Async<'T>, represented as a Task<'T>\r\n```",
+    "created_at": "2024-04-04T15:50:11Z",
+    "id": 1551965410,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "lol! Nice catch 👍 ",
+    "created_at": "2024-04-04T15:47:01Z",
+    "id": 1551958414,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Another good catch!",
+    "created_at": "2024-04-04T15:44:11Z",
+    "id": 1551951582,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Good catch!",
+    "created_at": "2024-04-04T15:44:01Z",
+    "id": 1551951270,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Actually, this is incorrect. The `Async` does not have to be running. Tasks are hot-started, asyncs are not. It is more likely it is not running. Maybe this?\r\n```suggestion\r\n    /// Immediately starts an Async<'T> and returns it as a Task<'T>\r\n```",
+    "created_at": "2024-04-04T15:43:18Z",
+    "id": 1551949531,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Note that the term \"unit-task\" is used in some other libraries. I'm also not really a fan of specifying something by mentioning the absence of something (but I also don't have a good alternative).",
+    "created_at": "2024-04-04T15:40:24Z",
+    "id": 1551944014,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah, all these \"generic vs non-generic\" versions of things in .NET are hard to explain simply. I've had several version of this text in the past. Each improvement is welcome! 👍 ",
+    "created_at": "2024-04-04T15:38:18Z",
+    "id": 1551939848,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, it's deliberate. It shadows `CompletedTask`, that exists by default in later versions of .NET. This way, people that use the later version of .NET will get the build-in version, but users that want to use it and are bound to .NET Standard or other older versions, can use this.",
+    "created_at": "2024-04-04T15:34:14Z",
+    "id": 1551931847,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "is there a specific reason this can't live in the module? Might be worth a comment...",
+    "created_at": "2024-03-31T10:23:59Z",
+    "id": 1545596858,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I was unable to parse this on multiple reads the way it was. Not 100% sure it's better, but I hope so.",
+    "created_at": "2024-03-31T10:23:03Z",
+    "id": 1545596727,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "the other two put this first",
+    "created_at": "2024-03-31T10:03:49Z",
+    "id": 1545593688,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "the other two put bind last",
+    "created_at": "2024-03-31T10:01:17Z",
+    "id": 1545593348,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/249",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "not the first time I've criticised my work knowingly and/or unknowingly. It's a sort of red/green/refactor cycle where I add words and then take them away and/or replace with shorter or mode direct. IOW simplify :D",
+    "created_at": "2024-03-17T20:52:29Z",
+    "id": 1527612473,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/241",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "eh, I actually took the \"consider using\" from an earlier PR by you that fixed that on some other function descriptions. \r\n\r\nWell, new insights, you're the language warrior 😆. We can always revert back. Unf. I already published this change prior to seeing your comments.",
+    "created_at": "2024-03-17T19:58:54Z",
+    "id": 1527604174,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/241",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// If <paramref name=\"predicate\" /> is asynchronous, see <see cref=\"TaskSeq.lengthByAsync\" />.\r\n```",
+    "created_at": "2024-03-17T00:21:54Z",
+    "id": 1527374443,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/241",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fixed",
+    "created_at": "2024-03-16T21:53:02Z",
+    "id": 1527287654,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/238",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx, fixed",
+    "created_at": "2024-03-16T21:52:55Z",
+    "id": 1527287614,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/238",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Think you mean `and` :D. Fixed.",
+    "created_at": "2024-03-16T21:52:45Z",
+    "id": 1527287581,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/238",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "you're so quick! I noticed it, thanks :)",
+    "created_at": "2024-03-16T21:51:10Z",
+    "id": 1527287154,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/238",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n#nowarn \"57\" // Experimental library feature, requires '--langversion:preview'. See StateMachineHelpers FS0057 comment\r\n```",
+    "created_at": "2024-03-16T21:42:30Z",
+    "id": 1527284006,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/238",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n#nowarn \"1204\" // This construct is for use by compiled F# code and should not be used directly.\r\n```",
+    "created_at": "2024-03-16T21:42:05Z",
+    "id": 1527283866,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/238",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n#nowarn \"1204\" // This construct is for use by compiled F# code anf should not be used directly.\r\n```",
+    "created_at": "2024-03-16T21:41:53Z",
+    "id": 1527283837,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/238",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n#nowarn \"57\" // Experimental library feature, requires '--langversion:preview'.\r\n```",
+    "created_at": "2024-03-16T21:41:28Z",
+    "id": 1527283702,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/238",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I guess Seq doesnt either but I'd like to see mention of NRE happening if there is a `null` in the input\r\nesp for arrays.\r\nBut then LINQ SelectMany also does not document it and behaves the same way \r\nSo I guess that's case closed based on prior art\r\n(I can recall writing test snippets in 2007 because of this not being written anywhere I was aware of)\r\n\r\nBut kudos for having the test in the first instance so it's all good I guess",
+    "created_at": "2024-03-16T20:57:51Z",
+    "id": 1527259859,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/237",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Also these are Combinators, so I guess they do Combine in that technical sense (which we all know is the best sense!)\r\n\r\nEverything is always \"new\" for all TaskSeq operators (hence my campaign for a keyword like yield conveying the fact that stuff comes in, has treatments applied, and flows out, remaining lazy)\r\nflattened is great\r\n\r\nI'm not sure 'new' is a useful word; if there is a 'Combines' in the description, then there is something new happening. \r\nBut we are not actually making a thing that is 'new', it's ephemeral\r\n\r\nHence mq quest for a workd like 'renders' or 'yields' to convey that while we are combining things, there is not really anything 'new' except in the sense that any function that does not return its input results in a 'new' value.\r\n\r\nAgain, just musing...",
+    "created_at": "2024-03-16T20:38:51Z",
+    "id": 1527253880,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/237",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "\"the given task sequence of task sequences\" feels like a mouthful, and Combines does not really help (Flattens would be a great one word TL;DR intro to my mind if I didnt know what concat did)\r\nIf I was writing something random from scratch: \r\n\r\nYields a task sequence that unrolls each task sequence emanating from the source, concatenating them end to end,",
+    "created_at": "2024-03-16T20:31:59Z",
+    "id": 1527251987,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/237",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "if this is a dynamic case, like this, is argument exception appropriate?\r\nshould it not be invalidOperationExceptions? IndexOutOfRangeExpcetions? \r\n\r\nI know I suggested that ArgumentOutOfRangeException might be better too, but it's kinda wrong for the same reasons no?\r\n\r\nOnly raising questions; I assume this is derived from what Seq does/decided...",
+    "created_at": "2024-03-16T20:08:09Z",
+    "id": 1527244675,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "name suggests one or many, but you handle the cases in many or one order ;P",
+    "created_at": "2024-03-16T20:04:00Z",
+    "id": 1527243289,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Should it be ArgumentOutOfRangeException? \r\nI'm fine with a generic invalidArg with a message tho; just being a devil's advocate",
+    "created_at": "2024-03-16T19:58:47Z",
+    "id": 1527241683,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "this seems very wooly and prob should be just 2 helpers with specific messages?\r\nif I say \"value or\" and didnt know anything I'd wonder what that is about, while index is pretty clear\r\nAlso should it be ArgumentOutOfRangeException?",
+    "created_at": "2024-03-16T19:58:35Z",
+    "id": 1527241629,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "why not base case first in the naming?",
+    "created_at": "2024-03-16T19:55:58Z",
+    "id": 1527240856,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "any reason for the snakes? Patrick's day?",
+    "created_at": "2024-03-16T19:55:17Z",
+    "id": 1527240619,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "maybe substituted?",
+    "created_at": "2024-03-16T19:53:30Z",
+    "id": 1527240054,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "its not really set, it's [dropped and] replaced ?",
+    "created_at": "2024-03-16T19:52:53Z",
+    "id": 1527239874,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "instead of the legalese in the summary, maybe this could have a terse hint that negative is treated as zero and a count stretching past the end of the input is safe/ignored?",
+    "created_at": "2024-03-16T19:52:02Z",
+    "id": 1527239645,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "the position from which the items should commence being omitted\r\n(depending on if the top level desc changes; if it stays as it is this is obv fine)",
+    "created_at": "2024-03-16T19:50:25Z",
+    "id": 1527239177,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> Return a new task sequence with the number of items starting at a given index removed\r\n\r\nYields a new task sequence omitting the specified number of items at the given index\r\n\r\n- the removed is already in the name ? and it does not convey that there never was a materialized thing that things are being chopped out of; they're kinda just skipped. Maybe that's obvious, but I'm thinking of people that are hearing index and at index and thinking mentally of arrays. I guess I don't have beginner cred here so I don't know; i.e. it's just a suggestions/thought\r\n\r\n\r\nAm also thinking that the term `position` might make sense somewhere, but you use index consistenly and I think its a good term\r\n\r\nalso instead of omitting, maybe dropping?\r\n",
+    "created_at": "2024-03-16T19:48:39Z",
+    "id": 1527238693,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "a new item -> an additional item?\r\nor \r\na specified item\r\n/ value?",
+    "created_at": "2024-03-16T19:41:47Z",
+    "id": 1527235346,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "below is atypical, unless it aligns with something I'd say less than?\r\n\r\nyou use the term negative elsewhere and that feels best?",
+    "created_at": "2024-03-16T19:40:31Z",
+    "id": 1527234981,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "where -> at which ?",
+    "created_at": "2024-03-16T19:39:30Z",
+    "id": 1527234617,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "not?",
+    "created_at": "2024-03-16T19:38:29Z",
+    "id": 1527234384,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "ye olde yields vs returns thing triggering in my head\r\nYes, all functions return things\r\nthe `<returns>` expresses it in that way and it's clear.\r\nBut in general mapping a sequence that's lazy to another thing that's still lazy\r\nThoughts? If there is prior art art/or it makes any sense to you I might do a walk to see if such language makes sense to apply across the board for all functions that return some mapped/altered rendition of some input?",
+    "created_at": "2024-03-16T19:37:56Z",
+    "id": 1527234212,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/236",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n        // The `exclude` argument of TaskSeq.except is only iterated after the first item\r\n```",
+    "created_at": "2023-12-28T09:56:20Z",
+    "id": 1437526836,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/228",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, it's a draft, I was drawing attention to the fact that it was dead (there's a line removed elsewhere which probably had intent behind it the removal was not intended as final; just to convey that the compiler would not miss it)",
+    "created_at": "2023-12-24T19:47:35Z",
+    "id": 1435872651,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/225",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It's all trade-offs (and good stuff for catching me mixing up the uom...)",
+    "created_at": "2023-12-24T19:46:04Z",
+    "id": 1435872484,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bartelink what was the reason for removing this? If it is not called, the better fix would be to call it. Also, it is marked `Skip`, so it is better to leave as-is, or fix the test ;).",
+    "created_at": "2023-12-24T17:48:22Z",
+    "id": 1435861783,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/225",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done",
+    "created_at": "2023-12-24T17:29:07Z",
+    "id": 1435860075,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yes but then no parens as its obvious you are supplying _unit_ as an arg :D",
+    "created_at": "2023-12-24T17:23:04Z",
+    "id": 1435859378,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It's more that `minMs` is not the same as `µsecMin`, and `minµs` looks weird. Hence the inversion and then staying consistent.",
+    "created_at": "2023-12-24T17:22:05Z",
+    "id": 1435859243,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> If you're calling a method, no space before args\r\n\r\nYep, I know. (I also know Gustavo hates that rule 😆). But this is not a method, so the space is fine.",
+    "created_at": "2023-12-24T17:18:08Z",
+    "id": 1435858858,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yes, V6 has that too - I sometimes leave a suffix,  but this one is not exacctly helpful...",
+    "created_at": "2023-12-24T17:12:34Z",
+    "id": 1435858330,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fair enough, but that's triply explicit over `()` or `do ()`, which is why Rider suggests it as a removal",
+    "created_at": "2023-12-24T17:06:54Z",
+    "id": 1435857695,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "was trying to put the UoM last as its arguably almost redundant in order to bring the role (min/max) of the arg to the fore.\r\n\r\nIf you're against that, fine with reverting them all as it's not like they're in anyone's face....",
+    "created_at": "2023-12-24T17:05:40Z",
+    "id": 1435857608,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Boo hiss!\r\n\r\nDevil's advocate: If you're calling a method, no space before args. If its a function, then redundant parens make no sense.\r\n\r\nNot sure if there is a F# style guide stance that's less subjective. I wish there was so I could push it back to Rider not to suggest it a a change, because I agree that being explicit about returning a unit is all good (similarly like redundant parens to call out \"we are making a tuple here folks\" )",
+    "created_at": "2023-12-24T17:02:37Z",
+    "id": 1435857256,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n            | EmptyVariant.YieldBangNested -> taskSeq { yield! taskSeq { do ignore () } }\r\n```",
+    "created_at": "2023-12-24T16:53:14Z",
+    "id": 1435856159,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I like to be explicit here\r\n```suggestion\r\n            | EmptyVariant.Do -> taskSeq { do ignore () }\r\n```",
+    "created_at": "2023-12-24T16:53:00Z",
+    "id": 1435856147,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    new(msecMin: int<ms>, msecMax: int<ms>) = DummyTaskFactory(int64 msecMin* 1000L<µs>, int64 msecMax* 1000L<µs>)\r\n```",
+    "created_at": "2023-12-24T16:52:18Z",
+    "id": 1435856097,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Same here\r\n```suggestion\r\n    /// Values <paramref name=\"msecMin\" /> and <paramref name=\"msecMax\" /> can be\r\n```",
+    "created_at": "2023-12-24T16:51:55Z",
+    "id": 1435856054,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is an incorrect change. The param refs are clearly named `µsecMin` etc, see above. This should be reversed:\r\n```suggestion\r\n    /// Uses the defaults for <paramref name=\"µsecMin\" /> and <paramref name=\"µsecMax\" />\r\n```",
+    "created_at": "2023-12-24T16:50:26Z",
+    "id": 1435855940,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think F# 8+ accepts this, which is a compiler thing, so should be good:\r\n```suggestion\r\n    use _ = tskSeq.GetAsyncEnumerator()\r\n```",
+    "created_at": "2023-12-24T16:47:14Z",
+    "id": 1435855547,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n        let! c = ValueTask<_>(4) // ValueTask that completes immediately\r\n```",
+    "created_at": "2023-12-24T16:45:24Z",
+    "id": 1435855350,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\nlet ``CE taskSeq: use 'let!' with a non-generic ValueTask`` () =\r\n```",
+    "created_at": "2023-12-24T16:45:10Z",
+    "id": 1435855327,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\nlet ``CE taskSeq: use 'let!' with a ValueTask<string>`` () =\r\n```",
+    "created_at": "2023-12-24T16:44:59Z",
+    "id": 1435855310,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\nlet ``CE taskSeq: use 'let!' with a ValueTask<unit>`` () =\r\n```",
+    "created_at": "2023-12-24T16:44:49Z",
+    "id": 1435855298,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This was deliberate, leave as-is\r\n```suggestion\r\n        do! Task.fromResult (()) // unit Task that completes immediately\r\n```",
+    "created_at": "2023-12-24T16:44:07Z",
+    "id": 1435855225,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n        do! ValueTask<_>(()) // unit ValueTask that completes immediately\r\n```",
+    "created_at": "2023-12-24T16:43:24Z",
+    "id": 1435855193,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\nlet ``CE taskSeq: use 'do!' with a non-generic ValueTask`` () =\r\n```",
+    "created_at": "2023-12-24T16:42:50Z",
+    "id": 1435855158,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "`valueTask` is not a thing. Either we use `ValueTask`, or the lowercase for readability. We can use the proper type name.\r\n```suggestion\r\nlet ``CE taskSeq: use 'do!' with a ValueTask<unit>`` () =\r\n```",
+    "created_at": "2023-12-24T16:42:41Z",
+    "id": 1435855131,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Feel free to take this PR forward, or attack it over time - it's just me addressing my obsessive removal of stuff the Rider linting flags and needing to tell someone or something to park it!",
+    "created_at": "2023-12-24T16:03:43Z",
+    "id": 1435849930,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/225",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah, this is just a copy-paste mistake, it should not be a `Theory`, it is just a test that checks if mutable side effects get executed. Same for the other ones.",
+    "created_at": "2023-12-24T16:01:24Z",
+    "id": 1435849517,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/225",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "See #227, that's where this went.",
+    "created_at": "2023-12-24T15:52:47Z",
+    "id": 1435847854,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/220",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah, merge on\r\nBut on reflection I should not have added that so will try to remember to remove that line in future",
+    "created_at": "2023-12-24T15:51:27Z",
+    "id": 1435847714,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "works for me!\r\n(this is one reason I like moving stuff out into other files like .props so stuff loosely groups without having to use comments)",
+    "created_at": "2023-12-24T15:50:23Z",
+    "id": 1435847621,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Not sure what you want to change here, you added this file to the PR ;). Ill merge, we can always fix it later.",
+    "created_at": "2023-12-24T15:49:34Z",
+    "id": 1435847508,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I removed the comment.",
+    "created_at": "2023-12-24T15:44:43Z",
+    "id": 1435846894,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes and no, these are also used for the DLL itself. I didn't really think it through :D.",
+    "created_at": "2023-12-24T15:43:08Z",
+    "id": 1435846728,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "(if this ever gets into \"many projects\" territory, it may become a different story, but right now, I am fine with this)",
+    "created_at": "2023-12-24T15:42:06Z",
+    "id": 1435846622,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah. I don't like magic, too many things are then set in different locations or levels. I prefer being specific and having things in one place. But for `Version.props` it is required, otherwise the version plugins don't work.",
+    "created_at": "2023-12-24T15:40:35Z",
+    "id": 1435846400,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "title and copyright are package stuff too?\r\nmaybe also GeneratePackageOnBuild",
+    "created_at": "2023-12-24T15:39:12Z",
+    "id": 1435846237,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah, it should. No idea why I named it that!",
+    "created_at": "2023-12-24T15:38:32Z",
+    "id": 1435846127,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Not a fan of Directory.build.props? I guess a separate PR to put sln at top level with sln-level Directory.build.props that are common to build and test can come later?",
+    "created_at": "2023-12-24T15:37:46Z",
+    "id": 1435846047,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Adding this one (`taskseqs`) as a 'ignore this for spellchecking' is a bit debatable - taskseqs and asyncseqs are used as shorthand inc in xmldoc, which is pretty cryptic to a newcomer, even if it is a good shorthand that makes sense taking into account that one is trying to convey a relatively difficult concept without assuming any given background",
+    "created_at": "2023-12-24T15:33:29Z",
+    "id": 1435845632,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Maybe this file should be renamed to xUnit as part of this?\r\n(It confused me for quite a bit)",
+    "created_at": "2023-12-24T15:15:27Z",
+    "id": 1435843181,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/226",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Agree - it was just the first way I found to shut it up\r\nand I'm def up for having `= task {` on the whole thing in general",
+    "created_at": "2023-12-24T15:07:36Z",
+    "id": 1435842192,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'll lift this one into a separate PR, that way these functional changes won't be hidden in a refactoring branch.\r\n\r\nSee: #227",
+    "created_at": "2023-12-24T14:53:05Z",
+    "id": 1435838602,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I guess this is ok for now, but keep in mind that there are many bugs with xUnit and async functions, and sometimes it required me to make the whole body to be `task`. Hence you will see it that way, usually (also, it takes less lines, but that is if lesser importance).",
+    "created_at": "2023-12-24T14:37:32Z",
+    "id": 1435836074,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I prefer using `TreatWarningsAsErrors`, as that treats all warnings as errors. I should have had that on long time ago. I'll make the change here.",
+    "created_at": "2023-12-24T14:35:30Z",
+    "id": 1435835875,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/224",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'll let you resolve this if you want to make a note first",
+    "created_at": "2023-12-23T17:50:55Z",
+    "id": 1435663962,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "👍  now paramref as discussed\r\n(also I meant `<c>` anyway)",
+    "created_at": "2023-12-23T17:50:28Z",
+    "id": 1435663852,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "👍  now paramref as discussed\r\n(also I meant `<c>` anyway)",
+    "created_at": "2023-12-23T17:50:22Z",
+    "id": 1435663838,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "👍  now paramref as discussed\r\n(also I meant `<c>` anyway)",
+    "created_at": "2023-12-23T17:50:13Z",
+    "id": 1435663818,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yeah, `<code>` also forces a line break - `<c>` is my goto in Equinox\r\nThe problem is that Rider checks paramrefs, so abusing them means a LOT of noise",
+    "created_at": "2023-12-23T16:44:38Z",
+    "id": 1435649447,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Dont thank me, thank @auduchinok :D",
+    "created_at": "2023-12-23T16:42:42Z",
+    "id": 1435649072,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I originally wrote something that: this is a behavioral change and backwards incompatible [...]\r\n\r\nHowever, the context wasn't clear while reviewing (I thought it applied to an exposed type), so I looked deeper and this is clearly only used internally. As such, it matters little, and may even be a (small) perf improvement.\r\n\r\nBut, I would actually like to have a test that checks that the `ReaderWriterLock` is properly released. And in fact, we should test this implementation a bit further, probably. Not part of this PR, that's for another time. ",
+    "created_at": "2023-12-23T16:12:29Z",
+    "id": 1435641731,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "And here:\r\n```suggestion\r\n    /// argument of type <typeref name=\"'State\" /> through the computation.  If the input function is <paramref name=\"f\" /> and the elements are <paramref name=\"i0...iN\" />\r\n    /// then computes <paramref name=\"f (... (f s i0)...) iN\" />.\r\n```",
+    "created_at": "2023-12-23T16:03:46Z",
+    "id": 1435639785,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Same here:\r\n```suggestion\r\n    /// then computes <paramref name=\"f (... (f s i0)...) iN\" />.\r\n```",
+    "created_at": "2023-12-23T16:03:17Z",
+    "id": 1435639671,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This doesn't get rendered with coloring, so let's stick with the hacky way, until I get time to fix the xml doc parsing code of the F# compiler itself.\r\n\r\n```suggestion\r\n    /// argument of type <typeref name=\"'State\" /> through the computation. If the input function is <paramref name=\"f\" /> and the elements are <paramref name=\"i0...iN\" />\r\n```",
+    "created_at": "2023-12-23T16:02:47Z",
+    "id": 1435639553,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "wow, so many typos / and/or copy/paste errors! Glad you're catching them!!! 🙏 ",
+    "created_at": "2023-12-23T16:01:17Z",
+    "id": 1435639203,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/222",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "fixed",
+    "created_at": "2023-12-22T23:15:19Z",
+    "id": 1435385090,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/220",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I assigned the to a bool before, but the match needed something like 5 lines so I went for clear code - will move it back",
+    "created_at": "2023-12-22T23:05:55Z",
+    "id": 1435381419,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/220",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "(about putting the function type DU inside the body)\r\nI understand the sentiment, but I prefer not having this business logic in the body as it incurs an extra penalty and allocation (remember that value types are boxed as params in an object in this case). \r\n\r\nSo, in general, I try to keep the DUs that declare the function type as far as reasonable on the fringes of the body, and I have been thinking of getting rid of them completely, or at least have them outside of the body of the `taskSeq`.",
+    "created_at": "2023-12-22T21:18:48Z",
+    "id": 1435350695,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/220",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "But I'll double-check the \"best practices\" here. I think it's bad practice to offer synchronous disposal of async resources, but let's check.\r\n\r\nThis fix can lead to backward compat issues, so we need to take it out for sure and treat separately.",
+    "created_at": "2023-12-22T20:42:56Z",
+    "id": 1435338937,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/220",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is a bug in F# (i.e., not raising the warning), we should not fix the mistake in the library by implementing an extra interface, we should fix F# instead. Some very old versions of this code used to have it.",
+    "created_at": "2023-12-22T20:41:14Z",
+    "id": 1435338317,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/220",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "this shuts up the code suggestion about removing the `new`, and makes me more confident that it'll actually Dispose\r\n@abelbraaksma So, what kind of Chesterton's fence have I fallen upon?\r\nObviously happy to revert, and arguably all changes in this file should move to another PR..",
+    "created_at": "2023-12-22T15:15:30Z",
+    "id": 1435151105,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/220",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "You'd be paying more attention if you didnt intend to write tests\r\nAnd you were clearly following the dictum of seeing the test fail first.",
+    "created_at": "2023-12-22T14:55:47Z",
+    "id": 1435137108,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/221",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fixed",
+    "created_at": "2023-12-22T14:08:07Z",
+    "id": 1435085626,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/221",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fixed, nice catch! 😆 ",
+    "created_at": "2023-12-22T14:07:57Z",
+    "id": 1435085452,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/221",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That's what you get from doing things at 2AM 😆 ",
+    "created_at": "2023-12-22T14:02:04Z",
+    "id": 1435080069,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/221",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣 ",
+    "created_at": "2023-12-22T14:01:43Z",
+    "id": 1435079779,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/221",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// Returns the smallest of all elements of the sequence, compared via <see cref=\"Operators.min\" />.\r\n```",
+    "created_at": "2023-12-22T09:23:54Z",
+    "id": 1434880499,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/221",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    static member min source = Internal.maxMin min source\r\n```",
+    "created_at": "2023-12-22T09:21:58Z",
+    "id": 1434878798,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/221",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah there's definitely scope for that, but don't forget also.... they'll appreciate TaskEx work like AwaitTaskCorrect just as much (and thankfully there's a broader base of contributors, even if its nowhere near any dream level of course!)",
+    "created_at": "2023-12-21T23:47:40Z",
+    "id": 1434595705,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> \"The first element where the predicate returns false is returned,\"\r\n\r\nI was going to argue with this but I see now that it is technically correct. The point is that there is nothing special about the first item though - it just skips while it returns true. And then it returns the rest. Which includes the first item of the rest. And the rest of the rest. Including the very last item. if there is one.\r\n\r\n>t says \"it skips 0 or more elements\", it does not skip the first one that fails.\r\n\r\nYou're probably correct - tbh I lost the will to parse it; it just feels very long winded, and I dont see whom explaining it in that manner actually helps...\r\n\r\n----\r\n\r\nBottom line is that this level of over explanation is only justified if you're trying to explain it in terms of something that does have those factors in play.\r\n\r\ni.e skipWhileInclusive.\r\n\r\n----\r\n\r\nTL;DR SkipWhile is really easy to explain if we just take the wording from Seq.takeWhile (which is not saddled with a contrived sibling :P) ",
+    "created_at": "2023-12-21T23:45:20Z",
+    "id": 1434594868,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yeah its releae mode only\r\nI ran into one in Equinox so have a thing I would like to simplify but dont know how \r\nhttps://github.com/jet/equinox/blob/master/src/Equinox/Stream.fs#L33",
+    "created_at": "2023-12-21T23:31:33Z",
+    "id": 1434589729,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Next proposal:\r\n>skipWhile skips while the condition holds, but stops before the item that fails\r\n\r\nthats overcomplicating matters compared to just saying it skips while the condition holds [, then returns the rest]\r\n\r\nThe only reason to talk in that way is if you have some other thing to go along with it...\r\n\r\n>takeWhile takes while the condition holds, but stops before the item that fails\r\n\r\nnot sure the \", but stops before the item that fails\" adds anything\r\nbut, I can see the before/after symmetry\r\nbut it feels contrived....\r\n\r\n>takeWhileInclusive takes while the condition holds, but stops after the item that fails\r\n\r\nwhile the impl does these things and it is a good way of explaining to someone thinking of the mechanism, its not as good as \"like takeWhile but also yields the final item (that failed)\"\r\n\r\n>skipWhileInclusive skips while the condition holds, but stops after the item that fails\r\n\r\nagain I cant picture what I'd use it for\r\n\r\nSo I'm saying I like the first set of explanations more than the last one\r\n\r\nBut still dont see the what I'd use it for, and there is a tax in having stuff to trawl through and/or rule out if you are never going to use it\r\n\r\n----\r\n\r\nI get the collect id vs map stuff\r\n\r\nBut big diff between takeWhileWhileInclusive is that you can't roll your own as a one liner whereas trimming off one more after a skipWhile is relatively trivial.\r\n\r\nThe ultimatle reason I'm being pedantic is\r\na) no prior art\r\nb) cant imagine using it\r\nc) it makes it harder to explain the simple normal one\r\n\r\n(afk for a bit, sorry for not having time to write it shorter)",
+    "created_at": "2023-12-21T22:05:10Z",
+    "id": 1434549056,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "But\r\n\r\n>skipWhileInclusive skips while the condition holds, but also skips the first one that fails\r\n\r\nthis seems a clear explanation, and the table looks logical\r\n\r\nbut I still don't know what I use it for\r\n",
+    "created_at": "2023-12-21T21:55:53Z",
+    "id": 1434543639,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Also, we should then improve the `Seq.fsi` comments, as in, return the favor to the community and improve there as well, as that is where most of this comes from.\r\n\r\n(something I've been wanting to do for a long while, but... time...)",
+    "created_at": "2023-12-21T21:55:22Z",
+    "id": 1434543375,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "It says at L854:\r\n\r\n```\r\nA function that evaluates to false when no more items should be returned.\r\n```\r\n\r\nabout the predicate function for `takeWhile`. What is the confusing bit? But if we want to improve existing wording on existing xml doc, we should open a separate pull request instead.",
+    "created_at": "2023-12-21T21:54:19Z",
+    "id": 1434542764,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I do get the completeness/having the duals/inverses argument \r\n\r\nBut in this case there are many problems:\r\n- Seq does not have it\r\n- The name is wierd\r\n- I honestly cant think of an example concrete usage\r\n- Its hard to explain a perfectly sane SkipWhile as being an opposite of something you cant picture\r\n\r\nSo I'm still not convinced :(",
+    "created_at": "2023-12-21T21:53:50Z",
+    "id": 1434542481,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> skipWhile should not/does not return the first one that fails?\r\n\r\nIt says \"it skips 0 or more elements\", it does not _skip_ the first one that fails. Exactly like `Seq.skipWhile` does.",
+    "created_at": "2023-12-21T21:52:41Z",
+    "id": 1434541807,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fixed for both functions",
+    "created_at": "2023-12-21T21:50:52Z",
+    "id": 1434540877,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": ">It is not that simple. tail would raise on empty. Though drop 1 would be safe, I guess. But it depends on how far the skipWhile has gotten. Also, the same can be said for takeWhileInclusive, which is just an extra TaskSeq.head.\r\n\r\nNo, the reason for the inclusive is that we want one into the dropped bit - head is no use for that as you'd need to count what you saw, re-iterate skipping that many items etc ?",
+    "created_at": "2023-12-21T21:50:50Z",
+    "id": 1434540861,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, should be. And many other snippets like it. But F# IDE tooling does not respect `<c>`. In fact, it is extremely limited. So I cheat 😆. Best I can do until I get time to fix F# IDE rendering code.",
+    "created_at": "2023-12-21T21:49:45Z",
+    "id": 1434540229,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I struggled with this one, thanks, I like it much more!",
+    "created_at": "2023-12-21T21:47:53Z",
+    "id": 1434539134,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Hmm, you mean:\r\n\r\n```html\r\nIf <paramref name=\"predicate\" /> is synchronous, use <see cref=\"TaskSeq.takeWhile\" />.\r\n```\r\n\r\nI thought we removed that long time ago, as it was too commanding? I like shorter, but then we should do it everywhere, as 50% of the functions here have this text snippet. I'll keep it in mind for another doc refactoring.",
+    "created_at": "2023-12-21T21:47:01Z",
+    "id": 1434538480,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, we have these tests.",
+    "created_at": "2023-12-21T21:45:10Z",
+    "id": 1434537372,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "should be resolved now, thanks for catching!",
+    "created_at": "2023-12-21T21:44:28Z",
+    "id": 1434536915,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "this warning is not raised locally...",
+    "created_at": "2023-12-21T21:37:03Z",
+    "id": 1434532235,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Oh shoot (GH doesn't show it on the main page, I should enable `warnings-as-error`).\r\n\r\n> This state machine is not statically compilable. A constrained generic construct occured in the resumable code specification. An alternative dynamic implementation will be used, which may be slower. Consider adjusting your code to ensure this state machine is statically compilable, or else suppress this warning.",
+    "created_at": "2023-12-21T21:35:28Z",
+    "id": 1434531378,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bartelink what warning? I don't have a warning... ",
+    "created_at": "2023-12-21T21:34:18Z",
+    "id": 1434530714,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "PS, if you take this from you:\r\n![image](https://github.com/fsprojects/FSharp.Control.TaskSeq/assets/16015770/dfbe0cc5-0dd5-4e3d-b9bb-012ebbcf4139)\r\n\r\nAnd then I fix it like this:\r\n* skipWhile skips while the condition holds\r\n* takeWhile takes while the condition holds\r\n* takeWhileInclusive takes while the condition holds, but also takes the first one that fails\r\n* skipWhileInclusive skips while the condition holds, but also skips the first one that fails\r\n\r\nyou can clearly see how they pair together.\r\n\r\nBtw, this may be better?\r\n\r\n* skipWhile skips while the condition holds, but stops _before_ the item that fails\r\n* takeWhile takes while the condition holds, but stops _before_ the item that fails\r\n* takeWhileInclusive takes while the condition holds, but stops _after_ the item that fails\r\n* skipWhileInclusive skips while the condition holds, but stops _after_ the item that fails\r\n",
+    "created_at": "2023-12-21T21:28:02Z",
+    "id": 1434526922,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> Amirite that >> TaskSeq.tail / >> TaskSeq.drop 1 would achieve the same semantic?\r\n\r\nIt is not that simple. `tail` would raise on empty. Though `drop 1` would be safe, I guess. But it depends on how far the `skipWhile` has gotten. Also, the same can be said for `takeWhileInclusive`, which is just an extra `TaskSeq.head`.\r\n\r\nI feel like if we support `takeWhileInclusive`, we should support `skipWhileInclusive` for parity. The same has been done in many functions in both `Seq` and `AsyncSeq` space.\r\n\r\nI needed the same truth table for `takeWhileInclusive`, I just never committed it. While working with the functions once you know that they are stable, is much easier. A simple call in FSI shows you what it does.\r\n\r\nIt's how I tested the edge cases that I wanted to support, by checking `Seq.take/takeWhile/skip/skipWhile` etc.\r\n\r\nI'm not dismissing your point, but I find parity and orthogonality very important. Btw, as a comparison, likewise `Seq.map2` is also just `Seq.zip >> Seq.map`, and `Seq.concat` is just `Seq.collect id`, yet they do all exist.",
+    "created_at": "2023-12-21T21:08:50Z",
+    "id": 1434515476,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "skipWhile should not/does not return the first one that fails?\r\nnot getting the 0 or more elements\r\n\r\nDoes it sound like I'm campaigning to remove the inclusive one to remove all this ambiguity yet?",
+    "created_at": "2023-12-21T20:13:57Z",
+    "id": 1434480571,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "trues should be in `<c>` ?",
+    "created_at": "2023-12-21T20:11:30Z",
+    "id": 1434479101,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "L854/868 predicate desc is wrong/confusing",
+    "created_at": "2023-12-21T20:05:50Z",
+    "id": 1434473922,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "while this might work well for flicking between two functions in intellisense, something terser might work for whats afterall the normal case:\r\n```suggestion\r\n    /// Stops consuming the source and yielding items as soon as the predicate returns <c>false</c>.\r\n```",
+    "created_at": "2023-12-21T20:02:19Z",
+    "id": 1434455654,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "consider using -> use/see",
+    "created_at": "2023-12-21T19:56:51Z",
+    "id": 1434448790,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Is there coverage (maybe tehre already is) re predicate flipping on the last one and/or second last item ?",
+    "created_at": "2023-12-21T19:36:19Z",
+    "id": 1434434424,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "see this warn? (IIRC you need to un-nest)",
+    "created_at": "2023-12-21T19:33:51Z",
+    "id": 1434432781,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yes, I agree, that would be clearer. Done, also in other parts.",
+    "created_at": "2023-12-21T17:55:59Z",
+    "id": 1434359379,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Nice",
+    "created_at": "2023-12-21T17:55:06Z",
+    "id": 1434358606,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx, fixed.",
+    "created_at": "2023-12-21T17:50:35Z",
+    "id": 1434354781,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Nice catch! Fixed.",
+    "created_at": "2023-12-21T17:49:09Z",
+    "id": 1434353688,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think this one is currently correct, actually (we should not `see` to the function currently hovered over):\r\n![image](https://github.com/fsprojects/FSharp.Control.TaskSeq/assets/16015770/5f1772bd-8f3a-41ff-94db-857ba2e10ccf)\r\n",
+    "created_at": "2023-12-21T17:47:31Z",
+    "id": 1434352399,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Actually, while doing this, I ran into the \"making it less clear for other functions\" issue (like `init`), and I like to use the same language where possible. \r\n\r\nFor now, I stick with it. We can certainly overhaul it at some point in the near future.",
+    "created_at": "2023-12-21T17:46:00Z",
+    "id": 1434351171,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah, I was mulling over this as well. I took it from `Seq.takeWhile` originally, I believe. But there's nothing that stops us from improving on that.\r\n\r\nI used your change in all variants where it made sense.",
+    "created_at": "2023-12-21T17:44:35Z",
+    "id": 1434350001,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done (slightly differently, but same effect)",
+    "created_at": "2023-12-21T17:30:46Z",
+    "id": 1434337833,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done, dropped",
+    "created_at": "2023-12-21T17:30:38Z",
+    "id": 1434337697,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "After doing this, the size of the single test (testing four variants) is smaller, or close to equal, but it now tests more edge cases, and is more readable. Using `InlineData` is not always an improvement, apparently :).\r\n\r\nUpdated, committed.",
+    "created_at": "2023-12-21T17:28:23Z",
+    "id": 1434335780,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "WAIT WAIT\r\n\r\nThe truth table for `skipWhileInclusive` in the overview makes it clear\r\n\r\nBut the fact you had to do one might be revealing.... (and I noticed just now that you cut and pasted it because the invocation does not have a `Inclusive` in the name!)\r\n\r\nAmirite that  `>> TaskSeq.tail` / `>> TaskSeq.drop 1` would achieve the same semantic?\r\n\r\nDo we have a use case / is it implemented somewhere else?\r\n\r\nIt just feels wrong...",
+    "created_at": "2023-12-21T16:55:23Z",
+    "id": 1434304785,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "So.... without looking...\r\n- skipWhile skips while the condition holds\r\n- takeWhile takes while the condition holds\r\n- takeWhileInclusive takes while the condition holds, _but also the first one that fails_\r\n- skipWhileInclusive skips while the condition holds but ... the `inclusive` is not telling me intuitively whether it should include the second last one if there was one or also skip another or something\r\n\r\n(deleted self-talk about Until having some benefits - no, it doesnt)\r\n\r\nBut I still don't feel right about `skipWhileInclusive` as I can't think of a use case that I can try names in the context of\r\n\r\nAs I said, I need to step away and think!",
+    "created_at": "2023-12-21T16:51:10Z",
+    "id": 1434300813,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "No. Just a little function inside the test that itself takes `TaskSe.takeWhile ((=) 9999)` as an argument. It is still dry. Basically like that last test you reviewed with 4x `do`. Same idea.\r\n\r\nDRY is not DRY if it creates too much cognitive overload.",
+    "created_at": "2023-12-21T16:26:34Z",
+    "id": 1434276699,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "`skipWhile` is clear/obvious enough in terms of what it means and what you'd name it (and if we have a `where` on the basis that Seq has one, then we absolutely should have a `skipWhile`)\r\n\r\nIts wth skipWhileInclusive might mean that's wrecking my head...\r\n\r\ninvoking _until_ was me thinking aloud....\r\n\r\nEven if we are adding something only to fill out a matrix, we should still be sure it has a use case, and that the name makes sense as an indepdent thing",
+    "created_at": "2023-12-21T16:26:24Z",
+    "id": 1434276508,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "wdym, 4 copies of 3/4 tests? I do like it being DRY as its very hard to review cloned code without eyes glazing over, and pretty painful to read in general",
+    "created_at": "2023-12-21T16:24:16Z",
+    "id": 1434274250,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "the main reason for not going for `until` was similar: we MUST implement `takeWhile` because it exists in F# Core and we want parity and ease of adoption for users. \r\n\r\nWhich means that, if we would go for `until`, we would have to implement both `while` and `until`. I had done that, as you may recall, but your main argument, an explosion of surface area for little gain, was convincing enough for me to drop that PR entirely.\r\n\r\nEDIT: see #183.",
+    "created_at": "2023-12-21T16:22:49Z",
+    "id": 1434272840,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "> should the other one be called exclusive or is should we flip and call it until\r\n\r\n@bartelink No. Simple reason, F# Core has `skipWhile` already, so we should have that one regardless. And we already have `takeWhileInclusive`, where `inclusive` applies to what we `take`. \r\n\r\nSo, it makes sense that here `inclusive` applies to what we `skip`.\r\n\r\nI went back and forth a bit while implementing it, and having it inverse lead to all kinds of other confusions. Now the semantics are equal to the other set of functions we have, with the only difference being \"take some items\" vs \"skip some items\".",
+    "created_at": "2023-12-21T16:20:51Z",
+    "id": 1434270999,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm gonna drop the whole thing and make it inline for clarity",
+    "created_at": "2023-12-21T16:07:53Z",
+    "id": 1434257840,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "🤔 I'm back here having tried to read the logic of the impl wondering\r\n- wow I barely read the xmldoc\r\n- should the other one be called exclusive or is should we flip and call it until\r\n\r\nWill come back to it later - perhaps after reading our to/fro about why until didnt make sense",
+    "created_at": "2023-12-21T15:36:29Z",
+    "id": 1434220613,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// The item under test is included (or skipped) when the predicate starts yielding false\r\n```",
+    "created_at": "2023-12-21T15:11:17Z",
+    "id": 1434193097,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "maybe the outer needs to be `ok` or `cont` and this `ok` should be named `hasMore` ?",
+    "created_at": "2023-12-21T15:06:06Z",
+    "id": 1434187469,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n                    // yield regardless of result of predicate\r\n```",
+    "created_at": "2023-12-21T15:04:10Z",
+    "id": 1434185391,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n            let! notEmpty = e.MoveNextAsync()\r\n```\r\nmaybe hasItems or hasAtleastOneItem",
+    "created_at": "2023-12-21T15:03:21Z",
+    "id": 1434184471,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// and then yields the remaining elements (see also <see cref=\"TaskSeq.skipWhileInclusiveAsync\" />). This function skips\r\n```",
+    "created_at": "2023-12-21T15:01:19Z",
+    "id": 1434182349,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// means that this function will skip 0 or more elements (see also <see cref=\"TaskSeq.skipWhileInclusiveAsync\" />).\r\n```",
+    "created_at": "2023-12-21T14:59:06Z",
+    "id": 1434179936,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Maybe this contraction does not lose the meaning? the commas make it all read very legalese?\r\n```suggestion\r\n    /// Returns a task sequence yielding elements of the underlying sequence until the given\r\n```",
+    "created_at": "2023-12-21T14:57:42Z",
+    "id": 1434178426,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    let ``TaskSeq-takeWhileI?A? excludes all items after predicate fails`` (inclusive, isAsync) =\r\n```",
+    "created_at": "2023-12-21T14:56:26Z",
+    "id": 1434176941,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I `do` the same (but often put a `: unit`) in the sig instead ;)",
+    "created_at": "2023-12-21T14:51:57Z",
+    "id": 1434171836,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fixed",
+    "created_at": "2023-12-21T14:51:51Z",
+    "id": 1434171719,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done",
+    "created_at": "2023-12-21T14:50:46Z",
+    "id": 1434170389,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "lol. Yeah. I sometimes find `do` clearer. But it can be removed.",
+    "created_at": "2023-12-21T14:50:07Z",
+    "id": 1434169677,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Function has changed and has a condition now.",
+    "created_at": "2023-12-21T14:49:32Z",
+    "id": 1434168983,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fixed",
+    "created_at": "2023-12-21T14:48:47Z",
+    "id": 1434168089,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "do overload!",
+    "created_at": "2023-12-21T14:48:47Z",
+    "id": 1434168069,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "consider a MemberData that yields the 4 combos so they dont need to be visually scanned per test\r\n(also maybe the MemberData can yield the function with a Case Name tag that says AsyncInclusive, SyncExclusive etc)",
+    "created_at": "2023-12-21T14:46:35Z",
+    "id": 1434165446,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "it is always `greater than -1`, i.e., always true. But I agree, they should both be the same, fixing.",
+    "created_at": "2023-12-21T14:46:15Z",
+    "id": 1434165061,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n            |> TaskSeq.skipWhileInclusiveAsync (fun _ -> task { return true })\r\n```",
+    "created_at": "2023-12-21T14:43:42Z",
+    "id": 1434162050,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "the reason for this lambda vs the next one is not jumping out to me",
+    "created_at": "2023-12-21T14:43:26Z",
+    "id": 1434161705,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "need symmetry with preceding conditon to be able to scan this, i.e. make the last one `fun x -> x < 5`",
+    "created_at": "2023-12-21T14:42:26Z",
+    "id": 1434160559,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yeah. Or maybe I drop the whole thing. The `TaskSeq.takeXXX` has the same thing (the `getFunction` function), but it rather confusing in practice.",
+    "created_at": "2023-12-21T14:39:49Z",
+    "id": 1434157604,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "pred made me thing predecessor, probably spell it in full?",
+    "created_at": "2023-12-21T14:38:23Z",
+    "id": 1434156053,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/219",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I reverted that `.fantomasignore` change and rebased.",
+    "created_at": "2023-12-19T17:00:54Z",
+    "id": 1431701616,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Well, good news, in part, as it was suggested to use Fantomas alpha release (see https://github.com/fsprojects/fantomas/issues/3019#issuecomment-1863079619) to at least get rid of the `.fantomasignore` file again.\r\n\r\nWe still have the double manifest, but at least we can now format `WhileBang` properly.",
+    "created_at": "2023-12-19T17:00:25Z",
+    "id": 1431701023,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": ">Neither approach would solve the issue with Fantomas, btw.\r\n\r\nThen don't do that :D\r\n\r\nBut yes, having a separate `src` vs `tests` split is obv only actually useful once you stop having 1:1 sets of X and X.Tests and/or something that you'd put in a Directory.props file which would vary between tests and src (and/or enable you not to put redundant stuff at top level)\r\n\r\n>Neither approach would solve the issue with Fantomas, btw.\r\n\r\npity, and I guess thats the main concern",
+    "created_at": "2023-12-19T14:43:58Z",
+    "id": 1431499536,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "yeah, but that's not the case here. There is no `proj` and `sln` in the same folder. It is just one down from the root, but structure is otherwise standard (each project in its own dir).\r\n\r\nHaving them an extra directory apart gives issues in Visual Studio when you add a new project, which is will add by default to the root dir (in a project dir), but not under `src`. Which is probably why i did it this way.\r\n\r\nNeither approach would solve the issue with Fantomas, btw. ",
+    "created_at": "2023-12-19T14:38:30Z",
+    "id": 1431492319,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Removed now",
+    "created_at": "2023-12-19T14:36:03Z",
+    "id": 1431489001,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Updated to `ok`, thanks. I should probably go over the code in general and find some kind of standard naming for often-used variable types.",
+    "created_at": "2023-12-19T14:34:03Z",
+    "id": 1431486447,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx, nice catch. Done.",
+    "created_at": "2023-12-19T14:32:57Z",
+    "id": 1431485003,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The `<br />` is not rendered (bug in F#). An empty line is, but adds a thin paragraph spacer. ",
+    "created_at": "2023-12-19T14:32:13Z",
+    "id": 1431484002,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx! I ended up combining this and prev line, as this throws `ArgumentException` and not `InvalidOperationException`.",
+    "created_at": "2023-12-19T14:29:33Z",
+    "id": 1431480448,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Generally the reason I run into is that if you have a `.proj` and a `.sln` in the same folder, dotnet build and things start complaining about ambiguity\r\nAgree separate PR makes sense for that",
+    "created_at": "2023-12-19T14:29:19Z",
+    "id": 1431480113,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx, I like it. Updated.",
+    "created_at": "2023-12-19T14:25:21Z",
+    "id": 1431474838,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why not? It is a helper function for testing. The `AggregateException` is a result of how exceptions are aggregated from threads and doing that by hand in each test and each scenario is just a lot of work.\r\n\r\nAll we are after is if the (nested or not) code raises the said exception. This is used in `should throw typeof<..>` scenarios.",
+    "created_at": "2023-12-19T14:22:37Z",
+    "id": 1431471261,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah, I have thought about that. There was a reason why I put the `sln` in the `src` folder, but I can't readily recall. If I change it, and I probably should, I would do that in a separate PR to not pollute this one.\r\n\r\nThe `.fantomasignore` is going to be temporary anyway.",
+    "created_at": "2023-12-19T14:20:26Z",
+    "id": 1431467986,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah, I haven't reported that line yet. It is the most confusing error I've ever seen 😆. I'll remove that line before merge. Tx for the review!",
+    "created_at": "2023-12-19T14:18:27Z",
+    "id": 1431465380,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "todo?",
+    "created_at": "2023-12-19T08:37:26Z",
+    "id": 1431081421,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "is more or ok not a better name?",
+    "created_at": "2023-12-19T08:35:25Z",
+    "id": 1431079183,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// <param name=\"count\">The maximum number of items to drop.</param>\r\n```",
+    "created_at": "2023-12-19T08:31:55Z",
+    "id": 1431075553,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// elements in the sequence. See <see cref=\"drop\" /> for a version that does not raise an exception. <br />\r\n```",
+    "created_at": "2023-12-19T08:31:17Z",
+    "id": 1431074845,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// <exception cref=\"T:InvalidOperationException\">Thrown when <paramref name=\"count\" /> exceeds the number of elements in the sequence.</exception>\r\n```",
+    "created_at": "2023-12-19T08:30:29Z",
+    "id": 1431074028,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// underlying sequence, and then yields the remainder. Raises an exception if there are not <paramref name=\"count\" /> items. <br/>\r\n```    ",
+    "created_at": "2023-12-19T08:29:47Z",
+    "id": 1431073337,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "unwrapping/special casing of AggregateException should not be in here....",
+    "created_at": "2023-12-19T08:21:19Z",
+    "id": 1431064140,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "if you move sln up, can this redundancy be removed?\r\n(also I personally would stick with convention of src and test being separate folders, but skip doing that in the sln)",
+    "created_at": "2023-12-19T08:16:44Z",
+    "id": 1431059528,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/209",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fixed 👍 ",
+    "created_at": "2023-10-31T11:53:40Z",
+    "id": 1377468904,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/186",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Oh, I can never remember. In Dutch, a camel has two bumps 😆 ",
+    "created_at": "2023-10-31T11:52:39Z",
+    "id": 1377467356,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/186",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That's going to be an crazy amount of work (and that's only thinking from the reviewing side!)\r\nSide note: for 187's overview, you've swapped CamelCase and pascalCase ;)",
+    "created_at": "2023-10-31T11:51:06Z",
+    "id": 1377464848,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/186",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Just for this one, I made an adjustment, though.",
+    "created_at": "2023-10-31T11:40:57Z",
+    "id": 1377453415,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/186",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Haha, yeah. There's definitely still more fine tuning needed in these doc comments and there's more \"old style\" comments lingering (which, tbh, are more tailored to being well suited towards tooltip comments, as I am currently not outputing any documentation, but I should do that soon as well, though).",
+    "created_at": "2023-10-31T11:38:42Z",
+    "id": 1377451238,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/186",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "so tempting to review all the xmldoc in here but best to allow this PR to say focused!",
+    "created_at": "2023-10-31T11:31:04Z",
+    "id": 1377443358,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/186",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done :)",
+    "created_at": "2023-10-31T11:12:09Z",
+    "id": 1377423060,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/186",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Funny reading my own comment under the 2nd answer there, which in turn leads to this bug report: https://github.com/dotnet/fsharp/issues/8093\r\n\r\nBut yeah, I didn't yet think it through, tbh ;). I just wanted CI to get the tests running. I'll update, good point!",
+    "created_at": "2023-10-30T23:19:13Z",
+    "id": 1376895129,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/186",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I beieve it needs AbstractClass and private ctor too? https://stackoverflow.com/a/13419343/11635",
+    "created_at": "2023-10-30T20:40:45Z",
+    "id": 1376776865,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/186",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Note this is inspired/provoked by a combo of two things:\r\n\r\n1. spans of ... `list ... List.map |> List.map |> List.toSeq` perpetually coming up in code reviews\r\n\r\n2. In Equinox, there's a place where the downstream logic requires a materialized result, but early on, the primary need is to know wheter it is empty or not. Only after some further processing are the actual items required.\r\n\r\nThere's also an Async angle - the function could be AsyncSeq in nature in that the processing might need to do Async things. But ultimately we need to materialize all the results, so taking an AsyncSeq would not be useful.\r\n\r\nBased on this high level requirement, I said \"that's a job for a `list`, they have neat comprehensions, are idiomatic and immutable\" and convey the correct semantic - we need the full thing, and we'll traverse it in stages.\r\n\r\nBut, there's also a secondary factor - C# only provides seq comprehensions, and forcing Async rather than Task is bad news.\r\n\r\n----\r\n\r\nThe solution?\r\n\r\nWell, the lowest common denominator is seq, that would work naturally for C#, and `list` will naturally upcast to that\r\n\r\nBut, the real need is a) convey we need all the items (they are not going to be pulled incrementally so no point in implementing it lazily) b) with a quick way to check if the result is empty\r\n\r\nSo, the `list` + `seq` pair of APIs got changed to a single one that takes an array on the basis that:\r\n- it removes the F# vs C# \"slighly different interfaces\" confusion/pointless variance (though there still is an Async vs Task divide)\r\n- in F#, an array comprehension vs a `seq {` tends to be less messy\r\n- in C# I'm sure they'll have an Array comprehension eventually, and adding an extension method to to a `Enumerable.ToArray` on the Seq is easy to do\r\n- yes, an array is mutable, but in practice we can tell people \"well then don't do that\" if they actually mutate items (and most people don't think of arrays as mutable in that way) and/or eventually use `iarray` if something like that becomes universal\r\n\r\n----\r\n\r\nSo, I _think_ that having a similar \"not perfect but on balance the best choice\" approach should be considered. `Async.Parallel` is an example of this (it takes a `seq` but then calls `Seq.toArray` immediately internally). For me, this would resolve the List vs Array vs ResizeArray thing, as long as the the semantics are clear and/or intuitive (I am guessing what they are here) i.e.:\r\n- for a seq, its lazy\r\n- for all the others they are upcast to seq, so don't go modifying/appending to the resizearray while there's a live iterator on it)",
+    "created_at": "2023-10-30T12:11:27Z",
+    "id": 1376099268,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bartelink Yeah, I have been considering this, and similarly for the `Async<_>` overloads (i.e. apart from the name, the `XXXAsync` functions take a `Task`).\r\n\r\nI hope to soon make the switch to static members.",
+    "created_at": "2023-10-30T11:55:10Z",
+    "id": 1376080562,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please do further comments in #136, which is where the changes will go.",
+    "created_at": "2023-10-30T11:53:41Z",
+    "id": 1376078987,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bartelink it is much appreciated! I think I've addressed all your comments so far. I appreciate the improved wording. Keep in mind that I seek parity with `seq` also in the use of wording (at least where it makes sense), to give people an easy adoption experience.",
+    "created_at": "2023-10-30T11:53:16Z",
+    "id": 1376078582,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Updated it for all functions to be clearer. See #136 for the fix.",
+    "created_at": "2023-10-30T11:51:44Z",
+    "id": 1376077094,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "If the VS tooling was better, than yes, mentioning it in the param was enough. But since it isn't, I need to add all this info in the tooltip main bulb.",
+    "created_at": "2023-10-30T11:48:24Z",
+    "id": 1376073758,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think this was taken from the `remarks` in the original `seq` docs. But yes, it should be in `iteri` and friends as wel.",
+    "created_at": "2023-10-30T11:47:36Z",
+    "id": 1376072972,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Agreed, good point. Removed in #136.",
+    "created_at": "2023-10-30T11:46:41Z",
+    "id": 1376072033,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is done for parity with seq. We should improve the docs there before doing it here.",
+    "created_at": "2023-10-30T11:44:30Z",
+    "id": 1376069976,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Sharp eye! Fixed in #136.",
+    "created_at": "2023-10-30T11:44:19Z",
+    "id": 1376069793,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is done for parity with seq. We should improve the docs there before doing it here.",
+    "created_at": "2023-10-30T11:43:58Z",
+    "id": 1376069424,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is done for parity with `seq`. We should improve the docs there before doing it here.",
+    "created_at": "2023-10-30T11:43:33Z",
+    "id": 1376069013,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Stopping here, the fact it takes ages to review reflects the insane amount of work this must have been to do!\r\n\r\nwas focused on individual wordings tat the start but have been scanning for a while. If you do find it within you to do the drudge work of addressing my suggestions, I promise to do a thorough re-review to trap inconsistencies on the ones I've already traversed, along with reading the rest thoroughly.",
+    "created_at": "2023-10-30T11:43:18Z",
+    "id": 1376068783,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done in #136",
+    "created_at": "2023-10-30T11:42:38Z",
+    "id": 1376068101,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx! Much better. I used pulled.",
+    "created_at": "2023-10-30T11:42:22Z",
+    "id": 1376067824,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Not quite. There's a conceptual difference. But at some point we can do another pass over the F# Seq and then this one as well. I seek parity here.",
+    "created_at": "2023-10-30T11:41:38Z",
+    "id": 1376067056,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx! Done in #136.",
+    "created_at": "2023-10-30T11:40:46Z",
+    "id": 1376065919,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "These all have been there since the start. I might consider moving some out, but it prevents an extra conversion pass. Plus, it is often not clear how to do this thread-safe, hence the extra helpers.\r\n\r\nBesides, we mimic `seq` and they have `toList/Array` etc.",
+    "created_at": "2023-10-30T11:40:11Z",
+    "id": 1376065145,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "aside: any thoughts on voption overloads? I guess they can come if/when overloading becomes possible? Or is all that stuff best left alongside valuetasks etc as a big future thing (to not do)?",
+    "created_at": "2023-10-30T11:39:54Z",
+    "id": 1376064866,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I don't think you see my comments, lol",
+    "created_at": "2023-10-30T11:38:09Z",
+    "id": 1376063138,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you continue in #136 instead @bartelink? It was my mistake to base this branch off of that one.",
+    "created_at": "2023-10-30T11:37:58Z",
+    "id": 1376062958,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "no harm I guess, but you dont go to the troubel of mentioning this for the iteri and friends. Perhaps a \"(0-based)\" in the '<param` might be enough?",
+    "created_at": "2023-10-30T11:37:49Z",
+    "id": 1376062814,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think you don't see my comments, lol. About going to #136 ;).",
+    "created_at": "2023-10-30T11:37:11Z",
+    "id": 1376062226,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "A list/seq/array of tasks may or may not be hot-started. It is a bad design decision to do this. In fact, I have tests that show exactly why this is a bad idea _in principle_. However, before `IAsyncEnumerable` this was probably the dominant way, hence providing such a function now (including the warning).\r\n\r\nLeaving as is for now unless I can come up with better wording.",
+    "created_at": "2023-10-30T11:36:47Z",
+    "id": 1376061855,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "index is negative is not a primary deliverable and should not be mentioned here, no more than ANE should be",
+    "created_at": "2023-10-30T11:36:34Z",
+    "id": 1376061692,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Again there is the Views/Builds/Returns/decorates thing - not sure that Return is particularly useful as its lazy\r\n\r\nMaybe \"Builds a task sequence that yields all but the first item of the source\"",
+    "created_at": "2023-10-30T11:35:20Z",
+    "id": 1376060472,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I took this from the way `seq` documentation is done and I want to give people a feeling of it being largely the same. Leaving it in for now. We can do another pass over the documentation at some point, for sure, though.",
+    "created_at": "2023-10-30T11:34:24Z",
+    "id": 1376059562,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This one is definitely up for being dropped.",
+    "created_at": "2023-10-30T11:33:32Z",
+    "id": 1376058637,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx. Improved in #136.",
+    "created_at": "2023-10-30T11:32:29Z",
+    "id": 1376057552,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Not sure about your comment here. Using `toArray/toList` are certainly preferred, but that's the same as with `seq`.",
+    "created_at": "2023-10-30T11:32:13Z",
+    "id": 1376057279,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// Returns the first item of the input task sequence given by <paramref name=\"source\" />.\r\n```",
+    "created_at": "2023-10-30T11:30:17Z",
+    "id": 1376055379,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This terminology was taken from AsyncSeq iirc. I may have to do another pass over this though. Leaving this unresolved for now, so that I don't forget.",
+    "created_at": "2023-10-30T11:27:22Z",
+    "id": 1376052491,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// <param name=\"mapping\">A function to transform items from the input task sequence. The logical index within the sequence is supplied alongside the item.</param>\r\n```",
+    "created_at": "2023-10-30T11:26:50Z",
+    "id": 1376051953,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This uses the same wording as `seq` in F#, using the wording `Views the sequence as ...`. Same as with `returns`. I don't mind improving over F#'s own words, though, but we do say that we return a `task sequence`, which is always lazily evaluated.\r\n\r\nI might deprecate the blocking methods, though, they are dangerous.",
+    "created_at": "2023-10-30T11:26:18Z",
+    "id": 1376051433,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Leaving as is, function has been there for a while now, this is just documentation.",
+    "created_at": "2023-10-30T11:23:40Z",
+    "id": 1376048795,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx! Fixing in #136",
+    "created_at": "2023-10-30T11:22:39Z",
+    "id": 1376047743,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This wording is not better yet, but 'can access' suggests that items intrinsically have an index and/or that there is some object wrapping going on, vs it being a temp maintained by the iteration process?\r\n```suggestion\r\n    /// <param name=\"action\">A function to invoke per item of the task sequence, together with that items logical index in the sequence.</param>\r\n```",
+    "created_at": "2023-10-30T11:22:12Z",
+    "id": 1376047293,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx! Fixing in #136",
+    "created_at": "2023-10-30T11:21:11Z",
+    "id": 1376046299,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Fixing in #136",
+    "created_at": "2023-10-30T11:19:40Z",
+    "id": 1376044799,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx! Fixing in #136",
+    "created_at": "2023-10-30T11:19:19Z",
+    "id": 1376044456,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "demanded -> pulled/requested?",
+    "created_at": "2023-10-30T11:16:40Z",
+    "id": 1376041819,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Maybe Builds is the term to replace Views that I commented on?",
+    "created_at": "2023-10-30T11:15:50Z",
+    "id": 1376040990,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// supplying the index as extra parameter for the <paramref name=\"action\" /> function.\r\n```",
+    "created_at": "2023-10-30T11:14:14Z",
+    "id": 1376039313,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "why is there an array, list and a seq variant? i.e. Async.Parallel takes a seq and then immediately calls toArray because it needs that internally, and life goes on\r\nIn most cases I'll pass an array comprehension as an argument, but it's nice to not have to do a ToArray if I happen to have a seq or list to hand\r\nThe more such overloads we have with either identical long xmldoc, or subtly varying ones, the more\r\n- some type of people spend time navigating the intellisense or docs figuring out why there are N of them in order to make the correct/optimal choice\r\n- other kinds of people will just arbitrarily pick one (e.g. if you have a pipeline that starts with a List, keep using List.map when the final result after 3 mappings only needs to be a seq)\r\n\r\nAs a reader, the bit I'm not getting here from the xmldoc is whether this is a convenience overload to strongly type things, or whether there is a difference in semantics between me using ofAsyncSeq vs ofAsyncArray given I have an array of Asyncs to hand.\r\n\r\n(No need to reply in any major depth, just giving feedback on what enters my head as I read this)",
+    "created_at": "2023-10-30T11:12:24Z",
+    "id": 1376037551,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "PS: no need to repeat, I'll take your suggestions to heart in that PR.",
+    "created_at": "2023-10-30T11:05:44Z",
+    "id": 1376030438,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bartelink can you comment these further on in #136? It was my mistake to base this branch off of that one, but this should really only be about the two added groups of functions.",
+    "created_at": "2023-10-30T11:05:13Z",
+    "id": 1376029925,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "here the qualifier self-discussion I delve into in my comment on ofTaskSeq is not warranted, and this is clear and unambiguous",
+    "created_at": "2023-10-30T11:04:03Z",
+    "id": 1376028763,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Btw, the documentation changes came into this PR because I accidentally based it off of #136. I will put your comments in there.\r\n\r\nAnd yes, it should make a defensive copy.",
+    "created_at": "2023-10-30T11:02:38Z",
+    "id": 1376027356,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Also the massive amount of work and value in this PR is the docs work here - the title should probably reflect that, not the fact that there happens to be a feature request ebing fulfilled too!",
+    "created_at": "2023-10-30T11:02:13Z",
+    "id": 1376026910,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": ">  why use this over ofSeq or ofArray? (if its only for symmetry with toResizeArray and thats a bit of a special case/wart, maybe don't provide it?)\r\n\r\nYeah, I'm not a big fan of this one. I should probably just drop it. It has been in the library for a while, but people can just use `ofSeq/toSeq` and variants.",
+    "created_at": "2023-10-30T11:01:02Z",
+    "id": 1376025682,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This 'Views' might speak to you, but is kinda verbing [(see intro of this)](https://wordsmith.org/words/primary.html) and might be confusing to various readers, i.e. yes its a Lens and the lib in general is lazy, but the reader might be trying to figure out what the operator _actually does_, which is provide/decorate an input sequence, mapping it to a different result with a given mapping semantic.\r\n\r\n(Coming back to here after seeing 20 of them - it probably makes sense for this one, but finding a different term might be more explict/clear overall?)",
+    "created_at": "2023-10-30T11:00:55Z",
+    "id": 1376025548,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "and there is no ofTaskResizeArray ;)",
+    "created_at": "2023-10-30T10:55:34Z",
+    "id": 1376019722,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "great to have this laid out\r\nin practice does the fact that most/all tasks will be started not mean that the dominant consideration will be the unconstrained overlapping execution?\r\nI'd focus on the ordered waiting as the thing being delivered vs any unsupportable/not explictly achieved limitation on overlapping afforded by this?\r\n... or I might have it wrong (for instance I don't know the typical ways in which you arrive at a task that's not already started)\r\nAh, I get it now - you are trying to convey that the evauation is lazy and that this avoids the overlapping execution of the Task\r\nNot sure if anyone else will follow the same thought process, as it really does depend on where you're at in grokking it all (I have some residual mental mappings where I picture an AsyncSeq yielding materialized spans of items that get `collect`ed into a flat sequence which are definitely not helpful)",
+    "created_at": "2023-10-30T10:54:48Z",
+    "id": 1376018787,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "can I mutate the resizearray after I apply this operator? does it take a defensive copy? why use this over ofSeq or ofArray? (if its only for symmetry with toResizeArray and thats a bit of a special case/wart, maybe don't provide it?)",
+    "created_at": "2023-10-30T10:44:26Z",
+    "id": 1376004851,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think this should have a remark conveying that `toArray`/`toList` should normally be used as returning a mutable buffer with potential excess capacity is rarely a good default (yes array is mutable too, but not really!) is not a normal good thing\r\n```suggestion\r\n    /// Gathers items into a ResizeArray (`System.Collections.Generic.List`) asynchronously from the input task sequence in <paramref name=\"source\" />.\r\n```",
+    "created_at": "2023-10-30T10:40:42Z",
+    "id": 1376000505,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "rather than 'is blocking' and 'is not blocking', perhaps these should flip to\r\n- \"yields when\" (or something else terse) to indicate when the processing thread / task is relinquished when there is nothing to do. (i.e. 'is non blocking while' a) suggests something modal b) suggests it might magically do something off CPU)\r\n- 'is blocking' -> \"blocks synchrously when\" to indicate where such a yield is not happening\r\n\r\nOr maybe to borrow the terminology you used re the disposal - properly yields vs blocks (e.g. 'blocks its thread while it awaits items' for `toList`)",
+    "created_at": "2023-10-30T10:35:59Z",
+    "id": 1375995182,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Maybe this could/should be reworded to convey that it does not *do* anything immediately, instead preparing a mapping overlay/view? \"the resulting\" might suggest it does something to someone that's not paying full attention and/or does not have the distinction between an enumerator and an iterator in mind?",
+    "created_at": "2023-10-30T10:28:07Z",
+    "id": 1375986197,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Hm, I would have expect a `by` function's function param to be allowed to yield an effectiveLength.\r\nHm, maybe that's sumBy.... (just givign an instant reaction - not saying its wrong as such, esp if there is prior art)",
+    "created_at": "2023-10-30T10:22:32Z",
+    "id": 1375979757,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// <param name=\"max\">Limit at which to stop evaluating source items.</param>\r\n```",
+    "created_at": "2023-10-30T10:19:29Z",
+    "id": 1375976139,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// <see cref=\"TaskSeq.length\" /> if you need to limit the number of items evaluated evaluated, or the sequence is potentially infinite.\r\n```",
+    "created_at": "2023-10-30T10:16:00Z",
+    "id": 1375972025,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// to be evaluated either in full, or until <paramref name=\"max\" /> items have been processed. Use this method instead of\r\n```",
+    "created_at": "2023-10-30T10:14:20Z",
+    "id": 1375970079,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n    /// <param name=\"value\">The input item to use as the single item of the task sequence.</param>\r\n```",
+    "created_at": "2023-10-30T10:12:22Z",
+    "id": 1375967757,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/183",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks, I wasn't aware of that. \r\n\r\nThe move to .NET 7.0 for SmokeTests allows access to a few more BCL methods that return an `IAsyncEnumerable<_>` (like https://learn.microsoft.com/en-us/dotnet/api/system.io.file.readlinesasync?view=net-7.0), which will improve our testing coverage.",
+    "created_at": "2023-10-29T17:50:17Z",
+    "id": 1375481787,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/181",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "pretty sure Random is not threadsafe (get stuck repeating the same value) under concurrent calls, though it's rare. I believe they have made it threadsafe in v7, but perhaps that's only their static one\r\n(I dont think this is a big deal given you're going to switch to that in due course anyway)",
+    "created_at": "2023-10-29T16:58:55Z",
+    "id": 1375473513,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/181",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done",
+    "created_at": "2023-10-29T15:59:15Z",
+    "id": 1375464147,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/181",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'll do the update to .NET 7,0 in a separate PR. I'm not a fan of muddling the PRs, plus it allows me to catch any inconsistencies. Will make this a module-level variable, though, so that the call to `Next` has more meaning.",
+    "created_at": "2023-10-29T15:57:25Z",
+    "id": 1375463836,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/181",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "haha, nice catch! Fixed.",
+    "created_at": "2023-10-29T15:07:28Z",
+    "id": 1375454771,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/181",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That's a good point. And yes, the SmokeTest could certainly target a higher .NET 7.0. I'll update.",
+    "created_at": "2023-10-29T15:07:14Z",
+    "id": 1375454714,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/181",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "sync comment with reality",
+    "created_at": "2023-10-28T16:39:55Z",
+    "id": 1375280599,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/181",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "concurrent executions of this will all be seeded the same in practical terms. If you can target net7.0, there is a static global random, I think?",
+    "created_at": "2023-10-28T16:38:42Z",
+    "id": 1375280435,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/181",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "perhaps the 2 version badges a la https://github.com/jet/equinox#readme might be more maintainable?",
+    "created_at": "2023-06-06T23:26:37Z",
+    "id": 1220532607,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/163",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "agreed, done",
+    "created_at": "2023-06-02T23:14:22Z",
+    "id": 1214945281,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/149",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "`finally`s not working was a specific problem for me too - I'm fine with my name being mentioned if its house style, but ultimately you analysed and found the problem so I'm happier without being called out!\r\n```suggestion\r\n    - fixes not calling Dispose for 'use!', 'use', or `finally` blocks in `try`...`finally` #157\r\n```",
+    "created_at": "2023-06-02T23:13:31Z",
+    "id": 1214944326,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/149",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is a test for ensuring the overload resolution works properly, so the difference doesn’t really matter that much here, but good to know! I’m aware of `Task.Run`, but as you say, it’s rather painful to use. Thanks for the pointer.",
+    "created_at": "2022-12-20T00:22:04Z",
+    "id": 1052749873,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The overloads and signature are very painful from F# though, hence a helper like this is normally required to make it palatable https://github.com/jet/propulsion/blob/4d62f9d8afc3ab87273a0765e09a065ea1e66ad9/src/Propulsion/Internal.fs#L90\r\n\r\n",
+    "created_at": "2022-12-19T09:42:36Z",
+    "id": 1051993115,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I held off on mentioning this earlier but it comes up in another issue....\r\n\r\nThis was the original .NET 4.0 set of Thread Pool helpers. All usage of `Task.Factory` has been shifted to `Task` helpers. In this specific case, the canonical way to express this is as a `Task.Run`. The `Run` verb is associated with a) starting stuff b) in the thread pool",
+    "created_at": "2022-12-19T08:42:17Z",
+    "id": 1051937838,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks, that's great digging...",
+    "created_at": "2022-12-19T08:13:18Z",
+    "id": 1051912787,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Closing this out as \"resolved\", as we've now recorded it separately in #135.",
+    "created_at": "2022-12-19T02:15:57Z",
+    "id": 1051739501,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "These are very acute and interesting points, I decided to record them separately (they may get lost in a merged PR): https://github.com/fsprojects/FSharp.Control.TaskSeq/issues/135. I hope I summarized your points correctly there.\r\n\r\nI also did my own research, and this thread is most interesting, specifically the response here: https://github.com/dotnet/fsharp/discussions/11043#discussioncomment-345815",
+    "created_at": "2022-12-19T02:14:14Z",
+    "id": 1051739005,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Seaching StartAsTask vs StarImmediateTask, this seems to be the only useful hit https://github.com/fsharp/fslang-suggestions/issues/521",
+    "created_at": "2022-12-18T21:16:05Z",
+    "id": 1051666931,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "StartAsTask does a QueueAsync like Async.Start and Async.StartChild:\r\nhttps://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/async.fs#L1200\r\nhttps://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/async.fs#L1171\r\n\r\nThe only reason you'd prefer to queue rather than do it inline it is if you have a better thing to do on this thread right after you offload and/or you can. achieve better fairness by routing each piece of work through the thread pool each time?",
+    "created_at": "2022-12-18T21:10:06Z",
+    "id": 1051665865,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I would think that `Async.StartImmediateAsTask` would be most efficient unless there's an express reason why it would not achieve some specified desired semantic - you're already in a context where you're running as a `task` in a valid context so no need to queue to be re-dispatched from the threadpool, potentially losing one's timeslice? (IIRC the logic and wrapping is identical aside from the extra dispatch hop)\r\nBut hard to argue against doing the same as `task` does",
+    "created_at": "2022-12-18T20:38:52Z",
+    "id": 1051661523,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yep, it does the same: https://github.com/dotnet/fsharp/blob/d91b6c5c97accf363d135d1f99816410da4ec341/src/FSharp.Core/tasks.fs#L462",
+    "created_at": "2022-12-18T19:41:52Z",
+    "id": 1051654894,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "What’s the (better) alternative @bartelink? I thought this was the preferred way to start Async and convert to task at the same time. I’d have to check, but I think it’s what `task` does. If not, I should copy its approach.",
+    "created_at": "2022-12-18T19:36:32Z",
+    "id": 1051654236,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "why hop to threadpool ?",
+    "created_at": "2022-12-18T16:04:12Z",
+    "id": 1051626326,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/114",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, there are far worse paragraphs on the planet - at the end of the day it does convey the core point perfectly well 🙈 ",
+    "created_at": "2022-12-17T06:48:36Z",
+    "id": 1051329102,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/125",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@bartelink I want to rework that whole section, maybe turn it into a feature table, or link to docs for some part. It could certainly be improved.",
+    "created_at": "2022-12-17T01:46:35Z",
+    "id": 1051284237,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/125",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "applied, tx",
+    "created_at": "2022-12-16T14:40:37Z",
+    "id": 1050828281,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done, tx.",
+    "created_at": "2022-12-16T14:37:22Z",
+    "id": 1050824925,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx. I'll probably just drop the second line altogether. Primarily, I don't want the left-most column to be too wordy and I can't think of a good way to explain both. Curious people can always look it up.",
+    "created_at": "2022-12-16T14:31:13Z",
+    "id": 1050818800,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Oops! lol. Tx.",
+    "created_at": "2022-12-16T14:29:37Z",
+    "id": 1050817266,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'll take the semicolon, keep the original wording. People can always go to the docs to find out.",
+    "created_at": "2022-12-16T14:29:09Z",
+    "id": 1050816600,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Let's keep it separate for now. I probably revisit some of this anyway.",
+    "created_at": "2022-12-16T14:25:53Z",
+    "id": 1050812791,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Good point",
+    "created_at": "2022-12-16T14:24:52Z",
+    "id": 1050811786,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks!",
+    "created_at": "2022-12-16T14:21:41Z",
+    "id": 1050808738,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I like to keep this one, as it is deliberate (I had commas before but didn't like it), it signifies they're interchangeable semantically.",
+    "created_at": "2022-12-16T14:21:01Z",
+    "id": 1050807926,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Tx, sharp eye!",
+    "created_at": "2022-12-16T14:19:17Z",
+    "id": 1050805488,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'll keep both, I used your updated text.",
+    "created_at": "2022-12-16T14:18:45Z",
+    "id": 1050804654,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks! Done.",
+    "created_at": "2022-12-16T14:17:57Z",
+    "id": 1050803794,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\nThis project has stable features currently, but before we go full \"version one\", we'd like to complete the surface area. This section covers the status of that, with a full list of implemented functions below. Here's the shortlist:\r\n```",
+    "created_at": "2022-12-16T09:06:40Z",
+    "id": 1050515524,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n| **Parallelism**            | Possible with ChildTask; support will follow                                      | Supported explicitly                                                 |\r\n```",
+    "created_at": "2022-12-16T09:05:52Z",
+    "id": 1050514864,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n| **Cancellation**           | Implicit token governs iteration                                                | Implicit token flows to all subtasks per normal `Async` semantics                               |\r\n```\r\nIs \"Implicit token governs iteration\" -> \"Implicit token governs iteration but requires explicit propagation of token to child Tasks\"\r\n",
+    "created_at": "2022-12-16T09:03:48Z",
+    "id": 1050513227,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "If this is going to be mentioned, it needs to be on line 2 or 3? Maybe merge into:\r\n```\r\n| **Implementation** | `task`-based;  statically compiled state machine | `async`-based; no state machine, continuation style |\r\n```",
+    "created_at": "2022-12-16T08:56:23Z",
+    "id": 1050506815,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n| **Recursion in `yield!`**  | **No** (requires F# support, upcoming)                                                | Yes                                                                  |\r\n```\r\ncapital O can be dropped, but good to make people think...",
+    "created_at": "2022-12-16T08:55:08Z",
+    "id": 1050505745,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n| **Conversion from other**  | Implicit (`yield!`) or `TaskSeq.ofAsyncSeq`                                         | `AsyncSeq.ofAsyncEnum`                                               |\r\n```",
+    "created_at": "2022-12-16T08:54:14Z",
+    "id": 1050505035,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n| **Behavior with `yield`**  | Zero allocations; no `Task` or even `ValueTask` created                           | Allocates an F# `Async` wrapped in a singleton `AsyncSeq`           |\r\n```",
+    "created_at": "2022-12-16T08:52:51Z",
+    "id": 1050503886,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n| **Support `for`**          | `IAsyncEnumerable<'T>`, `AsyncSeq`, any sequence                                  | `AsyncSeq`, any sequence                                             |\r\n```",
+    "created_at": "2022-12-16T08:51:47Z",
+    "id": 1050502987,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n| **Support `do!`**          | `Async<unit>`, `Task<unit>`, `Task`, `ValueTask<unit>`, `ValueTask`         | `Async<unit>` only                                                   |\r\n```",
+    "created_at": "2022-12-16T08:50:24Z",
+    "id": 1050501908,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n| **Support `let!`**         | All `task`-like: `Async<'T>`, `Task<'T>`, `ValueTask<'T>` or any `GetAwaiter()`   | `Async<'T>` only                                                     |\r\n```\r\n(VT last to align with next line)",
+    "created_at": "2022-12-16T08:49:50Z",
+    "id": 1050501446,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n| **Underlying type**        | `System.Collections.Generic.IAsyncEnumerable<'T>`                                 | Its own type, also called `IAsyncEnumerable<'T>`, but not compatible (although there are functions that Adapt to it) |\r\n```\r\nPerhaps this is better expressed in the text above, i.e. saying something like \"The most fundamental difference is that `taskSeq` is built from the ground up against `System.Collections.Generic.IAsyncEnumerable` and `ValueTask`; `AsyncSeq` provides adapter functions to/from it, but the internals were written and evolved long before `IAsyncEnumerable` was defined and hence some aspects differ to varying degrees.",
+    "created_at": "2022-12-16T08:47:28Z",
+    "id": 1050499370,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\nThe [`AsyncSeq`][11] and `TaskSeq` libraries both operate on asynchronous sequences, but there are a few fundamental differences. The most notable being that the former _does not_ implement `IAsyncEnumerable<'T>`, though it does have a type of that name with different semantics (not surprising; it predates the definition of the modern one). Another key difference is that `TaskSeq` uses `ValueTask`s for the asynchronous computations, whereas `AsyncSeq` uses F#'s `Async<'T>`.\r\n```",
+    "created_at": "2022-12-16T08:35:42Z",
+    "id": 1050490434,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Damn, there's still too many \"and\"s here! Probably should be two sentences (also maybe the fact implicit `yield` works should be mentioned?)",
+    "created_at": "2022-12-16T08:28:20Z",
+    "id": 1050484740,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/125",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This looks wonderful ❤️ ",
+    "created_at": "2022-12-16T08:25:25Z",
+    "id": 1050482667,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/125",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I would group these 2 in a single MoveNext/Current row. I think it's clearer as in AsyncSeq both things are in a single type.",
+    "created_at": "2022-12-16T07:07:03Z",
+    "id": 1050429436,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/131",
+    "user_login": "gusty"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "See #131",
+    "created_at": "2022-12-16T03:44:25Z",
+    "id": 1050343717,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/125",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'll put this one in a separate PR, but I think it is useful.",
+    "created_at": "2022-12-16T03:12:48Z",
+    "id": 1050332820,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/125",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\nThe [`AsyncSeq`][11] and `TaskSeq` library both operate on asynchronous sequences, but there are a few fundamental differences, most notably that the former _does not_ implement `IAsyncEnumerable<'T>`, but has its own same-named, but differently behaving type. \r\n\r\nThere are more differences:\r\n\r\n|                        | `TaskSeq`                                                   | `AsyncSeq`                                                           |\r\n|------------------------|-------------------------------------------------------------|----------------------------------------------------------------------|\r\n| Frameworks             | .NET 5.0+, NetStandard 2.1                                  | .NET 5.0+, NetStandard 2.0 and 2.1, .NET Framework 4.6.1+            |\r\n| Underlying type        | `System.Collections.Generic.IAsyncEnumerable<'T>            | Its own type, also called `IAsyncEnumerable<'T>`, but not compatible |\r\n| Implementation         | State machine (statically compiled)                         | No state machine, continuation style                                 |\r\n| Semantics              | `seq`-like: on-demand                                       | `seq`-like: on-demand                                                |\r\n| Support `let!`         | All task-like (async, task, valuetask, Task, or GetAwaiter) | `async` only                                                         |\r\n| Support `yield!`       | `IAsyncEnumerable<'T>`, `AsyncSeq`, any sequence            | `AsyncSeq`                                                           |\r\n| Support `for`          | `IAsyncEnumerable<'T>`, `AsyncSeq`, any sequence            | `AsyncSeq` any sequence                                              |\r\n| Conversion to other    | `TaskSeq.toAsyncSeq`                                        | `AsyncSeq.toAsyncEnum`                                               |\r\n| Conversion from other  | Implicit (yield!) or `TaskSeq.ofAsyncSeq`                   | `AsyncSeq.ofAsyncEnum`                                               |\r\n| Recursion in `yield!`  | No (requires F# support, upcoming)                          | Yes                                                                  |\r\n| Based on F# concept of | `task`                                                      | `async`                                                              |\r\n| MoveNext operation     | `ValueTask`                                                 | Cold-started `Task`                                                  |\r\n| Cancellation           | Implicit token governing iteration                          | Implicit token passed to each subtask                                |\r\n| Performance            | Very high, negligible allocations                           | Slower, more allocations, due to using `async`                       |\r\n| Behavior with `Return` | No allocations, no `Task` created                           | Allocated, a `Task` will be created                                  |\r\n| Parallelism            | Possible with ChildTask, support will follow                | Supported explicitly                                                 |\r\n|                        |                                                             |                                                                      |\r\n```",
+    "created_at": "2022-12-16T03:12:08Z",
+    "id": 1050332560,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/125",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\nGenerates optimized IL code through resumable state machines, and comes with a comprehensive set of functions in module 'TaskSeq'. See README for documentation and more info.</Description>\r\n```",
+    "created_at": "2022-12-16T02:27:17Z",
+    "id": 1050313953,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/125",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, the fact those were not magically expanded sailed over my head at the time!",
+    "created_at": "2022-12-14T12:06:42Z",
+    "id": 1048389624,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "ClassData is probably the best answer overall, but if you're code golfing, a MemberData targeting a let bound fn of `obj[]` does work , see https://stackoverflow.com/a/35127997/11635",
+    "created_at": "2022-12-14T12:05:50Z",
+    "id": 1048388883,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yeah, I considered it. I already have a cleanup branch, will take that there, so as not to block it more. Afaik, an `obj[]` is not valid metadata in attributes, but I can turn it into `ClassData`. Anyway, I agree, some more clarity can be useful, but let's think that through for all the other tests as well (where we mainly just use copies instead of variants).",
+    "created_at": "2022-12-14T11:58:08Z",
+    "id": 1048381952,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I should have done that, good idea",
+    "created_at": "2022-12-14T03:40:04Z",
+    "id": 1047980951,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "👍 but see naming thought on the Issue",
+    "created_at": "2022-12-14T03:37:36Z",
+    "id": 1047980124,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "that's now begging to be replaced with a `MemberData(nameof variants)`\r\n```\r\nlet variants : obj[] =\r\n    [| false; false\r\n       .... |]       \r\n```\r\nAnd at that point I know you'll do a struct typesafe enum for that!",
+    "created_at": "2022-12-14T03:36:21Z",
+    "id": 1047979668,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Not sure we need those, but if there's a use-case for `takeWhileIncl`... Anyway, this way I won't forget ;).",
+    "created_at": "2022-12-14T03:35:04Z",
+    "id": 1047979165,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done, see changes.",
+    "created_at": "2022-12-14T03:32:42Z",
+    "id": 1047977934,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done, see changes.",
+    "created_at": "2022-12-14T03:32:32Z",
+    "id": 1047977631,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done",
+    "created_at": "2022-12-14T03:02:24Z",
+    "id": 1047964885,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done.",
+    "created_at": "2022-12-14T03:01:50Z",
+    "id": 1047964625,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We can lift `inclusive` outside the inner loop. This means we get 4 code blocks, but it saves a few micro-ops (probably).",
+    "created_at": "2022-12-14T02:09:26Z",
+    "id": 1047939722,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'll probably make the `true|false` into a two-case struct DU for clarity.",
+    "created_at": "2022-12-14T02:06:15Z",
+    "id": 1047938023,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Creative! I like it :). I may generalize this soon(ish) for the other tests as well.",
+    "created_at": "2022-12-14T02:04:54Z",
+    "id": 1047937351,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That's why we call this module `SideEffects`. Here it isn't a special case ;)",
+    "created_at": "2022-12-14T02:03:14Z",
+    "id": 1047936428,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm also going to make a few naming changes here (that are kinder to different reporting tools) and lift the `expected` test.",
+    "created_at": "2022-12-14T02:02:14Z",
+    "id": 1047936008,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Link for `#126` wasn't added. Let me fix these last nits and add to the changelog as well, then we can merge this in.\r\n\r\nIn my other comment, I kinda meant each variant on its own row. No worries, I'll update this ;).",
+    "created_at": "2022-12-14T01:59:40Z",
+    "id": 1047934711,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Rider did that, and I didnt invest the time to figure out how to tell it not to ;) \r\nHaving takeWhileInclusive on its own line was triggering yet more reformatting\r\nI'll remove the egregious diffs and let you do a more general reorg in due course.",
+    "created_at": "2022-12-12T10:10:34Z",
+    "id": 1045629617,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, I think that's a good call; anyone that wants to re-separate can write the motivating benchmark ;)",
+    "created_at": "2022-12-12T10:07:59Z",
+    "id": 1045627083,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks, I like your suggested way of doing it, it just hadn't occurred to me.",
+    "created_at": "2022-12-12T10:06:50Z",
+    "id": 1045625862,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "bartelink"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I usually just put these on new rows (the variants, I mean). Also, is there a reason you changed the column alignment for all rows? For the diff, it's probably better not to do that, but perhaps it was necessary?\r\n\r\nAlso, I'm about to add a full list of all `AsyncSeq` functions covered/not covered, it should then probably go there.",
+    "created_at": "2022-12-11T13:43:27Z",
+    "id": 1045236728,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Wondering if these two could easily be combined without adding too much overhead. I guess on extra `if inclusive` wouldn't hurt too much. What are your thoughts?",
+    "created_at": "2022-12-11T13:35:22Z",
+    "id": 1045235398,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think I actually don't have a test like this currently, good to have it now. My approach is usually using mutables and doing plus-one between the items to ensure we stop at the proper point. But this works just fine as well.",
+    "created_at": "2022-12-11T13:30:48Z",
+    "id": 1045234543,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n/// For each of the tests below, we add a guard that will trigger if the predicate is passed items known to be beyond the\r\n/// first failing item in the known sequence (which is 1..10)\r\nlet inline condWithGuard x =\r\n```",
+    "created_at": "2022-12-11T13:28:28Z",
+    "id": 1045234160,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "```suggestion\r\n/// This is the base condition as one would expect in actual code\r\nlet inline cond x = x <> 6\r\n```",
+    "created_at": "2022-12-11T13:28:16Z",
+    "id": 1045234130,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/126",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is now done. I've also fixed the `singleton` implementation to properly return `defaultof` whenever before/after iteration.",
+    "created_at": "2022-11-24T23:47:28Z",
+    "id": 1031914225,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/90",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Thanks for this, it'll be much faster than relying on the resumable state implementation.",
+    "created_at": "2022-11-24T17:51:46Z",
+    "id": 1031746876,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/89",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "After extensive research, the basic rule is: there is no rule. Both F# and BCL libs are inconsistent, sometimes throwing exceptions, sometimes not. We may throw exceptions at some point, but right now I prefer to be consistent with the CE. That is, I want this:\r\n\r\n```F#\r\n> let s: seq<int> = seq { do () } ;;\r\nval s: seq<int>\r\n\r\n> s.GetEnumerator().Current;;\r\nval it: int = 0\r\n```\r\n\r\nto behave equal to this:\r\n\r\n```f#\r\n> let s: seq<int> = Seq.empty;;\r\nval s: seq<int>\r\n\r\n> s.GetEnumerator().Current;;\r\nSystem.InvalidOperationException:  // this is not consistent in Seq\r\n```\r\n\r\nIn other words: we will *not* throw an exception here for `taskSeq`. I may change this resolution, but for now, I think consistency is better, even though I agree in principal that throwing an exception isn't bad per se.",
+    "created_at": "2022-11-24T15:11:04Z",
+    "id": 1031618409,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/90",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Btw, just do be clear, the public function remains in `TaskSeq.fs`. That file should contain all surface area public functions. Only the implementation moves. Sorry for being vague earlier.",
+    "created_at": "2022-11-14T10:51:34Z",
+    "id": 1021348191,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/90",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": ">  what's wrong on having a large file with implementations?\r\n\r\nNothing. It’s a personal preference. Ease of reading, clear separation of multi purpose implementation from single purpose wrappers.\r\n\r\nI find (very) large implementation files hard to navigate. But there’s something to say for either approach. In this project I chose simplicity (smaller files with some logical, somewhat arbitrary separation) over one big implementation file (like in AsyncSeq). Both have pros and cons, but in the end, you choose a direction and stick to it, or it becomes messy.",
+    "created_at": "2022-11-13T19:19:44Z",
+    "id": 1020951137,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/89",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes. It’s nothing more than organisational. Also, we group like functions. Say we add `singletonAsync`, we’d process both in a single function in `TaskSeqInternal`.\r\n\r\nThis division is slightly arbitrary, but I like to keep the larger details separate from the lean and mean implementation file. In the end, there’s no functional reason other than organisation and style.",
+    "created_at": "2022-11-13T19:12:53Z",
+    "id": 1020950329,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/90",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": ">  within an invalid state is an undefined operation, therefore invalid operation.\r\n\r\nUndefinec and invalid are not interchangeable. Undefined means “we don’t tell you what to do, it’s the implementer’s choice”. Invalid means: “this operation is illegal”.\r\n\r\nIf `seq { yield 10 }` throws instead of `defaultof` I’ll have to check. I’ll also compare with other BCL libs. Consistency is key. From a contract perspective, either is fine.",
+    "created_at": "2022-11-13T19:09:29Z",
+    "id": 1020949880,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/90",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Sure I can, but I wonder what's wrong on having a large file with implementations?\r\nIf we want a short one, we have already the fsi file IMHO having a large file, specially taking into account that we have a fsi file, is more that fine. Otherwise we'll have triplication.",
+    "created_at": "2022-11-13T17:57:21Z",
+    "id": 1020941736,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/89",
+    "user_login": "gusty"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Not clear to me this request.\r\nThe idea is that `singleton` is a public function.\r\nWhy do you want to move it to an internal namespace?\r\nIs it to re-use it within other internal functions?",
+    "created_at": "2022-11-13T17:20:42Z",
+    "id": 1020937184,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/90",
+    "user_login": "gusty"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Why? Is there a contract that specify that?\r\nGetting the current within an invalid state is an undefined operation, therefore invalid operation.\r\nAlthough there's no contract, this is exactly what `seq` does.",
+    "created_at": "2022-11-13T17:19:26Z",
+    "id": 1020937015,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/90",
+    "user_login": "gusty"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please move it to `TaskSeqInternal` and call that function from here.",
+    "created_at": "2022-11-13T12:55:01Z",
+    "id": 1020898342,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/90",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This should return `Unchecked.defaultof<_>` when not started.",
+    "created_at": "2022-11-13T12:54:38Z",
+    "id": 1020898284,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/90",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Nit Fantomas:\r\n```suggestion\r\n                    member _.DisposeAsync () = ValueTask.CompletedTask\r\n```",
+    "created_at": "2022-11-13T12:48:01Z",
+    "id": 1020897306,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/89",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Please apply Fantomas. Should be in the form:\r\n```suggestion\r\n                    member _.Current with get() = Unchecked.defaultof<'T>\r\n```",
+    "created_at": "2022-11-13T12:47:49Z",
+    "id": 1020897260,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/89",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is a good improvement. Can you please move this to `TaskSeqInternal`? That's where all the \"larger than one or two lines\" implementations go.",
+    "created_at": "2022-11-13T12:46:40Z",
+    "id": 1020897133,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/89",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Done.",
+    "created_at": "2022-10-31T22:47:45Z",
+    "id": 1009935134,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/55",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Note, forgot to uncomment these lines, but this is solved in #54.",
+    "created_at": "2022-10-31T22:47:01Z",
+    "id": 1009934764,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/55",
+    "user_login": "abelbraaksma"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Don't forget to set this back to `false` before merging into `main`!\r\n```suggestion\r\n      <Value>TASKSEQ_LOG_VERBOSE = false</Value>\r\n```",
+    "created_at": "2022-10-30T22:14:22Z",
+    "id": 1008935015,
+    "pull_request_url": "https://api.github.com/repos/fsprojects/FSharp.Control.TaskSeq/pulls/54",
+    "user_login": "abelbraaksma"
+  }
+]

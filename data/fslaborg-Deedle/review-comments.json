@@ -1,0 +1,482 @@
+[
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I tried to just write this as `cov |> shouldEqual expected` but something was throwing the equality check off. I would guess some reference equality somewhere. Should `shouldEqual` work for two frames with the same contents? I'd like to write it as an equality on the frames if possible as that's a more correct assertion.",
+    "created_at": "2022-11-06T13:43:51Z",
+    "id": 1014832415,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/552",
+    "user_login": "Choc13"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I used the same code now that is used in FromArray2D so I think it should be now more performant either way ",
+    "created_at": "2021-07-25T09:19:21Z",
+    "id": 676114329,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/532",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Well that was a brainfart on my side :D sorry.",
+    "created_at": "2021-07-25T09:14:41Z",
+    "id": 676113771,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/532",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "> And where is the array2D from this example coming from anyways \r\n\r\nthat's from FSharp.Core\r\n\r\nhttps://github.com/dotnet/fsharp/blob/dbf9a625d3188184ecb787a536ddb85a4ea7a587/src/fsharp/FSharp.Core/fslib-extra-pervasives.fs#L185-L204",
+    "created_at": "2021-07-25T09:11:44Z",
+    "id": 676113423,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/532",
+    "user_login": "FoggyFinder"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I was not thinking about performance here, as I see the frame creation as a step that only happens a single time in a data analysis pipeline, but i can definitely adjust this to work exactly as the FromArray2D function.\r\n\r\n>We can easily do the same even now\r\n>jArray |> array2D |> Frame.FromArray2D\r\n\r\nAgreed, but the whole point of this PR is to get rid of the function in the middle. And where is the `array2D` from this example coming from anyways? I cant find it in FSharp.Core and needing an external library for that or having to do the copy in the analysis is exactly what i want to prevent.",
+    "created_at": "2021-07-25T08:59:02Z",
+    "id": 676111836,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/532",
+    "user_login": "kMutagene"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "creating a frame like that doesn't look effective . We create a copy of array just to pass it further? We can easily do the same even now\r\n\r\n```fsharp\r\njArray |> array2D |> Frame.FromArray2D\r\n```",
+    "created_at": "2021-07-25T08:14:17Z",
+    "id": 676105757,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/532",
+    "user_login": "FoggyFinder"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "👍 Sorry, I missed that! Sounds good.",
+    "created_at": "2018-08-17T09:27:42Z",
+    "id": 210854057,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/414",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "@tpetricek I already refactored it in https://github.com/fslaborg/Deedle/commit/6ba06fd0c7652495c252c16707aa8a896e0c61ef. There's no longer warning. It will output Series<string, float>.",
+    "created_at": "2018-08-16T22:59:06Z",
+    "id": 210765728,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/414",
+    "user_login": "zyzhu"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm getting a warning here saying that this will make `'V` a `float`:\r\n\r\n> warning FS0064: This construct causes code to be less generic than indicated by the type annotations. The type variable 'V has been constrained to be type 'float'.\r\n\r\nYou can fix that by adding `box`, but then you also need to specify the type argument for the series key in the pattern matching:\r\n\r\n    match box series with\r\n    | :? Series<'K, float> as floatSeries -> \r\n\r\nAlso, I think the returned series should probably not be `Series<string, float option>` but just `Series<string, float>` because series has missing values built-in. To do that, you can replace `Series.ofObservations` with `Series.ofOptionalObservations`",
+    "created_at": "2018-08-16T20:40:26Z",
+    "id": 210734618,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/414",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Similar change requested here",
+    "created_at": "2018-07-27T13:59:33Z",
+    "id": 205782155,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/394",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Change this to: \r\n```\r\n   let valueFactory = \r\n       Func<_,_> (fun typ -> \r\n         let par = Expression.Parameter(typeof<seq<OptionalValue<obj>>>)\r\n         let body = Expression.Call(createTypedVectorMi.MakeGenericMethod([| typ |]), par)\r\n         Expression.Lambda<Func<seq<OptionalValue<obj>>, _>>(body, par).Compile().Invoke)\r\n   fun typ ->\r\n     cache.GetOrAdd(typ, valueFactory)    \r\n```\r\n\r\nSo the `Func<_,_>` call to create the delegate is only executed once",
+    "created_at": "2018-07-27T13:59:17Z",
+    "id": 205782063,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/394",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Done\n",
+    "created_at": "2015-07-14T12:52:57Z",
+    "id": 34564189,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/314",
+    "user_login": "buybackoff"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Hmm.. perhaps that was coming from somewhere else? Anyway, would you mind removing this part of the change? (I think this might even give you a \"case will never be matched\" compiler warning...)\n",
+    "created_at": "2015-07-14T12:41:48Z",
+    "id": 34563343,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/314",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I had some very strange error with a message like \"expecting an option\", it seemed like there was a path where `a` or `b` are `null` or `opt`, but I couldn't catch and reproduce it in the end.\n",
+    "created_at": "2015-07-14T07:39:16Z",
+    "id": 34543919,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/314",
+    "user_login": "buybackoff"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I'm not sure I understand why is this change needed. Doesn't F# infer that `a` and `b` are options, and so the last case would never be actually matched? \n",
+    "created_at": "2015-07-13T22:48:46Z",
+    "id": 34520989,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/314",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "We still do this (below) for the loader that returns a sequence of key value pairs. But we do not \"fix\" incorrect results for the new API - I'll see if we need to do this or not.\n",
+    "created_at": "2015-02-04T19:06:32Z",
+    "id": 24109395,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/297",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, I think they will. \n\nI could do some refactoring in F# Data, so that Deedle only needs to depend on files with internal APIs. Although I suppose that all the things imported here are \"public\" but not really intended for wide-spread use, so this may be fine...\n",
+    "created_at": "2014-12-09T15:02:03Z",
+    "id": 21533405,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/289",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "That will cause problems if both FSharp.Data and Deedle are referenced\n",
+    "created_at": "2014-12-09T12:54:57Z",
+    "id": 21525738,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/289",
+    "user_login": "ovatsus"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Will these files appear as \"public\" in Deedle, under the FSharp.Data namespace (the same as in FSharp.Data itself)?\n",
+    "created_at": "2014-12-09T05:48:37Z",
+    "id": 21508306,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/289",
+    "user_login": "dsyme"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Probably can wipe out these comments -\n",
+    "created_at": "2014-11-25T18:16:00Z",
+    "id": 20882532,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/281",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "The main reason is that some changes in big deedle make it possible to do more efficient `GetSlice` on `df.Rows` (which cannot be done on `df.DenseRows`). I experimented a bit, but we probably need two types to do this. I'll clarify this in the code.\n",
+    "created_at": "2014-08-23T22:28:24Z",
+    "id": 16633057,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/247",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, that's exactly the idea!\n",
+    "created_at": "2014-08-23T22:09:12Z",
+    "id": 16632991,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/247",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Just to make sure I understand, you've abstracted the internals of the row series creation behind a Vectors.Combine expression, whose backward compatible implementation is in ArrayVector.fs, so that going forward you can change the behavior for a virtual frame?\n",
+    "created_at": "2014-08-11T18:43:01Z",
+    "id": 16071904,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/247",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I'm having trouble understanding the need for FilteredRowSeries in addition to RowSeries with another constructor?\n",
+    "created_at": "2014-08-11T18:18:23Z",
+    "id": 16070171,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/247",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Good catch, this does not make sense! \n\n(It immediately evaluates the value and there would not be much point delaying it anyway - it is just creating an vector to keep the columns...)\n",
+    "created_at": "2014-08-11T17:58:41Z",
+    "id": 16068809,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/247",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Oh wait, but then it initializes a rows array, invoking getRow? Is this all to avoid creating frameData if the rowCount is zero?\n",
+    "created_at": "2014-08-11T17:48:19Z",
+    "id": 16068157,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/247",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Nevermind, I see it's deferred until getRow is called.\n",
+    "created_at": "2014-08-11T17:46:21Z",
+    "id": 16068052,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/247",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Why lazy here? Isn't it just evaluated on the next line?\n",
+    "created_at": "2014-08-11T17:45:08Z",
+    "id": 16067964,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/247",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Accessing the first/last value using `series.KeyRange` will only work for an ordered series. For unordered series, this currently throws an exception (because the keys do not represent a \"range\" in that case). The alternative is to use `series.GetAt(0)` and `series.GetAt(series.KeyCount-1)`, which always works.\n\nI'm not entirely sure what is the right behavior here, but I suspect these functions should work on unordered series too. But changing the behavior of `KeyRange` is also an option...\n",
+    "created_at": "2014-07-16T20:48:34Z",
+    "id": 15026434,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/243",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Nice implementation. We can also use this to do a `kthLargest` and other order statistics. Realize now I'll probably want ranking functions like pandas. Will open a feature eventually...\n",
+    "created_at": "2014-03-31T17:41:29Z",
+    "id": 11127132,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/188",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Yeah, let's get rid of these and add some sort of `applyMissingFrom` function\n",
+    "created_at": "2014-03-31T17:39:03Z",
+    "id": 11127021,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/188",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "And remove these -\n",
+    "created_at": "2014-03-31T17:36:26Z",
+    "id": 11126905,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/188",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "So agreed to make this take `series:Series<'K,float>`, and add `numsum` ?\n",
+    "created_at": "2014-03-31T17:36:05Z",
+    "id": 11126880,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/188",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "That is quite clever, I'll have a quick look, but I think we should definitely do that! \n",
+    "created_at": "2014-03-29T22:54:30Z",
+    "id": 11095620,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "This is a good point - currently, only inner & outer join are done through alignment. I believe that left and right joins are implemented by calling reindex on the other index, which just performs lookup repeatedly. That could perhaps be done more efficiently on ordered frames...\n\n(But maybe that just means we could have more efficient `Reindex` implementation...)\n",
+    "created_at": "2014-03-29T22:41:10Z",
+    "id": 11095556,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Yes, that's the one: `let (||>) (a, b) f = f a b`.\n\nI think it has been redefined to do something else in some version of BM codebase, but I think we removed the custom definition.\n",
+    "created_at": "2014-03-29T22:34:09Z",
+    "id": 11095518,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Couldn't resist hacking this together on https://github.com/tpetricek/Deedle/pull/1\n",
+    "created_at": "2014-03-26T20:26:23Z",
+    "id": 10997091,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "I have a feeling this might allow for more optimization? For instance I think it's the bottleneck in @johannh's example where none of the series overlap. Could we perhaps use a priority queue that stores the next smallest key, and the series it came from? Then we could avoid looping from 0 to current.Length (2 times), which in @johannh's case is 2000 + 2000 for each key ... ie will have slower asymptotic growth on the number of series passed in ...\n",
+    "created_at": "2014-03-26T17:24:07Z",
+    "id": 10987652,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "One thought on the align functions - it might be forward-looking to consider these as 'inner, outer, left, right' type joins rather than union vs intersection if we ever want to support duplicate-key indices. Then the semantics anticipate the possible feature. Not sure this has bearing on current implementation other than naming conventions.\n",
+    "created_at": "2014-03-26T14:09:51Z",
+    "id": 10977319,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "nevermind, found it: http://msdn.microsoft.com/en-us/library/dd233228.aspx. always learning something new.\n",
+    "created_at": "2014-03-26T14:00:07Z",
+    "id": 10976882,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Very nice!\n",
+    "created_at": "2014-03-25T19:34:37Z",
+    "id": 10949041,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "In fact, can't find any info on it. What is this?\n",
+    "created_at": "2014-03-25T19:33:08Z",
+    "id": 10948958,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Nice, didn't know about the `||>` operator\n",
+    "created_at": "2014-03-25T19:30:24Z",
+    "id": 10948825,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/181",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Key selector never seemed to be used, so I made the second series construction deferred. I hated that it was done twice but couldn't otherwise figure out how to lift the construction out of the two separate function bodies.\n",
+    "created_at": "2014-02-24T16:16:37Z",
+    "id": 9997166,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/156",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Good catch, thanks for fixing.\n",
+    "created_at": "2014-02-24T16:13:51Z",
+    "id": 9997045,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/156",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I think this is not right - it changes the behavior of the method from returning row based on int offset to returning row based on the row key. I switched this back to the old behavior (and also reviewed other related methods) in: https://github.com/tpetricek/Deedle/commit/734e6e015de6e367dbeb5243c3ec661d003411ad\n",
+    "created_at": "2014-02-23T21:21:16Z",
+    "id": 9977739,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/156",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Not sure how it's any different from unnest?\n",
+    "created_at": "2014-02-12T18:50:03Z",
+    "id": 9680030,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/149",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "I wonder if we would want to keep this function in the public API, even if it is not super-fast? (Not sure if it is used or not - but seemed to be useful when you have a series and map each value to some data frame and then need to append all those nested frames...)\n\nBut equally, I'm happy to get rid of it if it is slow and not used in BM codebase!\n",
+    "created_at": "2014-02-12T01:30:45Z",
+    "id": 9652575,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/149",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can you add newline before `Select` here? (This is used in the docs, so the lines shouldn't be too long).\n",
+    "created_at": "2014-02-12T01:21:21Z",
+    "id": 9652353,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/149",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "(I did not suggest to use just `upcast l` because we might not want to expose the internal object)\n",
+    "created_at": "2014-02-11T22:47:20Z",
+    "id": 9647499,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/151",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Yes! :)\n",
+    "created_at": "2014-02-11T22:45:52Z",
+    "id": 9647461,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/151",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Couldn't this case just use `yield! l`?\n",
+    "created_at": "2014-02-11T21:50:27Z",
+    "id": 9645116,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/151",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Could you move the sentinel value to the `Address` module? e.g. as `Address.invalid`?\n(I suppose this is not a - perhaps more logical - option value for performance reasons?)\n",
+    "created_at": "2014-02-11T16:09:16Z",
+    "id": 9629598,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/150",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Good point!\n",
+    "created_at": "2014-02-07T22:29:49Z",
+    "id": 9557887,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/135",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "In principle, it sounds a bit wrong that the `Union` operation calculates the vector transformations, but we then throw them away and instead get a new transformation later using `Reindex`.\n\nThat said, I'd keep the way it is - sounds like the current approach does the job and I'm not sure if there is any better way at the moment (it would probably require adding `UnionN` to the index builder, which sounds like a lot of work).\n\nSo, this is really just a note for later, in case we had another implementation where unioning was more efficient then reindexing (I imagine this could be sometimes the case).\n",
+    "created_at": "2014-02-05T22:04:58Z",
+    "id": 9480595,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/135",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Great to see this fixed! My previous attempt here was completely wrong :-)\n",
+    "created_at": "2014-02-05T21:56:02Z",
+    "id": 9480206,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/135",
+    "user_login": "tpetricek"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "Sorry, this snuck in from another issue - not relevant to address cleanup\n",
+    "created_at": "2014-01-15T22:19:49Z",
+    "id": 8914773,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/126",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "CONTRIBUTOR",
+    "body": "The chunk of code below is unnecessary now that address is always int64\n",
+    "created_at": "2014-01-15T22:19:09Z",
+    "id": 8914725,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/126",
+    "user_login": "adamklein"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Can we use ISO format to avoid the locale ugliness?\n\nActually I would rather not have any examples that use DateTime. We should use DateTimeOffset. \n",
+    "created_at": "2013-11-10T00:44:13Z",
+    "id": 7547299,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/58",
+    "user_login": "hmansell"
+  },
+  {
+    "author_association": "MEMBER",
+    "body": "Better to pass the path parts as an array to Path.Combine rather than use explicit calls to get the separator?\n",
+    "created_at": "2013-11-10T00:41:44Z",
+    "id": 7547290,
+    "pull_request_url": "https://api.github.com/repos/fslaborg/Deedle/pulls/58",
+    "user_login": "hmansell"
+  }
+]
