@@ -77,29 +77,13 @@ Both paths contribute to issue resolution. The comment path is a "fast lane" tha
 
 ### Repository Throughput Analysis
 
-| Repository | Comment Path (closed/total) | RA PRs | Merged | Rejected | Open (WIP) | PR Throughput | Status |
-|---|---|---|---|---|---|---|---|
-| FSharp.Stats | 2/28 | 18 | 2 | 0 | 16 | **11%** | **BLOCKED** |
-| dowhy | 16/87 | 61 | 13 | 5 | 43 | **21%** | **BLOCKED** |
-| fantomas | 28/75 | 64 | 22 | 41 | 1 | **34%** | **BLOCKED** |
-| FsAutoComplete | 26/89 | 54 | 33 | 7 | 14 | **61%** | **BLOCKED** |
-| TaskSeq | 11/17 | 83 | 66 | 17 | 0 | 80% | FLOWING |
-| FSharp.Formatting | 51/65 | 118 | 94 | 22 | 2 | 80% | FLOWING |
-| TypeProviders.SDK | 11/16 | 50 | 45 | 4 | 1 | 90% | FLOWING |
-| licensee | 10/16 | 29 | 23 | 5 | 1 | 79% | FLOWING |
-| openclaw | 18/38 | 102 | 74 | 27 | 1 | 73% | FLOWING |
-| dotnet/fsharp | 54/87 | 0 | — | — | — | — | COMMENT-ONLY |
-| AsyncSeq | 7/7 | 69 | 56 | 11 | 2 | 81% | IDLE |
-| FSharp.Data | 104/110 | 102 | 86 | 15 | 1 | 84% | IDLE |
-| Deedle | 67/70 | 100 | 91 | 8 | 1 | 91% | IDLE |
-| SwaggerProvider | 26/28 | 69 | 63 | 6 | 0 | 91% | IDLE |
-| GenPRES | 27/29 | 60 | 60 | 0 | 0 | **100%** | IDLE |
+The full throughput data for each repository is available in [Appendix F](#appendix-f-repository-throughput-data). Below we summarize the key patterns.
 
-Status definitions: **BLOCKED** = pipeline stalled at a specific stage; **FLOWING** = pipeline operating normally with work still to do; **IDLE** = backlog effectively cleared, factory waiting for new input (≤5 open issues and ≤2 open PRs); **COMMENT-ONLY** = using only the investigation/triage path, no PR path.
+Status definitions: **BLOCKED** = pipeline stalled at a specific stage; **FLOWING** = pipeline operating normally with work still to do; **IDLE** = backlog effectively cleared, factory waiting for new input; **COMMENT-ONLY** = using only the investigation/triage path, no PR path.
 
-The "Comment Path" column shows how many issues were resolved via investigation comments alone (closed/total investigated). In well-flowing repos like FSharp.Data (104/110) and Deedle (67/70), humans are closing issues after reading RA's investigation comments at very high rates. In blocked repos like FSharp.Stats (2/28) and dowhy (16/87), even the comment-path is stalled — maintainers are not acting on investigation results either.
+In well-flowing repos, humans are closing issues after reading RA's investigation comments at very high rates. In blocked repos, even the comment-path is stalled — maintainers are not acting on investigation results either.
 
-The distinction between FLOWING and IDLE is important: repos classified as IDLE (FSharp.Data, Deedle, SwaggerProvider, AsyncSeq, GenPRES) have essentially completed their existing backlog. They are not constrained — they are **input-starved**. Their low residual WIP and issue counts reflect success, not a lack of capacity.
+The distinction between FLOWING and IDLE is important: repos classified as IDLE have essentially completed their existing backlog. They are not constrained — they are **input-starved**. Their low residual WIP and issue counts reflect success, not a lack of capacity.
 
 ![Pipeline Flow](graphs/bottleneck-pipeline-flow.png)
 
@@ -109,18 +93,15 @@ The distinction between FLOWING and IDLE is important: repos classified as IDLE 
 
 The repositories fall into four distinct operational states:
 
-**1. IDLE — Backlog cleared** (FSharp.Data, Deedle, SwaggerProvider, AsyncSeq, GenPRES): These factories have effectively completed their work. With ≤5 open issues and ≤2 open PRs, they are waiting for new input rather than being constrained. Their high throughput ratios (81–100%) and high comment-path closure rates (93–100%) reflect a well-functioning human-agent collaboration that has run out of backlog to process.
+**IDLE — Backlog cleared** (FSharp.Data, Deedle, SwaggerProvider, AsyncSeq, GenPRES): These factories have effectively completed their work and are waiting for new input. High throughput ratios and high comment-path closure rates reflect a well-functioning human-agent collaboration that has run out of backlog to process.
 
-**2. FLOWING — Pipeline operating normally** (TaskSeq, FSharp.Formatting, TypeProviders.SDK, licensee, openclaw): These factories still have work to do and are processing it at a healthy rate. Throughput ratios of 73–90% indicate maintainers are keeping pace with the agent's output on both paths.
+**FLOWING — Pipeline operating normally** (TaskSeq, FSharp.Formatting, TypeProviders.SDK, licensee, openclaw): These factories still have work to do and are processing it at a healthy rate. Maintainers are keeping pace with the agent's output on both the comment and PR paths.
 
-**3. BLOCKED — INACTION bottleneck** (FSharp.Stats, dowhy): Repo Assist is producing both investigation comments and PRs, but maintainers are not acting on either. The WIP queue grows without bound and comment-path closures are minimal.
+**BLOCKED — Inaction bottleneck** (FSharp.Stats, dowhy): Repo Assist is producing both investigation comments and PRs, but maintainers are not acting on either. The WIP queue grows without bound and comment-path closures are minimal.
 
-- **FSharp.Stats**: 16 of 18 PRs (89%) sitting unreviewed, avg wait 32.8 days. On the comment path, only 2 of 28 investigated issues were closed — maintainers are ignoring RA's triage output too. Little's Law implies a cycle time of 43.6 days — the pipeline is effectively stalled. The low backlog clearance (7%) is **not** because the workflow is too new; it's because no one is acting on the work it produces.
-- **dowhy**: 43 of 61 PRs (70%) in the review queue, avg wait 18.2 days. On the comment path, only 16 of 87 investigated issues were closed. Arrival rate is 1.15 PRs/day but departure rate is only 0.25/day — a 4.7:1 imbalance.
+**BLOCKED — Rejection bottleneck** (fantomas): Maintainers are actively reviewing PRs but rejecting a majority. The WIP queue stays low because PRs are being processed — just not accepted. The maintainer identifies three causes (see [Appendix E](#appendix-e-maintainer-notes--fantomas)): the domain requires holistic judgement that tests alone cannot capture, some open issues represent unresolved design discussions rather than actionable tasks, and the workflow's noise eventually exceeded available bandwidth — leading to a deliberate reduction to monthly cadence.
 
-**4. BLOCKED — REJECTION bottleneck** (fantomas): Maintainers are actively reviewing PRs but rejecting 64% of them (41/64 closed without merge). The WIP queue is low (1 PR) because PRs are being processed — just not accepted. On the comment path, 28 of 75 investigated issues were closed, indicating moderate engagement with RA's triage comments even as PRs are rejected. The maintainer identifies three causes (see [Appendix E](#appendix-e-maintainer-notes--fantomas)): the domain requires holistic judgement that tests alone cannot capture, some open issues represent unresolved design discussions rather than actionable tasks, and the workflow's noise eventually exceeded available bandwidth — leading to a deliberate reduction to monthly cadence rather than full disablement.
-
-**5. BLOCKED — MIXED bottleneck** (FsAutoComplete): Both accumulation (14 open PRs, avg wait 44.9 days) and rejection (7 rejected). On the comment path, only 26 of 89 investigated issues were closed. The 61% throughput rate is below the 79–91% seen in well-flowing repos. However, unlike the inaction cases above, this block reflects a **deliberate capacity constraint**: the maintainer reports high satisfaction with merged PR quality (33 RA PRs merged in 2 months = 62% of 2025's total output), but chose to pause the workflow to manage notification pressure during a period of reduced bandwidth (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)). Some rejected PRs were intentionally experimental. This case illustrates that BLOCKED status can reflect legitimate human factors — burnout avoidance, life circumstances — rather than workflow failure.
+**BLOCKED — Mixed bottleneck** (FsAutoComplete): Both accumulation and rejection. However, unlike the inaction cases, this reflects a **deliberate capacity constraint**: the maintainer reports high satisfaction with merged PR quality but chose to pause the workflow to manage notification pressure during a period of reduced bandwidth (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)). This illustrates that BLOCKED status can reflect legitimate human factors — burnout avoidance, life circumstances — rather than workflow failure.
 
 ### Cycle Time Analysis
 
@@ -333,23 +314,7 @@ Repo Assist workflow runs fall into three categories:
 - **Automated (additional)**: Manual dispatch from the GitHub Actions UI — where a maintainer explicitly dialed up the rate of automation beyond the scheduled cadence.
 - **Human intervention (/repo-assist)**: Event-triggered runs that actually executed — issue comments, PR review comments, issue events, and PR events that passed the workflow's pre-activation check. These represent actual `/repo-assist` invocations where a human triggered the agent to investigate a specific issue.
 
-| Repository | Active Runs | Runs/wk | Automated (scheduled) | Automated (additional) | Human intervention |
-|---|---|---|---|---|---|
-| dotnet/fsharp | 391 | 47.2 | 283 | 12 | 96 |
-| FSharp.Formatting | 338 | 30.3 | 73 | 90 | 175 |
-| TypeProviders.SDK | 209 | 20.3 | 39 | 151 | 19 |
-| FsAutoComplete | 142 | 19.5 | 52 | 50 | 40 |
-| FSharp.Data | 216 | 19.4 | 71 | 95 | 50 |
-| Deedle | 151 | 17.1 | 36 | 44 | 71 |
-| fantomas | 143 | 13.2 | 83 | 2 | 58 |
-| SwaggerProvider | 112 | 12.7 | 63 | 9 | 40 |
-| TaskSeq | 103 | 11.6 | 69 | 16 | 18 |
-| dowhy | 91 | 11.2 | 80 | 5 | 6 |
-| licensee | 106 | 10.8 | 70 | 1 | 35 |
-| AsyncSeq | 95 | 8.8 | 43 | 24 | 28 |
-| GenPRES | 78 | 7.2 | 77 | 1 | 0 |
-| FSharp.Stats | 46 | 6.6 | 31 | 4 | 11 |
-| openclaw | 121 | 14.6 | 118 | 3 | 0 |
+Full per-repository invocation data is available in [Appendix G](#appendix-g-workflow-invocation-data).
 
 ![Invocation Rate by Type](graphs/invocation-rate-by-type.png)
 
@@ -386,6 +351,7 @@ All data and scripts used in this analysis are available in this repository:
 - `scripts/normalized-graph.py` — Normalized open-issue trajectory graph aligned to adoption date
 - `scripts/invocation-analysis.py` — Workflow invocation rate analysis by trigger type (filters out skipped runs)
 - `scripts/velocity-graph.py` — Velocity dumbbell chart (before/after comparison)
+- `scripts/generate-tables.py` — Auto-generates appendix tables (throughput, invocations) from analysis JSON
 - `scripts/download-workflow-runs.sh` — Download GitHub Actions workflow run data
 - `data/` — Raw JSON data for all repositories (including `workflow-runs.json` per repo)
 - `graphs/` — All generated PNG graphs
@@ -494,3 +460,48 @@ The following are lightly edited notes from the fantomas maintainer (Florian Ver
 > I think those three things explain a fair bit of why there were so many closed PRs in that repo.
 
 *Editorial note: The maintainer's feedback highlights three distinct causes of rejection: (1) automation fatigue — the workflow's value diminished as it exceeded the maintainer's available bandwidth, leading to a deliberate rate reduction; (2) domain complexity — formatting correctness requires holistic judgement that cannot be captured by test coverage alone, making it cheaper to redo than to steer; and (3) issue ambiguity — some open issues represent unresolved design discussions rather than actionable tasks, and the agent cannot distinguish between them. The maintainer ultimately reduced the workflow to a monthly cadence rather than disabling it entirely.*
+
+### Appendix F: Repository Throughput Data
+
+<!-- THROUGHPUT-TABLE-START -->
+| Repository | Comment Path (closed/total) | RA PRs | Merged | Rejected | Open (WIP) | PR Throughput | Status |
+|---|---|---|---|---|---|---|---|
+| fantomas | 28/75 | 64 | 22 | 41 | 1 | **34%** | **BLOCKED** |
+| dowhy | 16/87 | 61 | 13 | 5 | 43 | **21%** | **BLOCKED** |
+| FsAutoComplete | 27/89 | 54 | 33 | 7 | 14 | **61%** | **BLOCKED** |
+| FSharp.Stats | 2/28 | 18 | 2 | 0 | 16 | **11%** | **BLOCKED** |
+| FSharp.Formatting | 53/65 | 118 | 94 | 22 | 2 | 80% | FLOWING |
+| openclaw | 18/38 | 102 | 74 | 27 | 1 | 73% | FLOWING |
+| FSharp.Control.TaskSeq | 12/17 | 83 | 66 | 17 | 0 | 80% | FLOWING |
+| FSharp.TypeProviders.SDK | 11/16 | 50 | 45 | 4 | 1 | 90% | FLOWING |
+| licensee | 10/16 | 29 | 23 | 5 | 1 | 79% | FLOWING |
+| dotnet/fsharp | 54/87 | 0 | — | — | — | — | COMMENT-ONLY |
+| FSharp.Data | 108/110 | 102 | 86 | 15 | 1 | 84% | IDLE |
+| Deedle | 67/70 | 100 | 91 | 8 | 1 | 91% | IDLE |
+| FSharp.Control.AsyncSeq | 7/7 | 69 | 56 | 11 | 2 | 81% | IDLE |
+| SwaggerProvider | 26/28 | 69 | 63 | 6 | 0 | 91% | IDLE |
+| GenPRES | 27/29 | 60 | 60 | 0 | 0 | **100%** | IDLE |
+<!-- THROUGHPUT-TABLE-END -->
+
+Status definitions: **BLOCKED** = pipeline stalled at a specific stage; **FLOWING** = pipeline operating normally with work still to do; **IDLE** = backlog effectively cleared, factory waiting for new input; **COMMENT-ONLY** = using only the investigation/triage path, no PR path.
+
+### Appendix G: Workflow Invocation Data
+
+<!-- INVOCATION-TABLE-START -->
+| Repository | Active Runs | Runs/wk | Automated (scheduled) | Automated (additional) | Human intervention |
+|---|---|---|---|---|---|
+| dotnet/fsharp | 391 | 47.2 | 283 | 12 | 96 |
+| FSharp.Formatting | 348 | 30.4 | 74 | 90 | 184 |
+| FsAutoComplete | 142 | 19.5 | 52 | 50 | 40 |
+| FSharp.Data | 216 | 19.4 | 71 | 95 | 50 |
+| FSharp.TypeProviders.SDK | 210 | 18.9 | 40 | 151 | 19 |
+| Deedle | 151 | 17.1 | 36 | 44 | 71 |
+| openclaw | 121 | 14.6 | 118 | 3 | 0 |
+| FSharp.Control.TaskSeq | 127 | 13.3 | 69 | 16 | 42 |
+| fantomas | 143 | 13.2 | 83 | 2 | 58 |
+| SwaggerProvider | 122 | 12.9 | 67 | 9 | 46 |
+| dowhy | 98 | 11.4 | 87 | 5 | 6 |
+| licensee | 106 | 10.8 | 70 | 1 | 35 |
+| FSharp.Control.AsyncSeq | 96 | 8.4 | 44 | 24 | 28 |
+| FSharp.Stats | 47 | 6.3 | 31 | 4 | 12 |
+<!-- INVOCATION-TABLE-END -->
