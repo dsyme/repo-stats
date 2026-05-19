@@ -16,7 +16,7 @@ Unlike one-shot AI coding assistants, Repo Assist runs autonomously on a schedul
 
 ![Open Issue Trajectories](graphs/normalized-open-issues.png)
 
-![Velocity Before and After](graphs/velocity-before-after.png)
+![**Velocity Before and After**](graphs/velocity-before-after.png)
 
 ## Measuring the Impact on Velocity: Dormant to Active
 
