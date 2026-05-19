@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-We analyze the impact of [Repo Assist](https://github.com/githubnext/agentics/blob/main/docs/repo-assist.md), a proactive AI repository agent, across 15 open source repositories that adopted it in 2026. The agent **reduced open issue counts in every repository** - 651 issues net. **Issue closure velocity increased by a median of 9×** and **PR merge velocity by a median of 9×**, transforming largely dormant projects into actively maintained ones.
+We analyze the impact of [Repo Assist](https://github.com/githubnext/agentics/blob/main/docs/repo-assist.md), a proactive AI repository agent, across 15 open source repositories that adopted it in 2026. The agent reduced open issue counts in every repository - 651 issues net. **Issue closure and PR merge velocity both increased by a median of 9×**, transforming largely dormant projects into actively maintained ones.
 
 Our analysis frames repositories as **human-agent software factories** ([SIGPLAN blog post](https://blog.sigplan.org/2026/04/21/repositories-are-human-agent-knowledge-factories/)), applying classical production theory to understand where work flows and where it stalls, and demonstrates how throughput is gated by human decision-making.
 
