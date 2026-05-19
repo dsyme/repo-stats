@@ -26,11 +26,11 @@ The velocity increases are large across the board, with both median issue closur
 
 ## Measuring the Impact on Quality: Backlog Reduction
 
+![Open Issue Trajectories](graphs/normalized-open-issues.png)
+
 Quality is measured as the proportion of the known backlog (number of open issues at the time of adoption) that has since been addressed. This captures how well the workflow tackles the accumulated debt of unresolved issues. For the purposes of this report, **human-approved AI PRs are assumed to be correct** - when a maintainer reviews and merges a Repo Assist draft PR, that constitutes a human quality judgment, just as it would for any human-authored contribution.
 
 The normalized trajectory chart above shows each repository's open issue count as a percentage of its count at adoption (100% = adoption day), aligned on the x-axis at the adoption date. Repos that achieved near-complete backlog clearance (FSharp.Data, Deedle, AsyncSeq) show curves dropping to near zero. Repos with blocked pipelines (FSharp.Stats, dowhy) show only modest decline.
-
-![Open Issue Trajectories](graphs/normalized-open-issues.png)
 
 Full per-repository backlog clearance data is available in [Appendix B](#appendix-b-backlog-clearance-data).
 
