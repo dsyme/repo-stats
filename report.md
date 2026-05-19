@@ -16,7 +16,7 @@ Unlike one-shot AI coding assistants, Repo Assist runs autonomously on a schedul
 
 ![Open Issue Trajectories](graphs/normalized-open-issues.png)
 
-![**Velocity Before and After**](graphs/velocity-before-after.png)
+![Velocity Before and After](graphs/velocity-before-after.png)
 
 ## Measuring the Impact on Velocity: Dormant to Active
 
@@ -24,9 +24,7 @@ In software engineering, *velocity* measures the rate at which a team completes 
 
 All 15 repositories show an increase in both issue closure rate and PR merge rate after Repo Assist adoption. The chart below uses a dumbbell plot to visualize the before/after comparison - each arrow shows the magnitude of acceleration for a single repository, with the multiplier on the right. The "before" period is an equal-length window prior to adoption for fair comparison.
 
-The velocity increases are large across the board. The median issue closure velocity increased **9×** (from 0.13 to 3.61 issues/week), and the median PR merge velocity increased **9×** (from 0.34 to 5.63 PRs/week), representing a qualitative shift from dormant or near-dormant repositories to actively-maintained ones. Even the weakest performer (FSharp.Stats, 2× on PRs) shows measurable improvement, though as we will see in the pipeline analysis, that repo's full potential is bottlenecked on human review.
-
-The mean velocity increase is even larger, but the mean is pulled up by a few repositories (Deedle at 114×, FSharp.Formatting at 129× on PRs) that went from essentially zero prior activity to high throughput. The median is a more representative measure of the typical experience. Full per-repository velocity data is available in [Appendix A](#appendix-a-velocity-data).
+The velocity increases are large across the board, with both median issue closure and median PR merge velocity increasing **9×** (from 0.13 to 3.61 issues/week, and 0.34 to 5.63 PRs/week), representing a qualitative shift from dormant or near-dormant repositories to actively-maintained ones. Even the weakest performer (FSharp.Stats, 2× on PRs) shows measurable improvement, though as we will see in the pipeline analysis, that repo's full potential is bottlenecked on human review. Full per-repository velocity data is available in [Appendix A](#appendix-a-velocity-data).
 
 ## Measuring the Impact on Quality: Backlog Reduction
 
