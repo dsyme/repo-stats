@@ -12,7 +12,7 @@ We analyze the impact of [Repo Assist](https://github.com/githubnext/agentics/bl
 
 Our analysis frames repositories as **human-agent software factories** ([SIGPLAN blog post](https://blog.sigplan.org/2026/04/21/repositories-are-human-agent-knowledge-factories/)), applying classical production theory to understand where work flows and where it stalls, and demonstrates how throughput is gated by human decision-making.
 
-Repo Assist runs autonomously on a schedule and in response to events - triaging issues, investigating bugs, creating draft PRs, and responding to questions. Unlike one-shot AI coding assistants, it represents **continuous AI-assisted repository automation**. It is implemented as a [GitHub Agentic Workflow](https://gh.io/gh-aw/), but the findings apply to any repository-level AI automation that produces similar outputs and relies on human review. Results hold across languages (F#, C#, Python, Ruby) and project types (compilers, libraries, tools), though outcomes vary with maintainer engagement, codebase complexity, and social dynamics.
+Unlike one-shot AI coding assistants, Repo Assist runs autonomously on a schedule and in response to events - triaging issues, investigating bugs, creating draft PRs, and responding to questions. It is implemented as a [GitHub Agentic Workflow](https://gh.io/gh-aw/), but the findings apply to any repository-level AI automation that produces similar outputs and relies on human review. Results hold across languages (F#, C#, Python, Ruby) and project types (compilers, libraries, tools), though outcomes vary with maintainer engagement, codebase complexity, and social dynamics.
 
 ![Open Issue Trajectories](graphs/normalized-open-issues.png)
 
