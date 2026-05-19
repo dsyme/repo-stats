@@ -12,11 +12,21 @@ We analyze the impact of [Repo Assist](https://github.com/githubnext/agentics/bl
 
 Our analysis draws on an emerging view of repositories as **human-agent software factories** - systems where human maintainers and AI agents collaborate in a structured production pipeline. This framing, explored in a recent [SIGPLAN blog post on human-agent software factories](https://blog.sigplan.org/2026/04/21/repositories-are-human-agent-knowledge-factories/), allows us to apply classical production theory (Theory of Constraints, Little's Law, cycle time analysis) to understand where work flows and where it stalls. The single most important factor determining outcomes is the rate at which maintainers act on the agent's output: throughput is gated by human decision-making. Maintainers pushed additional commits to 37% of Repo Assist PRs, often using secondary agents to extend the work, while the issue reopen rate after agent-assisted closure is just 3.3%.
 
-![Open Issue Trajectories](graphs/normalized-open-issues.png)
-
 Repo Assist runs autonomously on a schedule and in response to events - triaging issues, investigating bugs, creating draft pull requests, and responding to contributor questions. Unlike one-shot AI coding assistants, it represents **continuous AI-assisted repository automation**. It is implemented as a [GitHub Agentic Workflow](https://gh.io/gh-aw/), but the findings should apply to any repository-level AI automation that produces similar outputs and relies on human review. Results hold across different languages (F#, C#, Python, Ruby) and project types (compilers, libraries, tools), though outcomes vary based on maintainer engagement, codebase complexity, and social dynamics.
 
+![Open Issue Trajectories](graphs/normalized-open-issues.png)
+
 ![Velocity Before and After](graphs/velocity-before-after.png)
+
+## Measuring the Impact on Velocity: Dormant to Active
+
+In software engineering, *velocity* measures the rate at which a team completes work - here, the number of issues closed per week and PRs merged per week. Velocity is a key indicator of a project's activity: a dormant project has near-zero velocity, while an active one shows sustained throughput.
+
+All 15 repositories show an increase in both issue closure rate and PR merge rate after Repo Assist adoption. The chart below uses a dumbbell plot to visualize the before/after comparison - each arrow shows the magnitude of acceleration for a single repository, with the multiplier on the right. The "before" period is an equal-length window prior to adoption for fair comparison.
+
+The velocity increases are large across the board. The median issue closure velocity increased **9×** (from 0.13 to 3.61 issues/week), and the median PR merge velocity increased **9×** (from 0.34 to 5.63 PRs/week), representing a qualitative shift from dormant or near-dormant repositories to actively-maintained ones. Even the weakest performer (FSharp.Stats, 2× on PRs) shows measurable improvement, though as we will see in the pipeline analysis, that repo's full potential is bottlenecked on human review.
+
+The mean velocity increase is even larger, but the mean is pulled up by a few repositories (Deedle at 114×, FSharp.Formatting at 129× on PRs) that went from essentially zero prior activity to high throughput. The median is a more representative measure of the typical experience. Full per-repository velocity data is available in [Appendix A](#appendix-a-velocity-data).
 
 ## Measuring the Impact on Quality: Backlog Reduction
 
@@ -25,20 +35,6 @@ Quality is measured as the proportion of the known backlog (number of open issue
 The normalized trajectory chart above shows each repository's open issue count as a percentage of its count at adoption (100% = adoption day), aligned on the x-axis at the adoption date. Repos that achieved near-complete backlog clearance (FSharp.Data, Deedle, AsyncSeq) show curves dropping to near zero. Repos with blocked pipelines (FSharp.Stats, dowhy) show only modest decline.
 
 Full per-repository backlog clearance data is available in [Appendix B](#appendix-b-backlog-clearance-data).
-
-![Backlog Addressed](graphs/comparative-backlog-addressed.png)
-
-*Note: openclaw/openclaw-windows-node is excluded from the backlog charts above. It had only 3 open issues at adoption - too few for meaningful normalization - and its open issue count has since grown to 38 as rapid new issue creation (4.73/week) outpaced closure in this early-stage, actively growing project. Its adoption-era backlog was fully addressed (100%), but the net increase in open issues reflects growth, not a backlog problem. See the [per-repository detail](#openclawopenclaw-windows-node) for full analysis.*
-
-## Measuring the Impact on Velocity: Dormant to Active
-
-In software engineering, *velocity* measures the rate at which a team completes work - here, the number of issues closed per week and PRs merged per week. Velocity is a key indicator of a project's activity: a dormant project has near-zero velocity, while an active one shows sustained throughput.
-
-All 15 repositories show an increase in both issue closure rate and PR merge rate after Repo Assist adoption. The chart below uses a dumbbell plot to visualize the before/after comparison - each arrow shows the magnitude of acceleration for a single repository, with the multiplier on the right. The "before" period is an equal-length window prior to adoption for fair comparison.
-
-The velocity increases are large across the board. The median issue closure velocity increased **9×** (from 0.13 to 3.61 issues/week), and the median PR merge velocity increased **9×** (from 0.34 to 5.63 PRs/week). These are not marginal improvements - they represent a qualitative shift from dormant or near-dormant repositories to actively-maintained ones. Even the weakest performer (FSharp.Stats, 2× on PRs) shows measurable improvement, though as we will see in the pipeline analysis, that repo's full potential is bottlenecked on human review.
-
-The mean velocity increase is even larger, but the mean is pulled up by a few repositories (Deedle at 114×, FSharp.Formatting at 129× on PRs) that went from essentially zero prior activity to high throughput. The median is a more representative measure of the typical experience. Full per-repository velocity data is available in [Appendix A](#appendix-a-velocity-data).
 
 ## The Repository as Human-Agent Factory
 
@@ -67,25 +63,19 @@ Repo-assist automates the Investigation stage. For each issue it processes, it p
 
 Both paths contribute to issue resolution. The comment path is a "fast lane" that resolves issues without requiring PR review overhead. Using Little's Law ($L = \lambda \times W$), we analyze where work accumulates in the PR path specifically - the comment path has no WIP buffer since it produces immediate output.
 
-### Repository Throughput Analysis
-
 ### Repository Flow Status Classification
-
-In well-flowing repos, humans are closing issues after reading RA's investigation comments at very high rates. In blocked repos, even the comment-path is stalled - maintainers are not acting on investigation results either.
 
 The repositories fall into four distinct operational states:
 
-**IDLE - Backlog cleared** (FSharp.Data, Deedle, SwaggerProvider, AsyncSeq, GenPRES): These factories have effectively completed their work and are waiting for new input. High throughput ratios and high comment-path closure rates reflect a well-functioning human-agent collaboration that has run out of backlog to process.
+**IDLE - Backlog cleared** (FSharp.Data, Deedle, SwaggerProvider, AsyncSeq, GenPRES): Work complete, waiting for new input. These are not constrained - they are **input-starved**.
 
-**FLOWING - Pipeline operating normally** (TaskSeq, FSharp.Formatting, TypeProviders.SDK, licensee, openclaw): These factories still have work to do and are processing it at a healthy rate. Maintainers are keeping pace with the agent's output on both the comment and PR paths.
+**FLOWING - Pipeline operating normally** (TaskSeq, FSharp.Formatting, TypeProviders.SDK, licensee, openclaw): Work remains and is being processed at a healthy rate on both paths.
 
-**BLOCKED - Inaction bottleneck** (FSharp.Stats, dowhy): Repo Assist is producing both investigation comments and PRs, but maintainers are not acting on either. The WIP queue grows without bound and comment-path closures are minimal.
+**BLOCKED - Inaction bottleneck** (FSharp.Stats, dowhy): Agent is producing output, but maintainers are not acting on either comments or PRs. WIP grows without bound.
 
-**BLOCKED - Rejection bottleneck** (fantomas): Maintainers are actively reviewing PRs but rejecting a majority. The WIP queue stays low because PRs are being processed - just not accepted. The maintainer identifies three causes (see [Appendix E](#appendix-e-maintainer-notes--fantomas)): the domain requires holistic judgement that tests alone cannot capture, some open issues represent unresolved design discussions rather than actionable tasks, and the workflow's noise eventually exceeded available bandwidth - leading to a deliberate reduction to monthly cadence.
+**BLOCKED - Rejection bottleneck** (fantomas): PRs are reviewed promptly but mostly rejected. Three causes (see [Appendix E](#appendix-e-maintainer-notes--fantomas)): holistic judgement requirements, unresolved design discussions treated as actionable, and bandwidth exceeded - leading to monthly cadence reduction.
 
-**BLOCKED - Mixed bottleneck** (FsAutoComplete): Both accumulation and rejection. However, unlike the inaction cases, this reflects a **deliberate capacity constraint**: the maintainer reports high satisfaction with merged PR quality but chose to pause the workflow to manage notification pressure during a period of reduced bandwidth (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)). This illustrates that BLOCKED status can reflect legitimate human factors - burnout avoidance, life circumstances - rather than workflow failure.
-
-The distinction between FLOWING and IDLE is important: repos classified as IDLE have essentially completed their existing backlog. They are not constrained - they are **input-starved**. Their low residual WIP and issue counts reflect success, not a lack of capacity.
+**BLOCKED - Mixed bottleneck** (FsAutoComplete): Both accumulation and rejection, reflecting a **deliberate capacity constraint** - the maintainer paused the workflow to manage notification pressure, not due to quality concerns (see [Appendix D](#appendix-d-maintainer-notes-fsautocomplete)).
 
 ![Pipeline Flow](graphs/bottleneck-pipeline-flow.png)
 
@@ -305,8 +295,6 @@ Repo Assist workflow runs fall into three categories:
 Full per-repository invocation data is available in [Appendix F](#appendix-g-workflow-invocation-data).
 
 ![Invocation Rate by Type](graphs/invocation-rate-by-type.png)
-
-![Activity Over Time](graphs/invocation-over-time.png)
 
 ## Methodology
 
