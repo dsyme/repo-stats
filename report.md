@@ -14,9 +14,9 @@ Our analysis frames repositories as **human-agent software factories** ([SIGPLAN
 
 Unlike one-shot AI coding assistants, Repo Assist runs autonomously on a schedule and in response to events. It is implemented as a [GitHub Agentic Workflow](https://gh.io/gh-aw/), but the findings apply to any repository-level AI automation that produces similar outputs and relies on human review. Results hold across languages (F#, C#, Python, Ruby) and project types (compilers, libraries, tools), though outcomes vary with maintainer engagement, codebase complexity, and social dynamics.
 
-![Velocity Before and After](graphs/velocity-before-after.png)
-
 ## Measuring the Impact on Velocity: Dormant to Active
+
+![Velocity Before and After](graphs/velocity-before-after.png)
 
 In software engineering, *velocity* measures the rate at which a team completes work - here, the number of issues closed per week and PRs merged per week. Velocity is a key indicator of a project's activity: a dormant project has near-zero velocity, while an active one shows sustained throughput.
 
