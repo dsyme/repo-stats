@@ -14,15 +14,13 @@ Our analysis frames repositories as **human-agent software factories** ([SIGPLAN
 
 Unlike one-shot AI coding assistants, Repo Assist runs autonomously on a schedule and in response to events - triaging issues, investigating bugs, creating draft PRs, and responding to questions. It is implemented as a [GitHub Agentic Workflow](https://gh.io/gh-aw/), but the findings apply to any repository-level AI automation that produces similar outputs and relies on human review. Results hold across languages (F#, C#, Python, Ruby) and project types (compilers, libraries, tools), though outcomes vary with maintainer engagement, codebase complexity, and social dynamics.
 
-![Open Issue Trajectories](graphs/normalized-open-issues.png)
-
 ![Velocity Before and After](graphs/velocity-before-after.png)
 
 ## Measuring the Impact on Velocity: Dormant to Active
 
 In software engineering, *velocity* measures the rate at which a team completes work - here, the number of issues closed per week and PRs merged per week. Velocity is a key indicator of a project's activity: a dormant project has near-zero velocity, while an active one shows sustained throughput.
 
-All 15 repositories show an increase in both issue closure rate and PR merge rate after Repo Assist adoption. The chart below uses a dumbbell plot to visualize the before/after comparison - each arrow shows the magnitude of acceleration for a single repository, with the multiplier on the right. The "before" period is an equal-length window prior to adoption for fair comparison.
+All 15 repositories show an increase in both issue closure rate and PR merge rate after Repo Assist adoption. The chart above visualizes the before/after comparison - each arrow shows the velocity change for a single repository.
 
 The velocity increases are large across the board, with both median issue closure and median PR merge velocity increasing **9×** (from 0.13 to 3.61 issues/week, and 0.34 to 5.63 PRs/week), representing a qualitative shift from dormant or near-dormant repositories to actively-maintained ones. Even the weakest performer (FSharp.Stats, 2× on PRs) shows measurable improvement, though as we will see in the pipeline analysis, that repo's full potential is bottlenecked on human review. Full per-repository velocity data is available in [Appendix A](#appendix-a-velocity-data).
 
@@ -31,6 +29,8 @@ The velocity increases are large across the board, with both median issue closur
 Quality is measured as the proportion of the known backlog (number of open issues at the time of adoption) that has since been addressed. This captures how well the workflow tackles the accumulated debt of unresolved issues. For the purposes of this report, **human-approved AI PRs are assumed to be correct** - when a maintainer reviews and merges a Repo Assist draft PR, that constitutes a human quality judgment, just as it would for any human-authored contribution.
 
 The normalized trajectory chart above shows each repository's open issue count as a percentage of its count at adoption (100% = adoption day), aligned on the x-axis at the adoption date. Repos that achieved near-complete backlog clearance (FSharp.Data, Deedle, AsyncSeq) show curves dropping to near zero. Repos with blocked pipelines (FSharp.Stats, dowhy) show only modest decline.
+
+![Open Issue Trajectories](graphs/normalized-open-issues.png)
 
 Full per-repository backlog clearance data is available in [Appendix B](#appendix-b-backlog-clearance-data).
 
